@@ -6,7 +6,10 @@ var startBmr=function(){
   var elm=document.createElement("div");
   elm.id="mainBox";
   elm.style="position:absolute;z-index:100;top:0;left:0;width:50%;height:50%;background-color:blue;";
+  GUI.instance.DisplayMessage("Random change to check if jsdelivr updates");
   return elm;
 }
 
 GUI.instance.DisplayMessage("Test");
+
+
