@@ -63,3 +63,7 @@
     top: 0.5%;
     padding: 2px;
 }
+
+#loadFileLabel:hover {
+    filter: brightness(1.3);
+}

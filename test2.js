@@ -33,7 +33,7 @@ var createBmrCreateScreenBtn = function() {
   createBtn.id = "createBtn";
   createBtn.className = "gridButton";
   createBtn.innerHTML = "C R E A T E";
-  createBtn.onclick = loadCreateScreen();
+  createBtn.onclick = loadCreateScreen;
   return createBtn;
 }
 
