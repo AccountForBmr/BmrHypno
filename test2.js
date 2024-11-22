@@ -35,8 +35,9 @@ var createBmrStartingGrid = function() {
 
 var createBmrCreateScreenBtn = function() {
   let createBtn = document.createElement("div");
-  createBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:1 / span 3;background:aqua";
-  createBtn.innerHTML = "CREATE";
+  createBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:1 / span 3;background:rgba(20, 20, 20, 0.9);"+
+  "text-align:center;align-content:center;border:2px solid rgb(52, 52, 52);margin:0.05em;font-size:4em;";
+  createBtn.innerHTML = "C R E A T E";
   createBtn.onclick = (e)=>{console.log("I haven't made the create screen yet :c");};
   createBtn.onmouseenter = (e)=>{createBtn.style.filter="brightness(1.3)";};
   createBtn.onmouseleave = (e)=>{createBtn.style.filter="";};
@@ -45,8 +46,9 @@ var createBmrCreateScreenBtn = function() {
 
 var createBmrLoadScreenBtn = function() {
   let loadBtn = document.createElement("div");
-  loadBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:4 / span 3;background:darkred";
-  loadBtn.innerHTML = "LOAD";
+  loadBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:4 / span 3;background:rgba(20, 20, 20, 0.9);"+
+  "text-align:center;align-content:center;border:2px solid rgb(52, 52, 52);margin:0.05em;font-size:4em;";
+  loadBtn.innerHTML = "L O A D";
   loadBtn.onclick = (e)=>{console.log("I haven't made the load screen yet :c");};
   loadBtn.onmouseenter = (e)=>{loadBtn.style.filter="brightness(1.3)";};
   loadBtn.onmouseleave = (e)=>{loadBtn.style.filter="";};
