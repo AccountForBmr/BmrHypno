@@ -48,9 +48,9 @@ var createBmrLoadScreenBtn = function() {
   loadBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:4 / span 3;background:darkred";
   loadBtn.innerHTML = "LOAD";
   loadBtn.onclick = (e)=>{console.log("I haven't made the load screen yet :c");};
-  loadBtn.onmouseenter = (e)=>{createBtn.style.filter="brightness(1)";};
-  loadBtn.onmouseleave = (e)=>{createBtn.style.filter="";};
-  return createBtn;
+  loadBtn.onmouseenter = (e)=>{loadBtn.style.filter="brightness(1)";};
+  loadBtn.onmouseleave = (e)=>{loadBtn.style.filter="";};
+  return loadBtn;
 }
 
 var createBmrGrid = function() {
