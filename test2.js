@@ -28,7 +28,7 @@ var createBmrGrid = function() {
   grid.style="display:grid;position:relative;top:1.5em;width:100%;height:93%;border:2px solid #343434;border-radius:0.5em;gap:0.5em;"
   for(let i=0;i<4;i++) {
     //add to the left
-    grid.appendChild(createBrmGridItem(0));
+    grid.appendChild(createBmrGridItem(0));
     //add to the right
     grid.appendChild(createBmrGridItem(1));
   }
