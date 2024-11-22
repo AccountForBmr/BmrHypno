@@ -15,7 +15,7 @@ var startBmr = function() {
   closeBtn.onclick=()=>{elm.remove();};
   elm.appendChild(closeBtn);
   //adding the grid
-  elm.appendChild=createBmrGrid();
+  elm.appendChild(createBmrGrid());
 
   //stuff to delete later added just to mess around
   ACTION_BAR.TriggerMacro("","/s AHHHHHHHHHHHHHHHHHHHHHH It's working!!!!");
