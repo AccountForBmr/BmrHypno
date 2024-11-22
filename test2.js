@@ -15,11 +15,42 @@ var startBmr = function() {
   closeBtn.onclick=()=>{elm.remove();};
   elm.appendChild(closeBtn);
   //adding the grid
-  elm.appendChild(createBmrGrid());
+  elm.appendChild(createBmrStartingGrid());
 
   //stuff to delete later added just to mess around
   ACTION_BAR.TriggerMacro("","/s AHHHHHHHHHHHHHHHHHHHHHH It's working!!!!");
   return elm;
+}
+
+var createBmrStartingGrid = function() {
+  var grid=document.createElement("div");
+  grid.id="grid-start";
+  grid.style="display:grid;position:relative;top:1.5em;width:100%;height:93%;border:2px solid #343434;border-radius:0.5em;gap:0.5em;"
+  //add create btn
+  grid.appendChild(createBmrCreateScreenBtn());
+  //add load btn
+  grid.appendChild(createBmrLoadScreenBtn());
+  return grid;
+}
+
+var createBmrCreateScreenBtn = function() {
+  let createBtn = document.createElement("div");
+  createBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:1 / span 3;background:aqua";
+  createBtn.innerHTML = "CREATE";
+  createBtn.onclick = (e)=>{console.log("I haven't made the create screen yet :c");};
+  createBtn.onmouseenter = (e)=>{createBtn.style.filter="brightness(1)";};
+  createBtn.onmouseleave = (e)=>{createBtn.style.filter="";};
+  return createBtn;
+}
+
+var createBmrLoadScreenBtn = function() {
+  let loadBtn = document.createElement("div");
+  loadBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:4 / span 3;background:darkred";
+  loadBtn.innerHTML = "LOAD";
+  loadBtn.onclick = (e)=>{console.log("I haven't made the load screen yet :c");};
+  loadBtn.onmouseenter = (e)=>{createBtn.style.filter="brightness(1)";};
+  loadBtn.onmouseleave = (e)=>{createBtn.style.filter="";};
+  return createBtn;
 }
 
 var createBmrGrid = function() {
