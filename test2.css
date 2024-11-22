@@ -1,0 +1,51 @@
+#mainbox {
+    position:relative;
+    z-index:100;
+    top:5%;
+    left:25%;
+    width:50%;
+    height:75%;
+    background:rgba(0, 0, 0, 0.9);
+    color:#fff;
+    border:2px solid #343434;
+    border-radius:0.5em;
+    padding:0.25em;
+    font-size:calc(var(--scale) * 2);
+    backdrop-filter:blur(0.2em);
+    pointer-events:auto;
+    box-shadow:inset 0px 0px 30px 2px rgba(0, 0, 0, 0.5), 0px 0px 3px 0px rgba(0, 0, 0, 0.75)
+}
+
+#grid-start {
+    display:grid;
+    position:relative;
+    top:1.5em;
+    width:100%;
+    height:93%;
+    border:2px solid #343434;
+    border-radius:0.5em;
+    gap:0.5em;
+}
+
+.gridButton {
+    display:inline-grid;
+    border-radius:1.0em;
+    background:rgba(20, 20, 20, 0.9);
+    text-align:center;
+    align-content:center;
+    border:2px solid rgb(52, 52, 52);
+    margin:0.05em;
+    font-size:4em;
+}
+
+.gridButton:hover {
+    filter: brightness(1.3);
+}
+
+#createBtn {
+    grid-row:1 / span 3;
+}
+
+#loadBtn {
+    grid-row:4 / span 3;
+}
