@@ -38,7 +38,7 @@ var createBmrCreateScreenBtn = function() {
   createBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:1 / span 3;background:aqua";
   createBtn.innerHTML = "CREATE";
   createBtn.onclick = (e)=>{console.log("I haven't made the create screen yet :c");};
-  createBtn.onmouseenter = (e)=>{createBtn.style.filter="brightness(1)";};
+  createBtn.onmouseenter = (e)=>{createBtn.style.filter="brightness(1.3)";};
   createBtn.onmouseleave = (e)=>{createBtn.style.filter="";};
   return createBtn;
 }
@@ -48,7 +48,7 @@ var createBmrLoadScreenBtn = function() {
   loadBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:4 / span 3;background:darkred";
   loadBtn.innerHTML = "LOAD";
   loadBtn.onclick = (e)=>{console.log("I haven't made the load screen yet :c");};
-  loadBtn.onmouseenter = (e)=>{loadBtn.style.filter="brightness(1)";};
+  loadBtn.onmouseenter = (e)=>{loadBtn.style.filter="brightness(1.3)";};
   loadBtn.onmouseleave = (e)=>{loadBtn.style.filter="";};
   return loadBtn;
 }
