@@ -2,30 +2,25 @@
 A script that creates a menu in Bmr that you can use to load or create hypno messages, so have fun with it :P!
 */
 
+var mainBox = document.createElement("div");
+
 var startBmr = function() {
-  //add elm to div id=menus in bmr
-  var elm=document.createElement("div");
-  elm.id="mainBox";
-  /*elm.style="position:relative;z-index:100;top:10%;left:25%;width:50%;height:80%;background:rgba(0, 0, 0, 0.9);color:#fff;border:2px solid #343434;"+
-  "border-radius:0.5em;padding:0.25em;font-size:calc(var(--scale) * 2);backdrop-filter:blur(0.2em);pointer-events:auto;"+
-  "box-shadow:inset 0px 0px 30px 2px rgba(0, 0, 0, 0.5), 0px 0px 3px 0px rgba(0, 0, 0, 0.75)";*/
-  //close button, uses css from bmr if elm was added to menus
-  var closeBtn=document.createElement("div");
-  closeBtn.className="button close";
-  closeBtn.onclick=()=>{elm.remove();};
-  elm.appendChild(closeBtn);
+  //add mainBox to div id=menus in bmr
+  mainBox.id="mainBox";
+  //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
+  emptyMainBox();
   //adding the grid
-  elm.appendChild(createBmrStartingGrid());
+  mainBox.appendChild(createBmrStartingGrid());
 
   //stuff to delete later added just to mess around
   ACTION_BAR.TriggerMacro("","/s AHHHHHHHHHHHHHHHHHHHHHH It's working!!!!");
-  return elm;
+  return mainBox;
 }
 
 var createBmrStartingGrid = function() {
+  emptyMainBox();
   var grid=document.createElement("div");
   grid.id="grid-start";
-  //grid.style="display:grid;position:relative;top:1.5em;width:100%;height:93%;border:2px solid #343434;border-radius:0.5em;gap:0.5em;"
   //add create btn
   grid.appendChild(createBmrCreateScreenBtn());
   //add load btn
@@ -37,12 +32,8 @@ var createBmrCreateScreenBtn = function() {
   let createBtn = document.createElement("div");
   createBtn.id = "createBtn";
   createBtn.className = "gridButton";
-  /*createBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:1 / span 3;background:rgba(20, 20, 20, 0.9);"+
-  "text-align:center;align-content:center;border:2px solid rgb(52, 52, 52);margin:0.05em;font-size:4em;";*/
   createBtn.innerHTML = "C R E A T E";
-  createBtn.onclick = (e)=>{console.log("I haven't made the create screen yet :c");};
-  /*createBtn.onmouseenter = (e)=>{createBtn.style.filter="brightness(1.3)";};
-  createBtn.onmouseleave = (e)=>{createBtn.style.filter="";};*/
+  createBtn.onclick = loadCreateScreen();
   return createBtn;
 }
 
@@ -50,13 +41,49 @@ var createBmrLoadScreenBtn = function() {
   let loadBtn = document.createElement("div");
   loadBtn.id = "loadBtn";
   loadBtn.className = "gridButton";
-  /*loadBtn.style = "display:inline-grid;border-radius:1.0em;grid-row:4 / span 3;background:rgba(20, 20, 20, 0.9);"+
-  "text-align:center;align-content:center;border:2px solid rgb(52, 52, 52);margin:0.05em;font-size:4em;";*/
   loadBtn.innerHTML = "L O A D";
   loadBtn.onclick = (e)=>{console.log("I haven't made the load screen yet :c");};
-  /*loadBtn.onmouseenter = (e)=>{loadBtn.style.filter="brightness(1.3)";};
-  loadBtn.onmouseleave = (e)=>{loadBtn.style.filter="";};*/
   return loadBtn;
+}
+
+var loadCreateScreen = function() {
+  emptyMainBox();
+  let fileBtn = document.createElement("input");
+  fileBtn.type = "file";
+  fileBtn.id = "loadFileBtn";
+  //what happens after the file is loaded
+  //TODO TODO TODO TODO TODO TODO TODO TODO TODO, for now just console log
+  let loaded = (e) => {
+    let tmpFr = e.target;
+    let result = tmpFr.result;
+    console.log(result);
+    //let resultJSON = JSON.parse(result);
+  }
+  //How are the files processed when you load them
+  let process = (file) => {
+    let fr=new FileReader();
+    fr.readAsText(file);
+    fr.addEventListener('loadend',loaded);
+  }
+  //Making it so you process the file when you choose it
+  fileBtn.addEventListener('change',(e) => {
+    let file=fileBtn.files[0];
+    process(file);
+  });
+  //label for the fileBtn so I can css it
+  let fileBtnLabel = document.createElement("label");
+  fileBtnLabel.id = "loadFileLabel";
+  fileBtnLabel.appendChild(fileBtn);
+  fileBtnLabel.append("Load from file");
+  mainBox.appendChild(fileBtnLabel);
+}
+
+var emptyMainBox = function() {
+  mainBox.innerHTML = "";
+  var closeBtn=document.createElement("div");
+  closeBtn.className="button close";
+  closeBtn.onclick=()=>{mainBox.remove();};
+  mainBox.appendChild(closeBtn);
 }
 
 var createBmrGrid = function() {

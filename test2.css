@@ -1,7 +1,7 @@
 #mainBox {
     position:relative !important;
     z-index:100;
-    top:5%;
+    top:0;
     left:25% !important;
     width:50%;
     height:75%;
@@ -13,7 +13,7 @@
     font-size:calc(var(--scale) * 2);
     backdrop-filter:blur(0.2em);
     pointer-events:auto;
-    box-shadow:inset 0px 0px 30px 2px rgba(0, 0, 0, 0.5), 0px 0px 3px 0px rgba(0, 0, 0, 0.75)
+    box-shadow:inset 0px 0px 30px 2px rgba(0, 0, 0, 0.5), 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
 }
 
 #grid-start {
@@ -24,7 +24,7 @@
     height:93%;
     border:2px solid #343434;
     border-radius:0.5em;
-    gap:0.5em;
+    gap:0.1em;
 }
 
 .gridButton {
@@ -48,4 +48,18 @@
 
 #loadBtn {
     grid-row:4 / span 3;
+}
+
+#loadFileBtn {
+    display: none;
+}
+
+#loadFileLabel {
+    position: absolute;
+    border: 2px solid #343434;
+    border-radius: 0.5em;
+    background: rgba(20, 20, 20, 0.9);
+    font-size: 1em;
+    top: 0.5%;
+    padding: 2px;
 }
