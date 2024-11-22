@@ -11,7 +11,7 @@ var startBmr = function() {
   "box-shadow:inset 0px 0px 30px 2px rgba(0, 0, 0, 0.5), 0px 0px 3px 0px rgba(0, 0, 0, 0.75)";
   //close button, uses css from bmr if elm was added to menus
   var closeBtn=document.createElement("div");
-  closeBtn.class="button close";
+  closeBtn.className="button close";
   closeBtn.onclick=()=>{elm.remove();};
   elm.appendChild(closeBtn);
   //adding the grid
