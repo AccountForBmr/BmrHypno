@@ -133,6 +133,7 @@ var bmrHypno = function() {
   }
 
   function rewrittenDropdownFunction(e) {
+    /*
     const rect = document.getElementById("menu").getElementsByClassName("button")[0].getBoundingClientRect();
         DROPDOWN.instance.Open(e, [
           { label: "Inventory", onclick: () => MENU.Inventory.Open() },
@@ -147,6 +148,13 @@ var bmrHypno = function() {
           { label: "Hypno", onclick: () => document.getElementById("menus").appendChild(startBmr())},
           { label: "Exit", onclick: () => this.ExitAlert() },
         ], rect.left, rect.bottom);
+    */
+   var _menuButton = document.getElementById("menu").getElementsByClassName("button")[0];
+   let curFunc = _menuButton.onclick.toString(); 
+   let newFunc = curFunc.substring(curFunc.indexOf("{")+1,curFunc.length-1);
+   newFunc = newFunc.replace(/_menuButton/gm,'document.getElementById("menu").getElementsByClassName("button")[0]');
+   let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHypno.start)}'
+   newFunc = newFunc.replace(/MENU\.Spells\.Open\({}\) }/gm,restOfTheFunc);
   }
 
   BMRHYPNO.start = startBmr();
