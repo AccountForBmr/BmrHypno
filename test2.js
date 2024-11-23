@@ -1,6 +1,9 @@
 /*
 A script that creates a menu in Bmr that you can use to load or create hypno messages, so have fun with it :P!
 */
+
+var BMRHYPNO = {};
+
 var bmrHypno = function() {
   var mainBox = document.createElement("div");
   var _currentlyLoaded = {};
@@ -146,12 +149,11 @@ var bmrHypno = function() {
         ], rect.left, rect.bottom);
   }
 
+  BMRHYPNO.start = startBmr();
   GUI.instance.DisplayMessage("Everything was loaded correctly, hopefully! \\[T]/");
 
 };
 
-var BMRHYPNO = {
-  start: startBmr()
-};
+BMRHYPNO.load = bmrHypno();
 
 console.log("testtttt");
