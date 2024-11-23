@@ -12,6 +12,12 @@ var startBmr = function() {
   //adding the grid
   mainBox.appendChild(createBmrStartingGrid());
 
+  //replacing the dropdown menu in Bmr to add Hypno to the list
+  var menufunc=temp0.onclick.toString().substring(8).slice(0,-1);
+  menufunc=menufunc.replace(/"Exit/gm,"\"Hypno\", onclick: () => document.getElementById(\"menus\").appendChild(startBmr())},{label:\"Exit");
+  menufunc=menufunc.replace(/_menuButton/gm,"document.getElementById(\"menu\").getElementsByClassName(\"button\")[0]");
+  document.getElementById("menu").getElementsByClassName("button")[0].onclick=new Function("e",menufunc);
+
   //stuff to delete later added just to mess around
   ACTION_BAR.TriggerMacro("","/s AHHHHHHHHHHHHHHHHHHHHHH It's working!!!!");
   return mainBox;
