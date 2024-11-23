@@ -60,8 +60,8 @@
     border-radius: 0.5em;
     background: rgba(20, 20, 20, 0.9);
     font-size: 1em;
-    top: 0.5%;
-    padding: 2px;
+    top: 1%;
+    padding: 0 0.5em;
 }
 
 #loadFileLabel:hover {
