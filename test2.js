@@ -133,7 +133,7 @@ var bmrHypno = function() {
   }
 
   function rewrittenDropdownFunction(e) {
-    /*
+    /* The function in BMR, + hypno down there. Not replacing it like this in case I want to add more stuff to the menu
     const rect = document.getElementById("menu").getElementsByClassName("button")[0].getBoundingClientRect();
         DROPDOWN.instance.Open(e, [
           { label: "Inventory", onclick: () => MENU.Inventory.Open() },
@@ -149,17 +149,17 @@ var bmrHypno = function() {
           { label: "Exit", onclick: () => this.ExitAlert() },
         ], rect.left, rect.bottom);
     */
-   var _menuButton = document.getElementById("menu").getElementsByClassName("button")[0];
+   let _menuButton = document.getElementById("menu").getElementsByClassName("button")[0];
    let curFunc = _menuButton.onclick.toString(); 
    let newFunc = curFunc.substring(curFunc.indexOf("{")+1,curFunc.length-1);
    newFunc = newFunc.replace(/_menuButton/gm,'document.getElementById("menu").getElementsByClassName("button")[0]');
-   let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHYPNO.start)}'
+   let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHYPNO.start())}'
    newFunc = newFunc.replace(/MENU\.Spells\.Open\({}\) }/gm,restOfTheFunc);
 
    return new Function("e",newFunc);
   }
 
-  BMRHYPNO.start = startBmr();
+  BMRHYPNO.start = startBmr;
   GUI.instance.DisplayMessage("Everything was loaded correctly, hopefully! \\[T]/");
 
 };
@@ -167,3 +167,22 @@ var bmrHypno = function() {
 BMRHYPNO.load = bmrHypno();
 
 console.log("testtttt");
+/*-----------------------------
+type: img
+value: url of the image/gif
+opacity: ...
+max-min width-height: ...
+width-heigth: ...
+transformRotation: ...
+extra
+
+type: word
+value: "slut"
+color: random OR an hex value chosen by color picker
+opacity: value between 0 and 1(0 invisible, 1 totally visible
+fontSize: random between two chosen values
+fontType: ...nah
+max-min width-height: ???? Probably adding text-wrap too
+transformRotation: choose max deg and it will be between -deg and +deg
+extra: an other css that you might want to add. simply parse it like: first line \n second line probably. trasform gets +
+*/
