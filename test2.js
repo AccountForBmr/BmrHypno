@@ -151,7 +151,7 @@ var bmrHypno = function() {
 };
 
 var BMRHYPNO = {
-  "start": startBmr()
+  start: startBmr()
 };
 
 console.log("testtttt");
