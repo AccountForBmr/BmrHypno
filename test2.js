@@ -149,3 +149,5 @@ var bmrHypno = function() {
   GUI.instance.DisplayMessage("Everything was loaded correctly, hopefully! \\[T]/");
 
 };
+
+console.log("testtttt");
