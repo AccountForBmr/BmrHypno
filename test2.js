@@ -153,7 +153,7 @@ var bmrHypno = function() {
    let curFunc = _menuButton.onclick.toString(); 
    let newFunc = curFunc.substring(curFunc.indexOf("{")+1,curFunc.length-1);
    newFunc = newFunc.replace(/_menuButton/gm,'document.getElementById("menu").getElementsByClassName("button")[0]');
-   let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHypno.start)}'
+   let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHYPNO.start)}'
    newFunc = newFunc.replace(/MENU\.Spells\.Open\({}\) }/gm,restOfTheFunc);
 
    return new Function("e",newFunc);
