@@ -164,7 +164,7 @@ var bmrHypno = function() {
 
 };
 
-BMRHYPNO.load = bmrHypno();
+BMRHYPNO.load = bmrHypno;
 
 console.log("testtttt");
 /*-----------------------------
