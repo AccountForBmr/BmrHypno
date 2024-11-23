@@ -21,7 +21,7 @@ var bmrHypno = function() {
     menufunc=menufunc.replace(/"Exit/gm,"\"Hypno\", onclick: () => document.getElementById(\"menus\").appendChild(startBmr())\},\{label:\"Exit");
     menufunc=menufunc.replace(/_menuButton/gm,"document.getElementById(\"menu\").getElementsByClassName(\"button\")[0]");
     document.getElementById("menu").getElementsByClassName("button")[0].onclick=new Function("e",menufunc);*/
-    document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction;
+    document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
 
     //stuff to delete later added just to mess around
     ACTION_BAR.TriggerMacro("","/s AHHHHHHHHHHHHHHHHHHHHHH It's working!!!!");
@@ -155,6 +155,8 @@ var bmrHypno = function() {
    newFunc = newFunc.replace(/_menuButton/gm,'document.getElementById("menu").getElementsByClassName("button")[0]');
    let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHypno.start)}'
    newFunc = newFunc.replace(/MENU\.Spells\.Open\({}\) }/gm,restOfTheFunc);
+
+   return new Function("e",newFunc);
   }
 
   BMRHYPNO.start = startBmr();
