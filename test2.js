@@ -6,6 +6,7 @@ var BMRHYPNO = {};
 
 var bmrHypno = function() {
   var mainBox = document.createElement("div");
+  var _menuModified = false;
   var _currentlyLoaded = {};
 
   function startBmr() {
@@ -16,12 +17,15 @@ var bmrHypno = function() {
     //adding the grid
     mainBox.appendChild(createBmrStartingGrid());
 
-    //replacing the dropdown menu in Bmr to add Hypno to the list
-    /*var menufunc=document.getElementById("menu").getElementsByClassName("button")[0].onclick.toString().substring(8).slice(0,-1);
-    menufunc=menufunc.replace(/"Exit/gm,"\"Hypno\", onclick: () => document.getElementById(\"menus\").appendChild(startBmr())\},\{label:\"Exit");
-    menufunc=menufunc.replace(/_menuButton/gm,"document.getElementById(\"menu\").getElementsByClassName(\"button\")[0]");
-    document.getElementById("menu").getElementsByClassName("button")[0].onclick=new Function("e",menufunc);*/
-    document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
+    if(!_menuModified) {
+      //replacing the dropdown menu in Bmr to add Hypno to the list
+      /*var menufunc=document.getElementById("menu").getElementsByClassName("button")[0].onclick.toString().substring(8).slice(0,-1);
+      menufunc=menufunc.replace(/"Exit/gm,"\"Hypno\", onclick: () => document.getElementById(\"menus\").appendChild(startBmr())\},\{label:\"Exit");
+      menufunc=menufunc.replace(/_menuButton/gm,"document.getElementById(\"menu\").getElementsByClassName(\"button\")[0]");
+      document.getElementById("menu").getElementsByClassName("button")[0].onclick=new Function("e",menufunc);*/
+      document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
+      _menuModified = true;
+    }
 
     //stuff to delete later added just to mess around
     ACTION_BAR.TriggerMacro("","/s AHHHHHHHHHHHHHHHHHHHHHH It's working!!!!");
