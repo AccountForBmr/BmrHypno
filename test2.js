@@ -35,7 +35,7 @@ var bmrHypno = function() {
   function createBmrStartingGrid() {
     emptyMainBox();
     var grid = document.createElement("div");
-    grid.id = "grid-start";
+    grid.className = "grid-start";
     //add create btn
     grid.appendChild(createBmrCreateScreenBtn());
     //add load btn
@@ -97,7 +97,27 @@ var bmrHypno = function() {
 
   function createCreateScreenGrid() {
     let grid = document.createElement("div");
-    grid.id = "grid-start";
+    grid.className = "grid-start";
+    grid.id = "create-grid";
+    //create name container
+    let nameContainer = document.createElement("div");
+    nameContainer.className = "gridContainer";
+    nameContainer.id = "nameContainer";
+    //add label and input to name container
+    let nameLabel = document.createElement("div");
+    nameLabel.id = "nameLabel";
+    nameLabel.className = "gridLabel";
+    let nameInputContainer = document.createElement("div");
+    let nameInput = document.createElement("input");
+    nameInputContainer.id = "nameInputContainer";
+    nameInput.id = "formNameInput";
+    nameInput.className = "gridTextInput";
+    nameInputContainer.appendChild(nameInput);
+    nameContainer.appendChild(nameLabel);
+    nameContainer.appendChild(nameInputContainer);
+    //add nameContainer to grid
+    grid.appendChild(nameContainer);
+    
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
     return grid;
@@ -172,6 +192,8 @@ BMRHYPNO.load = bmrHypno;
 
 console.log("testtttt");
 /*-----------------------------
+setName needed to remove intervals
+
 type: img
 value: url of the image/gif
 opacity: ...
