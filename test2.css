@@ -109,8 +109,8 @@ Create stuff down here, mostly
 }
 
 .gridTextInput {
-    width: 100%;
-    height: 50%;
+    width: 100% !important;
+    height: 50% !important;
 }
 
 .gridTextInput:focus {
