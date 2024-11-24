@@ -8,6 +8,20 @@ var bmrHypno = function() {
   var mainBox = document.createElement("div");
   var _menuModified = false;
   var _currentlyLoaded = {};
+  var _preloadedHypnos = {
+    "New one": {},
+    "Load from file": "Load from file",
+    "Random": {
+      "first": {
+        "type": "word",
+        "value": "slut"
+      },
+      "second": {
+        "type": "img",
+        "value": "woah,url"
+      }
+    }
+  };
 
   function startBmr() {
     //add mainBox to div id=menus in bmr
@@ -63,6 +77,16 @@ var bmrHypno = function() {
 
   function loadCreateScreen() {
     emptyMainBox();
+    //top container here (load from and close button in it)
+    let topContainer = document.createElement("div");
+    topContainer.id = "topContainer";
+    topContainer.className = "gridContainer";
+    //load from label
+    let loadFromLabel = document.createElement("div");
+    loadFromLabel.className = "gridLabel";
+    loadFromLabel.innerHTML = "Load from:";
+    topContainer.appendChild(loadFromLabel);
+    //creating and loading the selection menu, along with the file btn
     let fileBtn = document.createElement("input");
     fileBtn.type = "file";
     fileBtn.id = "loadFileBtn";
@@ -90,9 +114,28 @@ var bmrHypno = function() {
     fileBtnLabel.id = "loadFileLabel";
     fileBtnLabel.appendChild(fileBtn);
     fileBtnLabel.append("Load from file");
-    mainBox.appendChild(fileBtnLabel);
+    topContainer.appendChild(loadSelections(fileBtnLabel));
+    mainBox.appendChild(topContainer);
 
     mainBox.appendChild(createCreateScreenGrid());
+  }
+
+  function loadSelections(displayBtn) {
+    var selections = document.createElement("select");
+    for(i in _preloadedHypnos) {
+      selections.options.add(new Option(i,_preloadedHypnos[i]));
+    }
+    selections.id = "selectHypno";
+    selections.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex].text;
+      if(selected == "Load from file") {
+        displayBtn.style.display = "";
+      } else {
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        displayBtn.style.display = "none";
+      }
+    };
+    return selections;
   }
 
   function createCreateScreenGrid() {
