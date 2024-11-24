@@ -70,6 +70,7 @@
 
 #selectHypno {
     color: #9c9c9c;
+    border-radius: 0.5em;
 }
 
 /*
@@ -115,6 +116,7 @@ Create stuff down here, mostly
 .gridTextInput {
     width: 100% !important;
     height: 50% !important;
+    border-radius: 0.5em;
 }
 
 .gridTextInput:focus {
