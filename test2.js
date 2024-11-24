@@ -115,6 +115,7 @@ var bmrHypno = function() {
     fileBtnLabel.appendChild(fileBtn);
     fileBtnLabel.append("Load from file");
     topContainer.appendChild(loadSelections(fileBtnLabel));
+    topContainer.appendChild(fileBtnLabel);
     mainBox.appendChild(topContainer);
 
     mainBox.appendChild(createCreateScreenGrid());
