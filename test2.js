@@ -107,11 +107,13 @@ var bmrHypno = function() {
     let nameLabel = document.createElement("div");
     nameLabel.id = "nameLabel";
     nameLabel.className = "gridLabel";
+    nameLabel.innerHTML = "Choose a name for your set:";
     let nameInputContainer = document.createElement("div");
     let nameInput = document.createElement("input");
     nameInputContainer.id = "nameInputContainer";
     nameInput.id = "formNameInput";
     nameInput.className = "gridTextInput";
+    nameInput.type = "text";
     nameInputContainer.appendChild(nameInput);
     nameContainer.appendChild(nameLabel);
     nameContainer.appendChild(nameInputContainer);
