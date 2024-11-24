@@ -98,7 +98,7 @@ var bmrHypno = function() {
   function createCreateScreenGrid() {
     let grid = document.createElement("div");
     grid.className = "grid-start";
-    grid.id = "create-grid";
+    grid.id = "createGrid";
     //create name container
     let nameContainer = document.createElement("div");
     nameContainer.className = "gridContainer";
@@ -117,7 +117,7 @@ var bmrHypno = function() {
     nameContainer.appendChild(nameInputContainer);
     //add nameContainer to grid
     grid.appendChild(nameContainer);
-    
+
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
     return grid;
