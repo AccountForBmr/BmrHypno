@@ -36,6 +36,7 @@
     border:2px solid rgb(52, 52, 52);
     margin:0.05em;
     font-size:4em;
+    color: #9c9c9c;
 }
 
 .gridButton:hover {
@@ -62,6 +63,7 @@
     font-size: 1em;
     top: 1%;
     padding: 0 0.5em;
+    color: #9c9c9c;
 }
 
 #loadFileLabel:hover {
