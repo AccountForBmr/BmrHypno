@@ -129,17 +129,23 @@ var bmrHypno = function() {
     }
     selections.id = "selectHypno";
     selections.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex].text;
-      if(selected == "Load from file") {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "Load from file") {
         displayBtn.style.display = "";
       } else {
-        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        loadSelectionInGrid(selected);
         displayBtn.style.display = "none";
       }
     };
     return selections;
   }
 
+  function loadSelectionInGrid(selection) {
+    //the name
+    document.getElementById("formNameInput").value = selection.text;
+    //that's all I have for now
+  }
+  
   function createCreateScreenGrid() {
     let grid = document.createElement("div");
     grid.className = "grid-start";
