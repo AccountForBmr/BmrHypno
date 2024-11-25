@@ -124,7 +124,8 @@ Create stuff down here, mostly
 }
 
 #selectTypeContainer {
-    height: 15%;
+    position: relative;
+    top: -0.1em;
 }
 
 .typeContainer {
