@@ -170,6 +170,34 @@ var bmrHypno = function() {
     nameContainer.appendChild(nameInputContainer);
     //add nameContainer to grid
     grid.appendChild(nameContainer);
+    
+    //add the selection boxes for word and img
+    let selectTypeContainer = document.createElement("div");
+    selectTypeContainer.id = "selectTypeContainer";
+    selectTypeContainer.className = "gridContainer";
+    //word box
+    let wordTypeContainer = document.createElement("div");
+    wordTypeContainer.id = "wordTypeContainer";
+    wordTypeContainer.className = "typeContainer";
+    wordTypeContainer.innerHTML = "Word/Text";
+    wordTypeContainer.onclick = (e) => {
+      wordTypeContainer.classList.add("activeType");
+      imgTypeContainer.classList.remove("activeType");
+      //TODO Change format of the inputs below
+    };
+    //img box
+    let imgTypeContainer = document.createElement("div");
+    imgTypeContainer.id = "imgTypeContainer";
+    imgTypeContainer.className = "typeContainer";
+    imgTypeContainer.innerHTML = "Image/Gif";
+    imgTypeContainer.onclick = (e) => {
+      wordTypeContainer.classList.remove("activeType");
+      imgTypeContainer.classList.add("activeType");
+      //TODO Change format of the inputs below
+    };
+    selectTypeContainer.appendChild(wordTypeContainer);
+    selectTypeContainer.appendChild(imgTypeContainer);
+    grid.appendChild(selectTypeContainer);
 
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
@@ -182,31 +210,6 @@ var bmrHypno = function() {
     closeBtn.className = "button close";
     closeBtn.onclick = () => { mainBox.remove(); };
     mainBox.appendChild(closeBtn);
-  }
-
-  function createBmrGrid() {
-    var grid=document.createElement("div");
-    grid.id="grid";
-    grid.style="display:grid;position:relative;top:1.5em;width:100%;height:93%;border:2px solid #343434;border-radius:0.5em;gap:0.5em;"
-    for(let i=0;i<4;i++) {
-      //add to the left
-      grid.appendChild(createBmrGridItem(0));
-      //add to the right
-      grid.appendChild(createBmrGridItem(1));
-    }
-    return grid;
-  }
-
-  function createBmrGridItem(position) {
-    let gridItem=document.createElement("div");
-    if(position==0) {
-      //left
-      gridItem.style="display:inline-grid;border-radius:1.0em;grid-column:1 / span 3;background:aqua";
-    } else {
-      //right
-      gridItem.style="display:inline-grid;border-radius:1.0em;grid-column:4 / span 3;background:red";
-    }
-    return gridItem;
   }
 
   function rewrittenDropdownFunction(e) {
