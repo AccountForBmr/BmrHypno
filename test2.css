@@ -1,6 +1,5 @@
 #mainBox {
     position:relative !important;
-    z-index:100;
     top:0;
     left:25% !important;
     width:50%;
@@ -76,13 +75,22 @@
 /*
 Create stuff down here, mostly
 */
-#createGrid {
+#createMenu {
     top: 1%;
-    grid-template-rows: 15% 15% 35%;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #fff rgba(0, 0, 0, 0.9);
 }
+
+.menu-start {
+    position:relative;
+    top:1%;
+    width:100%;
+    height:93%;
+    border:2px solid #343434;
+    border-radius:0.5em;
+}
+
 
 .gridContainer {
     width: 100%;
@@ -92,6 +100,7 @@ Create stuff down here, mostly
 #nameContainer {
     border-bottom: 2px solid rgb(52, 52, 52);
     border-radius: 0.5em;
+    height: 15%;
 }
 
 .gridLabel {
@@ -124,8 +133,7 @@ Create stuff down here, mostly
 }
 
 #selectTypeContainer {
-    position: relative;
-    top: -0.1em;
+    height: 15%;
 }
 
 .typeContainer {

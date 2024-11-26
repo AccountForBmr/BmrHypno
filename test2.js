@@ -148,8 +148,8 @@ var bmrHypno = function() {
   
   function createCreateScreenGrid() {
     let grid = document.createElement("div");
-    grid.className = "grid-start";
-    grid.id = "createGrid";
+    grid.className = "menu-start";
+    grid.id = "createMenu";
     //create name container
     let nameContainer = document.createElement("div");
     nameContainer.className = "gridContainer";
