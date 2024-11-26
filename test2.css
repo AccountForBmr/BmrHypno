@@ -46,8 +46,12 @@
     grid-row:1 / span 3;
 }
 
-#loadBtn {
+#castBtn {
     grid-row:4 / span 3;
+}
+
+#removeBtn {
+    grid-row:7 / span 3;
 }
 
 #loadFileBtn {
@@ -99,15 +103,39 @@ Create stuff down here, mostly
 
 #nameContainer {
     border-bottom: 2px solid rgb(52, 52, 52);
-    border-radius: 0.5em;
     height: 15%;
+}
+
+#spawnContainer {
+    border-bottom: 2px solid rgb(52, 52, 52);
+    border-radius: 0.5em;
+    height: 15%;    
+}
+
+#spawnLabel {
+    width: 60%;
+    height: 100%;
+}
+
+#formSpawnRange {
+    width: 100%;
+    height: 50%;
+}
+
+#spawnInputContainer {
+    width: 40%;
+    height: 100%;
+    align-content: center;
+    color: #9c9c9c;
 }
 
 .gridLabel {
     text-align: center;
     align-content: center;
     word-wrap: break-word;
+    text-wrap: balance;
     color: #9c9c9c;
+    overflow: auto;
 }
 
 #nameLabel {
@@ -140,6 +168,7 @@ Create stuff down here, mostly
     background-color: #313131;
     width: 50%;
     border: 2px solid rgba(255, 255, 255, 0.15);
+    border-top: 0;
     border-radius: 0 0 0.5em 0.5em;
     overflow: hidden;
     align-content: center;

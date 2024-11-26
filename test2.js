@@ -52,8 +52,11 @@ var bmrHypno = function() {
     grid.className = "grid-start";
     //add create btn
     grid.appendChild(createBmrCreateScreenBtn());
-    //add load btn
-    grid.appendChild(createBmrLoadScreenBtn());
+    //add cast btn
+    grid.appendChild(createBmrCastScreenBtn());
+    //add remove btn
+    grid.appendChild(createBmrRemoveScreenBtn());
+
     return grid;
   }
 
@@ -66,13 +69,22 @@ var bmrHypno = function() {
     return createBtn;
   }
 
-  function createBmrLoadScreenBtn() {
-    let loadBtn = document.createElement("div");
-    loadBtn.id = "loadBtn";
-    loadBtn.className = "gridButton";
-    loadBtn.innerHTML = "L O A D";
-    loadBtn.onclick = (e) => { console.log("I haven't made the load screen yet :c"); };
-    return loadBtn;
+  function createBmrCastScreenBtn() {
+    let castBtn = document.createElement("div");
+    castBtn.id = "castBtn";
+    castBtn.className = "gridButton";
+    castBtn.innerHTML = "C A S T";
+    castBtn.onclick = (e) => { console.log("I haven't made the cast screen yet :c"); };
+    return castBtn;
+  }
+
+  function createBmrRemoveScreenBtn() {
+    let removeBtn = document.createElement("div");
+    removeBtn.id = "removeBtn";
+    removeBtn.className = "gridButton";
+    removeBtn.innerHTML = "R E M O V E";
+    removeBtn.onclick = (e) => { console.log("I haven't made the remove screen yet :c"); };
+    return removeBtn;
   }
 
   function loadCreateScreen() {
@@ -165,12 +177,44 @@ var bmrHypno = function() {
     nameInput.id = "formNameInput";
     nameInput.className = "gridTextInput";
     nameInput.type = "text";
+    nameInput.placeholder = "name here.";
     nameInputContainer.appendChild(nameInput);
     nameContainer.appendChild(nameLabel);
     nameContainer.appendChild(nameInputContainer);
     //add nameContainer to grid
     grid.appendChild(nameContainer);
     
+    //create spawn container
+    let spawnContainer = document.createElement("div");
+    spawnContainer.className = "gridContainer";
+    spawnContainer.id = "spawnContainer";
+    //add label and inputs to spawn container
+    let spawnLabel = document.createElement("div");
+    spawnLabel.id = "spawnLabel";
+    spawnLabel.className = "gridLabel";
+    spawnLabel.innerHTML = "Choose how many milliseconds you want between each spawn:";
+    let spawnInputContainer = document.createElement("div");
+    let spawnInput = document.createElement("input");
+    let spawnInputRange = document.createElement("input")
+    spawnInputContainer.id = "spawnInputContainer";
+    spawnInput.id = "formSpawnInput";
+    spawnInputRange.id = "formSpawnRange";
+    spawnInput.className = "gridTextInput";
+    spawnInput.type = "text";
+    spawnInput.placeholder = "ms here, can go past max.";
+    //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
+    spawnInput.oninput = (e) => {spawnInputRange.value = e.target.value;}
+    spawnInput.onchange = (e) => {spawnInputRange.value = e.target.value;}
+    spawnInputRange.oninput = (e) => {spawnInput.value = e.target.value;}
+    spawnInputRange.onchange = (e) => {spawnInput.value = e.target.value;}
+    //add them in container
+    spawnInputContainer.appendChild(spawnInput);
+    spawnInputContainer.appendChild(spawnInputRange);
+    spawnContainer.appendChild(spawnLabel);
+    spawnContainer.appendChild(spawnInputContainer);
+    //add spawnContainer to grid
+    grid.appendChild(spawnContainer);
+
     //add the selection boxes for word and img
     let selectTypeContainer = document.createElement("div");
     selectTypeContainer.id = "selectTypeContainer";
