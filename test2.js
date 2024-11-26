@@ -202,6 +202,9 @@ var bmrHypno = function() {
     spawnInput.className = "gridTextInput";
     spawnInput.type = "text";
     spawnInput.placeholder = "ms here, can go past max.";
+    spawnInputRange.type = "range";
+    spawnInputRange.min = 100;
+    spawnInputRange.max = 60000;
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     spawnInput.oninput = (e) => {spawnInputRange.value = e.target.value;}
     spawnInput.onchange = (e) => {spawnInputRange.value = e.target.value;}
