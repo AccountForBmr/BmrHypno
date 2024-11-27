@@ -279,14 +279,14 @@ var bmrHypno = function() {
     //fillTabs();
     //changeTabType("word");
     grid.appendChild(createTabbedContainer);
-    simpleTabCauseTired();
+    simpleTabCauseTired(createTabbedContainer);
 
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
     return grid;
   }
 
-  function simpleTabCauseTired() {
+  function simpleTabCauseTired(aaa) {
     let tabsContainer = document.createElement("div");
     tabsContainer.id = "tabsContainer";
     for(i in _tabs["word"]) {
@@ -296,7 +296,7 @@ var bmrHypno = function() {
       tab.innerHTML = i;
       tabsContainer.appendChild(tab);
     }
-    document.getElementById("create-tab-start").appendChild(tabsContainer);
+    aaa.appendChild(tabsContainer);
   }
 
   function fillTabs() {
