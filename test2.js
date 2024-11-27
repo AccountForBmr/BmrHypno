@@ -276,10 +276,10 @@ var bmrHypno = function() {
     //creating the tabbed part
     createTabbedContainer = document.createElement("div");
     createTabbedContainer.id="create-tab-start";
-    simpleTabCauseTired();
     //fillTabs();
     //changeTabType("word");
     grid.appendChild(createTabbedContainer);
+    simpleTabCauseTired();
 
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
