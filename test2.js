@@ -7,6 +7,19 @@ var BMRHYPNO = {};
 var bmrHypno = function() {
   var mainBox = document.createElement("div");
   var _menuModified = false;
+  var _tabs = {
+    "word": {
+      "Base":"",
+      "Color":"",
+      "Effects":"",
+      "Preview":""
+    },
+    "image": {
+      "Base":"",
+      "Effects":"",
+      "Preview":""
+    }
+  }
   var _currentlyLoaded = {};
   var _preloadedHypnos = {
     "New one": {},
@@ -14,18 +27,25 @@ var bmrHypno = function() {
     "Random": {
       "name": "Random",
       "spawnTime": 1000,
-      "values": {
-        "first": {
+      "values": [
+        {
           "type": "word",
           "value": "slut"
         },
-        "second": {
+        {
           "type": "img",
           "value": "woah,url"
         }
-      },
+      ]
     }
   };
+  var _templateHypno = {
+    "name": "",
+    "spawnTime": "",
+    "values": [
+
+    ]
+  }
 
   function startBmr() {
     //add mainBox to div id=menus in bmr
@@ -232,7 +252,7 @@ var bmrHypno = function() {
     //word box
     let wordTypeContainer = document.createElement("div");
     wordTypeContainer.id = "wordTypeContainer";
-    wordTypeContainer.className = "typeContainer";
+    wordTypeContainer.className = "typeContainer activeType";
     wordTypeContainer.innerHTML = "Word/Text";
     wordTypeContainer.onclick = (e) => {
       wordTypeContainer.classList.add("activeType");
@@ -253,9 +273,51 @@ var bmrHypno = function() {
     selectTypeContainer.appendChild(imgTypeContainer);
     grid.appendChild(selectTypeContainer);
 
+    //creating the tabbed part
+    createTabbedContainer = document.createElement("div");
+    createTabbedContainer.id="create-tab-start";
+    simpleTabCauseTired();
+    //fillTabs();
+    //changeTabType("word");
+    grid.appendChild(createTabbedContainer);
+
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
     return grid;
+  }
+
+  function simpleTabCauseTired() {
+    let tabsContainer = document.createElement("div");
+    tabsContainer.id = "tabsContainer";
+    for(i in _tabs["word"]) {
+      let tab = document.createElement("div");
+      tab.id = i+"Create";
+      tab.className = "tabTitle wordTabTitle";
+      tab.innerHTML = i;
+      tabsContainer.appendChild(tab);
+    }
+    document.getElementById("create-tab-start").appendChild(tabsContainer);
+  }
+
+  function fillTabs() {
+    for(i in _tabs) {
+      for(j in _tabs[i]) {
+
+      }
+    }
+  }
+
+  function changeTabType(type) {
+    //document.getElementById("create-tab-start").innerHTML="";
+    let hideAll = document.querySelectorAll(".createTab, .tabTitle");
+    for (i in allTabs) {
+      allTabs[i].style.display = "none"; 
+    }
+    if(type=="word") {
+
+    } else {
+
+    }
   }
 
   function emptyMainBox() {
