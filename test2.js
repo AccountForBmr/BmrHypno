@@ -12,14 +12,18 @@ var bmrHypno = function() {
     "New one": {},
     "Load from file": "Load from file",
     "Random": {
-      "first": {
-        "type": "word",
-        "value": "slut"
+      "name": "Random",
+      "spawnTime": 1000,
+      "values": {
+        "first": {
+          "type": "word",
+          "value": "slut"
+        },
+        "second": {
+          "type": "img",
+          "value": "woah,url"
+        }
       },
-      "second": {
-        "type": "img",
-        "value": "woah,url"
-      }
     }
   };
 
@@ -154,7 +158,10 @@ var bmrHypno = function() {
 
   function loadSelectionInGrid(selection) {
     //the name
+    _currentlyLoaded = _preloadedHypnos[selection.text];
     document.getElementById("formNameInput").value = selection.text;
+    document.getElementById("formSpawnInput").value = _currentlyLoaded.spawnTime;
+    document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
     //that's all I have for now
   }
   
