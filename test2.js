@@ -274,7 +274,7 @@ var bmrHypno = function() {
     grid.appendChild(selectTypeContainer);
 
     //creating the tabbed part
-    createTabbedContainer = document.createElement("div");
+    let createTabbedContainer = document.createElement("div");
     createTabbedContainer.id="create-tab-start";
     //fillTabs();
     //changeTabType("word");
