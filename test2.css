@@ -203,7 +203,7 @@ Create stuff down here, mostly
     overflow: hidden;
 }
 
-#tabsContainer {
+#tabsTitleContainer {
     background-color: #313131;
     width: 100%;
     height: 10%;
@@ -230,4 +230,40 @@ background-color: #313131;
   color: #9c9c9c;
   text-align: center;
   font-size: smaller;
+}
+
+#tabsContainer {
+    width: 100%;
+    height: 90%;
+    border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.createTab {
+    width: 100%;
+    height: 100%;
+}
+
+#wordValueContainer {
+    height: 25%;
+}
+
+.tabWordContainer {
+    width: 100%;
+    display: flex;
+    border-top: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+#wordValueLabel {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#wordValueInputContainer {
+    width: 65%;
+    height: 100%;
+    color: #9c9c9c;
+    display: flex;
+    align-items: center;
 }

@@ -2,14 +2,18 @@
 A script that creates a menu in Bmr that you can use to load or create hypno messages, so have fun with it :P!
 */
 
+//TODO replace all create element id classname innerhtml with a function, cause yes :////
+
 var BMRHYPNO = {};
 
 var bmrHypno = function() {
   var mainBox = document.createElement("div");
   var _menuModified = false;
+  //should add the function that returns the baseTab, colorTab etc... to the right, then append that tab
+  // probably???  TODO TODO TODO TODO
   var _tabs = {
     "word": {
-      "Base":"",
+      "Base":createWordBaseTab,
       "Color":"",
       "Effects":"",
       "Preview":""
@@ -19,7 +23,9 @@ var bmrHypno = function() {
       "Effects":"",
       "Preview":""
     }
-  }
+  };
+  var _tabsTitles = [];
+  var _tabsContainers = [];
   var _currentlyLoaded = {};
   var _preloadedHypnos = {
     "New one": {},
@@ -276,9 +282,9 @@ var bmrHypno = function() {
     //creating the tabbed part
     let createTabbedContainer = document.createElement("div");
     createTabbedContainer.id="create-tab-start";
-    //fillTabs();
+    //fillTabs(createTabbedContainer);
     //changeTabType("word");
-    grid.appendChild(createTabbedContainer);
+    //grid.appendChild(createTabbedContainer);
     simpleTabCauseTired(createTabbedContainer);
 
     //TODO, make a function that adds passed string as input button for grid
@@ -297,14 +303,64 @@ var bmrHypno = function() {
       tabsContainer.appendChild(tab);
     }
     aaa.appendChild(tabsContainer);
+    aaa.appendChild(createWordBaseTab());
   }
 
-  function fillTabs() {
+  function fillTabs(wholeContainer) {
+    let tabsTitleContainer = document.createElement("div");
+    let tabsContainer = document.createElement("div");
+    tabsTitleContainer.id = "tabsTitleContainer";
+    tabsContainer.id = "tabsContainer";
     for(i in _tabs) {
       for(j in _tabs[i]) {
-
+        //creating titles for the tabs
+        let tabTitle = document.createElement("div");
+        tabTitle.id = i+j+"CreateTitle";
+        tabTitle.className ="tabTitle";
+        tabTitle.innerHTML = j;
+        _tabsTitles.push(tabTitle);
+        tabsTitleContainer.appendChild(tabTitle);
+        //creating the actual tab
+        let tabContainer = _tabs[i][j]();
+        tabsContainer.appendChild(tabContainer);
+        _tabsContainers.push(tabContainer);
       }
     }
+    wholeContainer.appendChild(tabsTitleContainer);
+    wholeContainer.appendChild(tabsContainer);
+  }
+
+  function createWordBaseTab() {
+    //the tab
+    let tab = document.createElement("div");
+    tab.id = "wordBaseTab";
+    tab.className = "createTab";
+    //all its elements
+    //value
+    let valueContainer = document.createElement("div");
+    valueContainer.id = "wordValueContainer";
+    valueContainer.className = "tabWordContainer";
+    let wordValueLabel = document.createElement("div");
+    wordValueLabel.id = "wordValueLabel";
+    wordValueLabel.className = "gridLabel";
+    wordValueLabel.innerHTML = "Type the word/text that you wish to use:";
+    valueContainer.appendChild(wordValueLabel);
+    let wordValueInputContainer =document.createElement("div");
+    wordValueInputContainer.id = "wordValueInputContainer";
+    let wordValueInput = document.createElement("input");
+    wordValueInput.id = "wordValueInput";
+    wordValueInput.className = "gridTextInput";
+    wordValueInput.type = "text";
+    wordValueInput.placeholder = "Text here.";
+    wordValueInputContainer.appendChild(wordValueInput);
+    valueContainer.appendChild(wordValueInputContainer);
+    tab.appendChild(valueContainer);
+    //time TODO
+
+    //position TODO
+
+    //font size TODO
+    return tab;
   }
 
   function changeTabType(type) {
