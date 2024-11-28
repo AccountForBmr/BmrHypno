@@ -294,7 +294,7 @@ var bmrHypno = function() {
 
   function simpleTabCauseTired(aaa) {
     let tabsContainer = document.createElement("div");
-    tabsContainer.id = "tabsContainer";
+    tabsContainer.id = "tabsTitleContainer";
     for(i in _tabs["word"]) {
       let tab = document.createElement("div");
       tab.id = i+"Create";
