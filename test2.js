@@ -7,7 +7,7 @@ A script that creates a menu in Bmr that you can use to load or create hypno mes
 var BMRHYPNO = {};
 
 var bmrHypno = function() {
-  var mainBox = document.createElement("div");
+  var mainBox = createElement("div", "mainBox");
   var _menuModified = false;
   //should add the function that returns the baseTab, colorTab etc... to the right, then append that tab
   // probably???  TODO TODO TODO TODO
@@ -55,7 +55,6 @@ var bmrHypno = function() {
 
   function startBmr() {
     //add mainBox to div id=menus in bmr
-    mainBox.id="mainBox";
     //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
     emptyMainBox();
     //adding the grid
@@ -78,8 +77,7 @@ var bmrHypno = function() {
 
   function createBmrStartingGrid() {
     emptyMainBox();
-    var grid = document.createElement("div");
-    grid.className = "grid-start";
+    var grid = createElement("div","","grid-start");
     //add create btn
     grid.appendChild(createBmrCreateScreenBtn());
     //add cast btn
@@ -91,28 +89,19 @@ var bmrHypno = function() {
   }
 
   function createBmrCreateScreenBtn() {
-    let createBtn = document.createElement("div");
-    createBtn.id = "createBtn";
-    createBtn.className = "gridButton";
-    createBtn.innerHTML = "C R E A T E";
+    let createBtn = createElement("div","createBtn","gridButton","C R E A T E");
     createBtn.onclick = loadCreateScreen;
     return createBtn;
   }
 
   function createBmrCastScreenBtn() {
-    let castBtn = document.createElement("div");
-    castBtn.id = "castBtn";
-    castBtn.className = "gridButton";
-    castBtn.innerHTML = "C A S T";
+    let castBtn = createElement("div","castBtn","gridButton","C A S T");
     castBtn.onclick = (e) => { console.log("I haven't made the cast screen yet :c"); };
     return castBtn;
   }
 
   function createBmrRemoveScreenBtn() {
-    let removeBtn = document.createElement("div");
-    removeBtn.id = "removeBtn";
-    removeBtn.className = "gridButton";
-    removeBtn.innerHTML = "R E M O V E";
+    let removeBtn = createElement("div","removeBtn","gridButton","R E M O V E");
     removeBtn.onclick = (e) => { console.log("I haven't made the remove screen yet :c"); };
     return removeBtn;
   }
@@ -120,18 +109,13 @@ var bmrHypno = function() {
   function loadCreateScreen() {
     emptyMainBox();
     //top container here (load from and close button in it)
-    let topContainer = document.createElement("div");
-    topContainer.id = "topContainer";
-    topContainer.className = "gridContainer";
+    let topContainer = createElement("div","topContainer","gridContainer");
     //load from label
-    let loadFromLabel = document.createElement("div");
-    loadFromLabel.className = "gridLabel";
-    loadFromLabel.innerHTML = "Load from:";
+    let loadFromLabel = createElement("div","","gridLabel","Load from:");
     topContainer.appendChild(loadFromLabel);
     //creating and loading the selection menu, along with the file btn
-    let fileBtn = document.createElement("input");
+    let fileBtn = createElement("input","loadFileBtn");
     fileBtn.type = "file";
-    fileBtn.id = "loadFileBtn";
     //what happens after the file is loaded
     //TODO TODO TODO TODO TODO TODO TODO TODO TODO, for now just console log
     let loaded = (e) => {
@@ -152,8 +136,7 @@ var bmrHypno = function() {
       process(file);
     });
     //label for the fileBtn so I can css it
-    let fileBtnLabel = document.createElement("label");
-    fileBtnLabel.id = "loadFileLabel";
+    let fileBtnLabel = createElement("label","loadFileLabel");
     fileBtnLabel.appendChild(fileBtn);
     fileBtnLabel.append("Load from file");
     topContainer.appendChild(loadSelections(fileBtnLabel));
@@ -165,11 +148,10 @@ var bmrHypno = function() {
   }
 
   function loadSelections(displayBtn) {
-    var selections = document.createElement("select");
+    var selections = createElement("select","selectHypno");
     for(i in _preloadedHypnos) {
       selections.options.add(new Option(i,_preloadedHypnos[i]));
     }
-    selections.id = "selectHypno";
     selections.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text == "Load from file") {
@@ -192,25 +174,14 @@ var bmrHypno = function() {
   }
   
   function createCreateScreenGrid() {
-    let grid = document.createElement("div");
-    grid.className = "menu-start";
-    grid.id = "createMenu";
+    let grid = createElement("div","createMenu","menu-start");
     //create name container
-    let nameContainer = document.createElement("div");
-    nameContainer.className = "gridContainer";
-    nameContainer.id = "nameContainer";
+    let nameContainer = createElement("div","nameContainer","gridContainer");
     //add label and input to name container
-    let nameLabel = document.createElement("div");
-    nameLabel.id = "nameLabel";
-    nameLabel.className = "gridLabel";
-    nameLabel.innerHTML = "Choose a name for your set:";
-    let nameInputContainer = document.createElement("div");
-    let nameInput = document.createElement("input");
-    nameInputContainer.id = "nameInputContainer";
-    nameInput.id = "formNameInput";
-    nameInput.className = "gridTextInput";
+    let nameLabel = createElement("div","nameLabel","gridLabel","Choose a name for your set:");
+    let nameInputContainer = createElement("div","nameInputContainer");
+    let nameInput = createElement("input","formNameInput","gridTextInput","","Name here.");
     nameInput.type = "text";
-    nameInput.placeholder = "name here.";
     nameInputContainer.appendChild(nameInput);
     nameContainer.appendChild(nameLabel);
     nameContainer.appendChild(nameInputContainer);
@@ -218,23 +189,13 @@ var bmrHypno = function() {
     grid.appendChild(nameContainer);
     
     //create spawn container
-    let spawnContainer = document.createElement("div");
-    spawnContainer.className = "gridContainer";
-    spawnContainer.id = "spawnContainer";
+    let spawnContainer = createElement("div","spawnContainer","gridContainer");
     //add label and inputs to spawn container
-    let spawnLabel = document.createElement("div");
-    spawnLabel.id = "spawnLabel";
-    spawnLabel.className = "gridLabel";
-    spawnLabel.innerHTML = "Choose how many milliseconds you want between each spawn:";
-    let spawnInputContainer = document.createElement("div");
-    let spawnInput = document.createElement("input");
-    let spawnInputRange = document.createElement("input")
-    spawnInputContainer.id = "spawnInputContainer";
-    spawnInput.id = "formSpawnInput";
-    spawnInputRange.id = "formSpawnRange";
-    spawnInput.className = "gridTextInput";
+    let spawnLabel = createElement("div","spawnLabel","gridLabel","Choose how many milliseconds you want between each spawn:");
+    let spawnInputContainer = createElement("div","spawnInputContainer");
+    let spawnInput = createElement("input","formSpawnInput","gridTextInput","","ms here, can go past max.");
+    let spawnInputRange = createElement("input","formSpawnRange");
     spawnInput.type = "text";
-    spawnInput.placeholder = "ms here, can go past max.";
     spawnInputRange.type = "range";
     spawnInputRange.min = 100;
     spawnInputRange.max = 60000;
@@ -252,24 +213,16 @@ var bmrHypno = function() {
     grid.appendChild(spawnContainer);
 
     //add the selection boxes for word and img
-    let selectTypeContainer = document.createElement("div");
-    selectTypeContainer.id = "selectTypeContainer";
-    selectTypeContainer.className = "gridContainer";
+    let selectTypeContainer = createElement("div","selectTypeContainer","gridContainer");
     //word box
-    let wordTypeContainer = document.createElement("div");
-    wordTypeContainer.id = "wordTypeContainer";
-    wordTypeContainer.className = "typeContainer activeType";
-    wordTypeContainer.innerHTML = "Word/Text";
+    let wordTypeContainer = createElement("div","wordTypeContainer","typeContainer activeType","Word/Text");
     wordTypeContainer.onclick = (e) => {
       wordTypeContainer.classList.add("activeType");
       imgTypeContainer.classList.remove("activeType");
       //TODO Change format of the inputs below
     };
     //img box
-    let imgTypeContainer = document.createElement("div");
-    imgTypeContainer.id = "imgTypeContainer";
-    imgTypeContainer.className = "typeContainer";
-    imgTypeContainer.innerHTML = "Image/Gif";
+    let imgTypeContainer = createElement("div","imgTypeContainer","typeContainer","Image/Gif");
     imgTypeContainer.onclick = (e) => {
       wordTypeContainer.classList.remove("activeType");
       imgTypeContainer.classList.add("activeType");
@@ -280,8 +233,7 @@ var bmrHypno = function() {
     grid.appendChild(selectTypeContainer);
 
     //creating the tabbed part
-    let createTabbedContainer = document.createElement("div");
-    createTabbedContainer.id="create-tab-start";
+    let createTabbedContainer = createElement("div","create-tab-start");
     //fillTabs(createTabbedContainer);
     //changeTabType("word");
     grid.appendChild(createTabbedContainer);
@@ -293,13 +245,9 @@ var bmrHypno = function() {
   }
 
   function simpleTabCauseTired(aaa) {
-    let tabsContainer = document.createElement("div");
-    tabsContainer.id = "tabsTitleContainer";
+    let tabsContainer = createElement("div","tabsTitleContainer");
     for(i in _tabs["word"]) {
-      let tab = document.createElement("div");
-      tab.id = i+"Create";
-      tab.className = "tabTitle wordTabTitle";
-      tab.innerHTML = i;
+      let tab = createElement("div",i+"Create","tabTitle wordTabTitle",i);
       tabsContainer.appendChild(tab);
     }
     aaa.appendChild(tabsContainer);
@@ -307,17 +255,12 @@ var bmrHypno = function() {
   }
 
   function fillTabs(wholeContainer) {
-    let tabsTitleContainer = document.createElement("div");
-    let tabsContainer = document.createElement("div");
-    tabsTitleContainer.id = "tabsTitleContainer";
-    tabsContainer.id = "tabsContainer";
+    let tabsTitleContainer = createElement("div","tabsTitleContainer");
+    let tabsContainer = createElement("div","tabsContainer");
     for(i in _tabs) {
       for(j in _tabs[i]) {
         //creating titles for the tabs
-        let tabTitle = document.createElement("div");
-        tabTitle.id = i+j+"CreateTitle";
-        tabTitle.className ="tabTitle";
-        tabTitle.innerHTML = j;
+        let tabTitle = createElement("div",i+j+"CreateTitle","tabTitle",j);
         _tabsTitles.push(tabTitle);
         tabsTitleContainer.appendChild(tabTitle);
         //creating the actual tab
@@ -332,26 +275,15 @@ var bmrHypno = function() {
 
   function createWordBaseTab() {
     //the tab
-    let tab = document.createElement("div");
-    tab.id = "wordBaseTab";
-    tab.className = "createTab";
+    let tab = createElement("div","wordBaseTab","createTab");
     //all its elements
     //value
-    let valueContainer = document.createElement("div");
-    valueContainer.id = "wordValueContainer";
-    valueContainer.className = "tabWordContainer";
-    let wordValueLabel = document.createElement("div");
-    wordValueLabel.id = "wordValueLabel";
-    wordValueLabel.className = "gridLabel";
-    wordValueLabel.innerHTML = "Type the word/text that you wish to use:";
+    let valueContainer = createElement("div","wordValueContainer","tabWordContainer");
+    let wordValueLabel = createElement("div","wordValueLabel","gridLabel","Type the word/text that you wish to use:");
     valueContainer.appendChild(wordValueLabel);
-    let wordValueInputContainer =document.createElement("div");
-    wordValueInputContainer.id = "wordValueInputContainer";
-    let wordValueInput = document.createElement("input");
-    wordValueInput.id = "wordValueInput";
-    wordValueInput.className = "gridTextInput";
+    let wordValueInputContainer =createElement("div","wordValueInputContainer");
+    let wordValueInput = createElement("input","wordValueInput","gridTextInput","","Text here.");
     wordValueInput.type = "text";
-    wordValueInput.placeholder = "Text here.";
     wordValueInputContainer.appendChild(wordValueInput);
     valueContainer.appendChild(wordValueInputContainer);
     tab.appendChild(valueContainer);
@@ -378,8 +310,7 @@ var bmrHypno = function() {
 
   function emptyMainBox() {
     mainBox.innerHTML = "";
-    var closeBtn = document.createElement("div");
-    closeBtn.className = "button close";
+    var closeBtn = createElement("div","","button close");
     closeBtn.onclick = () => { mainBox.remove(); };
     mainBox.appendChild(closeBtn);
   }
@@ -409,6 +340,15 @@ var bmrHypno = function() {
    newFunc = newFunc.replace(/MENU\.Spells\.Open\({}\) }/gm,restOfTheFunc);
 
    return new Function("e",newFunc);
+  }
+
+  function createElement(type = "div", id = "", className = "", innerHTML = "", placeholder = "") {
+    let elm = document.createElement(type);
+    elm.id = id;
+    elm.className = className;
+    elm.innerHTML = innerHTML;
+    elm.placeholder = placeholder;
+    return elm;
   }
 
   BMRHYPNO.start = startBmr;
