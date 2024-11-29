@@ -288,7 +288,27 @@ var bmrHypno = function() {
     valueContainer.appendChild(wordValueInputContainer);
     tab.appendChild(valueContainer);
     //time TODO
+    let timeContainer = createElement("div","wordTimeContainer","tabWordContainer");
+    let wordTimeLabel = createElement("div","wordTimeLabel","gridLabel","How long before the word leaves? (in milliseconds)");
+    let wordTimeInputContainer = createElement("div","wordTimeInputContainer");
+    let wordTimeInput = createElement("input","wordTimeInput","gridTextInput","","ms here, can go past max.");
+    let wordTimeRange = createElement("input","wordTimeRange");
 
+    wordTimeInput.type = "text";
+    wordTimeRange.type = "range";
+    wordTimeRange.min = 10;
+    wordTimeRange.max = 10000;
+    //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
+    wordTimeInput.oninput = (e) => {wordTimeRange.value = e.target.value;}
+    wordTimeInput.onchange = (e) => {wordTimeRange.value = e.target.value;}
+    wordTimeRange.oninput = (e) => {wordTimeInput.value = e.target.value;}
+    wordTimeRange.onchange = (e) => {wordTime.value = e.target.value;}
+
+    timeContainer.appendChild(wordTimeLabel);
+    timeContainer.appendChild(wordTimeInputContainer);
+    wordTimeInputContainer.appendChild(wordTimeInput);
+    wordTimeInputContainer.appendChild(wordTimeRange);
+    tab.appendChild(timeContainer);
     //position TODO
 
     //font size TODO
