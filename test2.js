@@ -198,7 +198,7 @@ var bmrHypno = function() {
     spawnInput.type = "text";
     spawnInputRange.type = "range";
     spawnInputRange.min = 100;
-    spawnInputRange.max = 60000;
+    spawnInputRange.max = 5000;
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     spawnInput.oninput = (e) => {spawnInputRange.value = e.target.value;}
     spawnInput.onchange = (e) => {spawnInputRange.value = e.target.value;}
