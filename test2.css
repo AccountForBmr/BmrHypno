@@ -168,8 +168,8 @@ Create stuff down here, mostly
     background-color: #313131;
     width: 50%;
     border: 2px solid rgba(255, 255, 255, 0.15);
-    border-top: 0;
-    border-radius: 0 0 0.5em 0.5em;
+    border-bottom: 0;
+    border-radius: 0.5em 0.5em 0 0;
     overflow: hidden;
     align-content: center;
     text-align: center;

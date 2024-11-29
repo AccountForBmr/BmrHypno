@@ -302,7 +302,7 @@ var bmrHypno = function() {
     wordTimeInput.oninput = (e) => {wordTimeRange.value = e.target.value;}
     wordTimeInput.onchange = (e) => {wordTimeRange.value = e.target.value;}
     wordTimeRange.oninput = (e) => {wordTimeInput.value = e.target.value;}
-    wordTimeRange.onchange = (e) => {wordTime.value = e.target.value;}
+    wordTimeRange.onchange = (e) => {wordTimeInput.value = e.target.value;}
 
     timeContainer.appendChild(wordTimeLabel);
     timeContainer.appendChild(wordTimeInputContainer);
