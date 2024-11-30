@@ -135,7 +135,8 @@ Create stuff down here, mostly
     word-wrap: break-word;
     text-wrap: balance;
     color: #9c9c9c;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #nameLabel {
@@ -243,7 +244,7 @@ background-color: #313131;
     height: 90%;
 }
 
-#wordValueContainer, #wordTimeContainer {
+#wordValueContainer, #wordTimeContainer, #wordPositionContainer {
     height: 25%;
 }
 
@@ -276,9 +277,39 @@ background-color: #313131;
     align-items: center;
 }
 
-#wordTimeLabel {
-    width: 40%;
+#wordTimeLabel, #wordPositionLabel {
+    width: 45%;
     height: 100%;
     display: flex;
     align-items: center;    
+}
+
+#wordPositionInputContainer {
+    width: 55%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#wordPositionInputSelect {
+    width: 50%;
+    border-radius: 0.5em;
+}
+
+#wordPositionInput1, #wordPositionInput2 {
+    width: 25% !important;
+}
+
+#chooseWindow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 10000;
+    box-shadow: inset 0px 0px 30px 2px rgba(39, 102, 133, 0.45);
+    align-content: center;
+    text-align: center;
+    color: lightcyan;
 }

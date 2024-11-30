@@ -70,8 +70,6 @@ var bmrHypno = function() {
       _menuModified = true;
     }
 
-    //stuff to delete later added just to mess around
-    ACTION_BAR.TriggerMacro("","/s AHHHHHHHHHHHHHHHHHHHHHH It's working!!!!");
     return mainBox;
   }
 
@@ -288,7 +286,7 @@ var bmrHypno = function() {
     valueContainer.appendChild(wordValueInputContainer);
     tab.appendChild(valueContainer);
     //time TODO
-    let timeContainer = createElement("div","wordTimeContainer","tabWordContainer");
+    let wordTimeContainer = createElement("div","wordTimeContainer","tabWordContainer");
     let wordTimeLabel = createElement("div","wordTimeLabel","gridLabel","How long before the word leaves? (in milliseconds)");
     let wordTimeInputContainer = createElement("div","wordTimeInputContainer");
     let wordTimeInput = createElement("input","wordTimeInput","gridTextInput","","ms here, can go past max.");
@@ -304,13 +302,49 @@ var bmrHypno = function() {
     wordTimeRange.oninput = (e) => {wordTimeInput.value = e.target.value;}
     wordTimeRange.onchange = (e) => {wordTimeInput.value = e.target.value;}
 
-    timeContainer.appendChild(wordTimeLabel);
-    timeContainer.appendChild(wordTimeInputContainer);
+    wordTimeContainer.appendChild(wordTimeLabel);
+    wordTimeContainer.appendChild(wordTimeInputContainer);
     wordTimeInputContainer.appendChild(wordTimeInput);
     wordTimeInputContainer.appendChild(wordTimeRange);
-    tab.appendChild(timeContainer);
+    tab.appendChild(wordTimeContainer);
     //position TODO
+    let wordPositionContainer = createElement("div","wordPositionContainer","tabWordContainer");
+    let wordPositionLabel = createElement("div","wordPositionLabel","gridLabel","Where should your word be?");
+    let wordPositionInputContainer = createElement("div","wordPositionInputContainer");
+    let wordPositionInputSelect = createElement("select","wordPositionInputSelect");
+    let wordPositionInput1 = createElement("input","wordPositionInput1","gridTextInput","","% from top");
+    let wordPositionInput2 = createElement("input","wordPositionInput2","gridTextInput","","% from left");
 
+    wordPositionInput1.type = "text";
+    wordPositionInput1.style.display = "none";
+    wordPositionInput2.type = "text";
+    wordPositionInput2.style.display = "none";
+    wordPositionInputSelect.options.add(new Option("Random","Random"));
+    wordPositionInputSelect.options.add(new Option("Precise Position","Precise Position"));
+    wordPositionInputSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "Random") {
+        wordPositionInput1.style.display = "none";
+        wordPositionInput2.style.display = "none";
+      } else {
+        wordPositionInput1.style.display = "";
+        wordPositionInput2.style.display = "";
+        let chooseWindow = createElement("div","chooseWindow","","Click where you would like your word top-left corner to be.");
+        document.getElementById("scaler").appendChild(chooseWindow);
+        chooseWindow.onclick = (evt) => {
+          let boundRect=evt.target.getBoundingClientRect();
+          wordPositionInput1.value = ((evt.clientX-boundRect.left)*100/boundRect.width).toFixed(2);
+          wordPositionInput2.value = ((evt.clientY-boundRect.top)*100/boundRect.height).toFixed(2);
+          chooseWindow.remove();
+        };
+      }
+    };
+    wordPositionContainer.appendChild(wordPositionLabel);
+    wordPositionContainer.appendChild(wordPositionInputContainer);
+    wordPositionInputContainer.appendChild(wordPositionInputSelect);
+    wordPositionInputContainer.appendChild(wordPositionInput1);
+    wordPositionInputContainer.appendChild(wordPositionInput2);
+    tab.appendChild(wordPositionContainer);
     //font size TODO
     return tab;
   }
@@ -399,4 +433,25 @@ fontType: ...nah
 max-min width-height: ???? Probably adding text-wrap too
 transformRotation: choose max deg and it will be between -deg and +deg
 extra: an other css that you might want to add. simply parse it like: first line \n second line probably. trasform gets +
+*/
+
+/*
+Animation example:
+
+temp0.animate(
+{
+	color: ["red","orange","yellow","green","blue","indigo","violet"]
+},
+{
+duration: 3000,
+fill: "both"
+}).onfinish = ()=>{alert(0)};
+temp0.animate(
+{
+	top: ["0%","50%","100%","0%"]
+},
+{
+duration: 3000,
+fill: "both"
+}).onfinish = ()=>{alert(55)};
 */
