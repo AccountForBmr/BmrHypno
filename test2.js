@@ -374,14 +374,19 @@ var bmrHypno = function() {
 
     wordFontInput1.onfocus = (e)=>{
       fontPreview.style.display = "";
-      fontMin.style.fontSize = wordFontInput1.value+"px";
-      fontMax.style.fontSize = wordFontInput2.value+"px";
     };
     wordFontInput1.onblur = (e)=>{
       fontPreview.style.display = "none";
     };
+    wordFontInput1.oninput = (e)=>{
+      fontMin.style.fontSize = wordFontInput1.value+"px";
+      fontMax.style.fontSize = wordFontInput2.value+"px";
+    }
+    wordFontInput1.onchange = wordFontInput1.oninput;
     wordFontInput2.onfocus = wordFontInput1.onfocus;
     wordFontInput2.onblur = wordFontInput1.onblur;
+    wordFontInput2.oninput = wordFontInput1.oninput;
+    wordFontInput2.onchange = wordFontInput1.onchange;
 
     wordFontContainer.appendChild(wordFontLabel);
     wordFontContainer.appendChild(wordFontInputContainer);
