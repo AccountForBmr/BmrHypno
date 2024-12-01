@@ -57,6 +57,8 @@ var bmrHypno = function() {
     //add mainBox to div id=menus in bmr
     //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
     emptyMainBox();
+    let closeButton = createElement("div","","button close");
+    mainBox.appendChild(closeButton);
     //adding the grid
     mainBox.appendChild(createBmrStartingGrid());
 
@@ -140,6 +142,15 @@ var bmrHypno = function() {
     topContainer.appendChild(loadSelections(fileBtnLabel));
     topContainer.appendChild(fileBtnLabel);
     fileBtnLabel.style.display="none";
+    //backButton
+    let backButton = createElement("input","backButton");
+    backButton.type = "button";
+    backButton.value = "<";
+    backButton.onclick = startBmr;
+    topContainer.appendChild(backButton);
+    //closeButtom
+    let closeButton = createElement("div","closeButton","button close");
+    topContainer.appendChild(closeButton);
     mainBox.appendChild(topContainer);
 
     mainBox.appendChild(createCreateScreenGrid());
@@ -364,9 +375,9 @@ var bmrHypno = function() {
 
   function emptyMainBox() {
     mainBox.innerHTML = "";
-    var closeBtn = createElement("div","","button close");
+    //var closeBtn = createElement("div","","button close");
     closeBtn.onclick = () => { mainBox.remove(); };
-    mainBox.appendChild(closeBtn);
+    //mainBox.appendChild(closeBtn);
   }
 
   function rewrittenDropdownFunction(e) {

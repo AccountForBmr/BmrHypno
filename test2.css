@@ -16,14 +16,14 @@
 }
 
 .grid-start {
-    display:grid;
+    display:flex;
     position:relative;
     top:1.5em;
     width:100%;
     height:93%;
     border:2px solid #343434;
     border-radius:0.5em;
-    gap:0.1em;
+    flex-wrap: wrap;
 }
 
 .gridButton {
@@ -42,16 +42,8 @@
     filter: brightness(1.3);
 }
 
-#createBtn {
-    grid-row:1 / span 3;
-}
-
-#castBtn {
-    grid-row:4 / span 3;
-}
-
-#removeBtn {
-    grid-row:7 / span 3;
+#createBtn, #castBtn, #removeBtn {
+    width: 100%;
 }
 
 #loadFileBtn {
@@ -95,10 +87,37 @@ Create stuff down here, mostly
     border-radius:0.5em;
 }
 
+#topContainer {
+    height: 7.5%;
+    align-items: center;
+}
 
 .gridContainer {
     width: 100%;
     display: flex;
+}
+
+#backButton {
+    width: 4.5%;
+    height: 75%;
+    background-color: black;
+    border-radius: 50%;
+    border: solid 1.5px rgb(216, 211, 124);
+    margin-left: auto;
+    margin-right: 0;
+    color: rgb(216, 211, 124);
+    filter: brightness(0.8);
+}
+
+#closeButton {
+    position: relative;
+    right: 0;
+    top: auto;
+    margin-left: 4px;    
+}
+
+#backButton:hover {
+    filter: brightness(1);
 }
 
 #nameContainer {
@@ -242,11 +261,13 @@ background-color: #313131;
 .createTab {
     width: 100%;
     height: 90%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-#wordValueContainer, #wordTimeContainer, #wordPositionContainer {
+/*#wordValueContainer, #wordTimeContainer, #wordPositionContainer {
     height: 25%;
-}
+}*/
 
 .tabWordContainer {
     width: 100%;
@@ -280,8 +301,6 @@ background-color: #313131;
 #wordTimeLabel, #wordPositionLabel {
     width: 45%;
     height: 100%;
-    display: flex;
-    align-items: center;    
 }
 
 #wordPositionInputContainer {
