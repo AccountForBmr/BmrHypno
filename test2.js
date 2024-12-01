@@ -383,6 +383,7 @@ var bmrHypno = function() {
     wordFontContainer.appendChild(wordFontInputContainer);
     wordFontInputContainer.appendChild(wordFontInput1);
     wordFontInputContainer.appendChild(wordFontInput2);
+    wordFontInputContainer.appendChild(fontPreview);
     tab.appendChild(wordFontContainer);
     return tab;
   }
