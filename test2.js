@@ -76,7 +76,7 @@ var bmrHypno = function() {
   }
 
   function createBmrStartingGrid() {
-    emptyMainBox();
+    //emptyMainBox();
     var grid = createElement("div","","grid-start");
     //add create btn
     grid.appendChild(createBmrCreateScreenBtn());
