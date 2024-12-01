@@ -365,13 +365,17 @@ var bmrHypno = function() {
     let wordFontInput1 = createElement("input","wordFontInput1","gridTextInput","","Min value.");
     let wordFontInput2 = createElement("input","wordFontInput2","gridTextInput","","Max value.");
     let fontPreview = createElement("div","fontPreview");
+    let fontMin = createElement("div","fontPreviewMin","fontPreviewText","Min");
+    let fontMax = createElement("div","fontPreviewMax","fontPreviewText","Max");
     fontPreview.style.display = "none";
-
+    
     wordFontInput1.type = "text";
     wordFontInput2.type = "text";
 
     wordFontInput1.onfocus = (e)=>{
       fontPreview.style.display = "";
+      fontMin.style.fontSize = wordFontInput1.value+"px";
+      fontMax.style.fontSize = wordFontInput2.value+"px";
     };
     wordFontInput1.onblur = (e)=>{
       fontPreview.style.display = "none";
@@ -384,6 +388,8 @@ var bmrHypno = function() {
     wordFontInputContainer.appendChild(wordFontInput1);
     wordFontInputContainer.appendChild(wordFontInput2);
     wordFontInputContainer.appendChild(fontPreview);
+    fontPreview.appendChild(fontMin);
+    fontPreview.appendChild(fontMax);
     tab.appendChild(wordFontContainer);
     return tab;
   }

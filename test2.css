@@ -345,8 +345,18 @@ background-color: #313131;
 }
 
 #fontPreview {
-  background-color: aliceblue;
-  width: 50%;
-  height: 25%;
-  position: fixed;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 50%;
+    height: 25%;
+    position: fixed;
+    border: 2px solid #343434;
+    border-radius: 0.5em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.fontPreviewText {
+    width: 50%;
 }
