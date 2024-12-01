@@ -346,8 +346,8 @@ var bmrHypno = function() {
         document.getElementById("scaler").appendChild(chooseWindow);
         chooseWindow.onclick = (evt) => {
           let boundRect=evt.target.getBoundingClientRect();
-          wordPositionInput1.value = ((evt.clientX-boundRect.left)*100/boundRect.width).toFixed(2);
-          wordPositionInput2.value = ((evt.clientY-boundRect.top)*100/boundRect.height).toFixed(2);
+          wordPositionInput1.value = ((evt.clientX-boundRect.left)*100/boundRect.width).toFixed(2)+"%";
+          wordPositionInput2.value = ((evt.clientY-boundRect.top)*100/boundRect.height).toFixed(2)+"%";
           chooseWindow.remove();
         };
       }

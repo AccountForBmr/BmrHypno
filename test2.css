@@ -276,6 +276,7 @@ background-color: #313131;
     border-bottom: 0;
     font-size: smaller;
     color: #9c9c9c;
+    align-items: center;
 }
 
 .tabWordContainer:last-child {
