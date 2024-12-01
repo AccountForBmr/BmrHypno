@@ -359,6 +359,31 @@ var bmrHypno = function() {
     wordPositionInputContainer.appendChild(wordPositionInput2);
     tab.appendChild(wordPositionContainer);
     //font size TODO
+    let wordFontContainer = createElement("div","wordFontContainer","tabWordContainer");
+    let wordFontLabel = createElement("div","wordFontLabel","gridLabel","Font size? (Random between the 2)");
+    let wordFontInputContainer = createElement("div","wordFontInputContainer");
+    let wordFontInput1 = createElement("input","wordFontInput1","gridTextInput","","Min value.");
+    let wordFontInput2 = createElement("input","wordFontInput2","gridTextInput","","Max value.");
+    let fontPreview = createElement("div","fontPreview");
+    fontPreview.style.display = "none";
+
+    wordFontInput1.type = "text";
+    wordFontInput2.type = "text";
+
+    wordFontInput1.onfocus = (e)=>{
+      fontPreview.style.display = "";
+    };
+    wordFontInput1.onblur = (e)=>{
+      fontPreview.style.display = "none";
+    };
+    wordFontInput2.onfocus = wordFontInput1.onfocus;
+    wordFontInput2.onblur = wordFontInput1.onblur;
+
+    wordFontContainer.appendChild(wordFontLabel);
+    wordFontContainer.appendChild(wordFontInputContainer);
+    wordFontInputContainer.appendChild(wordFontInput1);
+    wordFontInputContainer.appendChild(wordFontInput2);
+    tab.appendChild(wordFontContainer);
     return tab;
   }
 

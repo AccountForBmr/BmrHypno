@@ -136,7 +136,7 @@ Create stuff down here, mostly
     height: 100%;
 }
 
-#formSpawn, #wordTimeRange {
+#formSpawn, #formSpawnRange,#wordTimeRange {
     width: 100%;
     height: 50%;
 }
@@ -333,4 +333,20 @@ background-color: #313131;
     text-align: center;
     color: lightcyan;
     font-size: x-large;
+}
+
+#wordFontLabel {
+    width: 60%;
+    height: 100%;
+}
+
+#wordFontInput1, #wordFontInput2 {
+    width: 50% !important;
+}
+
+#fontPreview {
+  background-color: aliceblue;
+  width: 50%;
+  height: 25%;
+  position: fixed;
 }
