@@ -58,6 +58,7 @@ var bmrHypno = function() {
     //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
     emptyMainBox();
     let closeButton = createElement("div","","button close");
+    closeBtn.onclick = () => { mainBox.remove(); };
     mainBox.appendChild(closeButton);
     //adding the grid
     mainBox.appendChild(createBmrStartingGrid());
@@ -148,8 +149,9 @@ var bmrHypno = function() {
     backButton.value = "<";
     backButton.onclick = startBmr;
     topContainer.appendChild(backButton);
-    //closeButtom
+    //closeButton
     let closeButton = createElement("div","closeButton","button close");
+    closeBtn.onclick = () => { mainBox.remove(); };
     topContainer.appendChild(closeButton);
     mainBox.appendChild(topContainer);
 

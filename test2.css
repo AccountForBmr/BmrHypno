@@ -110,9 +110,9 @@ Create stuff down here, mostly
 }
 
 #closeButton {
-    position: relative;
-    right: 0;
-    top: auto;
+    position: relative !important;
+    right: 0 !important;
+    top: auto !important;
     margin-left: 4px;    
 }
 
