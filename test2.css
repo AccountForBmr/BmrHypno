@@ -175,6 +175,9 @@ Create stuff down here, mostly
     height: 100%;
     align-content: center;
     color: #9c9c9c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gridTextInput {

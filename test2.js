@@ -456,6 +456,9 @@ var bmrHypno = function() {
 
   function emptyMainBox() {
     mainBox.innerHTML = "";
+    _tabsTitles = [];
+    _tabsContainers = [];
+    _currentlyLoaded = {};
     //var closeBtn = createElement("div","","button close");
     //closeBtn.onclick = () => { mainBox.remove(); };
     //mainBox.appendChild(closeBtn);
