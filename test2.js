@@ -246,7 +246,7 @@ var bmrHypno = function() {
     //creating the tabbed part
     let createTabbedContainer = createElement("div","create-tab-start");
     fillTabs(createTabbedContainer);
-    //changeTabType("word");
+    changeTabType("word");
     grid.appendChild(createTabbedContainer);
     //simpleTabCauseTired(createTabbedContainer);
 
@@ -433,13 +433,22 @@ var bmrHypno = function() {
   function changeTabType(type) {
     //document.getElementById("create-tab-start").innerHTML="";
     let hideAll = document.querySelectorAll(".createTab, .tabTitle");
-    for (i in allTabs) {
-      allTabs[i].style.display = "none"; 
+    for (i in _tabsTitles) {
+      _tabsTitles[i].style.display = "none"; 
+      _tabsTitles[i].classList.remove("activeType");
     }
     if(type=="word") {
-
+      for(let i=0;i<4;i++) {
+        _tabsTitles[i].style.display = "";
+        _tabsContainers[i].style.display = "";
+      }
+      _tabsTitles[0].classList.add("activeType");
     } else {
-
+      for(let i=4;i<7;i++) {
+        _tabsTitles[i].style.display = "";
+        _tabsContainers[i].style.display = "";
+      }
+      _tabsTitles[4].classList.add("activeType");
     }
   }
 
