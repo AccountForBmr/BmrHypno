@@ -246,7 +246,6 @@ var bmrHypno = function() {
     //creating the tabbed part
     let createTabbedContainer = createElement("div","create-tab-start");
     fillTabs(createTabbedContainer);
-    changeTabType("word");
     grid.appendChild(createTabbedContainer);
     //simpleTabCauseTired(createTabbedContainer);
 
@@ -282,6 +281,7 @@ var bmrHypno = function() {
     }
     wholeContainer.appendChild(tabsTitleContainer);
     wholeContainer.appendChild(tabsContainer);
+    changeTabType("word");
   }
 
   function createWordBaseTab() {
