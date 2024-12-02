@@ -440,11 +440,15 @@ var bmrHypno = function() {
       _tabsTitles[i].classList.remove("activeType");
     }
     if(type=="word") {
-      _tabsTitles[0].style.display = "";
+      for(let i=0;i<4;i++) {
+        _tabsTitles[i].style.display = "";
+      }
       _tabsContainers[0].style.display = "";
       _tabsTitles[0].classList.add("activeType");
     } else {
-      _tabsTitles[4].style.display = "";
+      for(let i=4;i<7;i++) {
+        _tabsTitles[i].style.display = "";
+      }
       _tabsContainers[4].style.display = "";
       _tabsTitles[4].classList.add("activeType");
     }
