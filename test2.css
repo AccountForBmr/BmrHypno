@@ -107,6 +107,9 @@ Create stuff down here, mostly
     margin-right: 0;
     color: rgb(216, 211, 124);
     filter: brightness(0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #closeButton {
@@ -123,6 +126,7 @@ Create stuff down here, mostly
 #nameContainer {
     border-bottom: 2px solid rgb(52, 52, 52);
     height: 15%;
+    align-items: center;
 }
 
 #spawnContainer {
@@ -156,6 +160,9 @@ Create stuff down here, mostly
     color: #9c9c9c;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #nameLabel {
@@ -191,10 +198,11 @@ Create stuff down here, mostly
     border-bottom: 0;
     border-radius: 0.5em 0.5em 0 0;
     overflow: hidden;
-    align-content: center;
-    text-align: center;
     box-shadow: inset 0px 0px 30px 2px rgba(0, 0, 0, 0.15);
     color: #9c9c9c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .typeContainer:hover:not(.activeType) {
@@ -312,12 +320,14 @@ background-color: #313131;
 }
 
 #wordPositionInputSelect {
+    height: 80% !important;
     width: 50% !important;
     border-radius: 0.5em;
 }
 
 #wordPositionInput1, #wordPositionInput2 {
     width: 25% !important;
+    height: 80% !important;
 }
 
 #chooseWindow {
@@ -333,6 +343,9 @@ background-color: #313131;
     text-align: center;
     color: lightcyan;
     font-size: x-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #wordFontLabel {
@@ -344,19 +357,30 @@ background-color: #313131;
     width: 50% !important;
 }
 
-#fontPreview {
+#wordFontInputContainer {
+    width: 40%;
+}
+
+.fontPreview {
     background-color: rgba(0, 0, 0, 0.9);
     width: 50%;
-    height: 25%;
     position: fixed;
+    top: 0;
+    bottom: 0;
     border: 2px solid #343434;
     border-radius: 0.5em;
     overflow: hidden;
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
+    max-width: 50%;
 }
 
-.fontPreviewText {
-    width: 50%;
+#fontPreviewMin {
+    right: 100%;
+}
+
+#fontPreviewMax {
+    left: 100%;
 }
