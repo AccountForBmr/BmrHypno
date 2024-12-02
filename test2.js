@@ -14,14 +14,14 @@ var bmrHypno = function() {
   var _tabs = {
     "word": {
       "Base":createWordBaseTab,
-      "Color":"",
-      "Effects":"",
-      "Preview":""
+      "Color":createWordColorTab,
+      "Effects":createWordEffectsTab,
+      "Preview":createWordPreviewTab
     },
     "image": {
-      "Base":"",
-      "Effects":"",
-      "Preview":""
+      "Base":createImgBaseTab,
+      "Effects":createImgEffectsTab,
+      "Preview":createImgPreviewTab
     }
   };
   var _tabsTitles = [];
@@ -245,10 +245,10 @@ var bmrHypno = function() {
 
     //creating the tabbed part
     let createTabbedContainer = createElement("div","create-tab-start");
-    //fillTabs(createTabbedContainer);
+    fillTabs(createTabbedContainer);
     //changeTabType("word");
-    grid.appendChild(createTabbedContainer);
-    simpleTabCauseTired(createTabbedContainer);
+    //grid.appendChild(createTabbedContainer);
+    //simpleTabCauseTired(createTabbedContainer);
 
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
@@ -397,6 +397,36 @@ var bmrHypno = function() {
     wordFontInputContainer.appendChild(fontMin);
     wordFontInputContainer.appendChild(fontMax);
     tab.appendChild(wordFontContainer);
+    return tab;
+  }
+
+  function createWordColorTab() {
+    let tab = createElement("div","wordColorTab","createTab");
+    return tab;
+  }
+
+  function createWordEffectsTab() {
+    let tab = createElement("div","wordEffectsTab","createTab");
+    return tab;
+  }
+
+  function createWordPreviewTab() {
+    let tab = createElement("div","wordPreviewTab","createTab");
+    return tab;
+  }
+
+  function createImgBaseTab() {
+    let tab = createElement("div","imgBaseTab","createTab");
+    return tab;
+  }
+
+  function createImgEffectsTab() {
+    let tab = createElement("div","imgEffectsTab","createTab");
+    return tab;
+  }
+
+  function createImgPreviewTab() {
+    let tab = createElement("div","imgPreviewTab","createTab");
     return tab;
   }
 
