@@ -432,10 +432,12 @@ var bmrHypno = function() {
 
   function changeTabType(type) {
     //document.getElementById("create-tab-start").innerHTML="";
-    let hideAll = document.querySelectorAll(".createTab, .tabTitle");
-    for (i in hideAll) {
-      hideAll[i].style.display = "none"; 
-      hideAll[i].classList.remove("activeType");
+    //let hideAll = document.querySelectorAll(".createTab, .tabTitle");
+    for (let i=0;i<7;i++) {
+      _tabsContainers[i].style.display = "none"; 
+      _tabsContainers[i].classList.remove("activeType");
+      _tabsTitles[i].style.display = "none";
+      _tabsTitles[i].classList.remove("activeType");
     }
     if(type=="word") {
       for(let i=0;i<4;i++) {
