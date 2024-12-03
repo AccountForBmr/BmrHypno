@@ -272,16 +272,12 @@ var bmrHypno = function() {
     //word box
     let wordTypeContainer = createElement("div","wordTypeContainer","typeContainer activeType","Word/Text");
     wordTypeContainer.onclick = (e) => {
-      wordTypeContainer.classList.add("activeType");
-      imgTypeContainer.classList.remove("activeType");
       //TODO Change format of the inputs below
       changeTabType("word");
     };
     //img box
     let imgTypeContainer = createElement("div","imgTypeContainer","typeContainer","Image/Gif");
     imgTypeContainer.onclick = (e) => {
-      wordTypeContainer.classList.remove("activeType");
-      imgTypeContainer.classList.add("activeType");
       //TODO Change format of the inputs below
       changeTabType("image");
     };
@@ -485,6 +481,8 @@ var bmrHypno = function() {
   function changeTabType(type) {
     //document.getElementById("create-tab-start").innerHTML="";
     //let hideAll = document.querySelectorAll(".createTab, .tabTitle");
+    let wordType = document.getElementById("wordTypeContainer");
+    let imgType = document.getElementById("imgTypeContainer");
     for (let i=0;i<_tabsContainers.length;i++) {
       _tabsContainers[i].style.display = "none"; 
       _tabsContainers[i].classList.remove("activeType");
@@ -497,12 +495,16 @@ var bmrHypno = function() {
       }
       _tabsContainers[0].style.display = "";
       _tabsTitles[0].classList.add("activeType");
+      wordType.classList.add("activeType");
+      imgType.classList.remove("activeType");
     } else {
       for(let i=4;i<7;i++) {
         _tabsTitles[i].style.display = "";
       }
       _tabsContainers[4].style.display = "";
       _tabsTitles[4].classList.add("activeType");
+      wordType.classList.remove("activeType");
+      imgType.classList.add("activeType");
     }
   }
 
