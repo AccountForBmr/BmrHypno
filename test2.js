@@ -313,15 +313,14 @@ var bmrHypno = function() {
   function fillTabs(wholeContainer) {
     let tabsTitleContainer = createElement("div","tabsTitleContainer");
     let tabsContainer = createElement("div","tabsContainer");
-    var whichTabInfo = 0;
+    let whichTabInfo = 0;
     for(i in _tabs) {
       for(j in _tabs[i]) {
         //creating titles for the tabs
-        //let curTabInfo = whichTabInfo+0;
+        let curTabInfo = whichTabInfo;
         let tabTitle = createElement("div",i+j+"CreateTitle","tabTitle",j);
-        console.log("Current tab info"+whichTabInfo);
         tabTitle.onclick = (e) => {
-          changeTab(whichTabInfo+0);
+          changeTab(curTabInfo);
         };
         _tabsTitles.push(tabTitle);
         tabsTitleContainer.appendChild(tabTitle);
