@@ -38,7 +38,8 @@ var bmrHypno = function() {
           "value": "",
           "leaveTime": "",
           "position": "Random",
-          "font": ["",""]
+          "font": ["",""],
+          "color": "Random"
         }
       ]
     },
@@ -52,7 +53,8 @@ var bmrHypno = function() {
           "value": "slut",
           "leaveTime": 4120,
           "position": ["1.00%","3.14%"],
-          "font": ["64px","128px"]
+          "font": ["64px","128px"],
+          "color": "#abc123"
         },
         {
           "type": "img",
@@ -225,6 +227,21 @@ var bmrHypno = function() {
       //font
       document.getElementById("wordFontInput1").value = cur.font[0];
       document.getElementById("wordFontInput2").value = cur.font[1];
+      //color
+      let selectCol = document.getElementById("wordColorSelect");
+      let col1 = document.getElementById("wordColorInput");
+      let col2 = document.getElementById("wordColorPickerInput");
+      if(cur.color == "Random") {
+        selectCol.selectedIndex = 0;
+        col1.style.display = "none";
+        col2.style.display = "none";
+      } else {
+        selectCol.selectedIndex = 1;
+        col1.style.display = "";
+        col2.style.display = "";
+        col1.value = cur.color;
+        col2.value = cur.color;
+      }
     }
     //that's all I have for now
   }

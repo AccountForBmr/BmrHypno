@@ -410,7 +410,8 @@ Word Color down here
 
 #wordColorSelect {
     min-width: 50%;
-    width: 100%;
+    width: 100% !important;
+    border-radius: 0.5em;
 }
 
 #wordColorInput, #wordColorPickerInput {
