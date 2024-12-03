@@ -504,8 +504,8 @@ var bmrHypno = function() {
       }
       _tabsContainers[4].style.display = "";
       _tabsTitles[4].classList.add("activeType");
-      _tabsTypes[1].classList.remove("activeType");
-      _tabsTypes[0].classList.add("activeType");
+      _tabsTypes[0].classList.remove("activeType");
+      _tabsTypes[1].classList.add("activeType");
     }
   }
 

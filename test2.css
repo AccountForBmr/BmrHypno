@@ -266,7 +266,6 @@ background-color: #313131;
 #tabsContainer {
     width: 100%;
     height: 90%;
-    border-top: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .createTab {
