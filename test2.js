@@ -319,7 +319,7 @@ var bmrHypno = function() {
         //creating titles for the tabs
         let tabTitle = createElement("div",i+j+"CreateTitle","tabTitle",j);
         console.log("Current tab info"+whichTabInfo);
-        tabTitle.onclick = (e,whichTabInfo) => {
+        tabTitle.onclick = (e) => {
           changeTab(whichTabInfo);
         };
         _tabsTitles.push(tabTitle);
@@ -507,6 +507,7 @@ var bmrHypno = function() {
   }
 
   function changeTab(whichTab) {
+    console.log(whichTab);
     for (let i=0;i<_tabsContainers.length;i++) {
       _tabsContainers[i].style.display = "none"; 
       _tabsContainers[i].classList.remove("activeType");
