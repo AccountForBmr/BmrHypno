@@ -28,7 +28,19 @@ var bmrHypno = function() {
   var _tabsContainers = [];
   var _currentlyLoaded = {};
   var _preloadedHypnos = {
-    "New one": {},
+    "New one": {
+      "name": "",
+      "spawnTime": "",
+      "values": [
+        {
+          "type": "word",
+          "value": "",
+          "leaveTime": "",
+          "position": "Random",
+          "font": ["",""]
+        }
+      ]
+    },
     "Load from file": "Load from file",
     "Random": {
       "name": "Random",
@@ -197,7 +209,7 @@ var bmrHypno = function() {
       let selectPos = document.getElementById("wordPositionInputSelect");
       let pos1 = document.getElementById("wordPositionInput1");
       let pos2 = document.getElementById("wordPositionInput2");
-      if(position == "Random") {
+      if(cur.position == "Random") {
         selectPos.selectedIndex = 0;
         pos1.style.display = "none";
         pos2.style.display = "none";
