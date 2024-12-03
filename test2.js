@@ -453,6 +453,49 @@ var bmrHypno = function() {
 
   function createWordColorTab() {
     let tab = createElement("div","wordColorTab","createTab");
+    //all the elements
+    //the color
+    let wordColorContainer = createElement("div","wordColorContainer","tabWordContainer");
+    let wordColorLabel = createElement("div","wordColorLabel","gridLabel","Color for your word:");
+    let wordColorInputContainer = createElement("div","wordColorInputContainer");
+    let wordColorSelect = createElement("select","wordColorSelect");
+    let wordColorInput = createElement("input","wordColorInput","gridTextInput","","# Color Code");
+    let wordColorPickerInput = createElement("input","wordColorPickerInput","gridColorInput");
+
+    wordColorSelect.options.add(new Option("Random","Random"));
+    wordColorSelect.options.add(new Option("Choose","Choose"));
+    wordColorSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "Random") {
+        wordColorInput.style.display = "none";
+        wordColorPickerInput.style.display = "none";
+      } else {
+        wordColorInput.style.display = "";
+        wordColorPickerInput.style.display = "";
+      }
+    };
+
+    wordColorInput.style.display = "none";
+    wordColorInput.type = "text";
+    wordColorPickerInput.style.display = "none";
+    wordColorPickerInput.type = "color";
+
+    wordColorInput.oninput = (e) => {
+      wordColorPickerInput.value = e.target.value;
+    };
+    wordColorInput.onchange = wordColorInput.oninput;
+    wordColorPickerInput.oninput = (e) => {
+      wordColorInput.value = e.target.value;
+    };
+    wordColorPickerInput.onchange = wordColorPickerInput.oninput;
+    
+    wordColorContainer.appendChild(wordColorLabel);
+    wordColorContainer.appendChild(wordColorInputContainer);
+    wordColorInputContainer.appendChild(wordColorSelect);
+    wordColorInputContainer.appendChild(wordColorInput);
+    wordColorInputContainer.appendChild(wordColorPickerInput);
+    tab.appendChild(wordColorContainer);
+    //the...color gradien??? or filter??? I dunno? opacity in effect or here???
     return tab;
   }
 

@@ -397,6 +397,22 @@ Word Color down here
 
 */
 
-#wordColorTab {
-    background-color: aquamarine;
+#wordColorLabel {
+    width: 30%;
+}
+
+#wordColorInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+
+#wordColorSelect {
+    min-width: 50%;
+    width: 100%;
+}
+
+#wordColorInput, #wordColorPickerInput {
+    min-width: 25%;
 }
