@@ -317,11 +317,11 @@ var bmrHypno = function() {
     for(i in _tabs) {
       for(j in _tabs[i]) {
         //creating titles for the tabs
-        let curTabInfo = whichTabInfo+0;
+        //let curTabInfo = whichTabInfo+0;
         let tabTitle = createElement("div",i+j+"CreateTitle","tabTitle",j);
         console.log("Current tab info"+whichTabInfo);
         tabTitle.onclick = (e) => {
-          changeTab(curTabInfo);
+          changeTab(whichTabInfo+0);
         };
         _tabsTitles.push(tabTitle);
         tabsTitleContainer.appendChild(tabTitle);
@@ -508,17 +508,11 @@ var bmrHypno = function() {
   }
 
   function changeTab(whichTab) {
-    //testtest
-    console.log(whichTab);
     for (let i=0;i<_tabsContainers.length;i++) {
-      _tabsContainers[i].style.display = "none"; 
       _tabsContainers[i].classList.remove("activeType");
-      _tabsTitles[i].style.display = "none";
       _tabsTitles[i].classList.remove("activeType");
     }
-    _tabsContainers[whichTab].style.display = "";
     _tabsContainers[whichTab].classList.add("activeType");
-    _tabsTitles[whichTab].style.display = "";
     _tabsTitles[whichTab].classList.add("activeType");
   }
 
