@@ -36,7 +36,10 @@ var bmrHypno = function() {
       "values": [
         {
           "type": "word",
-          "value": "slut"
+          "value": "slut",
+          "leaveTime": 4120,
+          "position": ["1.00%","3.14%"],
+          "font": ["64px","128px"]
         },
         {
           "type": "img",
@@ -176,11 +179,39 @@ var bmrHypno = function() {
   }
 
   function loadSelectionInGrid(selection) {
-    //the name
+    //name
     _currentlyLoaded = _preloadedHypnos[selection.text];
     document.getElementById("formNameInput").value = selection.text;
+    //spawnTime
     document.getElementById("formSpawnInput").value = _currentlyLoaded.spawnTime;
     document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
+    //values[0]
+    let cur = _currentlyLoaded.values[0];
+    if(_currentlyLoaded.values[0].type == "word") {
+      //word
+      document.getElementById("wordValueInput").value = cur.value;
+      //leaveTime
+      document.getElementById("wordTimeInput").value = cur.leaveTime;
+      document.getElementById("wordTimeRange").value = cur.leaveTime;
+      //position
+      let selectPos = document.getElementById("wordPositionInputSelect");
+      let pos1 = document.getElementById("wordPositionInput1");
+      let pos2 = document.getElementById("wordPositionInput2");
+      if(position == "Random") {
+        selectPos.selectedIndex = 0;
+        pos1.style.display = "none";
+        pos2.style.display = "none";
+      } else {
+        selectPos.selectedIndex = 1;
+        pos1.style.display = "";
+        pos2.style.display = "";
+        pos1.value = cur.position[0];
+        pos2.value = cur.position[1];
+      }
+      //font
+      document.getElementById("wordFontInput1").value = cur.font[0];
+      document.getElementById("wordFontInput2").value = cur.font[1];
+    }
     //that's all I have for now
   }
   
@@ -231,6 +262,7 @@ var bmrHypno = function() {
       wordTypeContainer.classList.add("activeType");
       imgTypeContainer.classList.remove("activeType");
       //TODO Change format of the inputs below
+      changeTabType("word");
     };
     //img box
     let imgTypeContainer = createElement("div","imgTypeContainer","typeContainer","Image/Gif");
@@ -238,6 +270,7 @@ var bmrHypno = function() {
       wordTypeContainer.classList.remove("activeType");
       imgTypeContainer.classList.add("activeType");
       //TODO Change format of the inputs below
+      changeTabType("image");
     };
     selectTypeContainer.appendChild(wordTypeContainer);
     selectTypeContainer.appendChild(imgTypeContainer);
