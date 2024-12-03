@@ -24,6 +24,7 @@ var bmrHypno = function() {
       "Preview":createImgPreviewTab
     }
   };
+  var _tabsTypes = [];
   var _tabsTitles = [];
   var _tabsContainers = [];
   var _currentlyLoaded = {};
@@ -275,12 +276,14 @@ var bmrHypno = function() {
       //TODO Change format of the inputs below
       changeTabType("word");
     };
+    _tabsTypes.push(wordTypeContainer);
     //img box
     let imgTypeContainer = createElement("div","imgTypeContainer","typeContainer","Image/Gif");
     imgTypeContainer.onclick = (e) => {
       //TODO Change format of the inputs below
       changeTabType("image");
     };
+    _tabsTypes.push(imgTypeContainer);
     selectTypeContainer.appendChild(wordTypeContainer);
     selectTypeContainer.appendChild(imgTypeContainer);
     grid.appendChild(selectTypeContainer);
@@ -481,8 +484,6 @@ var bmrHypno = function() {
   function changeTabType(type) {
     //document.getElementById("create-tab-start").innerHTML="";
     //let hideAll = document.querySelectorAll(".createTab, .tabTitle");
-    let wordType = document.getElementById("wordTypeContainer");
-    let imgType = document.getElementById("imgTypeContainer");
     for (let i=0;i<_tabsContainers.length;i++) {
       _tabsContainers[i].style.display = "none"; 
       _tabsContainers[i].classList.remove("activeType");
@@ -495,19 +496,16 @@ var bmrHypno = function() {
       }
       _tabsContainers[0].style.display = "";
       _tabsTitles[0].classList.add("activeType");
-      wordType.classList.add("activeType");
-      imgType.classList.remove("activeType");
+      _tabsTypes[0].classList.add("activeType");
+      _tabsTypes[1].classList.remove("activeType");
     } else {
       for(let i=4;i<7;i++) {
         _tabsTitles[i].style.display = "";
       }
       _tabsContainers[4].style.display = "";
       _tabsTitles[4].classList.add("activeType");
-      //TEMP fix
-      if(wordType != null && imgType != null) {
-        wordType.classList.remove("activeType");
-        imgType.classList.add("activeType");
-      }
+      _tabsTypes[1].classList.remove("activeType");
+      _tabsTypes[0].classList.add("activeType");
     }
   }
 
