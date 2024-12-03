@@ -520,6 +520,7 @@ var bmrHypno = function() {
 
   function emptyMainBox() {
     mainBox.innerHTML = "";
+    _tabsTypes = [];
     _tabsTitles = [];
     _tabsContainers = [];
     _currentlyLoaded = {};
