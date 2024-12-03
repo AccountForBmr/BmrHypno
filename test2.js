@@ -503,8 +503,11 @@ var bmrHypno = function() {
       }
       _tabsContainers[4].style.display = "";
       _tabsTitles[4].classList.add("activeType");
-      wordType.classList.remove("activeType");
-      imgType.classList.add("activeType");
+      //TEMP fix
+      if(wordType != null && imgType != null) {
+        wordType.classList.remove("activeType");
+        imgType.classList.add("activeType");
+      }
     }
   }
 
