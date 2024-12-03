@@ -200,6 +200,7 @@ var bmrHypno = function() {
     //values[0]
     let cur = _currentlyLoaded.values[0];
     if(_currentlyLoaded.values[0].type == "word") {
+      changeTabType("word");
       //word
       document.getElementById("wordValueInput").value = cur.value;
       //leaveTime
@@ -312,16 +313,21 @@ var bmrHypno = function() {
   function fillTabs(wholeContainer) {
     let tabsTitleContainer = createElement("div","tabsTitleContainer");
     let tabsContainer = createElement("div","tabsContainer");
+    let whichTabInfo = 0;
     for(i in _tabs) {
       for(j in _tabs[i]) {
         //creating titles for the tabs
         let tabTitle = createElement("div",i+j+"CreateTitle","tabTitle",j);
+        tabTitle.onclick = (e) => {
+          changeTab(whichTabInfo);
+        };
         _tabsTitles.push(tabTitle);
         tabsTitleContainer.appendChild(tabTitle);
         //creating the actual tab
         let tabContainer = _tabs[i][j]();
         tabsContainer.appendChild(tabContainer);
         _tabsContainers.push(tabContainer);
+        whichTabInfo+=1;
       }
     }
     wholeContainer.appendChild(tabsTitleContainer);
@@ -497,6 +503,19 @@ var bmrHypno = function() {
       _tabsContainers[4].style.display = "";
       _tabsTitles[4].classList.add("activeType");
     }
+  }
+
+  function changeTab(whichTab) {
+    for (let i=0;i<_tabsContainers.length;i++) {
+      _tabsContainers[i].style.display = "none"; 
+      _tabsContainers[i].classList.remove("activeType");
+      _tabsTitles[i].style.display = "none";
+      _tabsTitles[i].classList.remove("activeType");
+    }
+    _tabsContainers[i].style.display = "";
+    _tabsContainers[i].classList.add("activeType");
+    _tabsTitles[i].style.display = "";
+    _tabsTitles[i].classList.add("activeType");
   }
 
   function emptyMainBox() {

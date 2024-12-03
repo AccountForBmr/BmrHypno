@@ -279,6 +279,11 @@ background-color: #313131;
 /*#wordValueContainer, #wordTimeContainer, #wordPositionContainer {
     height: 25%;
 }*/
+/*
+
+Word down here, Base
+
+*/
 
 .tabWordContainer {
     width: 100%;
@@ -385,4 +390,14 @@ background-color: #313131;
 
 #fontPreviewMax {
     left: 100%;
+}
+
+/*
+
+Word Color down here
+
+*/
+
+#wordColorTab {
+    background-color: aquamarine;
 }
