@@ -512,10 +512,10 @@ var bmrHypno = function() {
       _tabsTitles[i].style.display = "none";
       _tabsTitles[i].classList.remove("activeType");
     }
-    _tabsContainers[i].style.display = "";
-    _tabsContainers[i].classList.add("activeType");
-    _tabsTitles[i].style.display = "";
-    _tabsTitles[i].classList.add("activeType");
+    _tabsContainers[whichTab].style.display = "";
+    _tabsContainers[whichTab].classList.add("activeType");
+    _tabsTitles[whichTab].style.display = "";
+    _tabsTitles[whichTab].classList.add("activeType");
   }
 
   function emptyMainBox() {
