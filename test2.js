@@ -508,11 +508,11 @@ var bmrHypno = function() {
 
   function changeTab(whichTab) {
     for (let i=0;i<_tabsContainers.length;i++) {
-      _tabsContainers[i].classList.remove("activeType");
       _tabsTitles[i].classList.remove("activeType");
+      _tabsContainers[i].style.display = "none";
     }
-    _tabsContainers[whichTab].classList.add("activeType");
     _tabsTitles[whichTab].classList.add("activeType");
+    _tabsContainers[whichTab].style.display = "";
   }
 
   function emptyMainBox() {
