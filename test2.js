@@ -575,6 +575,15 @@ var bmrHypno = function() {
     let wordGradientContainer = createElement("div","wordGradientContainer","tabWordContainer");
     let wordGradientLabel = createElement("div","wordGradientLabel","gridLabel","Gradients!");
     let wordGradientInputContainer = createElement("div","wordGradientInputContainer"); 
+    let wordGradientSelect = createElement("select","wordGradientSelect");
+
+    wordGradientSelect.options.add(new Option("None","None"));
+    wordGradientSelect.options.add(new Option("Linear","Linear"));
+    wordGradientSelect.options.add(new Option("Radial","Radial"));
+    wordGradientSelect.options.add(new Option("Conic","Conic"));
+    wordGradientSelect.options.add(new Option("Repeating Linear","Repeating Linear"));
+    wordGradientSelect.options.add(new Option("Repeating Radial","Repeating Radial"));
+    wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
 
 
     wordGradientContainer.appendChild(wordGradientLabel);
