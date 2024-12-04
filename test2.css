@@ -417,3 +417,7 @@ Word Color down here
 #wordColorInput, #wordColorPickerInput, #wordBorderInput, #wordBorderPickerInput {
     min-width: 25%;
 }
+
+#wordGradientLabel {
+    width: 20%;
+}

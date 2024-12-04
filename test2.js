@@ -256,9 +256,10 @@ var bmrHypno = function() {
         selectBor.selectedIndex = 1;
         bor1.style.display = "";
         bor2.style.display = "";
-        bor1.value = cur.color;
-        bor2.value = cur.color;
+        bor1.value = cur.border;
+        bor2.value = cur.border;
       }
+      //gradient TODO
     }
     //that's all I have for now
   }
@@ -571,6 +572,14 @@ var bmrHypno = function() {
     wordBorderInputContainer.appendChild(wordBorderPickerInput);
     tab.appendChild(wordBorderContainer);
     //TODO Gradients!!!
+    let wordGradientContainer = createElement("div","wordGradientContainer","tabWordContainer");
+    let wordGradientLabel = createElement("div","wordGradientLabel","gridLabel","Gradients!");
+    let wordGradientInputContainer = createElement("div","wordGradientInputContainer"); 
+
+
+    wordGradientContainer.appendChild(wordGradientLabel);
+    wordGradientContainer.appendChild(wordGradientInputContainer);
+    tab.appendChild(wordGradientContainer);
     return tab;
   }
 
