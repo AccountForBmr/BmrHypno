@@ -39,7 +39,8 @@ var bmrHypno = function() {
           "leaveTime": "",
           "position": "Random",
           "font": ["",""],
-          "color": "Random"
+          "color": "Random",
+          "border": "None"
         }
       ]
     },
@@ -53,8 +54,9 @@ var bmrHypno = function() {
           "value": "slut",
           "leaveTime": 4120,
           "position": ["1.00%","3.14%"],
-          "font": ["64px","128px"],
-          "color": "#abc123"
+          "font": ["64","128"],
+          "color": "#abc123",
+          "border": "#def456"
         },
         {
           "type": "img",
@@ -241,6 +243,21 @@ var bmrHypno = function() {
         col2.style.display = "";
         col1.value = cur.color;
         col2.value = cur.color;
+      }
+      //border
+      let selectBor = document.getElementById("wordBorderSelect");
+      let bor1 = document.getElementById("wordBorderInput");
+      let bor2 = document.getElementById("wordBorderPickerInput");
+      if(cur.border == "None") {
+        selectBor.selectedIndex = 0;
+        bor1.style.display = "none";
+        bor2.style.display = "none";
+      } else {
+        selectBor.selectedIndex = 1;
+        bor1.style.display = "";
+        bor2.style.display = "";
+        bor1.value = cur.color;
+        bor2.value = cur.color;
       }
     }
     //that's all I have for now
@@ -512,7 +529,48 @@ var bmrHypno = function() {
     wordColorInputContainer.appendChild(wordColorInput);
     wordColorInputContainer.appendChild(wordColorPickerInput);
     tab.appendChild(wordColorContainer);
-    //the...color gradien??? or filter??? I dunno? opacity in effect or here???
+    //border
+    let wordBorderContainer = createElement("div","wordBorderContainer","tabWordContainer");
+    let wordBorderLabel = createElement("div","wordBorderLabel","gridLabel","Color for your border:");
+    let wordBorderInputContainer = createElement("div","wordBorderInputContainer");
+    let wordBorderSelect = createElement("select","wordBorderSelect");
+    let wordBorderInput = createElement("input","wordBorderInput","gridTextInput","","# Color Code");
+    let wordBorderPickerInput = createElement("input","wordBorderPickerInput","gridColorInput");
+
+    wordBorderSelect.options.add(new Option("None","None"));
+    wordBorderSelect.options.add(new Option("Choose","Choose"));
+    wordBorderSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "None") {
+        wordBorderInput.style.display = "none";
+        wordBorderPickerInput.style.display = "none";
+      } else {
+        wordBorderInput.style.display = "";
+        wordBorderPickerInput.style.display = "";
+      }
+    };
+
+    wordBorderInput.style.display = "none";
+    wordBorderInput.type = "text";
+    wordBorderPickerInput.style.display = "none";
+    wordBorderPickerInput.type = "color";
+
+    wordBorderInput.oninput = (e) => {
+      wordBorderPickerInput.value = e.target.value;
+    };
+    wordBorderInput.onchange = wordBorderInput.oninput;
+    wordBorderPickerInput.oninput = (e) => {
+      wordBorderInput.value = e.target.value;
+    };
+    wordBorderPickerInput.onchange = wordBorderPickerInput.oninput;
+    
+    wordBorderContainer.appendChild(wordBorderLabel);
+    wordBorderContainer.appendChild(wordBorderInputContainer);
+    wordBorderInputContainer.appendChild(wordBorderSelect);
+    wordBorderInputContainer.appendChild(wordBorderInput);
+    wordBorderInputContainer.appendChild(wordBorderPickerInput);
+    tab.appendChild(wordBorderContainer);
+    //TODO Gradients!!!
     return tab;
   }
 

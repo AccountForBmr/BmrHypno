@@ -397,23 +397,23 @@ Word Color down here
 
 */
 
-#wordColorLabel {
+#wordColorLabel, #wordBorderLabel {
     width: 30%;
 }
 
-#wordColorInputContainer {
+#wordColorInputContainer, #wordBorderInputContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 70%;
 }
 
-#wordColorSelect {
+#wordColorSelect, #wordBorderSelect {
     min-width: 50%;
     width: 100% !important;
     border-radius: 0.5em;
 }
 
-#wordColorInput, #wordColorPickerInput {
+#wordColorInput, #wordColorPickerInput, #wordBorderInput, #wordBorderPickerInput {
     min-width: 25%;
 }
