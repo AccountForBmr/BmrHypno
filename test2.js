@@ -496,7 +496,11 @@ var bmrHypno = function() {
     let wordColorInputContainer = createElement("div","wordColorInputContainer");
     let wordColorSelect = createElement("select","wordColorSelect");
     let wordColorInput = createElement("input","wordColorInput","gridTextInput","","# Color Code");
-    let wordColorPickerInput = createElement("input","wordColorPickerInput","gridColorInput");
+    var wordColorPicker = new jsColor(wordColorInput,{format:'hexa',
+      previewPosition:'right',
+      previewSize:50,
+      backgroundColor:'rgba(0,0,0,0.9)',
+      borderColor:'#343434'});
 
     wordColorSelect.options.add(new Option("Random","Random"));
     wordColorSelect.options.add(new Option("Choose","Choose"));
@@ -504,32 +508,28 @@ var bmrHypno = function() {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text == "Random") {
         wordColorInput.style.display = "none";
-        wordColorPickerInput.style.display = "none";
       } else {
         wordColorInput.style.display = "";
-        wordColorPickerInput.style.display = "";
       }
     };
 
     wordColorInput.style.display = "none";
     wordColorInput.type = "text";
-    wordColorPickerInput.style.display = "none";
-    wordColorPickerInput.type = "color";
 
     wordColorInput.oninput = (e) => {
-      wordColorPickerInput.value = e.target.value;
+      wordColorPicker.fromString(e.target.value);
     };
     wordColorInput.onchange = wordColorInput.oninput;
+    /*Not needed?
     wordColorPickerInput.oninput = (e) => {
       wordColorInput.value = e.target.value;
     };
-    wordColorPickerInput.onchange = wordColorPickerInput.oninput;
+    wordColorPickerInput.onchange = wordColorPickerInput.oninput;*/
     
     wordColorContainer.appendChild(wordColorLabel);
     wordColorContainer.appendChild(wordColorInputContainer);
     wordColorInputContainer.appendChild(wordColorSelect);
     wordColorInputContainer.appendChild(wordColorInput);
-    wordColorInputContainer.appendChild(wordColorPickerInput);
     tab.appendChild(wordColorContainer);
     //border
     let wordBorderContainer = createElement("div","wordBorderContainer","tabWordContainer");

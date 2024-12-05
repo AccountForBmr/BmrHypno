@@ -414,8 +414,8 @@ Word Color down here
     border-radius: 0.5em;
 }
 
-#wordColorInput, #wordColorPickerInput, #wordBorderInput, #wordBorderPickerInput {
-    min-width: 25%;
+#wordColorInput, #wordBorderInput {
+    min-width: 50%;
 }
 
 #wordGradientLabel {
