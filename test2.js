@@ -586,10 +586,6 @@ var bmrHypno = function() {
     wordGradientSelect.options.add(new Option("Repeating Radial","Repeating Radial"));
     wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
 
-    //test jsColor
-    var myPicker = new jsColor(wordBorderPickerInput);
-    var myPicker2 = new jsColor(wordColorInput);
-
     wordGradientInputContainer.appendChild(wordGradientSelect);
     wordGradientContainer.appendChild(wordGradientLabel);
     wordGradientContainer.appendChild(wordGradientInputContainer);
