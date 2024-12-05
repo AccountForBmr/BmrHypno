@@ -251,7 +251,7 @@ var bmrHypno = function() {
       } else {
         selectBor.selectedIndex = 1;
         bor1.style.display = "";
-        _colorPickers[0].fromString(cur.border);
+        _colorPickers[1].fromString(cur.border);
       }
       //gradient TODO
     }
@@ -633,7 +633,6 @@ var bmrHypno = function() {
   }
 
   function emptyMainBox() {
-    console.log(_colorPickers);
     mainBox.innerHTML = "";
     _tabsTypes = [];
     _tabsTitles = [];
