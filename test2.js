@@ -28,6 +28,7 @@ var bmrHypno = function() {
   var _tabsTypes = [];
   var _tabsTitles = [];
   var _tabsContainers = [];
+  var _colorPickers = [];
   var _currentlyLoaded = {};
   var _preloadedHypnos = {
     "New one": {
@@ -233,17 +234,13 @@ var bmrHypno = function() {
       //color
       let selectCol = document.getElementById("wordColorSelect");
       let col1 = document.getElementById("wordColorInput");
-      let col2 = document.getElementById("wordColorPickerInput");
       if(cur.color == "Random") {
         selectCol.selectedIndex = 0;
         col1.style.display = "none";
-        col2.style.display = "none";
       } else {
         selectCol.selectedIndex = 1;
         col1.style.display = "";
-        col2.style.display = "";
-        col1.value = cur.color;
-        col2.value = cur.color;
+        _colorPickers[0].fromString(cur.color);
       }
       //border
       let selectBor = document.getElementById("wordBorderSelect");
@@ -500,7 +497,8 @@ var bmrHypno = function() {
       previewPosition:'right',
       previewSize:50,
       backgroundColor:'rgba(0,0,0,0.9)',
-      borderColor:'#343434'});
+      borderColor:'#343434',
+      borderWidth:2});
 
     wordColorSelect.options.add(new Option("Random","Random"));
     wordColorSelect.options.add(new Option("Choose","Choose"));
@@ -515,12 +513,13 @@ var bmrHypno = function() {
 
     wordColorInput.style.display = "none";
     wordColorInput.type = "text";
+    _colorPickers.push(wordColorPicker);
 
-    wordColorInput.oninput = (e) => {
+    /*wordColorInput.oninput = (e) => {
       wordColorPicker.fromString(e.target.value);
     };
     wordColorInput.onchange = wordColorInput.oninput;
-    /*Not needed?
+    *//*Not needed?
     wordColorPickerInput.oninput = (e) => {
       wordColorInput.value = e.target.value;
     };
