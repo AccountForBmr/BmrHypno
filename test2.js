@@ -633,10 +633,12 @@ var bmrHypno = function() {
   }
 
   function emptyMainBox() {
+    console.log(_colorPickers);
     mainBox.innerHTML = "";
     _tabsTypes = [];
     _tabsTitles = [];
     _tabsContainers = [];
+    _colorPickers = [];
     _currentlyLoaded = {};
     //var closeBtn = createElement("div","","button close");
     //closeBtn.onclick = () => { mainBox.remove(); };
