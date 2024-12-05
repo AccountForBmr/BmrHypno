@@ -8,6 +8,7 @@ var BMRHYPNO = {};
 
 var bmrHypno = function() {
   var mainBox = createElement("div", "mainBox");
+  var jsColor = {};
   var _menuModified = false;
   //should add the function that returns the baseTab, colorTab etc... to the right, then append that tab
   // probably???  TODO TODO TODO TODO
@@ -584,9 +585,12 @@ var bmrHypno = function() {
     wordGradientSelect.options.add(new Option("Repeating Linear","Repeating Linear"));
     wordGradientSelect.options.add(new Option("Repeating Radial","Repeating Radial"));
     wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
-    
-    console.log(new JSColor(document.getElementById("game")));
 
+    //test jsColor
+    var myPicker = new jsColor(wordBorderPickerInput);
+    var myPicker2 = new jsColor(wordColorInput);
+
+    wordGradientInputContainer.appendChild(wordGradientSelect);
     wordGradientContainer.appendChild(wordGradientLabel);
     wordGradientContainer.appendChild(wordGradientInputContainer);
     tab.appendChild(wordGradientContainer);
@@ -708,8 +712,9 @@ var bmrHypno = function() {
   jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
   jsColorScript.async=true;
   document.body.appendChild(jsColorScript);
-  jsColorScript.onLoad = () => {
+  jsColorScript.onload = () => {
     GUI.instance.DisplayMessage("Everything was loaded correctly, hopefully! \\[T]/");
+    jsColor = JSColor; 
   }
 
 };
