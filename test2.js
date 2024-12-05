@@ -584,7 +584,13 @@ var bmrHypno = function() {
     wordGradientSelect.options.add(new Option("Repeating Linear","Repeating Linear"));
     wordGradientSelect.options.add(new Option("Repeating Radial","Repeating Radial"));
     wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
-
+    
+    //testing jscolor
+    jsColorScript=document.createElement('script');
+    jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
+    jsColorScript.async=true;
+    document.body.appendChild(jsColorScript);
+    console.log(new JSColor(document.getElementById("game")));
 
     wordGradientContainer.appendChild(wordGradientLabel);
     wordGradientContainer.appendChild(wordGradientInputContainer);
