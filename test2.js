@@ -554,8 +554,15 @@ var bmrHypno = function() {
     let wordGradientLabel = createElement("div","wordGradientLabel","gridLabel","Gradients!");
     let wordGradientInputContainer = createElement("div","wordGradientInputContainer"); 
     let wordGradientSelect = createElement("select","wordGradientSelect");
-
+    let wordGradientPreviewContainer = createElement("div","wordGradientPreviewContainer","fontPreview");
+    let wordGradientCreatorContainer = createElement("div","wordGradientCreatorContainer","fontPreview");
+    let wordGradientPreviewBg = createElement("div","wordGradientPreviewBg","gradientPreview");
+    let wordGradientPreviewTextContainer = createElement("div","wordGradientPreviewTextContainer","gradientPreview");
+    let wordGradientPreviewText = createElement("div","wordGradientPreviewText","","Test");
+    
     wordGradientSelect.options.add(new Option("None","None"));
+    wordGradientSelect.options.add(new Option("Yes","Yes"));
+    //TODO move these to the creator part
     wordGradientSelect.options.add(new Option("Linear","Linear"));
     wordGradientSelect.options.add(new Option("Radial","Radial"));
     wordGradientSelect.options.add(new Option("Conic","Conic"));
@@ -564,6 +571,11 @@ var bmrHypno = function() {
     wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
 
     wordGradientInputContainer.appendChild(wordGradientSelect);
+    wordGradientInputContainer.appendChild(wordGradientCreatorContainer);
+    wordGradientPreviewContainer.appendChild(wordGradientPreviewBg);
+    wordGradientPreviewTextContainer.appendChild(wordGradientPreviewText);
+    wordGradientPreviewContainer.appendChild(wordGradientPreviewTextContainer);
+    wordGradientInputContainer.appendChild(wordGradientPreviewContainer);
     wordGradientContainer.appendChild(wordGradientLabel);
     wordGradientContainer.appendChild(wordGradientInputContainer);
     tab.appendChild(wordGradientContainer);
