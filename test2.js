@@ -363,7 +363,9 @@ var bmrHypno = function() {
     let tabsContainer = createElement("div","tabsContainer");
     let whichTabInfo = 0;
     for(i in _tabs) {
+      console.log(i);
       for(j in _tabs[i]) {
+        console.log(j);
         //creating titles for the tabs
         let curTabInfo = whichTabInfo;
         let tabTitle = createElement("div",i+j+"CreateTitle","tabTitle",j);
