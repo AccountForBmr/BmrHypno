@@ -614,8 +614,6 @@ var bmrHypno = function() {
 
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
-      console.log(selected);
-      console.log(_preloadedGradients[selected]);
       if(selected != "No") {
         let grad = "";
         for(i in _preloadedGradients[selected]) {
@@ -629,10 +627,9 @@ var bmrHypno = function() {
           }
         }
         grad = grad.slice(0,-1);
-        console.log(`GRAD HERE:${grad}`);
-        wordGradientPreviewBg.style.background=grad;
+        wordGradientPreviewBg.style.backgroundImage=grad;
         wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
-        wordGradientPreviewText.style.background=grad;
+        wordGradientPreviewText.style.backgroundImage=grad;
         wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
       }
     };
