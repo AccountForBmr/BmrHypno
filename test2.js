@@ -67,6 +67,26 @@ var bmrHypno = function() {
       ]
     }
   };
+  var _preloadedGradients = {
+    "Rainbow1": {
+      0: {
+        "type": "linear-gradient",
+        "direction": "to right",
+        "colors": ["red","orange","yellow","green","blue","indigo","violet"],
+        "positions": ["","","","","","",""]
+      },
+      "blendMode": "overlay"
+    },
+    "ShadowBelow": {
+      0: {
+        "type": "linear-gradient",
+        "direction": "to bottom",
+        "colors": ["#848484","#848484"],
+        "positions": ["","60%"]
+      },
+      "blendMode": "overlay"
+    }
+  };
   var _templateHypno = {
     "name": "",
     "spawnTime": "",
