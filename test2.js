@@ -595,6 +595,13 @@ var bmrHypno = function() {
     let preloadGradientLabel = createElement("div","preloadGradientLabel","gradientLabel","Preload?");
     let preloadGradientSelect = createElement("select","preloadGradientSelect");
 
+
+    preloadGradientSelect.options.add(new Option("No","No"));
+    /* The culprit?
+    for(i in _preloadedGradients) {
+      preloadGradientSelect.options.add(new Option(i,_preloadedGradients[i]));
+    }
+    */
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text != "No") {
@@ -617,6 +624,9 @@ var bmrHypno = function() {
       }
     };
 
+    preloadGradientContainer.appendChild(preloadGradientLabel);
+    preloadGradientContainer.appendChild(preloadGradientSelect);
+    wordGradientCreatorContainer.appendChild(preloadGradientContainer);
     wordGradientInputContainer.appendChild(wordGradientSelect);
     wordGradientInputContainer.appendChild(wordGradientCreatorContainer);
     wordGradientPreviewContainer.appendChild(wordGradientPreviewBg);
