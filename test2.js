@@ -93,6 +93,7 @@ var bmrHypno = function() {
       "blendMode": "overlay"
     }
   };
+  var _preloadedGradientsIds = ["Rainbow1","ShadowBelow"];
   var _templateHypno = {
     "name": "",
     "spawnTime": "",
@@ -604,6 +605,10 @@ var bmrHypno = function() {
 
     preloadGradientSelect.options.add(new Option("No","No"));
 
+    for(i in _preloadedGradientsIds) {
+      preloadGradientSelect.options.add(new Option(_preloadedGradientsIds[i],_preloadedGradientsIds[i]));
+    }
+    /* sinner down here
     for(i in _preloadedGradients) {
       console.log("What am I doing here?????? why error at 382???")
       console.log(i);
