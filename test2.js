@@ -616,6 +616,8 @@ var bmrHypno = function() {
         grad = grad.slice(0,-1);
         wordGradientPreviewBg.style.background=grad;
         wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
+        wordGradientPreviewText.style.background=grad;
+        wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
       }
     }
     preloadGradientContainer.appendChild(preloadGradientLabel);
