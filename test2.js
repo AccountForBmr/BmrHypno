@@ -597,11 +597,12 @@ var bmrHypno = function() {
 
 
     preloadGradientSelect.options.add(new Option("No","No"));
-    /*
+    /* Culprit?
     for(i in _preloadedGradients) {
       preloadGradientSelect.options.add(new Option(i,i));
     }
     */
+   console.log(_preloadedGradients);
    preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
    preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
 
