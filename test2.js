@@ -599,27 +599,7 @@ var bmrHypno = function() {
     for(i in _preloadedGradients) {
       preloadGradientSelect.options.add(new Option(i,_preloadedGradients[i]));
     }
-    preloadGradientSelect.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
-      if(selected.text != "No") {
-        let grad = "";
-        for(i in _preloadedGradients[selected]) {
-          if(_preloadedGradients[selected][i]!="blendMode") {
-            grad+=`${_preloadedGradients[selected][i].type}(${_preloadedGradients[selected][i].direction},`;
-            for(j in _preloadedGradients[selected][i].colors) {
-              grad+=`${_preloadedGradients[selected][i].colors[j]} ${_preloadedGradients[selected][i].positions[j]},`;
-            }
-            grad = grad.slice(0,-1);
-            grad+="),";
-          }
-        }
-        grad = grad.slice(0,-1);
-        wordGradientPreviewBg.style.background=grad;
-        wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
-        wordGradientPreviewText.style.background=grad;
-        wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
-      }
-    };
+
 
     wordGradientInputContainer.appendChild(wordGradientSelect);
     wordGradientInputContainer.appendChild(wordGradientCreatorContainer);
