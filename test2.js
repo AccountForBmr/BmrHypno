@@ -594,11 +594,7 @@ var bmrHypno = function() {
     let preloadGradientContainer = createElement("div","preloadGradientContainer","gradientCreatorBox");
     let preloadGradientLabel = createElement("div","preloadGradientLabel","gradientLabel","Preload?");
     let preloadGradientSelect = createElement("select","preloadGradientSelect");
-    
-    preloadGradientSelect.options.add(new Option("No","No"));
-    for(i in _preloadedGradients) {
-      preloadGradientSelect.options.add(new Option(i,_preloadedGradients[i]));
-    }
+
 
 
     wordGradientInputContainer.appendChild(wordGradientSelect);
