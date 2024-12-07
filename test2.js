@@ -607,10 +607,10 @@ var bmrHypno = function() {
    preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
 
     preloadGradientSelect.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
+      let selected = e.target.options[e.target.selectedIndex].text;
       console.log(selected);
       console.log(_preloadedGradients[selected]);
-      if(selected.text != "No") {
+      if(selected != "No") {
         let grad = "";
         for(i in _preloadedGradients[selected]) {
           if(_preloadedGradients[selected][i]!="blendMode") {
