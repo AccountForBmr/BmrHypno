@@ -622,7 +622,7 @@ var bmrHypno = function() {
         wordGradientPreviewText.style.background=grad;
         wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
       }
-    }
+    };
     preloadGradientContainer.appendChild(preloadGradientLabel);
     preloadGradientContainer.appendChild(preloadGradientSelect);
     wordGradientCreatorContainer.appendChild(preloadGradientContainer);
