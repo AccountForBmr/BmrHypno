@@ -374,8 +374,7 @@ var bmrHypno = function() {
         tabsTitleContainer.appendChild(tabTitle);
         //creating the actual tab
         console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        console.log(_tabs[i][j]);
-        console.log(_tabs);
+        console.log(_tabs[i][j].toString());
         let tabContainer = _tabs[i][j]();
         tabsContainer.appendChild(tabContainer);
         _tabsContainers.push(tabContainer);
