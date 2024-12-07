@@ -93,7 +93,7 @@ var bmrHypno = function() {
       },
       "blendMode": "overlay"
     }
-  }
+  };
 
   function startBmr() {
     //add mainBox to div id=menus in bmr
