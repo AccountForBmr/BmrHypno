@@ -82,7 +82,13 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": "to bottom",
         "colors": ["#848484","#848484"],
-        "positions": ["","60%"]
+        "positions": ["",""]
+      },
+      1: {
+        "type": "linear-gradient",
+        "direction": "to bottom",
+        "colors": ["#FFFFFF00","#000000FF"],
+        "positions": ["","75%"]
       },
       "blendMode": "overlay"
     }
