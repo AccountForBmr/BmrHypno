@@ -605,7 +605,7 @@ var bmrHypno = function() {
 
     preloadGradientSelect.options.add(new Option("No","No"));
 
-    for(i in _preloadedGradientsIds) {
+    for(i in _preloadedGradients) {
       preloadGradientSelect.options.add(new Option(_preloadedGradients[i],"aaa"));
     }
     /* sinner down here
