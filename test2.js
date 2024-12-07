@@ -608,6 +608,8 @@ var bmrHypno = function() {
 
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
+      console.log(selected);
+      console.log(_preloadedGradients[selected]);
       if(selected.text != "No") {
         let grad = "";
         for(i in _preloadedGradients[selected]) {
