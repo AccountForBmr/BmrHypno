@@ -93,7 +93,6 @@ var bmrHypno = function() {
       "blendMode": "overlay"
     }
   };
-  var _preloadedGradientsIds = ["Rainbow1","ShadowBelow"];
   var _templateHypno = {
     "name": "",
     "spawnTime": "",
@@ -605,6 +604,7 @@ var bmrHypno = function() {
 
     preloadGradientSelect.options.add(new Option("No","No"));
 
+    /* I guess I'll just load them manually :/, no idea what's wrong with these
     for(i in _preloadedGradients) {
       preloadGradientSelect.options.add(new Option(_preloadedGradients[i],"aaa"));
     }
@@ -619,6 +619,8 @@ var bmrHypno = function() {
     preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
     preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
     */
+    preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
+    preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
       if(selected != "No") {
