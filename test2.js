@@ -597,11 +597,9 @@ var bmrHypno = function() {
 
 
     preloadGradientSelect.options.add(new Option("No","No"));
-    /* The culprit?
     for(i in _preloadedGradients) {
-      preloadGradientSelect.options.add(new Option(i,_preloadedGradients[i]));
+      preloadGradientSelect.options.add(new Option(i,i));
     }
-    */
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text != "No") {
