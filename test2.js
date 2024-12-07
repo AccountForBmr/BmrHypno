@@ -73,6 +73,26 @@ var bmrHypno = function() {
     "values": [
 
     ]
+  };
+  var _preloadedGradients = {
+    "Rainbow1": {
+      0: {
+        "type": "linear-gradient",
+        "direction": "to right",
+        "colors": ["red","orange","yellow","green","blue","indigo","violet"],
+        "positions": ["","","","","","",""]
+      },
+      "blendMode": "overlay"
+    },
+    "ShadowBelow": {
+      0: {
+        "type": "linear-gradient",
+        "direction": "to bottom",
+        "colors": ["#848484","#848484"],
+        "positions": ["","60%"]
+      },
+      "blendMode": "overlay"
+    }
   }
 
   function startBmr() {
@@ -569,6 +589,35 @@ var bmrHypno = function() {
     wordGradientSelect.options.add(new Option("Repeating Linear","Repeating Linear"));
     wordGradientSelect.options.add(new Option("Repeating Radial","Repeating Radial"));
     wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
+
+    //all the stuff for the creator her
+    let preloadGradientContainer = createElement("div","preloadGradientContainer","gradientCreatorBox");
+    let preloadGradientLabel = createElement("div","preloadGradientLabel","gradientLabel","Preload?");
+    let preloadGradientSelect = createElement("select","preloadGradientSelect");
+    
+    preloadGradientSelect.options.add(new Option("No","No"));
+    for(i in _preloadedGradients) {
+      preloadGradientSelect.options.add(new Option(i,_preloadedGradients[i]));
+    }
+    preloadGradientSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text != "No") {
+        let grad = "";
+        for(i in _preloadedGradients[selected]) {
+          if(_preloadedGradients[selected][i]!="blendMode") {
+            grad+=`${_preloadedGradients[selected][i].type}(`;
+            for(j in _preloadedGradients[selected][i].colors) {
+              grad+=`${_preloadedGradients[selected][i].colors[j]} ${_preloadedGradients[selected][i].positions[j]},`;
+            }
+            grad = grad.slice(0,-1);
+            grad+="),";
+          }
+        }
+        grad = grad.slice(0,-1);
+        wordGradientPreviewBg.style.background=grad;
+        wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
+      }
+    }
 
     wordGradientInputContainer.appendChild(wordGradientSelect);
     wordGradientInputContainer.appendChild(wordGradientCreatorContainer);
