@@ -623,6 +623,7 @@ var bmrHypno = function() {
           }
         }
         grad = grad.slice(0,-1);
+        console.log(`GRAD HERE:${grad}`);
         wordGradientPreviewBg.style.background=grad;
         wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
         wordGradientPreviewText.style.background=grad;
