@@ -613,7 +613,7 @@ var bmrHypno = function() {
       if(selected != "No") {
         let grad = "";
         for(i in _preloadedGradients[selected]) {
-          if(_preloadedGradients[selected][i]!="blendMode") {
+          if(i!="blendMode") {
             grad+=`${_preloadedGradients[selected][i].type}(${_preloadedGradients[selected][i].direction},`;
             for(j in _preloadedGradients[selected][i].colors) {
               grad+=`${_preloadedGradients[selected][i].colors[j]} ${_preloadedGradients[selected][i].positions[j]},`;
