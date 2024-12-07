@@ -364,6 +364,7 @@ var bmrHypno = function() {
     let whichTabInfo = 0;
     for(i in _tabs) {
       console.log(i);
+      if(_tabs[i])
       for(j in _tabs[i]) {
         console.log(j);
         //creating titles for the tabs
