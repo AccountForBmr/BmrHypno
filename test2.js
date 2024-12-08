@@ -577,7 +577,7 @@ var bmrHypno = function() {
     tab.appendChild(wordBorderContainer);
     //TODO Gradients!!!
     let wordGradientContainer = createElement("div","wordGradientContainer","tabWordContainer");
-    let wordGradientLabel = createElement("div","wordGradientLabel","gridLabel","Gradients!");
+    let wordGradientLabel = createElement("div","wordGradientLabel","gridLabel","Gradients! (You may choose to replace the color with a gradient instead. Be warned that your color will be ignored if you choose this)");
     let wordGradientInputContainer = createElement("div","wordGradientInputContainer"); 
     let wordGradientSelect = createElement("select","wordGradientSelect");
     let wordGradientPreviewContainer = createElement("div","wordGradientPreviewContainer","fontPreview");
@@ -597,13 +597,12 @@ var bmrHypno = function() {
     wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
 
     //all the stuff for the creator her
+    //select part
     let preloadGradientContainer = createElement("div","preloadGradientContainer","gradientCreatorBox");
     let preloadGradientLabel = createElement("div","preloadGradientLabel","gradientLabel","Preload?");
     let preloadGradientSelect = createElement("select","preloadGradientSelect");
 
-
     preloadGradientSelect.options.add(new Option("No","No"));
-
     /* I guess I'll just load them manually :/, no idea what's wrong with these
     for(i in _preloadedGradients) {
       preloadGradientSelect.options.add(new Option(_preloadedGradients[i],"aaa"));
@@ -622,6 +621,7 @@ var bmrHypno = function() {
     preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
     preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
     preloadGradientSelect.onchange = (e) => {
+      //TODO move this in a func cause I need it later
       let selected = e.target.options[e.target.selectedIndex].text;
       if(selected != "No") {
         let grad = "";
@@ -646,6 +646,39 @@ var bmrHypno = function() {
     preloadGradientContainer.appendChild(preloadGradientLabel);
     preloadGradientContainer.appendChild(preloadGradientSelect);
     wordGradientCreatorContainer.appendChild(preloadGradientContainer);
+
+    //buttons!
+    let gradientBtnContainer = createElement("div","gradientBtnContainer","gradientCreatorBox");
+    let gradientAddBtn = createElement("div","gradientAddBtn","gradientBtn","+");
+    let gradientRemoveBtn = createElement("div","gradientRemoveBtn","gradientBtn","-");
+
+    gradientAddBtn.onclick = (e) => {
+      //TODO add a gradient
+    };
+    gradientRemoveBtn.onclick = (e) => {
+      //TODO remove selected grad unless None
+    };
+
+    gradientBtnContainer.appendChild(gradientAddBtn);
+    gradientBtnContainer.appendChild(gradientRemoveBtn);
+    wordGradientCreatorContainer.appendChild(gradientBtnContainer);
+
+    //Choose current gradient
+    let gradientSelectedContainer = createElement("div","gradientSelectedContainer","gradientCreatorBox");
+    let gradientSelectedLabel = createElement("div","gradientSelectedLabel","gradientLabel","Selected:");
+    let gradientSelectedSelect = createElement("select","gradientSelectedSelect");
+
+    gradientSelectedSelect.options.add(new Option("None","None"));
+    gradientSelectedSelect.onchange = (e) => {
+      //TODO hide everything with none, load the gradient when chosen
+    }
+
+    gradientSelectedContainer.appendChild(gradientSelectedLabel);
+    gradientSelectedContainer.appendChild(gradientSelectedSelect);
+    wordGradientCreatorContainer.appendChild(gradientSelectedContainer);
+
+
+    //add everything
     wordGradientInputContainer.appendChild(wordGradientSelect);
     wordGradientInputContainer.appendChild(wordGradientCreatorContainer);
     wordGradientPreviewContainer.appendChild(wordGradientPreviewBg);

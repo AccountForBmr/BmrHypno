@@ -208,7 +208,7 @@ Create stuff down here, mostly
     justify-content: center;
 }
 
-.typeContainer:hover:not(.activeType), .tabTitle:hover:not(.activeType) {
+.typeContainer:hover:not(.activeType), .tabTitle:hover:not(.activeType), .gradientBtn {
     filter: brightness(1.3);
 }
 
@@ -419,12 +419,20 @@ Word Color down here
 }
 
 #wordGradientLabel {
+    width: 80%;
+}
+
+#wordGradientInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 20%;
 }
 
 #wordGradientCreatorContainer {
     right: 100%;
     flex-wrap: wrap;
+    align-items: normal;
 }
 
 #wordGradientPreviewContainer {
@@ -450,12 +458,12 @@ Word Color down here
     font-size: 64px;
     border: 2px solid rgb(80,80,80);
     color: transparent;
-    background: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    background: #9c9c9c;
     background-clip: text;
 }
 
 #wordGradientPreviewBg {
-    background: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    background: #9c9c9c;
 }
 
 .gradientCreatorBox {
@@ -463,5 +471,35 @@ Word Color down here
     align-items: center;
     justify-content: center;
     width: 100%;
+    border: 2px solid rgb(80, 80, 80);
 }
 
+#preloadGradientLabel {
+    width: 50%;
+}
+
+#preloadGradientSelect {
+    width: 50%;
+    border-radius: 0.5em;
+}
+
+#gradientBtnContainer {
+    align-items: normal;
+}
+
+.gradientBtn {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#gradientAddBtn {
+    background-color: #033f03;
+    border-right: 2px solid rgb(80, 80, 80);
+}
+
+#gradienRemovetBtn {
+    background-color: #5a0606;
+    border-left: 2px solid rgb(80, 80, 80);
+}
