@@ -59,7 +59,7 @@
     color: #9c9c9c;
 }
 
-#loadFileLabel:hover, .selectContainer:hover,.gridTextInput:hover {
+#loadFileLabel:hover, .selectContainer:hover, .gridTextInput:hover, .gradientBtn:hover {
     filter: brightness(1.3);
 }
 
@@ -431,7 +431,7 @@ Word Color down here
 }
 
 #wordGradientSelect {
-    width: 100%;
+    width: 100% !important;
 }
 
 
@@ -464,12 +464,12 @@ Word Color down here
     font-size: 64px;
     border: 2px solid rgb(80,80,80);
     color: transparent;
-    background: #9c9c9c;
+    background-image: #9c9c9c;
     background-clip: text;
 }
 
 #wordGradientPreviewBg {
-    background: #9c9c9c;
+    background-image: #9c9c9c;
 }
 
 .gradientCreatorBox {
