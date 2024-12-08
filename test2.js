@@ -207,7 +207,7 @@ var bmrHypno = function() {
   }
 
   function loadSelections(displayBtn) {
-    var selections = createElement("select","selectHypno");
+    var selections = createElement("select","selectHypno","selectContainer");
     for(i in _preloadedHypnos) {
       selections.options.add(new Option(i,_preloadedHypnos[i]));
     }
@@ -430,7 +430,7 @@ var bmrHypno = function() {
     let wordPositionContainer = createElement("div","wordPositionContainer","tabWordContainer");
     let wordPositionLabel = createElement("div","wordPositionLabel","gridLabel","Where should your word be?");
     let wordPositionInputContainer = createElement("div","wordPositionInputContainer");
-    let wordPositionInputSelect = createElement("select","wordPositionInputSelect");
+    let wordPositionInputSelect = createElement("select","wordPositionInputSelect","selectContainer");
     let wordPositionInput1 = createElement("input","wordPositionInput1","gridTextInput","","% from top");
     let wordPositionInput2 = createElement("input","wordPositionInput2","gridTextInput","","% from left");
 
@@ -513,7 +513,7 @@ var bmrHypno = function() {
     let wordColorContainer = createElement("div","wordColorContainer","tabWordContainer");
     let wordColorLabel = createElement("div","wordColorLabel","gridLabel","Color for your word:");
     let wordColorInputContainer = createElement("div","wordColorInputContainer");
-    let wordColorSelect = createElement("select","wordColorSelect");
+    let wordColorSelect = createElement("select","wordColorSelect","selectContainer");
     let wordColorInput = createElement("input","wordColorInput","gridTextInput","","# Color Code");
     var wordColorPicker = new jsColor(wordColorInput,{format:'hex',
       previewPosition:'right',
@@ -546,7 +546,7 @@ var bmrHypno = function() {
     let wordBorderContainer = createElement("div","wordBorderContainer","tabWordContainer");
     let wordBorderLabel = createElement("div","wordBorderLabel","gridLabel","Color for your border:");
     let wordBorderInputContainer = createElement("div","wordBorderInputContainer");
-    let wordBorderSelect = createElement("select","wordBorderSelect");
+    let wordBorderSelect = createElement("select","wordBorderSelect","selectContainer");
     let wordBorderInput = createElement("input","wordBorderInput","gridTextInput","","# Color Code");
     var wordBorderPicker = new jsColor(wordBorderInput,{format:'hex',
       previewPosition:'right',
@@ -579,7 +579,7 @@ var bmrHypno = function() {
     let wordGradientContainer = createElement("div","wordGradientContainer","tabWordContainer");
     let wordGradientLabel = createElement("div","wordGradientLabel","gridLabel","Gradients! (You may choose to replace the color with a gradient instead. Be warned that your color will be ignored if you choose this)");
     let wordGradientInputContainer = createElement("div","wordGradientInputContainer"); 
-    let wordGradientSelect = createElement("select","wordGradientSelect");
+    let wordGradientSelect = createElement("select","wordGradientSelect","selectContainer");
     let wordGradientPreviewContainer = createElement("div","wordGradientPreviewContainer","fontPreview");
     let wordGradientCreatorContainer = createElement("div","wordGradientCreatorContainer","fontPreview");
     let wordGradientPreviewBg = createElement("div","wordGradientPreviewBg","gradientPreview");
@@ -600,7 +600,7 @@ var bmrHypno = function() {
     //select part
     let preloadGradientContainer = createElement("div","preloadGradientContainer","gradientCreatorBox");
     let preloadGradientLabel = createElement("div","preloadGradientLabel","gradientLabel","Preload?");
-    let preloadGradientSelect = createElement("select","preloadGradientSelect");
+    let preloadGradientSelect = createElement("select","preloadGradientSelect","selectContainer");
 
     preloadGradientSelect.options.add(new Option("No","No"));
     /* I guess I'll just load them manually :/, no idea what's wrong with these
@@ -666,7 +666,7 @@ var bmrHypno = function() {
     //Choose current gradient
     let gradientSelectedContainer = createElement("div","gradientSelectedContainer","gradientCreatorBox");
     let gradientSelectedLabel = createElement("div","gradientSelectedLabel","gradientLabel","Selected:");
-    let gradientSelectedSelect = createElement("select","gradientSelectedSelect");
+    let gradientSelectedSelect = createElement("select","gradientSelectedSelect","selectContainer");
 
     gradientSelectedSelect.options.add(new Option("None","None"));
     gradientSelectedSelect.onchange = (e) => {

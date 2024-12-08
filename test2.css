@@ -59,13 +59,16 @@
     color: #9c9c9c;
 }
 
-#loadFileLabel:hover, #selectHypno:hover, .gridTextInput:hover {
+#loadFileLabel:hover, .selectContainer:hover,.gridTextInput:hover {
     filter: brightness(1.3);
+}
+
+.selectContainer {
+    border-radius: 0.5em;
 }
 
 #selectHypno {
     color: #9c9c9c;
-    border-radius: 0.5em;
 }
 
 /*
@@ -329,7 +332,6 @@ Word down here, Base
 #wordPositionInputSelect {
     height: 80% !important;
     width: 50% !important;
-    border-radius: 0.5em;
 }
 
 #wordPositionInput1, #wordPositionInput2 {
@@ -411,7 +413,6 @@ Word Color down here
 #wordColorSelect, #wordBorderSelect {
     min-width: 50%;
     width: 100% !important;
-    border-radius: 0.5em;
 }
 
 #wordColorInput, #wordBorderInput {
@@ -428,6 +429,11 @@ Word Color down here
     justify-content: center;
     width: 20%;
 }
+
+#wordGradientSelect {
+    width: 100%;
+}
+
 
 #wordGradientCreatorContainer {
     right: 100%;
@@ -480,7 +486,6 @@ Word Color down here
 
 #preloadGradientSelect {
     width: 50%;
-    border-radius: 0.5em;
 }
 
 #gradientBtnContainer {
@@ -499,7 +504,13 @@ Word Color down here
     border-right: 2px solid rgb(80, 80, 80);
 }
 
-#gradienRemovetBtn {
+#gradientRemovetBtn {
     background-color: #5a0606;
     border-left: 2px solid rgb(80, 80, 80);
+}
+
+.gradientLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
