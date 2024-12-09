@@ -464,13 +464,13 @@ Word Color down here
     font-size: 64px;
     border: 2px solid rgb(80,80,80);
     color: transparent;
-    background-image: #9c9c9c;
+    /*background-image: #9c9c9c;*/
     background-clip: text;
 }
 
-#wordGradientPreviewBg {
+/*#wordGradientPreviewBg {
     background-image: #9c9c9c;
-}
+}*/
 
 .gradientCreatorBox {
     display: flex;
@@ -513,4 +513,13 @@ Word Color down here
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#nameGradientLabel {
+    width: 50%;
+}
+
+.gradientTextInput {
+    width: 50%;
+    border-radius: 0.5em;
 }

@@ -68,6 +68,15 @@ var bmrHypno = function() {
     }
   };
   var _preloadedGradients = {
+    "New one": {
+      0: {
+        "type": "linear-gradient",
+        "direction": "to top",
+        "colors": ["gray","gray"],
+        "positions": ["",""]
+      },
+      "blendMode": "normal"
+    },
     "Rainbow1": {
       0: {
         "type": "linear-gradient",
@@ -618,12 +627,12 @@ var bmrHypno = function() {
     preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
     preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
     */
+    preloadGradientSelect.options.add(new Option("New one","New one"));
     preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
     preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
     preloadGradientSelect.onchange = (e) => {
       //TODO move this in a func cause I need it later
       let selected = e.target.options[e.target.selectedIndex].text;
-      if(selected != "No") {
         let grad = "";
         for(i in _preloadedGradients[selected]) {
           if(i!="blendMode") {
@@ -640,13 +649,21 @@ var bmrHypno = function() {
         wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
         wordGradientPreviewText.style.backgroundImage=grad;
         wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
-      }
     };
 
     preloadGradientContainer.appendChild(preloadGradientLabel);
     preloadGradientContainer.appendChild(preloadGradientSelect);
     wordGradientCreatorContainer.appendChild(preloadGradientContainer);
 
+    //name part
+    let nameGradientContainer = createElement("div","nameGradientContainer","gradientCreatorBox");
+    let nameGradientLabel = createElement("div","nameGradientLabel","gradientLabel","Preload?");
+    let nameGradientInput = createElement("input","nameGradientInput","gradientTextInput","","Name here");
+    nameGradientInput.type = "text";
+    
+    nameGradientContainer.appendChild(nameGradientLabel);
+    nameGradientContainer.appendChild(nameGradientInput);
+    wordGradientContainer.appendChild(nameGradientContainer);
     //buttons!
     let gradientBtnContainer = createElement("div","gradientBtnContainer","gradientCreatorBox");
     let gradientAddBtn = createElement("div","gradientAddBtn","gradientBtn","+");
