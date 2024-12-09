@@ -166,6 +166,23 @@ var bmrHypno = function() {
 
   function loadCreateScreen() {
     emptyMainBox();
+    let topContainerHTML = `
+    <div id="topContainer" class="gridContainer">
+      <div id="" class="gridLabel">Load from:</div>
+      <select id="selectHypno" class="selectContainer">
+        <option value="[object Object]">New one</option>
+        <option value="Load from file">Load from file</option>
+        <option value="[object Object]">Random</option>
+      </select>
+      <label id="loadFileLabel" class="" style="display: none;">
+        <input id="loadFileBtn" class="" placeholder="" type="file">Load from file
+      </label>
+      <input id="backButton" class="" placeholder="" type="button" value="<">
+      <div id="closeButton" class="button close"></div>
+    </div>
+    `;
+    /* testing insertAdjacentHTML
+
     //top container here (load from and close button in it)
     let topContainer = createElement("div","topContainer","gridContainer");
     //load from label
@@ -211,7 +228,33 @@ var bmrHypno = function() {
     closeButton.onclick = () => { mainBox.remove(); };
     topContainer.appendChild(closeButton);
     mainBox.appendChild(topContainer);
-
+    */
+    mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
+    let fileBtn = document.getElementById("loadFileBtn");
+    fileBtn.type = "file";
+    //what happens after the file is loaded
+    //TODO TODO TODO TODO TODO TODO TODO TODO TODO, for now just console log
+    let loaded = (e) => {
+      let tmpFr = e.target;
+      let result = tmpFr.result;
+      console.log(result);
+      //let resultJSON = JSON.parse(result);
+    };
+    //How are the files processed when you load them
+    let process = (file) => {
+      let fr = new FileReader();
+      fr.readAsText(file);
+      fr.addEventListener('loadend', loaded);
+    };
+    //Making it so you process the file when you choose it
+    fileBtn.addEventListener('change', (e) => {
+      let file = fileBtn.files[0];
+      process(file);
+    });
+    let backButton = document.getElementById("backButton");
+    backButton.onclick = startBmr;
+    let closeButton = document.getElementById("closeButton");
+    closeButton.onclick = () => { mainBox.remove(); };
     mainBox.appendChild(createCreateScreenGrid());
   }
 
