@@ -254,7 +254,8 @@ var bmrHypno = function() {
     closeButton.onclick = () => { mainBox.remove(); };
     let selectHypno = document.getElementById("selectHypno");
     loadSelections(selectHypno);
-    mainBox.appendChild(createCreateScreenGrid());
+    //mainBox.appendChild(createCreateScreenGrid());
+    createCreateScreenGrid();
   }
 
   function loadSelections(selections) {
@@ -349,6 +350,30 @@ var bmrHypno = function() {
   }
   
   function createCreateScreenGrid() {
+    let createMenuHTML = `
+    <div id="createMenu", class="menu-start">
+      <div id="nameContainer" class="gridContainer">
+        <div id="nameLabel" class="gridLabel">Choose a name for your set:</div>
+        <div id="nameInputContainer">
+          <input id="formNameInput" class="gridTextInput" placeholder="Name here." type="text">
+        </div>
+      </div>
+      <div id="spawnContainer" class="gridContainer">
+        <div id="spawnLabel" class="gridLabel">Choose how many milliseconds you want between each spawn:</div>
+        <div id="spawnInputContainer" class="">
+          <input id="formSpawnInput" class="gridTextInput" placeholder="ms here, can go past max." type="text">
+          <input id="formSpawnRange" class="" placeholder="" type="range" min="100" max="5000">
+        </div>
+      </div>
+      <div id="selectTypeContainer" class="gridContainer">
+        <div id="wordTypeContainer" class="typeContainer activeType">Word/Text</div>
+        <div id="imgTypeContainer" class="typeContainer">Image/Gif</div>
+      </div>
+      <div id="create-tab-start">
+      </div>
+    </div>
+    `;
+    /*
     let grid = createElement("div","createMenu","menu-start");
     //create name container
     let nameContainer = createElement("div","nameContainer","gridContainer");
@@ -416,6 +441,32 @@ var bmrHypno = function() {
     //TODO, make a function that adds passed string as input button for grid
     //TODO first though, make it so it loads _currentlyLoaded
     return grid;
+    */
+    mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
+    //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
+    let spawnInput = document.getElementById("formSpawnInput");
+    let spawnInputRange = document.getElementById("formSpawnRange");
+    spawnInput.oninput = (e) => {spawnInputRange.value = e.target.value;}
+    spawnInput.onchange = (e) => {spawnInputRange.value = e.target.value;}
+    spawnInputRange.oninput = (e) => {spawnInput.value = e.target.value;}
+    spawnInputRange.onchange = (e) => {spawnInput.value = e.target.value;}
+    //select word/img
+    //word
+    let wordTypeContainer = document.getElementById("wordTypeContainer");
+    let imgTypeContainer = document.getElementById("imgTypeContainer");
+    wordTypeContainer.onclick = (e) => {
+      //TODO Change format of the inputs below
+      changeTabType("word");
+    };
+    //img
+    imgTypeContainer.onclick = (e) => {
+      //TODO Change format of the inputs below
+      changeTabType("image");
+    };
+    //creating the tabbed part
+    let createTabbedContainer = document.getElementById("create-tab-start");
+    fillTabs(createTabbedContainer);
+    grid.appendChild(createTabbedContainer);
   }
 
   function simpleTabCauseTired(aaa) {
