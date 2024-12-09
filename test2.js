@@ -663,7 +663,7 @@ var bmrHypno = function() {
     
     nameGradientContainer.appendChild(nameGradientLabel);
     nameGradientContainer.appendChild(nameGradientInput);
-    wordGradientContainer.appendChild(nameGradientContainer);
+    wordGradientCreatorContainer.appendChild(nameGradientContainer);
     //buttons!
     let gradientBtnContainer = createElement("div","gradientBtnContainer","gradientCreatorBox");
     let gradientAddBtn = createElement("div","gradientAddBtn","gradientBtn","+");
