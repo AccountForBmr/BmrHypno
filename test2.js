@@ -611,7 +611,6 @@ var bmrHypno = function() {
     let preloadGradientLabel = createElement("div","preloadGradientLabel","gradientLabel","Preload?");
     let preloadGradientSelect = createElement("select","preloadGradientSelect","selectContainer");
 
-    preloadGradientSelect.options.add(new Option("No","No"));
     /* I guess I'll just load them manually :/, no idea what's wrong with these
     for(i in _preloadedGradients) {
       preloadGradientSelect.options.add(new Option(_preloadedGradients[i],"aaa"));
@@ -657,7 +656,7 @@ var bmrHypno = function() {
 
     //name part
     let nameGradientContainer = createElement("div","nameGradientContainer","gradientCreatorBox");
-    let nameGradientLabel = createElement("div","nameGradientLabel","gradientLabel","Preload?");
+    let nameGradientLabel = createElement("div","nameGradientLabel","gradientLabel","Name?");
     let nameGradientInput = createElement("input","nameGradientInput","gradientTextInput","","Name here");
     nameGradientInput.type = "text";
     
