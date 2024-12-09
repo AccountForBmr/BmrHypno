@@ -170,9 +170,6 @@ var bmrHypno = function() {
     <div id="topContainer" class="gridContainer">
       <div id="" class="gridLabel">Load from:</div>
       <select id="selectHypno" class="selectContainer">
-        <option value="[object Object]">New one</option>
-        <option value="Load from file">Load from file</option>
-        <option value="[object Object]">Random</option>
       </select>
       <label id="loadFileLabel" class="" style="display: none;">
         <input id="loadFileBtn" class="" placeholder="" type="file">Load from file
@@ -255,11 +252,13 @@ var bmrHypno = function() {
     backButton.onclick = startBmr;
     let closeButton = document.getElementById("closeButton");
     closeButton.onclick = () => { mainBox.remove(); };
+    let selectHypno = document.getElementById("selectHypno");
+    loadSelections(selectHypno);
     mainBox.appendChild(createCreateScreenGrid());
   }
 
-  function loadSelections(displayBtn) {
-    var selections = createElement("select","selectHypno","selectContainer");
+  function loadSelections(selections) {
+    /*var selections = createElement("select","selectHypno","selectContainer");
     for(i in _preloadedHypnos) {
       selections.options.add(new Option(i,_preloadedHypnos[i]));
     }
@@ -272,7 +271,20 @@ var bmrHypno = function() {
         displayBtn.style.display = "none";
       }
     };
-    return selections;
+    return selections;*/
+    let displayBtn = document.getElementById("loadFileLabel");
+    for(i in _preloadedHypnos) {
+      selections.options.add(new Option(i,_preloadedHypnos[i]));
+    }
+    selections.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "Load from file") {
+        displayBtn.style.display = "";
+      } else {
+        loadSelectionInGrid(selected);
+        displayBtn.style.display = "none";
+      }
+    };
   }
 
   function loadSelectionInGrid(selection) {
