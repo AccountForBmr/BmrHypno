@@ -463,6 +463,8 @@ var bmrHypno = function() {
       //TODO Change format of the inputs below
       changeTabType("image");
     };
+    _tabsTypes.push(wordTypeContainer);
+    _tabsTypes.push(imgTypeContainer);
     //creating the tabbed part
     let createTabbedContainer = document.getElementById("create-tab-start");
     fillTabs(createTabbedContainer);
