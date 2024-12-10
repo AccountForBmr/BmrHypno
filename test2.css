@@ -368,6 +368,7 @@ Word down here, Base
 
 #wordFontInputContainer {
     width: 40%;
+    display: flex;
 }
 
 .fontPreview {

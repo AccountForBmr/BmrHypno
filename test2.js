@@ -910,6 +910,80 @@ var bmrHypno = function() {
 
     document.getElementById("tabsContainer").appendChild(tab);
     return tab;
+    //remaking color down here 
+    /* continuing tomorrow
+    let tab = createElement("div","wordColorTab","createTab");
+    let createColorBaseTabHTML = `
+    <div id="wordColorContainer" class="tabWordContainer">
+      <div id="wordColorLabel" class="gridLabel">Color for your word:</div>
+      <div id="wordColorInputContainer" class="">
+        <select id="wordColorSelect" class="selectContainer">
+          <option value="Random">Random</option>
+          <option value="Choose">Choose</option>
+        </select>
+        <input id="wordColorInput" class="gridTextInput" placeholder="# Color Code" style="display: none;" type="text">
+      </div>
+    </div>
+    <div id="wordBorderContainer" class="tabWordContainer">
+      <div id="wordBorderLabel" class="gridLabel">Color for your border:</div>
+      <div id="wordBorderInputContainer">
+        <select id="wordBorderSelect" class="selectContainer">
+          <option value="None">None</option>
+          <option value="Choose">Choose</option>
+        </select>
+        <input id="wordBorderInput" class="gridTextInput" placeholder="# Color Code" style="display: none;" type="text">
+      </div>
+    </div>
+    <div id="wordGradientContainer" class="tabWordContainer">
+      <div id="wordGradientLabel" class="gridLabel">Gradients! (You may choose to replace the color with a gradient instead. Be warned that your color will be ignored if you choose this)</div>
+      <div id="wordGradientInputContainer">
+        <select id="wordGradientSelect" class="selectContainer">
+          <option value="None">None</option>
+          <option value="Yes">Yes</option>
+          <option value="Linear">Linear</option>
+          <option value="Radial">Radial</option>
+          <option value="Conic">Conic</option>
+          <option value="Repeating Linear">Repeating Linear</option>
+          <option value="Repeating Radial">Repeating Radial</option>
+          <option value="Repeating Conic">Repeating Conic</option>
+        </select>
+        <div id="wordGradientCreatorContainer" class="fontPreview">
+          <div id="preloadGradientContainer" class="gradientCreatorBox">
+            <div id="preloadGradientLabel" class="gradientLabel">Preload?</div>
+              <select id="preloadGradientSelect" class="selectContainer">
+                <option value="New one">New one</option>
+                <option value="Rainbow1">Rainbow1</option>
+                <option value="ShadowBelow">ShadowBelow</option>
+              </select>
+            </div>
+            <div id="nameGradientContainer" class="gradientCreatorBox">
+              <div id="nameGradientLabel" class="gradientLabel">Name?</div>
+              <input id="nameGradientInput" class="gradientTextInput" placeholder="Name here" type="text">
+            </div>
+            <div id="gradientBtnContainer" class="gradientCreatorBox">
+              <div id="gradientAddBtn" class="gradientBtn">+</div>
+              <div id="gradientRemoveBtn" class="gradientBtn">-</div>
+            </div>
+            <div id="gradientSelectedContainer" class="gradientCreatorBox">
+              <div id="gradientSelectedLabel" class="gradientLabel">Selected:</div>
+              <select id="gradientSelectedSelect" class="selectContainer">
+                <option value="None">None</option>
+              </select>
+            </div>
+          </div>
+          <div id="wordGradientPreviewContainer" class="fontPreview">
+            <div id="wordGradientPreviewBg" class="gradientPreview"></div>
+            <div id="wordGradientPreviewTextContainer" class="gradientPreview">
+              <div id="wordGradientPreviewText" class="">Test</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    tab.insertAdjacentHTML("beforeend",createWordColorTabHTML);
+    document.getElementById("tabsContainer").appendChild(tab);
+    return tab;
+    /*
   }
 
   function createWordEffectsTab() {
