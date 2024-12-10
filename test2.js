@@ -661,7 +661,7 @@ var bmrHypno = function() {
     `;
     tab.insertAdjacentHTML("beforeend",createWordBaseTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
-
+    //value
     //time
     let wordTimeInput = document.getElementById("wordTimeInput");
     let wordTimeRange = document.getElementById("wordTimeRange");
@@ -719,6 +719,7 @@ var bmrHypno = function() {
   }
 
   function createWordColorTab() {
+    /*
     let tab = createElement("div","wordColorTab","createTab");
     //all the elements
     //the color
@@ -828,7 +829,7 @@ var bmrHypno = function() {
     console.log(_preloadedGradients);
     preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
     preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
-    */
+    *//*
     preloadGradientSelect.options.add(new Option("New one","New one"));
     preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
     preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
@@ -910,10 +911,10 @@ var bmrHypno = function() {
 
     document.getElementById("tabsContainer").appendChild(tab);
     return tab;
+    */
     //remaking color down here 
-    /* continuing tomorrow
     let tab = createElement("div","wordColorTab","createTab");
-    let createColorBaseTabHTML = `
+    let createWordColorTabHTML = `
     <div id="wordColorContainer" class="tabWordContainer">
       <div id="wordColorLabel" class="gridLabel">Color for your word:</div>
       <div id="wordColorInputContainer" class="">
@@ -982,8 +983,83 @@ var bmrHypno = function() {
     `;
     tab.insertAdjacentHTML("beforeend",createWordColorTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
+    //color
+    let wordColorInput = document.getElementById("wordColorInput");
+    var wordColorPicker = new jsColor(wordColorInput,{format:'hex',
+      previewPosition:'right',
+      previewSize:50,
+      backgroundColor:'rgba(0,0,0,0.9)',
+      borderColor:'#343434',
+      borderWidth:2});
+    let wordColorSelect = document.getElementById("wordColorSelect");
+    wordColorSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "Random") {
+        wordColorInput.style.display = "none";
+      } else {
+          wordColorInput.style.display = "";
+      }
+    };
+    _colorPickers.push(wordColorPicker);
+    //border
+    let wordBorderInput = document.getElementById("wordBorderInput");
+    var wordBorderPicker = new jsColor(wordBorderInput,{format:'hex',
+      previewPosition:'right',
+      previewSize:50,
+      backgroundColor:'rgba(0,0,0,0.9)',
+      borderColor:'#343434',
+      borderWidth:2});
+    let wordBorderSelect = document.getElementById("wordBorderSelect");
+    wordBorderSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "None") {
+        wordBorderInput.style.display = "none";
+      } else {
+        wordBorderInput.style.display = "";
+      }
+    };
+    _colorPickers.push(wordBorderPicker);
+    //gradient
+    let preloadGradientSelect = document.getElementById("preloadGradientSelect");
+    let wordGradientPreviewBg = document.getElementById("wordGradientPreviewBg");
+    let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");
+    preloadGradientSelect.onchange = (e) => {
+      //TODO move this in a func cause I need it later
+      let selected = e.target.options[e.target.selectedIndex].text;
+        let grad = "";
+        for(i in _preloadedGradients[selected]) {
+          if(i!="blendMode") {
+            grad+=`${_preloadedGradients[selected][i].type}(${_preloadedGradients[selected][i].direction},`;
+            for(j in _preloadedGradients[selected][i].colors) {
+              grad+=`${_preloadedGradients[selected][i].colors[j]} ${_preloadedGradients[selected][i].positions[j]},`;
+            }
+            grad = grad.slice(0,-1);
+            grad+="),";
+          }
+        }
+        grad = grad.slice(0,-1);
+        wordGradientPreviewBg.style.backgroundImage=grad;
+        wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
+        wordGradientPreviewText.style.backgroundImage=grad;
+        wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
+    };
+
+    let gradientAddBtn = document.getElementById("gradientAddBtn");
+    let gradientRemoveBtn = document.getElementById("gradientRemoveBtn");
+    gradientAddBtn.onclick = (e) => {
+      //TODO add a gradient
+    };
+    gradientRemoveBtn.onclick = (e) => {
+      //TODO remove selected grad unless None
+    };
+
+    let gradientSelectedSelect = document.getElementById("gradientSelectedSelect");
+    gradientSelectedSelect.options.add(new Option("None","None"));
+    gradientSelectedSelect.onchange = (e) => {
+      //TODO hide everything with none, load the gradient when chosen
+    }
+
     return tab;
-    /*
   }
 
   function createWordEffectsTab() {
