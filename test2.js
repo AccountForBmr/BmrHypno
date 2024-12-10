@@ -468,7 +468,7 @@ var bmrHypno = function() {
     //creating the tabbed part
     let createTabbedContainer = document.getElementById("create-tab-start");
     fillTabs(createTabbedContainer);
-    grid.appendChild(createTabbedContainer);
+    //No need???? document.getElementById("createMenu").appendChild(createTabbedContainer);
   }
 
   function simpleTabCauseTired(aaa) {
