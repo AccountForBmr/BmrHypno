@@ -468,7 +468,6 @@ var bmrHypno = function() {
     //creating the tabbed part
     let createTabbedContainer = document.getElementById("create-tab-start");
     fillTabs(createTabbedContainer);
-    //No need???? document.getElementById("createMenu").appendChild(createTabbedContainer);
   }
 
   function simpleTabCauseTired(aaa) {
@@ -484,6 +483,8 @@ var bmrHypno = function() {
   function fillTabs(wholeContainer) {
     let tabsTitleContainer = createElement("div","tabsTitleContainer");
     let tabsContainer = createElement("div","tabsContainer");
+    wholeContainer.appendChild(tabsTitleContainer);
+    wholeContainer.appendChild(tabsContainer);
     let whichTabInfo = 0;
     for(i in _tabs) {
       for(j in _tabs[i]) {
@@ -497,17 +498,16 @@ var bmrHypno = function() {
         tabsTitleContainer.appendChild(tabTitle);
         //creating the actual tab
         let tabContainer = _tabs[i][j]();
-        tabsContainer.appendChild(tabContainer);
+        //tabsContainer.appendChild(tabContainer); added to _tabs[i][j] so I can get the ids
         _tabsContainers.push(tabContainer);
         whichTabInfo+=1;
       }
     }
-    wholeContainer.appendChild(tabsTitleContainer);
-    wholeContainer.appendChild(tabsContainer);
     changeTabType("word");
   }
 
   function createWordBaseTab() {
+    /*
     //the tab
     let tab = createElement("div","wordBaseTab","createTab");
     //all its elements
@@ -620,6 +620,101 @@ var bmrHypno = function() {
     wordFontInputContainer.appendChild(fontMin);
     wordFontInputContainer.appendChild(fontMax);
     tab.appendChild(wordFontContainer);
+    return tab;
+    */
+    //// insertAdjacentHTML from here on
+    let tab = createElement("div","wordBaseTab","createTab");
+    let createWordBaseTabHTML = `
+    <div id="wordValueContainer" class="tabWordContainer">
+      <div id="wordValueLabel" class="gridLabel">Type the word/text that you wish to use:</div>
+      <div id="wordValueInputContainer">
+        <input id="wordValueInput" class="gridTextInput" placeholder="Text here." type="text">
+      </div>
+    </div>
+    <div id="wordTimeContainer" class="tabWordContainer">
+      <div id="wordTimeLabel" class="gridLabel">How long before the word leaves? (in milliseconds)</div>
+      <div id="wordTimeInputContainer">
+        <input id="wordTimeInput" class="gridTextInput" placeholder="ms here, can go past max." type="text">
+        <input id="wordTimeRange" placeholder="" type="range" min="10" max="10000">
+      </div>
+    </div>
+    <div id="wordPositionContainer" class="tabWordContainer">
+      <div id="wordPositionLabel" class="gridLabel">Where should your word be?</div>
+      <div id="wordPositionInputContainer">
+        <select id="wordPositionInputSelect" class="selectContainer">
+          <option value="Random">Random</option>
+          <option value="Precise Position">Precise Position</option>
+        </select>
+        <input id="wordPositionInput1" class="gridTextInput" placeholder="% from top" type="text" style="display: none;">
+        <input id="wordPositionInput2" class="gridTextInput" placeholder="% from left" type="text" style="display: none;">
+      </div>
+    </div>
+    <div id="wordFontContainer" class="tabWordContainer">
+      <div id="wordFontLabel" class="gridLabel">Font size? (Random between the 2)</div>
+      <div id="wordFontInputContainer">
+        <input id="wordFontInput1" class="gridTextInput" placeholder="Min value." type="text">
+        <input id="wordFontInput2" class="gridTextInput" placeholder="Max value." type="text">
+        <div id="fontPreviewMin" class="fontPreview" style="display: none;">Min</div>
+        <div id="fontPreviewMax" class="fontPreview" style="display: none;">Max</div>
+      </div>
+    </div>
+    `;
+    tab.insertAdjacentHTML("beforeend",createWordBaseTabHTML);
+    document.getElementById("tabsContainer").appendChild(tab);
+
+    //time
+    let wordTimeInput = document.getElementById("wordTimeInput");
+    let wordTimeRange = document.getElementById("wordTimeRange");
+    wordTimeInput.oninput = (e) => {wordTimeRange.value = e.target.value;}
+    wordTimeInput.onchange = (e) => {wordTimeRange.value = e.target.value;}
+    wordTimeRange.oninput = (e) => {wordTimeInput.value = e.target.value;}
+    wordTimeRange.onchange = (e) => {wordTimeInput.value = e.target.value;}
+
+    //position
+    let wordPositionInputSelect = document.getElementById("wordPositionInputSelect");
+    let wordPositionInput1 = document.getElementById("wordPositionInput1");
+    let wordPositionInput2 = document.getElementById("wordPositionInput2");
+    wordPositionInputSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text == "Random") {
+        wordPositionInput1.style.display = "none";
+        wordPositionInput2.style.display = "none";
+      } else {
+        wordPositionInput1.style.display = "";
+        wordPositionInput2.style.display = "";
+        let chooseWindow = createElement("div","chooseWindow","","Click where you would like your word top-left corner to be.");
+        document.getElementById("scaler").appendChild(chooseWindow);
+        chooseWindow.onclick = (evt) => {
+          let boundRect=evt.target.getBoundingClientRect();
+          wordPositionInput1.value = ((evt.clientX-boundRect.left)*100/boundRect.width).toFixed(2)+"%";
+          wordPositionInput2.value = ((evt.clientY-boundRect.top)*100/boundRect.height).toFixed(2)+"%";
+          chooseWindow.remove();
+        };
+      }
+    };
+    //font
+    let wordFontInput1 = document.getElementById("wordFontInput1");
+    let wordFontInput2 = document.getElementById("wordFontInput2");
+    let fontMin = document.getElementById("fontPreviewMin");
+    let fontMax = document.getElementById("fontPreviewMax");
+    wordFontInput1.onfocus = (e)=>{
+      fontMin.style.display = "";
+      fontMax.style.display = "";
+    };
+    wordFontInput1.onblur = (e)=>{
+      fontMin.style.display = "none";
+      fontMax.style.display = "none"
+    };
+    wordFontInput1.oninput = (e)=>{
+      fontMin.style.fontSize = wordFontInput1.value+"px";
+      fontMax.style.fontSize = wordFontInput2.value+"px";
+    }
+    wordFontInput1.onchange = wordFontInput1.oninput;
+    wordFontInput2.onfocus = wordFontInput1.onfocus;
+    wordFontInput2.onblur = wordFontInput1.onblur;
+    wordFontInput2.oninput = wordFontInput1.oninput;
+    wordFontInput2.onchange = wordFontInput1.onchange;
+
     return tab;
   }
 
@@ -812,31 +907,43 @@ var bmrHypno = function() {
     wordGradientContainer.appendChild(wordGradientLabel);
     wordGradientContainer.appendChild(wordGradientInputContainer);
     tab.appendChild(wordGradientContainer);
+
+    document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
 
   function createWordEffectsTab() {
     let tab = createElement("div","wordEffectsTab","createTab");
+
+    document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
 
   function createWordPreviewTab() {
     let tab = createElement("div","wordPreviewTab","createTab");
+
+    document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
 
   function createImgBaseTab() {
     let tab = createElement("div","imgBaseTab","createTab");
+
+    document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
 
   function createImgEffectsTab() {
     let tab = createElement("div","imgEffectsTab","createTab");
+
+    document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
 
   function createImgPreviewTab() {
     let tab = createElement("div","imgPreviewTab","createTab");
+
+    document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
 
