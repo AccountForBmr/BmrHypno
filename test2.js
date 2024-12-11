@@ -111,6 +111,7 @@ var bmrHypno = function() {
   }
 
   function startBmr() {
+    /*
     //add mainBox to div id=menus in bmr
     //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
     emptyMainBox();
@@ -119,13 +120,16 @@ var bmrHypno = function() {
     mainBox.appendChild(closeButton);
     //adding the grid
     mainBox.appendChild(createBmrStartingGrid());
-
+    */
+    //with insertAdjacent + adding container
+    let topContainerHTML = `
+    <div id="topContainer" class="gridContainer">
+      <div id="closeButton" class="button close"></div>
+    </div>
+    `;
+    mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
+    document.getElementById("closeButton").onclick = () => { mainBox.remove(); };
     if(!_menuModified) {
-      //replacing the dropdown menu in Bmr to add Hypno to the list
-      /*var menufunc=document.getElementById("menu").getElementsByClassName("button")[0].onclick.toString().substring(8).slice(0,-1);
-      menufunc=menufunc.replace(/"Exit/gm,"\"Hypno\", onclick: () => document.getElementById(\"menus\").appendChild(startBmr())\},\{label:\"Exit");
-      menufunc=menufunc.replace(/_menuButton/gm,"document.getElementById(\"menu\").getElementsByClassName(\"button\")[0]");
-      document.getElementById("menu").getElementsByClassName("button")[0].onclick=new Function("e",menufunc);*/
       document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
       _menuModified = true;
     }
@@ -1054,7 +1058,6 @@ var bmrHypno = function() {
     };
 
     let gradientSelectedSelect = document.getElementById("gradientSelectedSelect");
-    gradientSelectedSelect.options.add(new Option("None","None"));
     gradientSelectedSelect.onchange = (e) => {
       //TODO hide everything with none, load the gradient when chosen
     }
