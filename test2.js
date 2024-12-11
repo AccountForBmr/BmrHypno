@@ -122,6 +122,7 @@ var bmrHypno = function() {
     mainBox.appendChild(createBmrStartingGrid());
     */
     //with insertAdjacent + adding container
+    emptyMainBox();
     let topContainerHTML = `
     <div id="topContainer" class="gridContainer">
       <div id="closeButton" class="button close"></div>
@@ -133,6 +134,8 @@ var bmrHypno = function() {
       document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
       _menuModified = true;
     }
+
+    mainBox.appendChild(createBmrStartingGrid());
 
     return mainBox;
   }
