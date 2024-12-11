@@ -111,25 +111,17 @@ var bmrHypno = function() {
   }
 
   function startBmr() {
-    /*
     //add mainBox to div id=menus in bmr
     //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
     emptyMainBox();
+    let topCont = createElement("div","topContainer","gridContainer");
     let closeButton = createElement("div","","button close");
     closeButton.onclick = () => { mainBox.remove(); };
-    mainBox.appendChild(closeButton);
+    topCont.appendChild(closeButton);
+    mainBox.appendChild(topCont);
     //adding the grid
     mainBox.appendChild(createBmrStartingGrid());
-    */
-    //with insertAdjacent + adding container
-    emptyMainBox();
-    let topContainerHTML = `
-    <div id="topContainer" class="gridContainer">
-      <div id="closeButton" class="button close"></div>
-    </div>
-    `;
-    mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
-    document.getElementById("closeButton").onclick = () => { mainBox.remove(); };
+
     if(!_menuModified) {
       document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
       _menuModified = true;
