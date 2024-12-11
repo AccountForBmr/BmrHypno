@@ -115,7 +115,7 @@ var bmrHypno = function() {
     //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
     emptyMainBox();
     let topCont = createElement("div","topContainer","topStart");
-    let closeButton = createElement("div","","button close");
+    let closeButton = createElement("div","closeButton","button close");
     closeButton.onclick = () => { mainBox.remove(); };
     topCont.appendChild(closeButton);
     mainBox.appendChild(topCont);
