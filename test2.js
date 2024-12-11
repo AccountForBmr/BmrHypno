@@ -114,7 +114,7 @@ var bmrHypno = function() {
     //add mainBox to div id=menus in bmr
     //adds the close button and resets everything, uses css from bmr if mainBox was added to menus
     emptyMainBox();
-    let topCont = createElement("div","topContainer","gridContainer");
+    let topCont = createElement("div","topContainer","topStart");
     let closeButton = createElement("div","","button close");
     closeButton.onclick = () => { mainBox.remove(); };
     topCont.appendChild(closeButton);
@@ -126,8 +126,6 @@ var bmrHypno = function() {
       document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
       _menuModified = true;
     }
-
-    mainBox.appendChild(createBmrStartingGrid());
 
     return mainBox;
   }
