@@ -1017,6 +1017,21 @@ var bmrHypno = function() {
     };
     _colorPickers.push(wordBorderPicker);
     //gradient
+    let wordGradientSelect = document.getElementById("wordGradientSelect");
+    wordGradientSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      let wordGradientCreatorContainer = document.getElementById("wordGradientCreatorContainer");
+      let wordGradientPreviewContainer = document.getElementById("wordGradientPreviewContainer");
+      if(selected.text == "None") {
+        wordGradientCreatorContainer.style.display = "none";
+        wordGradientPreviewContainer.style.display = "none";
+      } else {
+        wordGradientCreatorContainer.style.display = "";
+        wordGradientPreviewContainer.style.display = "";
+      }
+    }
+
+    //gradientPreviews
     let preloadGradientSelect = document.getElementById("preloadGradientSelect");
     let wordGradientPreviewBg = document.getElementById("wordGradientPreviewBg");
     let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");

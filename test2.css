@@ -447,11 +447,13 @@ Word Color down here
     right: 100%;
     flex-wrap: wrap;
     align-items: normal;
+    display: none;
 }
 
 #wordGradientPreviewContainer {
     left: 100%;
     flex-wrap: wrap;
+    display: none;
 }
 
 .gradientPreview {
@@ -472,13 +474,13 @@ Word Color down here
     font-size: 64px;
     border: 2px solid rgb(80,80,80);
     color: transparent;
-    /*background-image: #9c9c9c;*/
+    background-image: linear-gradient(#9c9c9c,#9c9c9c);
     background-clip: text;
 }
 
-/*#wordGradientPreviewBg {
+#wordGradientPreviewBg {
     background-image: #9c9c9c;
-}*/
+}
 
 .gradientCreatorBox {
     display: flex;
