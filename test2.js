@@ -945,7 +945,7 @@ var bmrHypno = function() {
           <option value="Repeating Radial">Repeating Radial</option>
           <option value="Repeating Conic">Repeating Conic</option>
         </select>
-        <div id="wordGradientCreatorContainer" class="fontPreview">
+        <div id="wordGradientCreatorContainer" class="fontPreview" style="display: none;">
           <div id="preloadGradientContainer" class="gradientCreatorBox">
             <div id="preloadGradientLabel" class="gradientLabel">Preload?</div>
               <select id="preloadGradientSelect" class="selectContainer">
@@ -969,7 +969,7 @@ var bmrHypno = function() {
               </select>
             </div>
           </div>
-          <div id="wordGradientPreviewContainer" class="fontPreview">
+          <div id="wordGradientPreviewContainer" class="fontPreview" style="display: none;">
             <div id="wordGradientPreviewBg" class="gradientPreview"></div>
             <div id="wordGradientPreviewTextContainer" class="gradientPreview">
               <div id="wordGradientPreviewText" class="">Test</div>

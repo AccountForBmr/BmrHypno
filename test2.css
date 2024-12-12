@@ -447,13 +447,11 @@ Word Color down here
     right: 100%;
     flex-wrap: wrap;
     align-items: normal;
-    display: none;
 }
 
 #wordGradientPreviewContainer {
     left: 100%;
     flex-wrap: wrap;
-    display: none;
 }
 
 .gradientPreview {
