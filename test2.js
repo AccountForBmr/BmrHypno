@@ -974,7 +974,7 @@ var bmrHypno = function() {
               </select>
             </div>                    
             <div id="gradientSelectedContainer" class="gradientCreatorBox">
-              <div id="gradientSelectedLabel" class="gradientLabel">Selected:</div>
+              <div id="gradientSelectedLabel" class="gradientLabel">Selected Gradient</div>
               <select id="gradientSelectedSelect" class="selectContainer">
                 <option value="None">None</option>
               </select>
@@ -1011,7 +1011,7 @@ var bmrHypno = function() {
                 <option value="None">None</option>
               </select>
               <div id="colorGradientBtnContainer" class="gradientCreatorBox">
-                <div id="coloGradientAddBtn" class="gradientBtn">+</div>
+                <div id="colorGradientAddBtn" class="gradientBtn">+</div>
                 <div id="colorGradientRemoveBtn" class="gradientBtn">-</div>
               </div>
             </div>

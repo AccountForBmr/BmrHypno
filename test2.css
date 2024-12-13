@@ -488,7 +488,7 @@ Word Color down here
     border: 2px solid rgb(80, 80, 80);
 }
 
-#preloadGradientLabel, #preloadGradientSelect, #angleGradientLabel, #changeColorGradientLabel, #shapeGradientLabel, #blendSelect, #typeGradientLabel, #typeGradientSelect {
+#preloadGradientLabel, #preloadGradientSelect, #angleGradientLabel, #changeColorGradientLabel, #shapeGradientLabel, #blendSelect, #typeGradientLabel, #typeGradientSelect, #blendGradientLabel, #nameGradientInput, #angleGradientInput, #shapeSelect, #changeColorGradientInput {
     width: 50% !important;
 }
 
