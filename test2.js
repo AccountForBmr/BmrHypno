@@ -938,12 +938,6 @@ var bmrHypno = function() {
         <select id="wordGradientSelect" class="selectContainer">
           <option value="None">None</option>
           <option value="Yes">Yes</option>
-          <option value="Linear">Linear</option>
-          <option value="Radial">Radial</option>
-          <option value="Conic">Conic</option>
-          <option value="Repeating Linear">Repeating Linear</option>
-          <option value="Repeating Radial">Repeating Radial</option>
-          <option value="Repeating Conic">Repeating Conic</option>
         </select>
         <div id="wordGradientCreatorContainer" class="fontPreview" style="display: none;">
           <div id="preloadGradientContainer" class="gradientCreatorBox">
@@ -958,9 +952,26 @@ var bmrHypno = function() {
               <div id="nameGradientLabel" class="gradientLabel">Name?</div>
               <input id="nameGradientInput" class="gradientTextInput" placeholder="Name here" type="text">
             </div>
-            <div class="gradientCreatorBox" id="blendGradientContainer">
-              <div class="gradientLabel" id="blendGradientLabel">Blend Type</div>
-              <input class="gradientTextInput" placeholder="Name here" type="text" id="blendGradientInput">
+            <div id="blendGradientContainer" class="gradientCreatorBox">
+              <div id="blendGradientLabel" class="gradientLabel">Blend Type</div>
+              <select id="blendSelect" class="selectContainer">
+                <option value="normal">normal</option>
+                <option value="multiply">multiply</option>
+                <option value="screen">screen</option>
+                <option valu="overlay">overlay</option>
+                <option value="darken">darken</option>
+                <option value="lighten">lighten</option>
+                <option value="color-dodge">color-dodge</option>
+                <option value="color-burn">color-burn</option>
+                <option value="hard-light">hard-light</option>
+                <option value="soft-light">soft-light</option>
+                <option value="difference">difference</option>
+                <option value="exclusion">exclusion</option>
+                <option value="hue">hue</option>
+                <option value="saturation">saturation</option>
+                <option value="color">color</option>
+                <option value="luminosity">luminosity</option>
+              </select>
             </div>                    
             <div id="gradientSelectedContainer" class="gradientCreatorBox">
               <div id="gradientSelectedLabel" class="gradientLabel">Selected:</div>
@@ -972,29 +983,47 @@ var bmrHypno = function() {
                 <div id="gradientRemoveBtn" class="gradientBtn">-</div>
               </div>
             </div>
-            <div class="gradientCreatorBox" id="angleGradientContainer">
-              <div class="gradientLabel" id="angleGradientLabel">Angle</div>
-              <input class="gradientTextInput" placeholder="Name here" type="text" id="angleGradientInput">
+            <div id="typeGradientContainer" class="gradientCreatorBox">
+              <div id="typeGradientLabel" class="gradientLabel">Type</div>
+              <select id="typeGradientSelect" class="selectContainer">
+                <option value="linear">linear</option>
+                <option value="radial">radial</option>
+                <option value="conic">conic</option>
+                <option value="repeating-linear">repeating-linear</option>
+                <option value="repeating-radial">repeating-radial</option>
+                <option value="repeating-conic">repeating-conic</option>
+              </select>
             </div>
-            <div class="gradientCreatorBox" id="colorGradientSelectedContainer">
-              <div class="gradientLabel" id="colorGradientSelectedLabel">Selected color:</div>
-              <select class="selectContainer" id="colorGradientSelectedSelect">
+            <div id="angleGradientContainer" class="gradientCreatorBox">
+              <div id="angleGradientLabel" class="gradientLabel">Angle</div>
+              <input id="angleGradientInput" class="gradientTextInput" placeholder="Use deg" type="text">
+            </div>
+            <div id="shapeGradientContainer" class="gradientCreatorBox" style="display: none;">
+              <div id="shapeGradientLabel" class="gradientLabel">Shape</div>
+              <select id="shapeSelect" class="selectContainer">
+                <option value="ellipse">ellipse</option>
+                <option value="circle">circle</option>
+              </select>
+            </div>
+            <div id="colorGradientSelectedContainer" class="gradientCreatorBox">
+              <div id="colorGradientSelectedLabel" class="gradientLabel">Selected color:</div>
+              <select id="colorGradientSelectedSelect" class="selectContainer">
                 <option value="None">None</option>
               </select>
-              <div class="gradientCreatorBox" id="colorGradientBtnContainer">
-                <div class="gradientBtn" id="coloGradientAddBtn">+</div>
-                <div class="gradientBtn" id="colorGradientRemoveBtn">-</div>
+              <div id="colorGradientBtnContainer" class="gradientCreatorBox">
+                <div id="coloGradientAddBtn" class="gradientBtn">+</div>
+                <div id="colorGradientRemoveBtn" class="gradientBtn">-</div>
               </div>
             </div>
-            <div class="gradientCreatorBox" id="changeColorGradientContainer">
-              <div class="gradientLabel" id="changeColorGradientLabel">Change Color</div>
-              <input class="gradientTextInput" placeholder="Name here" type="text" id="changeColorGradientInput">
+            <div id="changeColorGradientContainer" class="gradientCreatorBox">
+              <div id="changeColorGradientLabel" class="gradientLabel">Change Color</div>
+              <input id="changeColorGradientInput" class="gradientTextInput" placeholder="# Color Code" type="text">
             </div>
-            <div class="gradientCreatorBox" id="positionGradientContainer">
-              <div class="gradientLabel" id="positionGradientLabel">Position</div>
-              <input class="gradientTextInput" placeholder="Name here" id="positionGradientInput" type="range">
+            <div id="positionGradientContainer" class="gradientCreatorBox">
+              <div id="positionGradientLabel" class="gradientLabel">Position</div>
+              <input id="positionGradientInput" class="gradientTextInput" placeholder="50" type="range">
             </div>
-            <div class="gradientCreatorBox" id="previewGradientContainer">                                
+            <div id="previewGradientContainer" class="gradientCreatorBox">                                
             </div>
           </div>
         <div id="wordGradientPreviewContainer" class="fontPreview" style="display: none;">

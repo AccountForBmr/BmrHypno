@@ -488,16 +488,18 @@ Word Color down here
     border: 2px solid rgb(80, 80, 80);
 }
 
-#preloadGradientLabel {
-    width: 50%;
+#preloadGradientLabel, #preloadGradientSelect, #angleGradientLabel, #changeColorGradientLabel, #shapeGradientLabel, #blendSelect, #typeGradientLabel, #typeGradientSelect {
+    width: 50% !important;
 }
 
-#preloadGradientSelect {
-    width: 50%;
+#gradientSelectedLabel, #gradientSelectedSelect, #colorGradientSelectedLabel, #colorGradientSelectedSelect {
+    width: 25% !important;
 }
 
-#gradientBtnContainer {
-    align-items: normal;
+#gradientBtnContainer, #colorGradientBtnContainer {
+    width: 50% !important;
+    border-radius: 0.5em;
+    overflow: hidden;
 }
 
 .gradientBtn {
@@ -507,12 +509,12 @@ Word Color down here
     justify-content: center;
 }
 
-#gradientAddBtn {
+#gradientAddBtn, #colorGradientAddBtn {
     background-color: #033f03;
     border-right: 2px solid rgb(80, 80, 80);
 }
 
-#gradientRemoveBtn {
+#gradientRemoveBtn, #colorGradientRemoveBtn {
     background-color: #5a0606;
     border-left: 2px solid rgb(80, 80, 80);
 }
@@ -530,4 +532,8 @@ Word Color down here
 .gradientTextInput {
     width: 50%;
     border-radius: 0.5em;
+}
+
+#previewGradientContainer {
+    min-height: 10%;
 }
