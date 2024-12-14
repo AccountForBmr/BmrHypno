@@ -1130,7 +1130,7 @@ var bmrHypno = function() {
     let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
-      uptadeGradientPreviewRight(_preloadedGradients[selected]);
+      updateGradientPreviewRight(_preloadedGradients[selected]);
     };
 
     let gradientAddBtn = document.getElementById("gradientAddBtn");
