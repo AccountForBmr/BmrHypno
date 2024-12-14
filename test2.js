@@ -1131,6 +1131,7 @@ var bmrHypno = function() {
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
       updateGradientPreviewRight(_preloadedGradients[selected]);
+      updateGradientPreviewLeft(_preloadedGradients[selected]); //TODO TODO TODO
     };
 
     let gradientAddBtn = document.getElementById("gradientAddBtn");
@@ -1147,16 +1148,45 @@ var bmrHypno = function() {
       //TODO hide everything with none, load the gradient when chosen
     }
 
+    //color in gradient
+    let gradientColorInput = document.getElementById("changeColorGradientInput");
+    var gradientColorPicker = new jsColor(gradientColorInput,{format:'hexa',
+      previewPosition:'right',
+      previewSize:50,
+      backgroundColor:'rgba(0,0,0,0.9)',
+      borderColor:'#343434',
+      borderWidth:2});
+    _colorPickers.push(gradientColorPicker);
+
     return tab;
   }
 
   function updateGradient(selected) {
     //might just remove the name
     //document.getElementById("nameGradientInput").value = selected;
-    document.getElementById("blendSelect").selectedIndex = blendModes.indexOf(selected.blendMode);
+    //document.getElementById("blendSelect").selectedIndex = blendModes.indexOf(selected.blendMode);
     //selected Gradient here
     //TODO
     //_currentGradientInfo
+  }
+
+  function updateGradientPreviewLeft(selectedGradient) {
+    document.getElementById("nameGradientInput").value = selectedGradient.name;
+    document.getElementById("blendSelect").value = selectedGradient.blendMode;
+    document.getElementById("gradientSelectedSelect").selectedIndex = 0;
+    document.getElementById("typeGradientSelect").value = selectedGradient.gradients[0].type;
+    if(selectedGradient.gradients[0].type.includes("radial")) {
+      document.getElementById("shapeSelect").value = selectedGradient.gradients[0].direction;
+      document.getElementById("shapeGradientContainer").style.display = "";
+      document.getElementById("angleGradientContainer").style.display = "none";
+    } else {
+      document.getElementById("angleGradientInput").value = selectedGradient.gradients[0].direction;
+      document.getElementById("shapeGradientContainer").style.display = "none";
+      document.getElementById("angleGradientContainer").style.display = "";      
+    }
+    document.getElementById("colorGradientSelectedSelect").selectedIndex = 0;
+    _colorPickers[2].fromString(selectedGradient.gradients[0].colors[0]);
+    document.getElementById("positionGradientInput").value = selectedGradient.gradients[0].positions[0];
   }
 
   function updateGradientPreviewRight(selectedGradient) {
