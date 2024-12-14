@@ -10,6 +10,7 @@ var bmrHypno = function() {
   var mainBox = createElement("div", "mainBox");
   var jsColor = {};
   var _menuModified = false;
+  const blendModes = ["normal","multiply","screen","overlay","darken","lighten","color-dodge","color-burn","hard-light","soft-light","difference","exclusion","hue","saturation","color","luminosity"];
   //should add the function that returns the baseTab, colorTab etc... to the right, then append that tab
   // probably???  TODO TODO TODO TODO
   var _tabs = {
@@ -30,6 +31,11 @@ var bmrHypno = function() {
   var _tabsContainers = [];
   var _colorPickers = [];
   var _currentlyLoaded = {};
+  var _currentlyLoadedInfo = {
+    "selectedHypno": 0,
+    "selectedGradient": 0,
+    "selectedGradientColor": 0
+  };
   var _preloadedHypnos = {
     "New one": {
       "name": "",
@@ -69,46 +75,77 @@ var bmrHypno = function() {
   };
   var _preloadedGradients = {
     "New one": {
-      0: {
+      "gradients": [
+        {
         "type": "linear-gradient",
         "direction": "to top",
         "colors": ["gray","gray"],
         "positions": ["",""]
-      },
-      "blendMode": "normal"
+      }
+    ],
+    "name": "New one",
+    "blendMode": "normal"
     },
     "Rainbow1": {
-      0: {
+      "gradients":  [
+      {
         "type": "linear-gradient",
         "direction": "to right",
         "colors": ["red","orange","yellow","green","blue","indigo","violet"],
         "positions": ["","","","","","",""]
-      },
-      "blendMode": "overlay"
+      }
+    ],
+    "name": "Rainbow1",
+    "blendMode": "overlay"
     },
     "ShadowBelow": {
-      0: {
+      "gradients": [
+        {
         "type": "linear-gradient",
         "direction": "to bottom",
         "colors": ["#848484","#848484"],
         "positions": ["",""]
       },
-      1: {
+      {
         "type": "linear-gradient",
         "direction": "to bottom",
         "colors": ["#FFFFFF00","#000000FF"],
         "positions": ["","75%"]
-      },
-      "blendMode": "overlay"
+      }
+    ],
+    "name": "ShadowBelow",
+    "blendMode": "overlay"
     }
   };
-  var _templateHypno = {
+  var _currentGradientInfo = {
+    "name": "New one",
+    "selectedGradient": 0,
+    "blendMode": "normal",
+    "type": "linear-gradient",
+    "direction": "to top",
+    "colors": ["gray","gray"],
+    "positions": ["",""]
+  };
+  const _templateHypno = {
     "name": "",
     "spawnTime": "",
     "values": [
 
     ]
-  }
+  };
+  const _templateGradient = {
+    "gradients": [
+      {
+        "type": "linear-gradient",
+        "direction": "0",
+        "colors": ["#848484","#848484"],
+        "positions": ["",""]
+      },
+    ],
+    "name": "New one",
+    "blendMode": "normal"
+    }
+  };
 
   function startBmr() {
     //add mainBox to div id=menus in bmr
@@ -958,7 +995,7 @@ var bmrHypno = function() {
                 <option value="normal">normal</option>
                 <option value="multiply">multiply</option>
                 <option value="screen">screen</option>
-                <option valu="overlay">overlay</option>
+                <option value="overlay">overlay</option>
                 <option value="darken">darken</option>
                 <option value="lighten">lighten</option>
                 <option value="color-dodge">color-dodge</option>
@@ -986,12 +1023,12 @@ var bmrHypno = function() {
             <div id="typeGradientContainer" class="gradientCreatorBox">
               <div id="typeGradientLabel" class="gradientLabel">Type</div>
               <select id="typeGradientSelect" class="selectContainer">
-                <option value="linear">linear</option>
-                <option value="radial">radial</option>
-                <option value="conic">conic</option>
-                <option value="repeating-linear">repeating-linear</option>
-                <option value="repeating-radial">repeating-radial</option>
-                <option value="repeating-conic">repeating-conic</option>
+                <option value="linear-gradient">linear</option>
+                <option value="radial-gradient">radial</option>
+                <option value="conic-gradient">conic</option>
+                <option value="repeating-linear-gradient">repeating linear</option>
+                <option value="repeating-radial-gradient">repeating radial</option>
+                <option value="repeating-conic-gradient">repeating conic</option>
               </select>
             </div>
             <div id="angleGradientContainer" class="gradientCreatorBox">
@@ -1093,24 +1130,8 @@ var bmrHypno = function() {
     let wordGradientPreviewBg = document.getElementById("wordGradientPreviewBg");
     let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");
     preloadGradientSelect.onchange = (e) => {
-      //TODO move this in a func cause I need it later
       let selected = e.target.options[e.target.selectedIndex].text;
-        let grad = "";
-        for(i in _preloadedGradients[selected]) {
-          if(i!="blendMode") {
-            grad+=`${_preloadedGradients[selected][i].type}(${_preloadedGradients[selected][i].direction},`;
-            for(j in _preloadedGradients[selected][i].colors) {
-              grad+=`${_preloadedGradients[selected][i].colors[j]} ${_preloadedGradients[selected][i].positions[j]},`;
-            }
-            grad = grad.slice(0,-1);
-            grad+="),";
-          }
-        }
-        grad = grad.slice(0,-1);
-        wordGradientPreviewBg.style.backgroundImage=grad;
-        wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
-        wordGradientPreviewText.style.backgroundImage=grad;
-        wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
+      uptadeGradientPreviewRight(_preloadedGradients[selected]);
     };
 
     let gradientAddBtn = document.getElementById("gradientAddBtn");
@@ -1128,6 +1149,34 @@ var bmrHypno = function() {
     }
 
     return tab;
+  }
+
+  function updateGradient(selected) {
+    //might just remove the name
+    //document.getElementById("nameGradientInput").value = selected;
+    document.getElementById("blendSelect").selectedIndex = blendModes.indexOf(selected.blendMode);
+    //selected Gradient here
+    //TODO
+    //_currentGradientInfo
+  }
+
+  function updateGradientPreviewRight(selectedGradient) {
+    let wordGradientPreviewBg = document.getElementById("wordGradientPreviewBg");
+    let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");
+    let grad = "";
+    for(i in selectedGradient.gradients) {
+      grad+=`${selectedGradient.gradients[i].type}(${selectedGradient.gradients[i].direction},`;
+      for(j in selectedGradient.gradients[i].colors) {
+        grad+=`${selectedGradient.gradients[i].colors[j]} ${selectedGradient.gradients[i].positions[j]},`;
+      }
+      grad = grad.slice(0,-1);
+      grad+="),";
+    }
+    grad = grad.slice(0,-1);
+    wordGradientPreviewBg.style.backgroundImage=grad;
+    wordGradientPreviewBg.style.backgroundBlendMode=selectedGradient.blendMode;
+    wordGradientPreviewText.style.backgroundImage=grad;
+    wordGradientPreviewText.style.backgroundBlendMode=selectedGradient.blendMode;
   }
 
   function createWordEffectsTab() {
