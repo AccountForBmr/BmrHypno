@@ -144,7 +144,6 @@ var bmrHypno = function() {
     ],
     "name": "New one",
     "blendMode": "normal"
-    }
   };
 
   function startBmr() {
