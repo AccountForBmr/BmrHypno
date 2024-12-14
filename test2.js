@@ -1033,6 +1033,7 @@ var bmrHypno = function() {
             <div id="angleGradientContainer" class="gradientCreatorBox">
               <div id="angleGradientLabel" class="gradientLabel">Angle</div>
               <input id="angleGradientInput" class="gradientTextInput" placeholder="Use deg" type="text">
+              <input id="angleGradientInputRange" class="gradientTextInput" placeholder="0" type="range" min="0" max="360">
             </div>
             <div id="shapeGradientContainer" class="gradientCreatorBox" style="display: none;">
               <div id="shapeGradientLabel" class="gradientLabel">Shape</div>
@@ -1057,7 +1058,8 @@ var bmrHypno = function() {
             </div>
             <div id="positionGradientContainer" class="gradientCreatorBox">
               <div id="positionGradientLabel" class="gradientLabel">Position</div>
-              <input id="positionGradientInput" class="gradientTextInput" placeholder="50" type="range">
+              <input id="positionGradientInput" class="gradientTextInput" type="text" placeholder="Auto">
+              <input id="positionGradientInputRange" class="gradientTextInput" placeholder="50" type="range" min="0" max="100">
             </div>
             <div id="previewGradientContainer" class="gradientCreatorBox">                                
             </div>
@@ -1181,12 +1183,14 @@ var bmrHypno = function() {
       document.getElementById("angleGradientContainer").style.display = "none";
     } else {
       document.getElementById("angleGradientInput").value = selectedGradient.gradients[0].direction;
+      document.getElementById("angleGradientInputRange").value = selectedGradient.gradients[0].direction;
       document.getElementById("shapeGradientContainer").style.display = "none";
       document.getElementById("angleGradientContainer").style.display = "";      
     }
     document.getElementById("colorGradientSelectedSelect").selectedIndex = 0;
     _colorPickers[2].fromString(selectedGradient.gradients[0].colors[0]);
     document.getElementById("positionGradientInput").value = selectedGradient.gradients[0].positions[0];
+    document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[0].positions[0];
   }
 
   function updateGradientPreviewRight(selectedGradient) {
