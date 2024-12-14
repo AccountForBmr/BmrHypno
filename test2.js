@@ -1149,6 +1149,26 @@ var bmrHypno = function() {
     gradientSelectedSelect.onchange = (e) => {
       //TODO hide everything with none, load the gradient when chosen
     }
+    //type gradient
+    let typeGradientSelect = document.getElementById("typeGradientSelect");
+    typeGradientSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      if(selected.text.includes("radial")) {
+        document.getElementById("shapeGradientContainer").style.display = "";
+        document.getElementById("angleGradientContainer").style.display = "none";     
+      } else {
+        document.getElementById("shapeGradientContainer").style.display = "none";
+        document.getElementById("angleGradientContainer").style.display = "";
+      }
+    }
+
+    //angle gradient
+    let angleGradientInput = document.getElementById("angleGradientInput");
+    let angleGradientInputRange = document.getElementById("angleGradientInputRange");
+    angleGradientInput.oninput = (e) => {angleGradientInputRange.value = e.target.value;}
+    angleGradientInputRange.oninput = (e) => {angleGradientInput.value = e.target.value;}
+    angleGradientInput.onchange = angleGradientInput.oninput;
+    angleGradientInputRange.onchange = angleGradientInputRange.oninput;
 
     //color in gradient
     let gradientColorInput = document.getElementById("changeColorGradientInput");
@@ -1159,6 +1179,13 @@ var bmrHypno = function() {
       borderColor:'#343434',
       borderWidth:2});
     _colorPickers.push(gradientColorPicker);
+    //position color
+    let positionGradientInput = document.getElementById("positionGradientInput");
+    let positionGradientInputRange = document.getElementById("positionGradientInputRange");
+    positionGradientInput.oninput = (e) => {positionGradientInputRange.value = e.target.value;}
+    positionGradientInputRange.oninput = (e) => {positionGradientInput.value = e.target.value;}
+    positionGradientInput.onchange = positionGradientInput.oninput;
+    positionGradientInputRange.onchange = positionGradientInputRange.oninput;
 
     return tab;
   }
