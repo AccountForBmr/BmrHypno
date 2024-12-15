@@ -31,11 +31,6 @@ var bmrHypno = function() {
   var _tabsContainers = [];
   var _colorPickers = [];
   var _currentlyLoaded = {};
-  var _currentlyLoadedInfo = {
-    "selectedHypno": 0,
-    "selectedGradient": 0,
-    "selectedGradientColor": 0
-  };
   var _preloadedHypnos = {
     "New one": {
       "name": "",
@@ -324,6 +319,9 @@ var bmrHypno = function() {
   function loadSelectionInGrid(selection) {
     //name
     _currentlyLoaded = _preloadedHypnos[selection.text];
+    _currentlyLoaded.selectedValue=0;
+    _currentlyLoaded.selectedGradient=0;
+    _currentlyLoaded.selectedGradientColor=0;
     document.getElementById("formNameInput").value = selection.text;
     //spawnTime
     document.getElementById("formSpawnInput").value = _currentlyLoaded.spawnTime;
@@ -1012,7 +1010,7 @@ var bmrHypno = function() {
             <div id="gradientSelectedContainer" class="gradientCreatorBox">
               <div id="gradientSelectedLabel" class="gradientLabel">Selected Gradient</div>
               <select id="gradientSelectedSelect" class="selectContainer">
-                <option value="None">None</option>
+                <option value="0">0</option>
               </select>
               <div id="gradientBtnContainer" class="gradientCreatorBox">
                 <div id="gradientAddBtn" class="gradientBtn">+</div>
@@ -1045,7 +1043,8 @@ var bmrHypno = function() {
             <div id="colorGradientSelectedContainer" class="gradientCreatorBox">
               <div id="colorGradientSelectedLabel" class="gradientLabel">Selected color:</div>
               <select id="colorGradientSelectedSelect" class="selectContainer">
-                <option value="None">None</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
               </select>
               <div id="colorGradientBtnContainer" class="gradientCreatorBox">
                 <div id="colorGradientAddBtn" class="gradientBtn">+</div>
@@ -1132,8 +1131,9 @@ var bmrHypno = function() {
     let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = _preloadedGradients[selected];
       updateGradientPreviewRight(_preloadedGradients[selected]);
-      updateGradientPreviewLeft(_preloadedGradients[selected]); //TODO TODO TODO
+      updateGradientPreviewLeft(_preloadedGradients[selected]); 
     };
 
     let gradientAddBtn = document.getElementById("gradientAddBtn");
@@ -1179,6 +1179,15 @@ var bmrHypno = function() {
       borderColor:'#343434',
       borderWidth:2});
     _colorPickers.push(gradientColorPicker);
+    let colorGradientSelectedSelect = document.getElementById("colorGradientSelectedSelect");
+    colorGradientSelectedSelect.onchange = (e) => {
+      let selected = e.target.selectedIndex;
+      let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
+      gradientColorPicker.fromString(selectedGradient.colors[selected]);
+      positionGradientInput.value = selectedGradient.positions[selected];
+      positionGradientInputRange.value = selectedGradient.positions[selected];
+      _currentlyLoaded.selectedGradientColor = selected;
+    };
     //position color
     let positionGradientInput = document.getElementById("positionGradientInput");
     let positionGradientInputRange = document.getElementById("positionGradientInputRange");
@@ -1202,7 +1211,12 @@ var bmrHypno = function() {
   function updateGradientPreviewLeft(selectedGradient) {
     document.getElementById("nameGradientInput").value = selectedGradient.name;
     document.getElementById("blendSelect").value = selectedGradient.blendMode;
-    document.getElementById("gradientSelectedSelect").selectedIndex = 0;
+    let gradientSelectedSelect = document.getElementById("gradientSelectedSelect");
+    gradientSelectedSelect.options.length = 0;
+    for (let i=0; i < selectedGradient.gradients.length; i++) {
+      gradientSelectedSelect.options.add(new Option(i,i));
+    }
+    gradientSelectedSelect.selectedIndex = 0;
     document.getElementById("typeGradientSelect").value = selectedGradient.gradients[0].type;
     if(selectedGradient.gradients[0].type.includes("radial")) {
       document.getElementById("shapeSelect").value = selectedGradient.gradients[0].direction;
@@ -1214,7 +1228,12 @@ var bmrHypno = function() {
       document.getElementById("shapeGradientContainer").style.display = "none";
       document.getElementById("angleGradientContainer").style.display = "";      
     }
-    document.getElementById("colorGradientSelectedSelect").selectedIndex = 0;
+    let colorGradientSelectedSelect = document.getElementById("colorGradientSelectedSelect");
+    colorGradientSelectedSelect.options.length = 0;
+    for (let i=0; i < selectedGradient.gradients[0].colors.length; i++) {
+      gradientSelectedSelect.options.add(new Option(i,i));
+    }    
+    colorGradientSelectedSelect.selectedIndex = 0;
     _colorPickers[2].fromString(selectedGradient.gradients[0].colors[0]);
     document.getElementById("positionGradientInput").value = selectedGradient.gradients[0].positions[0];
     document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[0].positions[0];
