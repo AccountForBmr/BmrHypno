@@ -1232,7 +1232,7 @@ var bmrHypno = function() {
     let colorGradientSelectedSelect = document.getElementById("colorGradientSelectedSelect");
     colorGradientSelectedSelect.options.length = 0;
     for (let i=0; i < selectedGradient.gradients[0].colors.length; i++) {
-      gradientSelectedSelect.options.add(new Option(i,i));
+      colorGradientSelectedSelect.options.add(new Option(i,i));
     }    
     colorGradientSelectedSelect.selectedIndex = 0;
     _colorPickers[2].fromString(selectedGradient.gradients[0].colors[0]);
