@@ -137,7 +137,10 @@ var bmrHypno = function() {
         "border": "None",
         "gradient": "None"
       }
-    ]
+    ],
+    "selectedValue": 0,
+    "selectedGradient": 0,
+    "selectedGradientColor": 0
   };
   const _templateGradient = {
     "gradients": [
@@ -1352,9 +1355,7 @@ var bmrHypno = function() {
     _tabsTitles = [];
     _tabsContainers = [];
     _colorPickers = [];
-    console.log(_currentlyLoaded);
     _currentlyLoaded = JSON.parse(JSON.stringify(_templateHypno));
-    console.log(_currentlyLoaded);
     //var closeBtn = createElement("div","","button close");
     //closeBtn.onclick = () => { mainBox.remove(); };
     //mainBox.appendChild(closeBtn);
