@@ -1169,7 +1169,7 @@ var bmrHypno = function() {
       console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       _currentlyLoaded.selectedGradient = selected;
-      let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
+      let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       updateGradientPreviewLeft(selectedGradient,selected);
     }
     //type gradient
