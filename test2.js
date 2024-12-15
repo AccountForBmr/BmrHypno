@@ -43,7 +43,8 @@ var bmrHypno = function() {
           "position": "Random",
           "font": ["",""],
           "color": "Random",
-          "border": "None"
+          "border": "None",
+          "gradient": "None"
         }
       ]
     },
@@ -134,7 +135,7 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": "0",
         "colors": ["#848484","#848484"],
-        "positions": ["",""]
+        "positions": ["50","78"]
       },
     ],
     "name": "New one",
@@ -1117,9 +1118,13 @@ var bmrHypno = function() {
       let wordGradientCreatorContainer = document.getElementById("wordGradientCreatorContainer");
       let wordGradientPreviewContainer = document.getElementById("wordGradientPreviewContainer");
       if(selected.text == "None") {
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = "None";
         wordGradientCreatorContainer.style.display = "none";
         wordGradientPreviewContainer.style.display = "none";
       } else {
+        if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient == "None") {
+          _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_templateGradient));
+        }
         wordGradientCreatorContainer.style.display = "";
         wordGradientPreviewContainer.style.display = "";
       }
@@ -1174,7 +1179,7 @@ var bmrHypno = function() {
     let gradientColorInput = document.getElementById("changeColorGradientInput");
     var gradientColorPicker = new jsColor(gradientColorInput,{format:'hexa',
       previewPosition:'right',
-      previewSize:50,
+      previewSize:30,
       backgroundColor:'rgba(0,0,0,0.9)',
       borderColor:'#343434',
       borderWidth:2});
