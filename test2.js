@@ -1181,6 +1181,7 @@ var bmrHypno = function() {
     _colorPickers.push(gradientColorPicker);
     let colorGradientSelectedSelect = document.getElementById("colorGradientSelectedSelect");
     colorGradientSelectedSelect.onchange = (e) => {
+      console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
       gradientColorPicker.fromString(selectedGradient.colors[selected]);
