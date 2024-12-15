@@ -60,7 +60,8 @@ var bmrHypno = function() {
           "position": ["1.00%","3.14%"],
           "font": ["64","128"],
           "color": "#abc123",
-          "border": "#def456"
+          "border": "#def456",
+          "gradient": "None"
         },
         {
           "type": "img",
@@ -126,7 +127,16 @@ var bmrHypno = function() {
     "name": "",
     "spawnTime": "",
     "values": [
-
+      {
+        "type": "word",
+        "value": "",
+        "leaveTime": "",
+        "position": "Random",
+        "font": ["",""],
+        "color": "Random",
+        "border": "None",
+        "gradient": "None"
+      }
     ]
   };
   const _templateGradient = {
@@ -1342,7 +1352,7 @@ var bmrHypno = function() {
     _tabsTitles = [];
     _tabsContainers = [];
     _colorPickers = [];
-    _currentlyLoaded = {};
+    _currentlyLoaded = JSON.parse(JSON.stringify(_templateHypno));
     //var closeBtn = createElement("div","","button close");
     //closeBtn.onclick = () => { mainBox.remove(); };
     //mainBox.appendChild(closeBtn);
