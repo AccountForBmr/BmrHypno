@@ -1261,6 +1261,16 @@ var bmrHypno = function() {
     _colorPickers[2].fromString(selectedGradient.gradients[displayedGradient].colors[0]);
     document.getElementById("positionGradientInput").value = selectedGradient.gradients[displayedGradient].positions[0];
     document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[displayedGradient].positions[0];
+
+    //the preview
+    let grad = selectedGradient.gradients[displayedGradient];
+    let gradImg = `${grad.type}(${grad.direction}deg,`;
+    for (i in grad.colors) {
+      gradImg+=`${grad.colors[i]} ${grad.positions[i]},`;
+    }
+    gradImg = gradImg.slice(0,-1);
+    gradImg += ")";
+    document.getElementById("previewGradientContainer").style.backgroundImage = gradImg;
   }
 
   function updateGradientPreviewRight(selectedGradient) {
