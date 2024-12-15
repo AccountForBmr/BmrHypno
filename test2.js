@@ -148,7 +148,7 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": "0",
         "colors": ["#848484","#848484"],
-        "positions": ["50","78"]
+        "positions": ["",""]
       },
     ],
     "name": "New one",
@@ -1151,7 +1151,7 @@ var bmrHypno = function() {
       let selected = e.target.options[e.target.selectedIndex].text;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = _preloadedGradients[selected];
       updateGradientPreviewRight(_preloadedGradients[selected]);
-      updateGradientPreviewLeft(_preloadedGradients[selected]); 
+      updateGradientPreviewLeft(_preloadedGradients[selected],0); 
     };
 
     let gradientAddBtn = document.getElementById("gradientAddBtn");
@@ -1163,9 +1163,14 @@ var bmrHypno = function() {
       //TODO remove selected grad unless None
     };
 
+    //choose which gradient to load
     let gradientSelectedSelect = document.getElementById("gradientSelectedSelect");
     gradientSelectedSelect.onchange = (e) => {
-      //TODO hide everything with none, load the gradient when chosen
+      console.log(_currentlyLoaded);
+      let selected = e.target.selectedIndex;
+      _currentlyLoaded.selectedGradient = selected;
+      let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
+      updateGradientPreviewLeft(selectedGradient,selected);
     }
     //type gradient
     let typeGradientSelect = document.getElementById("typeGradientSelect");
@@ -1227,7 +1232,7 @@ var bmrHypno = function() {
     //_currentGradientInfo
   }
 
-  function updateGradientPreviewLeft(selectedGradient) {
+  function updateGradientPreviewLeft(selectedGradient,displayedGradient) {
     document.getElementById("nameGradientInput").value = selectedGradient.name;
     document.getElementById("blendSelect").value = selectedGradient.blendMode;
     let gradientSelectedSelect = document.getElementById("gradientSelectedSelect");
@@ -1235,27 +1240,27 @@ var bmrHypno = function() {
     for (let i=0; i < selectedGradient.gradients.length; i++) {
       gradientSelectedSelect.options.add(new Option(i,i));
     }
-    gradientSelectedSelect.selectedIndex = 0;
-    document.getElementById("typeGradientSelect").value = selectedGradient.gradients[0].type;
-    if(selectedGradient.gradients[0].type.includes("radial")) {
-      document.getElementById("shapeSelect").value = selectedGradient.gradients[0].direction;
+    gradientSelectedSelect.selectedIndex = displayedGradient;
+    document.getElementById("typeGradientSelect").value = selectedGradient.gradients[displayedGradient].type;
+    if(selectedGradient.gradients[displayedGradient].type.includes("radial")) {
+      document.getElementById("shapeSelect").value = selectedGradient.gradients[displayedGradient].direction;
       document.getElementById("shapeGradientContainer").style.display = "";
       document.getElementById("angleGradientContainer").style.display = "none";
     } else {
-      document.getElementById("angleGradientInput").value = selectedGradient.gradients[0].direction;
-      document.getElementById("angleGradientInputRange").value = selectedGradient.gradients[0].direction;
+      document.getElementById("angleGradientInput").value = selectedGradient.gradients[displayedGradient].direction;
+      document.getElementById("angleGradientInputRange").value = selectedGradient.gradients[displayedGradient].direction;
       document.getElementById("shapeGradientContainer").style.display = "none";
       document.getElementById("angleGradientContainer").style.display = "";      
     }
     let colorGradientSelectedSelect = document.getElementById("colorGradientSelectedSelect");
     colorGradientSelectedSelect.options.length = 0;
-    for (let i=0; i < selectedGradient.gradients[0].colors.length; i++) {
+    for (let i=0; i < selectedGradient.gradients[displayedGradient].colors.length; i++) {
       colorGradientSelectedSelect.options.add(new Option(i,i));
     }    
     colorGradientSelectedSelect.selectedIndex = 0;
-    _colorPickers[2].fromString(selectedGradient.gradients[0].colors[0]);
-    document.getElementById("positionGradientInput").value = selectedGradient.gradients[0].positions[0];
-    document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[0].positions[0];
+    _colorPickers[2].fromString(selectedGradient.gradients[displayedGradient].colors[0]);
+    document.getElementById("positionGradientInput").value = selectedGradient.gradients[displayedGradient].positions[0];
+    document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[displayedGradient].positions[0];
   }
 
   function updateGradientPreviewRight(selectedGradient) {
