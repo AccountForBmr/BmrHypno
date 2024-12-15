@@ -1352,7 +1352,9 @@ var bmrHypno = function() {
     _tabsTitles = [];
     _tabsContainers = [];
     _colorPickers = [];
+    console.log(_currentlyLoaded);
     _currentlyLoaded = JSON.parse(JSON.stringify(_templateHypno));
+    console.log(_currentlyLoaded);
     //var closeBtn = createElement("div","","button close");
     //closeBtn.onclick = () => { mainBox.remove(); };
     //mainBox.appendChild(closeBtn);
