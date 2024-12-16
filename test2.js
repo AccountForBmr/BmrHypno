@@ -1137,7 +1137,7 @@ var bmrHypno = function() {
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient == "None") {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_templateGradient));
-          updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0);
+          updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0,0);
           updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
         }
         wordGradientCreatorContainer.style.display = "";
@@ -1153,7 +1153,7 @@ var bmrHypno = function() {
       let selected = e.target.options[e.target.selectedIndex].text;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = _preloadedGradients[selected];
       updateGradientPreviewRight(_preloadedGradients[selected]);
-      updateGradientPreviewLeft(_preloadedGradients[selected],0); 
+      updateGradientPreviewLeft(_preloadedGradients[selected],0,0); 
     };
 
     let gradientAddBtn = document.getElementById("gradientAddBtn");
@@ -1171,8 +1171,9 @@ var bmrHypno = function() {
       console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       _currentlyLoaded.selectedGradient = selected;
+      _currentlyLoaded.selectedGradientColor = 0;
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
-      updateGradientPreviewLeft(selectedGradient,selected);
+      updateGradientPreviewLeft(selectedGradient,selected,0);
     }
     //type gradient
     let typeGradientSelect = document.getElementById("typeGradientSelect");
@@ -1217,7 +1218,7 @@ var bmrHypno = function() {
 
     gradientColorInput.oninput = (e) => {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].colors[_currentlyLoaded.selectedGradientColor] = gradientColorPicker.toHEXAString();
-      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient);
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
     //position color
@@ -1240,7 +1241,7 @@ var bmrHypno = function() {
     //_currentGradientInfo
   }
 
-  function updateGradientPreviewLeft(selectedGradient,displayedGradient) {
+  function updateGradientPreviewLeft(selectedGradient,displayedGradient,displayedColor) {
     document.getElementById("nameGradientInput").value = selectedGradient.name;
     document.getElementById("blendSelect").value = selectedGradient.blendMode;
     let gradientSelectedSelect = document.getElementById("gradientSelectedSelect");
@@ -1265,10 +1266,10 @@ var bmrHypno = function() {
     for (let i=0; i < selectedGradient.gradients[displayedGradient].colors.length; i++) {
       colorGradientSelectedSelect.options.add(new Option(i,i));
     }    
-    colorGradientSelectedSelect.selectedIndex = 0;
-    _colorPickers[2].fromString(selectedGradient.gradients[displayedGradient].colors[0]);
-    document.getElementById("positionGradientInput").value = selectedGradient.gradients[displayedGradient].positions[0];
-    document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[displayedGradient].positions[0];
+    colorGradientSelectedSelect.selectedIndex = displayedColor;
+    _colorPickers[2].fromString(selectedGradient.gradients[displayedGradient].colors[displayedColor]);
+    document.getElementById("positionGradientInput").value = selectedGradient.gradients[displayedGradient].positions[displayedColor];
+    document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[displayedGradient].positions[displayedColor];
 
     //the preview
     let grad = selectedGradient.gradients[displayedGradient];
