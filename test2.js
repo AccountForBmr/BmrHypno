@@ -1207,8 +1207,8 @@ var bmrHypno = function() {
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       updateGradientPreviewLeft(selectedGradient,selected,0);
     }
-    for(i in _preloadedGradients) {
-      gradientSelectedSelect.options.add(new Option(i,i));
+    for(l in _preloadedGradients) {
+      gradientSelectedSelect.options.add(new Option(l,l));
     }
     //name gradient, also, kinda useless
     let nameGradientInput = document.getElementById("nameGradientInput");
