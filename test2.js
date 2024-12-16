@@ -1020,6 +1020,7 @@ var bmrHypno = function() {
                 <option value="New one">New one</option>
                 <option value="Rainbow1">Rainbow1</option>
                 <option value="ShadowBelow">ShadowBelow</option>
+                <option value="RandomPositions">RandomPositions</option>
               </select>
              </div>
             <div id="nameGradientContainer" class="gradientCreatorBox">
@@ -1282,16 +1283,15 @@ var bmrHypno = function() {
       console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
-      /*gradientColorPicker.fromString(selectedGradient.colors[selected]);
+      gradientColorPicker.fromString(selectedGradient.colors[selected]);
       if (positionGradientSelect.value == "Start at") {
         positionGradientInput.value = selectedGradient.positions[selected];
         positionGradientInputRange.value = selectedGradient.positions[selected];
       } else {
         positionGradientInput.value = selectedGradient.positions2[selected];
         positionGradientInputRange.value = selectedGradient.positions2[selected];        
-      }*/
+      }
       _currentlyLoaded.selectedGradientColor = selected;
-      updateGradientPreviewLeft(selectedGradient,_currentlyLoaded.selectedGradient,selected);
     };
 
     gradientColorInput.oninput = (e) => {
