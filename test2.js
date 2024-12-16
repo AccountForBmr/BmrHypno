@@ -1015,6 +1015,10 @@ var bmrHypno = function() {
           <div id="preloadGradientContainer" class="gradientCreatorBox">
             <div id="preloadGradientLabel" class="gradientLabel">Preload?</div>
               <select id="preloadGradientSelect" class="selectContainer">
+                <option value="New one">New one</option>
+                <option value="Rainbow1">Rainbow1</option>
+                <option value="ShadowBelow">ShadowBelow</option>
+                <option value="RandomPositions">RandomPositions</option>
               </select>
              </div>
             <div id="nameGradientContainer" class="gradientCreatorBox">
@@ -1183,6 +1187,11 @@ var bmrHypno = function() {
       updateGradientPreviewRight(_preloadedGradients[selected]);
       updateGradientPreviewLeft(_preloadedGradients[selected],0,0); 
     };
+    for(gradName in _preloadedGradients) {
+      console.log(gradName);
+      preloadGradientSelect.options.add(new Option(gradName,gradName));
+      preloadGradientSelect.options.add(new Option("Woof","Bark"));
+    }
 
     let gradientAddBtn = document.getElementById("gradientAddBtn");
     let gradientRemoveBtn = document.getElementById("gradientRemoveBtn");
@@ -1202,9 +1211,6 @@ var bmrHypno = function() {
       _currentlyLoaded.selectedGradientColor = 0;
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       updateGradientPreviewLeft(selectedGradient,selected,0);
-    }
-    for(gradName in _preloadedGradients) {
-      gradientSelectedSelect.options.add(new Option(gradName,gradName));
     }
     //name gradient, also, kinda useless
     let nameGradientInput = document.getElementById("nameGradientInput");
