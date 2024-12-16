@@ -1202,6 +1202,9 @@ var bmrHypno = function() {
         document.getElementById("shapeGradientContainer").style.display = "none";
         document.getElementById("angleGradientContainer").style.display = "";
       }
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].type = selected.value;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
 
     //angle gradient
@@ -1299,7 +1302,12 @@ var bmrHypno = function() {
 
     //the preview
     let grad = selectedGradient.gradients[displayedGradient];
-    let gradImg = `${grad.type}(${grad.direction}deg,`;
+    let gradImg = `${grad.type}(${grad.direction}`;
+    if(grad.type.includes("radial")) {
+      gradImg += ",";
+    } else {
+      gradImg += "deg,";
+    }
     for (i in grad.colors) {
       gradImg+=`${grad.colors[i]} ${grad.positions[i]!=""&&grad.positions[i]!="Auto"&&grad.positions[i]!="auto"?grad.positions[i]+"%":""},`;
     }
