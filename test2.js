@@ -1137,6 +1137,8 @@ var bmrHypno = function() {
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient == "None") {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_templateGradient));
+          _currentlyLoaded.selectedGradient = 0;
+          _currentlyLoaded.selectedGradientColor = 0;
           updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0,0);
           updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
         }
@@ -1152,6 +1154,8 @@ var bmrHypno = function() {
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = _preloadedGradients[selected];
+      _currentlyLoaded.selectedGradient = 0;
+      _currentlyLoaded.selectedGradientColor = 0;
       updateGradientPreviewRight(_preloadedGradients[selected]);
       updateGradientPreviewLeft(_preloadedGradients[selected],0,0); 
     };
