@@ -1297,7 +1297,16 @@ var bmrHypno = function() {
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
-    positionGradientInputRange.oninput = (e) => {positionGradientInput.value = e.target.value;}
+    positionGradientInputRange.oninput = (e) => {
+      positionGradientInput.value = e.target.value;
+      if(positionGradientSelect.value == "Start at") {
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor] = e.target.value;
+      } else {
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions2[_currentlyLoaded.selectedGradientColor] = e.target.value;
+      }
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+    }
     positionGradientInput.onchange = positionGradientInput.oninput;
     positionGradientInputRange.onchange = positionGradientInputRange.oninput;
 
