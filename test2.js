@@ -107,7 +107,7 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": 180,
         "colors": ["#FFFFFF00","#000000FF"],
-        "positions": ["","75%"]
+        "positions": ["","75"]
       }
     ],
     "name": "ShadowBelow",
@@ -1301,7 +1301,7 @@ var bmrHypno = function() {
     let grad = selectedGradient.gradients[displayedGradient];
     let gradImg = `${grad.type}(${grad.direction}deg,`;
     for (i in grad.colors) {
-      gradImg+=`${grad.colors[i]} ${grad.positions[i]},`;
+      gradImg+=`${grad.colors[i]} ${grad.positions[i]!=""&&grad.positions[i]!="Auto"&&grad.positions[i]!="auto"?grad.positions[i]+"%":""},`;
     }
     gradImg = gradImg.slice(0,-1);
     gradImg += ")";
@@ -1315,7 +1315,7 @@ var bmrHypno = function() {
     for(i in selectedGradient.gradients) {
       grad+=`${selectedGradient.gradients[i].type}(${selectedGradient.gradients[i].direction}deg,`;
       for(j in selectedGradient.gradients[i].colors) {
-        grad+=`${selectedGradient.gradients[i].colors[j]} ${selectedGradient.gradients[i].positions[j]},`;
+        grad+=`${selectedGradient.gradients[i].colors[j]} ${selectedGradient.gradients[i].positions[j]!=""&&selectedGradient.gradients[i].positions[j]!="Auto"&&selectedGradient.gradients[i].positions[j]!="auto"?selectedGradient.gradients[i].positions[j]+"%":""},`;
       }
       grad = grad.slice(0,-1);
       grad+="),";
