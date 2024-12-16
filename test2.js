@@ -1235,6 +1235,8 @@ var bmrHypno = function() {
     shapeSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = selected;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     };
 
     //color in gradient
