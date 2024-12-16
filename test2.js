@@ -1179,6 +1179,18 @@ var bmrHypno = function() {
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       updateGradientPreviewLeft(selectedGradient,selected,0);
     }
+    //name gradient, also, kinda useless
+    let nameGradientInput = document.getElementById("nameGradientInput");
+    nameGradientInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name = e.target.value;
+    };
+    //blend gradient 
+    let blendSelect = document.getElementById("blendSelect");
+    blendSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex].value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.blendMode = selected;
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+    }
     //type gradient
     let typeGradientSelect = document.getElementById("typeGradientSelect");
     typeGradientSelect.onchange = (e) => {
