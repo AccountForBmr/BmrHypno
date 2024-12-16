@@ -1302,7 +1302,8 @@ var bmrHypno = function() {
 
     //the preview
     let grad = selectedGradient.gradients[displayedGradient];
-    let gradImg = `${grad.type}(${grad.direction}`;
+    let gradImg = `${grad.type}(`;
+    gradImg += grad.type.includes("conic")?`from ${grad.direction}`:`${grad.direction}`;
     gradImg += grad.type.includes("radial")?",":"deg,";
     for (i in grad.colors) {
       gradImg+=`${grad.colors[i]} ${grad.positions[i]!=""&&grad.positions[i]!="Auto"&&grad.positions[i]!="auto"?grad.positions[i]+"%":""},`;
@@ -1317,7 +1318,8 @@ var bmrHypno = function() {
     let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");
     let grad = "";
     for(i in selectedGradient.gradients) {
-      grad+=`${selectedGradient.gradients[i].type}(${selectedGradient.gradients[i].direction}`;
+      grad += `${selectedGradient.gradients[i].type}(`;
+      grad += selectedGradient.gradients[i].type.includes("conic")?`from ${selectedGradient.gradients[i].direction}`:`${selectedGradient.gradients[i].direction}`;
       grad += selectedGradient.gradients[i].type.includes("radial")?",":"deg,";
       for(j in selectedGradient.gradients[i].colors) {
         grad+=`${selectedGradient.gradients[i].colors[j]} ${selectedGradient.gradients[i].positions[j]!=""&&selectedGradient.gradients[i].positions[j]!="Auto"&&selectedGradient.gradients[i].positions[j]!="auto"?selectedGradient.gradients[i].positions[j]+"%":""},`;
