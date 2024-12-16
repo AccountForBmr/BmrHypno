@@ -1214,6 +1214,12 @@ var bmrHypno = function() {
       positionGradientInputRange.value = selectedGradient.positions[selected];
       _currentlyLoaded.selectedGradientColor = selected;
     };
+
+    gradientColorInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].colors[_currentlyLoaded.selectedGradientColor] = gradientColorPicker.toHEXAString();
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+    }
     //position color
     let positionGradientInput = document.getElementById("positionGradientInput");
     let positionGradientInputRange = document.getElementById("positionGradientInputRange");
