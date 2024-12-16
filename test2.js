@@ -76,7 +76,7 @@ var bmrHypno = function() {
         {
         "type": "linear-gradient",
         "direction": 0,
-        "colors": ["#848484","#848484"],
+        "colors": ["#848484FF","#848484FF"],
         "positions": ["",""]
       }
     ],
@@ -88,7 +88,7 @@ var bmrHypno = function() {
       {
         "type": "linear-gradient",
         "direction": 90,
-        "colors": ["#FF0000","#FFA500","#FFFF00","#008000","#0000FF","#4B0082","#8F00FF"],
+        "colors": ["#FF0000FF","#FFA500FF","#FFFF00FF","#008000FF","#0000FFFF","#4B0082FF","#8F00FFFF"],
         "positions": ["","","","","","",""]
       }
     ],
@@ -100,7 +100,7 @@ var bmrHypno = function() {
         {
         "type": "linear-gradient",
         "direction": 180,
-        "colors": ["#848484","#848484"],
+        "colors": ["#848484FF","#848484FF"],
         "positions": ["",""]
       },
       {
@@ -120,7 +120,7 @@ var bmrHypno = function() {
     "blendMode": "normal",
     "type": "linear-gradient",
     "direction": 0,
-    "colors": ["#848484","#848484"],
+    "colors": ["#848484FF","#848484FF"],
     "positions": ["",""]
   };
   const _templateHypno = {
@@ -147,7 +147,7 @@ var bmrHypno = function() {
       {
         "type": "linear-gradient",
         "direction": "0",
-        "colors": ["#848484","#848484"],
+        "colors": ["#848484FF","#848484FF"],
         "positions": ["",""]
       },
     ],
@@ -1137,6 +1137,8 @@ var bmrHypno = function() {
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient == "None") {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_templateGradient));
+          updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0);
+          updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
         }
         wordGradientCreatorContainer.style.display = "";
         wordGradientPreviewContainer.style.display = "";
