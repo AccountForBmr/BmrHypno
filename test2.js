@@ -11,8 +11,6 @@ var bmrHypno = function() {
   var jsColor = {};
   var _menuModified = false;
   const blendModes = ["normal","multiply","screen","overlay","darken","lighten","color-dodge","color-burn","hard-light","soft-light","difference","exclusion","hue","saturation","color","luminosity"];
-  //should add the function that returns the baseTab, colorTab etc... to the right, then append that tab
-  // probably???  TODO TODO TODO TODO
   var _tabs = {
     "word": {
       "Base":createWordBaseTab,
@@ -1208,6 +1206,9 @@ var bmrHypno = function() {
       _currentlyLoaded.selectedGradientColor = 0;
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       updateGradientPreviewLeft(selectedGradient,selected,0);
+    }
+    for(i in _preloadedGradients) {
+      gradientSelectedSelect.options.push(new Option(i,i));
     }
     //name gradient, also, kinda useless
     let nameGradientInput = document.getElementById("nameGradientInput");
