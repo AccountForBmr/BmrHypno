@@ -76,7 +76,7 @@ var bmrHypno = function() {
         {
         "type": "linear-gradient",
         "direction": 0,
-        "colors": ["#848484FF","#848484FF"],
+        "colors": ["#000000FF","#848484FF"],
         "positions": ["",""]
       }
     ],
@@ -147,7 +147,7 @@ var bmrHypno = function() {
       {
         "type": "linear-gradient",
         "direction": "0",
-        "colors": ["#848484FF","#848484FF"],
+        "colors": ["#000000FF","#848484FF"],
         "positions": ["",""]
       },
     ],
@@ -1260,7 +1260,7 @@ var bmrHypno = function() {
     };
 
     gradientColorInput.oninput = (e) => {
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].colors[_currentlyLoaded.selectedGradientColor] = gradientColorPicker.toHEXAString();
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].colors[_currentlyLoaded.selectedGradientColor] = gradientColorInput.value;//gradientColorPicker.toHEXAString();
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
