@@ -1199,7 +1199,7 @@ var bmrHypno = function() {
         document.getElementById("shapeGradientContainer").style.display = "";
         document.getElementById("angleGradientContainer").style.display = "none";
         shapeSelect.selectedIndex = 0;
-        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].position ="ellipse";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction ="ellipse";
       } else {
         document.getElementById("shapeGradientContainer").style.display = "none";
         document.getElementById("angleGradientContainer").style.display = "";
@@ -1231,7 +1231,7 @@ var bmrHypno = function() {
     let shapeSelect = document.getElementById("shapeSelect");
     shapeSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].value;
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].position = selected;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = selected;
     };
 
     //color in gradient
