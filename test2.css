@@ -492,7 +492,7 @@ Word Color down here
     width: 50% !important;
 }
 
-#gradientSelectedLabel, #gradientSelectedSelect, #colorGradientSelectedLabel, #colorGradientSelectedSelect, #angleGradientLabel, #angleGradientInput, #positionGradientLabel, #positionGradientInput {
+#gradientSelectedLabel, #gradientSelectedSelect, #colorGradientSelectedLabel, #colorGradientSelectedSelect, #angleGradientLabel, #angleGradientInput, #positionGradientSelect, #positionGradientInput {
     width: 25% !important;
 }
 

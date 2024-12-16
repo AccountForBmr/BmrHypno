@@ -77,7 +77,8 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": 0,
         "colors": ["#000000FF","#848484FF"],
-        "positions": ["",""]
+        "positions": ["",""],
+        "positions2": ["",""]
       }
     ],
     "name": "New one",
@@ -89,7 +90,8 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": 90,
         "colors": ["#FF0000FF","#FFA500FF","#FFFF00FF","#008000FF","#0000FFFF","#4B0082FF","#8F00FFFF"],
-        "positions": ["","","","","","",""]
+        "positions": ["","","","","","",""],
+        "positions2": ["","","","","","",""]
       }
     ],
     "name": "Rainbow1",
@@ -101,13 +103,15 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": 180,
         "colors": ["#848484FF","#848484FF"],
-        "positions": ["",""]
+        "positions": ["",""],
+        "positions2": ["",""]
       },
       {
         "type": "linear-gradient",
         "direction": 180,
         "colors": ["#FFFFFF00","#000000FF"],
-        "positions": ["","75"]
+        "positions": ["","75"],
+        "positions2": ["",""]
       }
     ],
     "name": "ShadowBelow",
@@ -121,7 +125,8 @@ var bmrHypno = function() {
     "type": "linear-gradient",
     "direction": 0,
     "colors": ["#848484FF","#848484FF"],
-    "positions": ["",""]
+    "positions": ["",""],
+    "positions2": ["",""]
   };
   const _templateHypno = {
     "name": "",
@@ -148,7 +153,8 @@ var bmrHypno = function() {
         "type": "linear-gradient",
         "direction": "0",
         "colors": ["#000000FF","#848484FF"],
-        "positions": ["",""]
+        "positions": ["",""],
+        "positions2": ["",""]
       },
     ],
     "name": "New one",
@@ -1070,7 +1076,10 @@ var bmrHypno = function() {
               <input id="changeColorGradientInput" class="gradientTextInput" placeholder="# Color Code" type="text">
             </div>
             <div id="positionGradientContainer" class="gradientCreatorBox">
-              <div id="positionGradientLabel" class="gradientLabel">Position</div>
+              <select id="positionGradientSelect" class="gradientLabel">
+                <option>Start at</option>
+                <option>End at</option>
+              </select>
               <input id="positionGradientInput" class="gradientTextInput" type="text" placeholder="Auto">
               <input id="positionGradientInputRange" class="gradientTextInput" placeholder="50" type="range" min="0" max="100">
             </div>
@@ -1260,14 +1269,34 @@ var bmrHypno = function() {
     };
 
     gradientColorInput.oninput = (e) => {
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].colors[_currentlyLoaded.selectedGradientColor] = gradientColorInput.value;//gradientColorPicker.toHEXAString();
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].colors[_currentlyLoaded.selectedGradientColor] = gradientColorPicker.toHEXAString();
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
     //position color
+    let positionGradientSelect = document.getElementById("positionGradientSelect");
     let positionGradientInput = document.getElementById("positionGradientInput");
     let positionGradientInputRange = document.getElementById("positionGradientInputRange");
-    positionGradientInput.oninput = (e) => {positionGradientInputRange.value = e.target.value;}
+    positionGradientSelect.onchange = (e) => {
+      console.log(e.target.value);
+      if(e.target.value == "Start at") {
+        positionGradientInput.value = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor];
+        positionGradientInputRange.value = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor];
+      } else {
+        positionGradientInput.value = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions2[_currentlyLoaded.selectedGradientColor];
+        positionGradientInputRange.value = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions2[_currentlyLoaded.selectedGradientColor];        
+      }
+    };
+    positionGradientInput.oninput = (e) => {
+      positionGradientInputRange.value = e.target.value;
+      if(positionGradientSelect.value == "Start at") {
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor] = e.target.value;
+      } else {
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions2[_currentlyLoaded.selectedGradientColor] = e.target.value;
+      }
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+    }
     positionGradientInputRange.oninput = (e) => {positionGradientInput.value = e.target.value;}
     positionGradientInput.onchange = positionGradientInput.oninput;
     positionGradientInputRange.onchange = positionGradientInputRange.oninput;
@@ -1311,8 +1340,13 @@ var bmrHypno = function() {
     }    
     colorGradientSelectedSelect.selectedIndex = displayedColor;
     _colorPickers[2].fromString(selectedGradient.gradients[displayedGradient].colors[displayedColor]);
-    document.getElementById("positionGradientInput").value = selectedGradient.gradients[displayedGradient].positions[displayedColor];
-    document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[displayedGradient].positions[displayedColor];
+    if(document.getElementById("positionGradientSelect").value == "Start at") {
+      document.getElementById("positionGradientInput").value = selectedGradient.gradients[displayedGradient].positions[displayedColor];
+      document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[displayedGradient].positions[displayedColor];
+    } else {
+      document.getElementById("positionGradientInput").value = selectedGradient.gradients[displayedGradient].positions2[displayedColor];
+      document.getElementById("positionGradientInputRange").value = selectedGradient.gradients[displayedGradient].positions2[displayedColor];
+    }
 
     //the preview
     let grad = selectedGradient.gradients[displayedGradient];
@@ -1320,7 +1354,7 @@ var bmrHypno = function() {
     gradImg += grad.type.includes("conic")?`from ${grad.direction}`:`${grad.direction}`;
     gradImg += grad.type.includes("radial")?",":"deg,";
     for (i in grad.colors) {
-      gradImg+=`${grad.colors[i]} ${grad.positions[i]!=""&&grad.positions[i]!="Auto"&&grad.positions[i]!="auto"?grad.positions[i]+"%":""},`;
+      gradImg+=`${grad.colors[i]} ${grad.positions[i]!=""?grad.positions[i]+"%":""} ${grad.positions2[i]!=""?grad.positions2[i]+"%":""},`;
     }
     gradImg = gradImg.slice(0,-1);
     gradImg += ")";
@@ -1336,7 +1370,7 @@ var bmrHypno = function() {
       grad += selectedGradient.gradients[i].type.includes("conic")?`from ${selectedGradient.gradients[i].direction}`:`${selectedGradient.gradients[i].direction}`;
       grad += selectedGradient.gradients[i].type.includes("radial")?",":"deg,";
       for(j in selectedGradient.gradients[i].colors) {
-        grad+=`${selectedGradient.gradients[i].colors[j]} ${selectedGradient.gradients[i].positions[j]!=""&&selectedGradient.gradients[i].positions[j]!="Auto"&&selectedGradient.gradients[i].positions[j]!="auto"?selectedGradient.gradients[i].positions[j]+"%":""},`;
+        grad+=`${selectedGradient.gradients[i].colors[j]} ${selectedGradient.gradients[i].positions[j]!=""?selectedGradient.gradients[i].positions[j]+"%":""} ${selectedGradient.gradients[i].positions2[j]!=""?selectedGradient.gradients[i].positions2[j]+"%":""},`;
       }
       grad = grad.slice(0,-1);
       grad+="),";
