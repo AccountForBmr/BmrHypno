@@ -116,6 +116,26 @@ var bmrHypno = function() {
     ],
     "name": "ShadowBelow",
     "blendMode": "overlay"
+    },
+    "RandomPositions": {
+      "gradients": [
+        {
+        "type": "radial-gradient",
+        "direction": "circle",
+        "colors": ["#008000FF","#0000FFFF","#D2FF1FFF","#C0FBFFFF","#1A2323FF"],
+        "positions": ["0","15","25","75",""],
+        "positions2": ["15","25","50","","80"]
+      },
+      {
+        "type": "linear-gradient",
+        "direction": 180,
+        "colors": ["#FFFFFF00","#000000FF"],
+        "positions": ["","75"],
+        "positions2": ["",""]
+      }
+    ],
+    "name": "ShadowBelow",
+    "blendMode": "overlay"
     }
   };
   var _currentGradientInfo = {
