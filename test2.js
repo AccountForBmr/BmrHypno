@@ -1203,6 +1203,9 @@ var bmrHypno = function() {
       } else {
         document.getElementById("shapeGradientContainer").style.display = "none";
         document.getElementById("angleGradientContainer").style.display = "";
+        angleGradientInput.value = 0;
+        angleGradientInputRange.value = 0;
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = 0;
       }
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].type = selected.value;
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
