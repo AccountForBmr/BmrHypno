@@ -1207,8 +1207,18 @@ var bmrHypno = function() {
     //angle gradient
     let angleGradientInput = document.getElementById("angleGradientInput");
     let angleGradientInputRange = document.getElementById("angleGradientInputRange");
-    angleGradientInput.oninput = (e) => {angleGradientInputRange.value = e.target.value;}
-    angleGradientInputRange.oninput = (e) => {angleGradientInput.value = e.target.value;}
+    angleGradientInput.oninput = (e) => { 
+      angleGradientInputRange.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = e.target.value;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+    }
+    angleGradientInputRange.oninput = (e) => { 
+      angleGradientInput.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = e.target.value;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+    }
     angleGradientInput.onchange = angleGradientInput.oninput;
     angleGradientInputRange.onchange = angleGradientInputRange.oninput;
 
