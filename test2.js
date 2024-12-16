@@ -1197,7 +1197,9 @@ var bmrHypno = function() {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text.includes("radial")) {
         document.getElementById("shapeGradientContainer").style.display = "";
-        document.getElementById("angleGradientContainer").style.display = "none";     
+        document.getElementById("angleGradientContainer").style.display = "none";
+        shapeSelect.selectedIndex = 0;
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].position ="ellipse";
       } else {
         document.getElementById("shapeGradientContainer").style.display = "none";
         document.getElementById("angleGradientContainer").style.display = "";
@@ -1224,6 +1226,13 @@ var bmrHypno = function() {
     }
     angleGradientInput.onchange = angleGradientInput.oninput;
     angleGradientInputRange.onchange = angleGradientInputRange.oninput;
+
+    //shape gradient (radial)
+    let shapeSelect = document.getElementById("shapeSelect");
+    shapeSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex].value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].position = selected;
+    };
 
     //color in gradient
     let gradientColorInput = document.getElementById("changeColorGradientInput");
