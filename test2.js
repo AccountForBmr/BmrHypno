@@ -1297,6 +1297,33 @@ var bmrHypno = function() {
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
+
+    //color +/- button
+    let colorGradientAddBtn = document.getElementById("colorGradientAddBtn");
+    let colorGradientRemoveBtn = document.getElementById("colorGradientRemoveBtn");
+    colorGradientAddBtn.onclick = (e) => {
+      let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
+      gr.colors.push("#000000FF");
+      gr.positions.push("");
+      gr.positions2.push("");
+      _currentlyLoaded.selectedGradientColor = gr.colors.length-1;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+    }
+    colorGradientRemoveBtn.onclick = (e) => {
+      let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
+      if(gr.colors.length == 2) {
+        GUI.instance.DisplayMessage("You can't have less than 2 colors");
+        return;
+      }
+      gr.colors.splice(_currentlyLoaded.selectedGradientColor,1);
+      gr.positions.splice(_currentlyLoaded.selectedGradientColor,1);
+      gr.positions2.splice(_currentlyLoaded.selectedGradientColor,1);
+      _currentlyLoaded.selectedGradientColor = _currentlyLoaded.selectedGradientColor==0?0:_currentlyLoaded.selectedGradientColor-1;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);      
+    }
+
     //position color
     let positionGradientSelect = document.getElementById("positionGradientSelect");
     let positionGradientInput = document.getElementById("positionGradientInput");
