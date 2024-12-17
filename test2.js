@@ -774,13 +774,23 @@ var bmrHypno = function() {
     tab.insertAdjacentHTML("beforeend",createWordBaseTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
     //value
+    let wordValueInput = document.getElementById("wordValueInput");
+    wordValueInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].value = e.target.value;
+    }
     //time
     let wordTimeInput = document.getElementById("wordTimeInput");
     let wordTimeRange = document.getElementById("wordTimeRange");
-    wordTimeInput.oninput = (e) => {wordTimeRange.value = e.target.value;}
-    wordTimeInput.onchange = (e) => {wordTimeRange.value = e.target.value;}
-    wordTimeRange.oninput = (e) => {wordTimeInput.value = e.target.value;}
-    wordTimeRange.onchange = (e) => {wordTimeInput.value = e.target.value;}
+    wordTimeInput.oninput = (e) => {
+      wordTimeRange.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
+    }
+    wordTimeInput.onchange = (e) => wordTimeInput.oninput;
+    wordTimeRange.oninput = (e) => {
+      wordTimeInput.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
+    }
+    wordTimeRange.onchange = (e) => wordTimeRange.oninput;
 
     //position
     let wordPositionInputSelect = document.getElementById("wordPositionInputSelect");
@@ -791,6 +801,7 @@ var bmrHypno = function() {
       if(selected.text == "Random") {
         wordPositionInput1.style.display = "none";
         wordPositionInput2.style.display = "none";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = "Random";
       } else {
         wordPositionInput1.style.display = "";
         wordPositionInput2.style.display = "";
@@ -800,10 +811,20 @@ var bmrHypno = function() {
           let boundRect=evt.target.getBoundingClientRect();
           wordPositionInput1.value = ((evt.clientX-boundRect.left)*100/boundRect.width).toFixed(2)+"%";
           wordPositionInput2.value = ((evt.clientY-boundRect.top)*100/boundRect.height).toFixed(2)+"%";
+          _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = [wordPositionInput1.value,wordPositionInput2.value];
           chooseWindow.remove();
         };
       }
     };
+    wordPositionInput1.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[0] = e.target.value;
+    }
+    wordPositionInput1.onchange = wordPositionInput1.oninput;
+    wordPositionInput2.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[1] = e.target.value;
+    }
+    wordPositionInput2.onchange = wordPositionInput2.oninput;
+
     //font
     let wordFontInput1 = document.getElementById("wordFontInput1");
     let wordFontInput2 = document.getElementById("wordFontInput2");
@@ -820,6 +841,7 @@ var bmrHypno = function() {
     wordFontInput1.oninput = (e)=>{
       fontMin.style.fontSize = wordFontInput1.value+"px";
       fontMax.style.fontSize = wordFontInput2.value+"px";
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];
     }
     wordFontInput1.onchange = wordFontInput1.oninput;
     wordFontInput2.onfocus = wordFontInput1.onfocus;
