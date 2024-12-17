@@ -1473,7 +1473,15 @@ var bmrHypno = function() {
 
   function createWordEffectsTab() {
     let tab = createElement("div","wordEffectsTab","createTab");
-
+    let createWordEffectTabHTML = `
+    <div id="wordOpacityContainer" class="tabWordContainer">
+      <div id="wordOpacityLabel" class="gridLabel">Opacity:</div>
+      <div id="wordOpacityInputContainer">
+        <input id="wordOpacityInput" class="gridTextInput" placeholder="Opacity here, between 0 and 1" type="text">
+        <input id="wordOpacityRange" placeholder="" type="range" min="0.01" max="1"></div>
+    </div>
+    `;
+    tab.insertAdjacentHTML("beforeend",createWordEffectTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
