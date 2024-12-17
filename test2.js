@@ -42,7 +42,8 @@ var bmrHypno = function() {
           "font": ["",""],
           "color": "Random",
           "border": "None",
-          "gradient": "None"
+          "gradient": "None",
+          "opacity": "0.5"
         }
       ]
     },
@@ -78,7 +79,8 @@ var bmrHypno = function() {
           ],
           "name": "ShadowBelow",
           "blendMode": "overlay"
-          }
+          },
+          "opacity": "0.5"
         },
         {
           "type": "img",
@@ -1517,6 +1519,21 @@ var bmrHypno = function() {
     `;
     tab.insertAdjacentHTML("beforeend",createWordEffectTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
+
+    //opacity
+    let wordOpacityInput = document.getElementById("wordOpacityInput");
+    let wordOpacityRange = document.getElementById("wordOpacityRange");
+    wordOpacityInput.oninput = (e) => {
+      wordOpacityRange.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue] = e.target.value;
+    }
+    wordOpacityRange.oninput = (e) => {
+      wordOpacityInput.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue] = e.target.value;
+    }
+    wordOpacityInput.onchange = wordOpacityInput.oninput;
+    wordOpacityRange.onchange = wordOpacityRange.oninput;
+    
     return tab;
   }
 
