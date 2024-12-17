@@ -512,13 +512,27 @@ var bmrHypno = function() {
     return grid;
     */
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
+    //name of the set
+    let formNameInput = document.getElementById("formNameInput");
+    formNameInput.oninput = (e) => {
+      _currentlyLoaded.name = e.target.value;
+      console.log(_currentlyLoaded);
+    }
+    formNameInput.onchange = formNameInput.oninput;
+
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
-    spawnInput.oninput = (e) => {spawnInputRange.value = e.target.value;}
-    spawnInput.onchange = (e) => {spawnInputRange.value = e.target.value;}
-    spawnInputRange.oninput = (e) => {spawnInput.value = e.target.value;}
-    spawnInputRange.onchange = (e) => {spawnInput.value = e.target.value;}
+    spawnInput.oninput = (e) => {
+      spawnInputRange.value = e.target.value;
+      _currentlyLoaded.spawnTime = e.target.value;
+    }
+    spawnInput.onchange = spawnInput.oninput;
+    spawnInputRange.oninput = (e) => {
+      spawnInput.value = e.target.value;
+      _currentlyLoaded.spawnTime = e.target.value;
+    }
+    spawnInputRange.onchange = spawnInputRange.oninput;
     //select word/img
     //word
     let wordTypeContainer = document.getElementById("wordTypeContainer");
