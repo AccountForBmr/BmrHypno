@@ -1188,13 +1188,28 @@ var bmrHypno = function() {
       preloadGradientSelect.options.add(new Option(gradName,gradName));
     }
 
+    //gradient +/- buttons
     let gradientAddBtn = document.getElementById("gradientAddBtn");
     let gradientRemoveBtn = document.getElementById("gradientRemoveBtn");
     gradientAddBtn.onclick = (e) => {
-      //TODO add a gradient
+      let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
+      gr.gradients.push(JSON.parse(JSON.stringify(_templateGradient.gradients[0])));
+      _currentlyLoaded.selectedGradient = gr.gradients.length-1;
+      _currentlyLoaded.selectedGradientColor = 0;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     };
     gradientRemoveBtn.onclick = (e) => {
-      //TODO remove selected grad unless None
+      let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
+      if(gr.gradients.length == 1) {
+        GUI.instance.DisplayMessage("You can't have less than 1 gradient in this gradient group");
+        return;
+      }
+      gr.gradients.splice(_currentlyLoaded.selectedGradient,1);
+      _currentlyLoaded.selectedGradient = _currentlyLoaded.selectedGradient==0?0:_currentlyLoaded.selectedGradient-1;
+      _currentlyLoaded.selectedGradientColor = 0;
+      updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
+      updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);  
     };
 
     //choose which gradient to load
