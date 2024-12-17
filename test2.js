@@ -434,7 +434,7 @@ var bmrHypno = function() {
         bor1.style.display = "";
         _colorPickers[1].fromString(cur.border);
       }
-      //gradient TODO
+      //gradient
       let wordGradientSelect = document.getElementById("wordGradientSelect");
       let wordGradientCreatorContainer = document.getElementById("wordGradientCreatorContainer");
       let wordGradientPreviewContainer = document.getElementById("wordGradientPreviewContainer");
@@ -449,7 +449,10 @@ var bmrHypno = function() {
         updateGradientPreviewLeft(cur.gradient,0,0);
         updateGradientPreviewRight(cur.gradient);
       }
-      //opacity TODO
+      //opacity
+      document.getElementById("wordOpacityInput").value = cur.opacity;
+      document.getElementById("wordOpacityRange").value = cur.opacity;
+      //rotation TODO
     }
     //that's all I have for now
   }
@@ -587,16 +590,6 @@ var bmrHypno = function() {
     //creating the tabbed part
     let createTabbedContainer = document.getElementById("create-tab-start");
     fillTabs(createTabbedContainer);
-  }
-
-  function simpleTabCauseTired(aaa) {
-    let tabsContainer = createElement("div","tabsTitleContainer");
-    for(i in _tabs["word"]) {
-      let tab = createElement("div",i+"Create","tabTitle wordTabTitle",i);
-      tabsContainer.appendChild(tab);
-    }
-    aaa.appendChild(tabsContainer);
-    aaa.appendChild(createWordBaseTab());
   }
 
   function fillTabs(wholeContainer) {
@@ -1525,15 +1518,15 @@ var bmrHypno = function() {
     let wordOpacityRange = document.getElementById("wordOpacityRange");
     wordOpacityInput.oninput = (e) => {
       wordOpacityRange.value = e.target.value;
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue] = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].opacity = e.target.value;
     }
     wordOpacityRange.oninput = (e) => {
       wordOpacityInput.value = e.target.value;
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue] = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].opacity = e.target.value;
     }
     wordOpacityInput.onchange = wordOpacityInput.oninput;
     wordOpacityRange.onchange = wordOpacityRange.oninput;
-    
+
     return tab;
   }
 

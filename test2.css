@@ -551,6 +551,10 @@ Word Effects Down Here
     width: 70%;
 }
 
+#wordOpacityLabel {
+    width: 30%;
+}
+
 #wordOpacityInput {
     width: 25% !important;
 }
