@@ -59,7 +59,26 @@ var bmrHypno = function() {
           "font": ["64","128"],
           "color": "#abc123",
           "border": "#def456",
-          "gradient": "None"
+          "gradient": {
+            "gradients": [
+              {
+              "type": "radial-gradient",
+              "direction": "circle",
+              "colors": ["#008000FF","#0000FFFF","#D2FF1FFF","#C0FBFFFF","#1A2323FF"],
+              "positions": ["0","15","25","75",""],
+              "positions2": ["15","25","50","","80"]
+            },
+            {
+              "type": "linear-gradient",
+              "direction": 180,
+              "colors": ["#FFFFFF00","#000000FF"],
+              "positions": ["","75"],
+              "positions2": ["",""]
+            }
+          ],
+          "name": "ShadowBelow",
+          "blendMode": "overlay"
+          }
         },
         {
           "type": "img",
@@ -414,6 +433,21 @@ var bmrHypno = function() {
         _colorPickers[1].fromString(cur.border);
       }
       //gradient TODO
+      let wordGradientSelect = document.getElementById("wordGradientSelect");
+      let wordGradientCreatorContainer = document.getElementById("wordGradientCreatorContainer");
+      let wordGradientPreviewContainer = document.getElementById("wordGradientPreviewContainer");
+      if(cur.gradient == "None") {
+        wordGradientSelect.selectedIndex = 0;
+        wordGradientCreatorContainer.style.display = "none";
+        wordGradientPreviewContainer.style.display = "none";
+      } else {
+        wordGradientSelect.selectedIndex = 1;
+        wordGradientCreatorContainer.style.display = "";
+        wordGradientPreviewContainer.style.display = "";
+        updateGradientPreviewLeft(cur.gradient,0,0);
+        updateGradientPreviewRight(cur.gradient);
+      }
+      //opacity TODO
     }
     //that's all I have for now
   }
@@ -1478,7 +1512,7 @@ var bmrHypno = function() {
       <div id="wordOpacityLabel" class="gridLabel">Opacity:</div>
       <div id="wordOpacityInputContainer">
         <input id="wordOpacityInput" class="gridTextInput" placeholder="Opacity here, between 0 and 1" type="text">
-        <input id="wordOpacityRange" placeholder="" type="range" min="0.01" max="1"></div>
+        <input id="wordOpacityRange" placeholder="" type="range" min="0.01" max="1" step="0.01"></div>
     </div>
     `;
     tab.insertAdjacentHTML("beforeend",createWordEffectTabHTML);

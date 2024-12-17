@@ -537,3 +537,24 @@ Word Color down here
 #previewGradientContainer {
     min-height: 10%;
 }
+
+/*
+
+Word Effects Down Here
+
+*/
+
+#wordOpacityInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+
+#wordOpacityInput {
+    width: 25% !important;
+}
+
+#wordOpacityRange {
+    width: 75% !important;
+}
