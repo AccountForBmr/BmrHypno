@@ -1565,7 +1565,7 @@ var bmrHypno = function() {
     wordOpacityInput.onchange = wordOpacityInput.oninput;
     wordOpacityRange.onchange = wordOpacityRange.oninput;
     wordOpacityInput.onblur = (e) => {wordOpacityInput.style.opacity = "1";}
-    wordOpacityInputRange.onblur = (e) => {wordOpacityInput.style.opacity = "1";}
+    wordOpacityInput.onblur = (e) => {wordOpacityInput.style.opacity = "1";}
     //rotation
     let wordRotationInput1 = document.getElementById("wordRotationInput1");
     let wordRotationInput2 = document.getElementById("wordRotationInput2");
