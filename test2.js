@@ -181,7 +181,9 @@ var bmrHypno = function() {
         "font": ["",""],
         "color": "Random",
         "border": "None",
-        "gradient": "None"
+        "gradient": "None",
+        "opacity": "0.5",
+        "rotation": ["0","0"]
       }
     ],
     "selectedValue": 0,
@@ -1531,7 +1533,7 @@ var bmrHypno = function() {
     let tab = createElement("div","wordEffectsTab","createTab");
     let createWordEffectTabHTML = `
     <div id="wordOpacityContainer" class="tabWordContainer">
-      <div id="wordOpacityLabel" class="gridLabel">Opacity:</div>
+      <div id="wordOpacityLabel" class="gridLabel">Opacity (between 0 and 1):</div>
       <div id="wordOpacityInputContainer">
         <input id="wordOpacityInput" class="gridTextInput" placeholder="Opacity here, between 0 and 1" type="text">
         <input id="wordOpacityRange" placeholder="" type="range" min="0.01" max="1" step="0.01"></div>
@@ -1553,13 +1555,17 @@ var bmrHypno = function() {
     wordOpacityInput.oninput = (e) => {
       wordOpacityRange.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].opacity = e.target.value;
+      wordOpacityInput.style.opacity = e.target.value;
     }
     wordOpacityRange.oninput = (e) => {
       wordOpacityInput.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].opacity = e.target.value;
+      wordOpacityInput.style.opacity = e.target.value;
     }
     wordOpacityInput.onchange = wordOpacityInput.oninput;
     wordOpacityRange.onchange = wordOpacityRange.oninput;
+    wordOpacityInput.onblur = (e) => {wordOpacityInput.style.opacity = "1";}
+    wordOpacityInputRange.onblur = (e) => {wordOpacityInput.style.opacity = "1";}
     //rotation
     let wordRotationInput1 = document.getElementById("wordRotationInput1");
     let wordRotationInput2 = document.getElementById("wordRotationInput2");

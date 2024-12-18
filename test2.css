@@ -548,11 +548,11 @@ Word Effects Down Here
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70%;
+    width: 50%;
 }
 
 #wordOpacityLabel {
-    width: 30%;
+    width: 50%;
 }
 
 #wordOpacityInput {
