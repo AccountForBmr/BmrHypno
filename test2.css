@@ -562,3 +562,23 @@ Word Effects Down Here
 #wordOpacityRange {
     width: 75% !important;
 }
+
+#wordRotationContainer {
+    overflow: hidden;
+}
+
+#wordRotationLabel {
+    width: 50%;
+}
+
+#wordRotationInputContainer {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#wordRotationInput1, #wordRotationInput2 {
+    width: 50% !important;
+    text-align: center;
+}

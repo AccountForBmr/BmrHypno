@@ -43,7 +43,8 @@ var bmrHypno = function() {
           "color": "Random",
           "border": "None",
           "gradient": "None",
-          "opacity": "0.5"
+          "opacity": "0.5",
+          "rotation": ["0","0"]
         }
       ]
     },
@@ -80,7 +81,8 @@ var bmrHypno = function() {
           "name": "ShadowBelow",
           "blendMode": "overlay"
           },
-          "opacity": "0.5"
+          "opacity": "0.5",
+          "rotation": ["-45","45"]
         },
         {
           "type": "img",
@@ -452,7 +454,10 @@ var bmrHypno = function() {
       //opacity
       document.getElementById("wordOpacityInput").value = cur.opacity;
       document.getElementById("wordOpacityRange").value = cur.opacity;
-      //rotation TODO
+      //rotation
+      document.getElementById("wordRotationInput1").value = cur.rotation[0];
+      document.getElementById("wordRotationInput2").value = cur.rotation[1];
+      //animation/additional effects TODO
     }
     //that's all I have for now
   }
@@ -1531,6 +1536,13 @@ var bmrHypno = function() {
         <input id="wordOpacityInput" class="gridTextInput" placeholder="Opacity here, between 0 and 1" type="text">
         <input id="wordOpacityRange" placeholder="" type="range" min="0.01" max="1" step="0.01"></div>
     </div>
+    <div id="wordRotationContainer" class="tabWordContainer">
+      <div id="wordRotationLabel" class="gridLabel">Rotation between(in degrees):</div>
+      <div id="wordRotationInputContainer">
+        <input id="wordRotationInput1" class="gridTextInput" type="text" placeholder="Min here(Use deg)">
+        <input id="wordRotationInput2" class="gridTextInput" type="text" placeholder="Max here(Use deg)">
+      </div>
+    </div>
     `;
     tab.insertAdjacentHTML("beforeend",createWordEffectTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
@@ -1548,6 +1560,26 @@ var bmrHypno = function() {
     }
     wordOpacityInput.onchange = wordOpacityInput.oninput;
     wordOpacityRange.onchange = wordOpacityRange.oninput;
+    //rotation
+    let wordRotationInput1 = document.getElementById("wordRotationInput1");
+    let wordRotationInput2 = document.getElementById("wordRotationInput2");
+
+    wordRotationInput1.oninput = (e) => {
+      wordRotationInput1.style.transform = `rotate(${e.target.value}deg)`;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].rotation[0] = e.target.value;
+    }
+    wordRotationInput1.onchange = wordRotationInput1.oninput;
+    wordRotationInput1.onblur = (e) => {
+      wordRotationInput1.style.transform = "";
+    }
+    wordRotationInput2.oninput = (e) => {
+      wordRotationInput2.style.transform = `rotate(${e.target.value}deg)`;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].rotation[1] = e.target.value;
+    }
+    wordRotationInput2.onchange = wordRotationInput2.oninput;
+    wordRotationInput2.onblur = (e) => {
+      wordRotationInput2.style.transform = "";
+    }
 
     return tab;
   }
