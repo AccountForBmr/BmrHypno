@@ -1544,23 +1544,23 @@ var bmrHypno = function() {
         <input id="wordRotationInput1" class="gridTextInput" type="text" placeholder="Min here(Use deg)">
         <input id="wordRotationInput2" class="gridTextInput" type="text" placeholder="Max here(Use deg)">
       </div>
-      <div id="wordAnimationInputContainer" class="tabWordContainer">
-        <div id="wordAnimationLabel" class="gridLabel">Animation/Additional properties (Anything in the 0 keyframe can be treated as an additional property):</div>
-        <div id="wordAnimationContainer">
-          <select id="wordAnimationSelect" class="selectContainer">
-            <option>None</option>
-            <option>Yes</option>
-          </select>
-          <div id="wordAnimationCreatorContainer" class="animationPreview">
-            <div id="preloadAnimationContainer" class="sideCreatorBox">
-              <div id="preloadAnimationLabel" class="gradientLabel">Preload?</div>
-              <select id="preloadAnimationSelect" class="selectContainer">
-                <option value="New one">New one</option>
-                <option value="Rainbow1">Rainbow1</option>
-                <option value="ShadowBelow">ShadowBelow</option>
-                <option value="RandomPositions">RandomPositions</option>
-              </select>
-            </div>
+    </div>
+    <div id="wordAnimationInputContainer" class="tabWordContainer">
+      <div id="wordAnimationLabel" class="gridLabel">Animation/Additional properties (Anything in the 0 keyframe can be treated as an additional property):</div>
+      <div id="wordAnimationContainer">
+        <select id="wordAnimationSelect" class="selectContainer">
+          <option>None</option>
+          <option>Yes</option>
+        </select>
+        <div id="wordAnimationCreatorContainer" class="animationPreview">
+          <div id="preloadAnimationContainer" class="sideCreatorBox">
+            <div id="preloadAnimationLabel" class="gradientLabel">Preload?</div>
+            <select id="preloadAnimationSelect" class="selectContainer">
+              <option value="New one">New one</option>
+              <option value="Rainbow1">Rainbow1</option>
+              <option value="ShadowBelow">ShadowBelow</option>
+              <option value="RandomPositions">RandomPositions</option>
+            </select>
           </div>
         </div>
       </div>
