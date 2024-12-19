@@ -480,7 +480,7 @@ Word Color down here
     background-image: linear-gradient(#9c9c9c,#9c9c9c);
 }
 
-.gradientCreatorBox {
+.sideCreatorBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -581,4 +581,44 @@ Word Effects Down Here
 #wordRotationInput1, #wordRotationInput2 {
     width: 50% !important;
     text-align: center;
+}
+
+#wordAnimationLabel {
+    width: 80%;
+}
+
+#wordAnimationContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+}
+
+#wordAnimationSelect {
+    width: 100% !important;
+}
+
+.animationPreview {
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 50%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    border: 2px solid #343434;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    max-width: 50%;
+}
+
+#wordAnimationCreatorContainer {
+    right: 100%;
+    flex-wrap: wrap;
+    align-items: normal;
+}
+
+#preloadAnimationLabel, #preloadGradientSelect {
+    width: 50% !important;
 }

@@ -1084,16 +1084,16 @@ var bmrHypno = function() {
           <option value="Yes">Yes</option>
         </select>
         <div id="wordGradientCreatorContainer" class="fontPreview" style="display: none;">
-          <div id="preloadGradientContainer" class="gradientCreatorBox">
+          <div id="preloadGradientContainer" class="sideCreatorBox">
             <div id="preloadGradientLabel" class="gradientLabel">Preload?</div>
               <select id="preloadGradientSelect" class="selectContainer">
               </select>
              </div>
-            <div id="nameGradientContainer" class="gradientCreatorBox">
+            <div id="nameGradientContainer" class="sideCreatorBox">
               <div id="nameGradientLabel" class="gradientLabel">Name?</div>
               <input id="nameGradientInput" class="gradientTextInput" placeholder="Name here" type="text">
             </div>
-            <div id="blendGradientContainer" class="gradientCreatorBox">
+            <div id="blendGradientContainer" class="sideCreatorBox">
               <div id="blendGradientLabel" class="gradientLabel">Blend Type</div>
               <select id="blendSelect" class="selectContainer">
                 <option value="normal">normal</option>
@@ -1114,17 +1114,17 @@ var bmrHypno = function() {
                 <option value="luminosity">luminosity</option>
               </select>
             </div>                    
-            <div id="gradientSelectedContainer" class="gradientCreatorBox">
+            <div id="gradientSelectedContainer" class="sideCreatorBox">
               <div id="gradientSelectedLabel" class="gradientLabel">Selected Gradient</div>
               <select id="gradientSelectedSelect" class="selectContainer">
                 <option value="0">0</option>
               </select>
-              <div id="gradientBtnContainer" class="gradientCreatorBox">
+              <div id="gradientBtnContainer" class="sideCreatorBox">
                 <div id="gradientAddBtn" class="gradientBtn">+</div>
                 <div id="gradientRemoveBtn" class="gradientBtn">-</div>
               </div>
             </div>
-            <div id="typeGradientContainer" class="gradientCreatorBox">
+            <div id="typeGradientContainer" class="sideCreatorBox">
               <div id="typeGradientLabel" class="gradientLabel">Type</div>
               <select id="typeGradientSelect" class="selectContainer">
                 <option value="linear-gradient">linear</option>
@@ -1135,34 +1135,34 @@ var bmrHypno = function() {
                 <option value="repeating-conic-gradient">repeating conic</option>
               </select>
             </div>
-            <div id="angleGradientContainer" class="gradientCreatorBox">
+            <div id="angleGradientContainer" class="sideCreatorBox">
               <div id="angleGradientLabel" class="gradientLabel">Angle</div>
               <input id="angleGradientInput" class="gradientTextInput" placeholder="Use deg" type="text">
               <input id="angleGradientInputRange" class="gradientTextInput" placeholder="0" type="range" min="0" max="360">
             </div>
-            <div id="shapeGradientContainer" class="gradientCreatorBox" style="display: none;">
+            <div id="shapeGradientContainer" class="sideCreatorBox" style="display: none;">
               <div id="shapeGradientLabel" class="gradientLabel">Shape</div>
               <select id="shapeSelect" class="selectContainer">
                 <option value="ellipse">ellipse</option>
                 <option value="circle">circle</option>
               </select>
             </div>
-            <div id="colorGradientSelectedContainer" class="gradientCreatorBox">
+            <div id="colorGradientSelectedContainer" class="sideCreatorBox">
               <div id="colorGradientSelectedLabel" class="gradientLabel">Selected color:</div>
               <select id="colorGradientSelectedSelect" class="selectContainer">
                 <option value="0">0</option>
                 <option value="1">1</option>
               </select>
-              <div id="colorGradientBtnContainer" class="gradientCreatorBox">
+              <div id="colorGradientBtnContainer" class="sideCreatorBox">
                 <div id="colorGradientAddBtn" class="gradientBtn">+</div>
                 <div id="colorGradientRemoveBtn" class="gradientBtn">-</div>
               </div>
             </div>
-            <div id="changeColorGradientContainer" class="gradientCreatorBox">
+            <div id="changeColorGradientContainer" class="sideCreatorBox">
               <div id="changeColorGradientLabel" class="gradientLabel">Change Color</div>
               <input id="changeColorGradientInput" class="gradientTextInput" placeholder="# Color Code" type="text">
             </div>
-            <div id="positionGradientContainer" class="gradientCreatorBox">
+            <div id="positionGradientContainer" class="sideCreatorBox">
               <select id="positionGradientSelect" class="gradientLabel">
                 <option>Start at</option>
                 <option>End at</option>
@@ -1170,7 +1170,7 @@ var bmrHypno = function() {
               <input id="positionGradientInput" class="gradientTextInput" type="text" placeholder="Auto">
               <input id="positionGradientInputRange" class="gradientTextInput" placeholder="50" type="range" min="0" max="100">
             </div>
-            <div id="previewGradientContainer" class="gradientCreatorBox">                                
+            <div id="previewGradientContainer" class="sideCreatorBox">                                
             </div>
           </div>
         <div id="wordGradientPreviewContainer" class="fontPreview" style="display: none;">
@@ -1543,6 +1543,26 @@ var bmrHypno = function() {
       <div id="wordRotationInputContainer">
         <input id="wordRotationInput1" class="gridTextInput" type="text" placeholder="Min here(Use deg)">
         <input id="wordRotationInput2" class="gridTextInput" type="text" placeholder="Max here(Use deg)">
+      </div>
+      <div id="wordAnimationInputContainer" class="tabWordContainer">
+        <div id="wordAnimationLabel" class="gridLabel">Animation/Additional properties (Anything in the 0 keyframe can be treated as an additional property):</div>
+        <div id="wordAnimationContainer">
+          <select id="wordAnimationSelect" class="selectContainer">
+            <option>None</option>
+            <option>Yes</option>
+          </select>
+          <div id="wordAnimationCreatorContainer" class="animationPreview">
+            <div id="preloadAnimationContainer" class="sideCreatorBox">
+              <div id="preloadAnimationLabel" class="gradientLabel">Preload?</div>
+              <select id="preloadAnimationSelect" class="selectContainer">
+                <option value="New one">New one</option>
+                <option value="Rainbow1">Rainbow1</option>
+                <option value="ShadowBelow">ShadowBelow</option>
+                <option value="RandomPositions">RandomPositions</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     `;
