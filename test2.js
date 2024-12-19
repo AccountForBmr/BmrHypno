@@ -2,15 +2,12 @@
 A script that creates a menu in Bmr that you can use to load or create hypno messages, so have fun with it :P!
 */
 
-//TODO replace all create element id classname innerhtml with a function, cause yes :////
-
 var BMRHYPNO = {};
 
 var bmrHypno = function() {
   var mainBox = createElement("div", "mainBox");
   var jsColor = {};
   var _menuModified = false;
-  const blendModes = ["normal","multiply","screen","overlay","darken","lighten","color-dodge","color-burn","hard-light","soft-light","difference","exclusion","hue","saturation","color","luminosity"];
   var _tabs = {
     "word": {
       "Base":createWordBaseTab,
@@ -44,7 +41,8 @@ var bmrHypno = function() {
           "border": "None",
           "gradient": "None",
           "opacity": "0.5",
-          "rotation": ["0","0"]
+          "rotation": ["0","0"],
+          "animation": "None"
         }
       ]
     },
@@ -82,7 +80,8 @@ var bmrHypno = function() {
           "blendMode": "overlay"
           },
           "opacity": "0.5",
-          "rotation": ["-45","45"]
+          "rotation": ["-45","45"],
+          "animation": "None"
         },
         {
           "type": "img",
@@ -159,16 +158,6 @@ var bmrHypno = function() {
     "blendMode": "overlay"
     }
   };
-  var _currentGradientInfo = {
-    "name": "New one",
-    "selectedGradient": 0,
-    "blendMode": "normal",
-    "type": "linear-gradient",
-    "direction": 0,
-    "colors": ["#848484FF","#848484FF"],
-    "positions": ["",""],
-    "positions2": ["",""]
-  };
   const _templateHypno = {
     "name": "",
     "spawnTime": "",
@@ -183,7 +172,8 @@ var bmrHypno = function() {
         "border": "None",
         "gradient": "None",
         "opacity": "0.5",
-        "rotation": ["0","0"]
+        "rotation": ["0","0"],
+        "animation": "None"
       }
     ],
     "selectedValue": 0,
@@ -1552,7 +1542,7 @@ var bmrHypno = function() {
           <option>None</option>
           <option>Yes</option>
         </select>
-        <div id="wordAnimationCreatorContainer" class="animationPreview">
+        <div id="wordAnimationCreatorContainer" class="animationPreview" style="display: none;">
           <div id="preloadAnimationContainer" class="sideCreatorBox">
             <div id="preloadAnimationLabel" class="gradientLabel">Preload?</div>
             <select id="preloadAnimationSelect" class="selectContainer">
@@ -1562,6 +1552,8 @@ var bmrHypno = function() {
               <option value="RandomPositions">RandomPositions</option>
             </select>
           </div>
+        </div>
+        <div id="wordAnimationPreviewContainer" class="animationPreview" style="display: none;">
         </div>
       </div>
     </div>
@@ -1605,6 +1597,28 @@ var bmrHypno = function() {
     wordRotationInput2.onchange = wordRotationInput2.oninput;
     wordRotationInput2.onblur = (e) => {
       wordRotationInput2.style.transform = "";
+    }
+    //animation
+    let wordAnimationSelect = document.getElementById("wordAnimationSelect");
+    wordAnimationSelect.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      let wordAnimationCreatorContainer = document.getElementById("wordAnimationCreatorContainer");
+      let wordAnimationPreviewContainer = document.getElementById("wordAnimationPreviewContainer");
+      if(selected.text == "None") {
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = "None";
+        wordAnimationCreatorContainer.style.display = "none";
+        wordAnimationPreviewContainer.style.display = "none";
+      } else {
+        if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation == "None") {
+          //_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(_templateAnimation));
+          _currentlyLoaded.selectedKeyframe = 0;
+          _currentlyLoaded.selectedKeyframeValue = 0;
+          //updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0,0);
+          //updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+        }
+        wordAnimationCreatorContainer.style.display = "";
+        wordAnimationPreviewContainer.style.display = "";
+      }
     }
 
     return tab;

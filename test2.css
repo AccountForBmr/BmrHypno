@@ -619,6 +619,11 @@ Word Effects Down Here
     align-items: normal;
 }
 
+#wordAnimationPreviewContainer {
+    left: 100%;
+    flex-wrap: wrap;
+}
+
 #preloadAnimationLabel, #preloadGradientSelect {
     width: 50% !important;
 }
