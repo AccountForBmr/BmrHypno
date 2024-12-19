@@ -509,12 +509,12 @@ Word Color down here
     justify-content: center;
 }
 
-#gradientAddBtn, #colorGradientAddBtn {
+#gradientAddBtn, #colorGradientAddBtn, #keyframeAddBtn {
     background-color: #033f03;
     border-right: 2px solid rgb(80, 80, 80);
 }
 
-#gradientRemoveBtn, #colorGradientRemoveBtn {
+#gradientRemoveBtn, #colorGradientRemoveBtn, #keyframeRemoveBtn {
     background-color: #5a0606;
     border-left: 2px solid rgb(80, 80, 80);
 }
@@ -624,6 +624,16 @@ Word Effects Down Here
     flex-wrap: wrap;
 }
 
-#preloadAnimationLabel, #preloadGradientSelect {
+#preloadAnimationLabel, #preloadGradientSelect, #nameAnimationLabel, #nameAnimationInput, #durationAnimationLabel, #durationAnimationInput, #iterationsAnimationLabel, #easeAnimationLabel, #easeAnimationSelect {
     width: 50% !important;
+}
+
+#iterationsAnimationInput, #iterationsAnimationInputRange, #keyframeSelectedLabel, #keyframeSelectedSelect {
+    width: 25% !important;
+}
+
+#animationBtnContainer {
+    width: 50% !important;
+    border-radius: 0.5em;
+    overflow: hidden;
 }

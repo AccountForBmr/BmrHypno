@@ -1546,12 +1546,42 @@ var bmrHypno = function() {
           <div id="preloadAnimationContainer" class="sideCreatorBox">
             <div id="preloadAnimationLabel" class="gradientLabel">Preload?</div>
             <select id="preloadAnimationSelect" class="selectContainer">
-              <option value="New one">New one</option>
-              <option value="Rainbow1">Rainbow1</option>
-              <option value="ShadowBelow">ShadowBelow</option>
-              <option value="RandomPositions">RandomPositions</option>
             </select>
           </div>
+          <div id="nameAnimationContainer" class="sideCreatorBox">
+            <div id="nameAnimationLabel" class="gradientLabel">Name?</div>
+            <input id="nameAnimationInput" class="gradientTextInput" placeholder="Name here" type="text">
+          </div>
+          <div id="durationAnimationContainer" class="sideCreatorBox">
+            <div id="durationAnimationLabel" class="gradientLabel">Duration?</div>
+            <input id="durationAnimationInput" class="gradientTextInput" type="text" placeholder="(in milliseconds)">
+          </div>
+          <div id="iterationsAnimationContainer" class="sideCreatorBox">
+            <div id="iterationsAnimationLabel" class="gradientLabel">Iterations?</div>
+            <input id="iterationsAnimationInput" class="gradientTextInput" type="text" placeholder="Number">
+            <input id="iterationsAnimationInputRange" class="gradientTextInput" placeholder="0" type="range" min="0" max="10">
+          </div>
+          <div id="easeAnimationContainer" class="sideCreatorBox">
+            <div id="easeAnimationLabel" class="gradientLabel">Easing?</div>
+            <select id="easeAnimationSelect" class="selectContainer">
+              <option value="None">None</option>
+              <option value="ease">ease</option>
+              <option value="ease-in">ease-in</option>
+              <option value="ease-out">ease-out</option>
+              <option value="ease-in-out">ease-in-out</option>
+            </select>
+          </div>
+          <div id="keyframeSelectedContainer" class="sideCreatorBox">
+            <div id="keyframeSelectedLabel" class="gradientLabel">Selected Keyframe</div>
+            <select id="keyframeSelectedSelect" class="selectContainer">                
+              <option value="0">0</option>
+            </select>
+            <div id="animationBtnContainer" class="sideCreatorBox">
+              <div id="keyframeAddBtn" class="gradientBtn">+</div>
+              <div id="keyframeRemoveBtn" class="gradientBtn">-</div>
+            </div>
+          </div>
+          <div id="paddingDown" class="sideCreatorBox" style="min-height: 10%;"></div>
         </div>
         <div id="wordAnimationPreviewContainer" class="animationPreview" style="display: none;">
         </div>
