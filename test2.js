@@ -178,7 +178,9 @@ var bmrHypno = function() {
     ],
     "selectedValue": 0,
     "selectedGradient": 0,
-    "selectedGradientColor": 0
+    "selectedGradientColor": 0,
+    "selectedKeyframe": 0,
+    "selectedKeyframeValue": 0
   };
   const _templateGradient = {
     "gradients": [
@@ -193,6 +195,21 @@ var bmrHypno = function() {
     "name": "New one",
     "blendMode": "normal"
   };
+  const _templateAnimation = {
+    "keyframes": [
+      {
+        "offset": 0,
+        "names": ["filter"],
+        "values": ["brightness(1.5)"]
+      }
+    ],
+    "name": "New one",
+    "timings": {
+      "easing": "ease",
+      "duration": 5000,
+      "iterations": 1
+    }
+  }
 
   function startBmr() {
     //add mainBox to div id=menus in bmr
@@ -259,54 +276,6 @@ var bmrHypno = function() {
       <div id="closeButton" class="button close"></div>
     </div>
     `;
-    /* testing insertAdjacentHTML
-
-    //top container here (load from and close button in it)
-    let topContainer = createElement("div","topContainer","gridContainer");
-    //load from label
-    let loadFromLabel = createElement("div","","gridLabel","Load from:");
-    topContainer.appendChild(loadFromLabel);
-    //creating and loading the selection menu, along with the file btn
-    let fileBtn = createElement("input","loadFileBtn");
-    fileBtn.type = "file";
-    //what happens after the file is loaded
-    //TODO TODO TODO TODO TODO TODO TODO TODO TODO, for now just console log
-    let loaded = (e) => {
-      let tmpFr = e.target;
-      let result = tmpFr.result;
-      console.log(result);
-      //let resultJSON = JSON.parse(result);
-    };
-    //How are the files processed when you load them
-    let process = (file) => {
-      let fr = new FileReader();
-      fr.readAsText(file);
-      fr.addEventListener('loadend', loaded);
-    };
-    //Making it so you process the file when you choose it
-    fileBtn.addEventListener('change', (e) => {
-      let file = fileBtn.files[0];
-      process(file);
-    });
-    //label for the fileBtn so I can css it
-    let fileBtnLabel = createElement("label","loadFileLabel");
-    fileBtnLabel.appendChild(fileBtn);
-    fileBtnLabel.append("Load from file");
-    topContainer.appendChild(loadSelections(fileBtnLabel));
-    topContainer.appendChild(fileBtnLabel);
-    fileBtnLabel.style.display="none";
-    //backButton
-    let backButton = createElement("input","backButton");
-    backButton.type = "button";
-    backButton.value = "<";
-    backButton.onclick = startBmr;
-    topContainer.appendChild(backButton);
-    //closeButton
-    let closeButton = createElement("div","closeButton","button close");
-    closeButton.onclick = () => { mainBox.remove(); };
-    topContainer.appendChild(closeButton);
-    mainBox.appendChild(topContainer);
-    */
     mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
     let fileBtn = document.getElementById("loadFileBtn");
     fileBtn.type = "file";
@@ -375,6 +344,8 @@ var bmrHypno = function() {
     _currentlyLoaded.selectedValue=0;
     _currentlyLoaded.selectedGradient=0;
     _currentlyLoaded.selectedGradientColor=0;
+    _currentlyLoaded.selectedKeyframe=0;
+    _currentlyLoaded.selectedKeyframeValue=0;
     document.getElementById("formNameInput").value = selection.text;
     //spawnTime
     document.getElementById("formSpawnInput").value = _currentlyLoaded.spawnTime;
@@ -478,75 +449,6 @@ var bmrHypno = function() {
       </div>
     </div>
     `;
-    /*
-    let grid = createElement("div","createMenu","menu-start");
-    //create name container
-    let nameContainer = createElement("div","nameContainer","gridContainer");
-    //add label and input to name container
-    let nameLabel = createElement("div","nameLabel","gridLabel","Choose a name for your set:");
-    let nameInputContainer = createElement("div","nameInputContainer");
-    let nameInput = createElement("input","formNameInput","gridTextInput","","Name here.");
-    nameInput.type = "text";
-    nameInputContainer.appendChild(nameInput);
-    nameContainer.appendChild(nameLabel);
-    nameContainer.appendChild(nameInputContainer);
-    //add nameContainer to grid
-    grid.appendChild(nameContainer);
-    
-    //create spawn container
-    let spawnContainer = createElement("div","spawnContainer","gridContainer");
-    //add label and inputs to spawn container
-    let spawnLabel = createElement("div","spawnLabel","gridLabel","Choose how many milliseconds you want between each spawn:");
-    let spawnInputContainer = createElement("div","spawnInputContainer");
-    let spawnInput = createElement("input","formSpawnInput","gridTextInput","","ms here, can go past max.");
-    let spawnInputRange = createElement("input","formSpawnRange");
-    spawnInput.type = "text";
-    spawnInputRange.type = "range";
-    spawnInputRange.min = 100;
-    spawnInputRange.max = 5000;
-    //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
-    spawnInput.oninput = (e) => {spawnInputRange.value = e.target.value;}
-    spawnInput.onchange = (e) => {spawnInputRange.value = e.target.value;}
-    spawnInputRange.oninput = (e) => {spawnInput.value = e.target.value;}
-    spawnInputRange.onchange = (e) => {spawnInput.value = e.target.value;}
-    //add them in container
-    spawnInputContainer.appendChild(spawnInput);
-    spawnInputContainer.appendChild(spawnInputRange);
-    spawnContainer.appendChild(spawnLabel);
-    spawnContainer.appendChild(spawnInputContainer);
-    //add spawnContainer to grid
-    grid.appendChild(spawnContainer);
-
-    //add the selection boxes for word and img
-    let selectTypeContainer = createElement("div","selectTypeContainer","gridContainer");
-    //word box
-    let wordTypeContainer = createElement("div","wordTypeContainer","typeContainer activeType","Word/Text");
-    wordTypeContainer.onclick = (e) => {
-      //TODO Change format of the inputs below
-      changeTabType("word");
-    };
-    _tabsTypes.push(wordTypeContainer);
-    //img box
-    let imgTypeContainer = createElement("div","imgTypeContainer","typeContainer","Image/Gif");
-    imgTypeContainer.onclick = (e) => {
-      //TODO Change format of the inputs below
-      changeTabType("image");
-    };
-    _tabsTypes.push(imgTypeContainer);
-    selectTypeContainer.appendChild(wordTypeContainer);
-    selectTypeContainer.appendChild(imgTypeContainer);
-    grid.appendChild(selectTypeContainer);
-
-    //creating the tabbed part
-    let createTabbedContainer = createElement("div","create-tab-start");
-    fillTabs(createTabbedContainer);
-    grid.appendChild(createTabbedContainer);
-    //simpleTabCauseTired(createTabbedContainer);
-
-    //TODO, make a function that adds passed string as input button for grid
-    //TODO first though, make it so it loads _currentlyLoaded
-    return grid;
-    */
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
     //name of the set
     let formNameInput = document.getElementById("formNameInput");
@@ -616,122 +518,6 @@ var bmrHypno = function() {
   }
 
   function createWordBaseTab() {
-    /*
-    //the tab
-    let tab = createElement("div","wordBaseTab","createTab");
-    //all its elements
-    //value
-    let valueContainer = createElement("div","wordValueContainer","tabWordContainer");
-    let wordValueLabel = createElement("div","wordValueLabel","gridLabel","Type the word/text that you wish to use:");
-    valueContainer.appendChild(wordValueLabel);
-    let wordValueInputContainer =createElement("div","wordValueInputContainer");
-    let wordValueInput = createElement("input","wordValueInput","gridTextInput","","Text here.");
-    wordValueInput.type = "text";
-    wordValueInputContainer.appendChild(wordValueInput);
-    valueContainer.appendChild(wordValueInputContainer);
-    tab.appendChild(valueContainer);
-    //time TODO
-    let wordTimeContainer = createElement("div","wordTimeContainer","tabWordContainer");
-    let wordTimeLabel = createElement("div","wordTimeLabel","gridLabel","How long before the word leaves? (in milliseconds)");
-    let wordTimeInputContainer = createElement("div","wordTimeInputContainer");
-    let wordTimeInput = createElement("input","wordTimeInput","gridTextInput","","ms here, can go past max.");
-    let wordTimeRange = createElement("input","wordTimeRange");
-
-    wordTimeInput.type = "text";
-    wordTimeRange.type = "range";
-    wordTimeRange.min = 10;
-    wordTimeRange.max = 10000;
-    //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
-    wordTimeInput.oninput = (e) => {wordTimeRange.value = e.target.value;}
-    wordTimeInput.onchange = (e) => {wordTimeRange.value = e.target.value;}
-    wordTimeRange.oninput = (e) => {wordTimeInput.value = e.target.value;}
-    wordTimeRange.onchange = (e) => {wordTimeInput.value = e.target.value;}
-
-    wordTimeContainer.appendChild(wordTimeLabel);
-    wordTimeContainer.appendChild(wordTimeInputContainer);
-    wordTimeInputContainer.appendChild(wordTimeInput);
-    wordTimeInputContainer.appendChild(wordTimeRange);
-    tab.appendChild(wordTimeContainer);
-    //position TODO
-    let wordPositionContainer = createElement("div","wordPositionContainer","tabWordContainer");
-    let wordPositionLabel = createElement("div","wordPositionLabel","gridLabel","Where should your word be?");
-    let wordPositionInputContainer = createElement("div","wordPositionInputContainer");
-    let wordPositionInputSelect = createElement("select","wordPositionInputSelect","selectContainer");
-    let wordPositionInput1 = createElement("input","wordPositionInput1","gridTextInput","","% from top");
-    let wordPositionInput2 = createElement("input","wordPositionInput2","gridTextInput","","% from left");
-
-    wordPositionInput1.type = "text";
-    wordPositionInput1.style.display = "none";
-    wordPositionInput2.type = "text";
-    wordPositionInput2.style.display = "none";
-    wordPositionInputSelect.options.add(new Option("Random","Random"));
-    wordPositionInputSelect.options.add(new Option("Precise Position","Precise Position"));
-    wordPositionInputSelect.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
-      if(selected.text == "Random") {
-        wordPositionInput1.style.display = "none";
-        wordPositionInput2.style.display = "none";
-      } else {
-        wordPositionInput1.style.display = "";
-        wordPositionInput2.style.display = "";
-        let chooseWindow = createElement("div","chooseWindow","","Click where you would like your word top-left corner to be.");
-        document.getElementById("scaler").appendChild(chooseWindow);
-        chooseWindow.onclick = (evt) => {
-          let boundRect=evt.target.getBoundingClientRect();
-          wordPositionInput1.value = ((evt.clientX-boundRect.left)*100/boundRect.width).toFixed(2)+"%";
-          wordPositionInput2.value = ((evt.clientY-boundRect.top)*100/boundRect.height).toFixed(2)+"%";
-          chooseWindow.remove();
-        };
-      }
-    };
-    wordPositionContainer.appendChild(wordPositionLabel);
-    wordPositionContainer.appendChild(wordPositionInputContainer);
-    wordPositionInputContainer.appendChild(wordPositionInputSelect);
-    wordPositionInputContainer.appendChild(wordPositionInput1);
-    wordPositionInputContainer.appendChild(wordPositionInput2);
-    tab.appendChild(wordPositionContainer);
-    //font size TODO
-    let wordFontContainer = createElement("div","wordFontContainer","tabWordContainer");
-    let wordFontLabel = createElement("div","wordFontLabel","gridLabel","Font size? (Random between the 2)");
-    let wordFontInputContainer = createElement("div","wordFontInputContainer");
-    let wordFontInput1 = createElement("input","wordFontInput1","gridTextInput","","Min value.");
-    let wordFontInput2 = createElement("input","wordFontInput2","gridTextInput","","Max value.");
-    let fontMin = createElement("div","fontPreviewMin","fontPreview","Min");
-    let fontMax = createElement("div","fontPreviewMax","fontPreview","Max");
-    fontMin.style.display = "none";
-    fontMax.style.display = "none";
-    
-    wordFontInput1.type = "text";
-    wordFontInput2.type = "text";
-
-    wordFontInput1.onfocus = (e)=>{
-      fontMin.style.display = "";
-      fontMax.style.display = "";
-    };
-    wordFontInput1.onblur = (e)=>{
-      fontMin.style.display = "none";
-      fontMax.style.display = "none"
-    };
-    wordFontInput1.oninput = (e)=>{
-      fontMin.style.fontSize = wordFontInput1.value+"px";
-      fontMax.style.fontSize = wordFontInput2.value+"px";
-    }
-    wordFontInput1.onchange = wordFontInput1.oninput;
-    wordFontInput2.onfocus = wordFontInput1.onfocus;
-    wordFontInput2.onblur = wordFontInput1.onblur;
-    wordFontInput2.oninput = wordFontInput1.oninput;
-    wordFontInput2.onchange = wordFontInput1.onchange;
-
-    wordFontContainer.appendChild(wordFontLabel);
-    wordFontContainer.appendChild(wordFontInputContainer);
-    wordFontInputContainer.appendChild(wordFontInput1);
-    wordFontInputContainer.appendChild(wordFontInput2);
-    wordFontInputContainer.appendChild(fontMin);
-    wordFontInputContainer.appendChild(fontMax);
-    tab.appendChild(wordFontContainer);
-    return tab;
-    */
-    //// insertAdjacentHTML from here on
     let tab = createElement("div","wordBaseTab","createTab");
     let createWordBaseTabHTML = `
     <div id="wordValueContainer" class="tabWordContainer">
@@ -850,200 +636,6 @@ var bmrHypno = function() {
   }
 
   function createWordColorTab() {
-    /*
-    let tab = createElement("div","wordColorTab","createTab");
-    //all the elements
-    //the color
-    let wordColorContainer = createElement("div","wordColorContainer","tabWordContainer");
-    let wordColorLabel = createElement("div","wordColorLabel","gridLabel","Color for your word:");
-    let wordColorInputContainer = createElement("div","wordColorInputContainer");
-    let wordColorSelect = createElement("select","wordColorSelect","selectContainer");
-    let wordColorInput = createElement("input","wordColorInput","gridTextInput","","# Color Code");
-    var wordColorPicker = new jsColor(wordColorInput,{format:'hex',
-      previewPosition:'right',
-      previewSize:50,
-      backgroundColor:'rgba(0,0,0,0.9)',
-      borderColor:'#343434',
-      borderWidth:2});
-
-    wordColorSelect.options.add(new Option("Random","Random"));
-    wordColorSelect.options.add(new Option("Choose","Choose"));
-    wordColorSelect.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
-      if(selected.text == "Random") {
-        wordColorInput.style.display = "none";
-      } else {
-        wordColorInput.style.display = "";
-      }
-    };
-
-    wordColorInput.style.display = "none";
-    wordColorInput.type = "text";
-    _colorPickers.push(wordColorPicker);
-    
-    wordColorContainer.appendChild(wordColorLabel);
-    wordColorContainer.appendChild(wordColorInputContainer);
-    wordColorInputContainer.appendChild(wordColorSelect);
-    wordColorInputContainer.appendChild(wordColorInput);
-    tab.appendChild(wordColorContainer);
-    //border
-    let wordBorderContainer = createElement("div","wordBorderContainer","tabWordContainer");
-    let wordBorderLabel = createElement("div","wordBorderLabel","gridLabel","Color for your border:");
-    let wordBorderInputContainer = createElement("div","wordBorderInputContainer");
-    let wordBorderSelect = createElement("select","wordBorderSelect","selectContainer");
-    let wordBorderInput = createElement("input","wordBorderInput","gridTextInput","","# Color Code");
-    var wordBorderPicker = new jsColor(wordBorderInput,{format:'hex',
-      previewPosition:'right',
-      previewSize:50,
-      backgroundColor:'rgba(0,0,0,0.9)',
-      borderColor:'#343434',
-      borderWidth:2});
-
-    wordBorderSelect.options.add(new Option("None","None"));
-    wordBorderSelect.options.add(new Option("Choose","Choose"));
-    wordBorderSelect.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
-      if(selected.text == "None") {
-        wordBorderInput.style.display = "none";
-      } else {
-        wordBorderInput.style.display = "";
-      }
-    };
-
-    wordBorderInput.style.display = "none";
-    wordBorderInput.type = "text";
-    _colorPickers.push(wordBorderPicker);
-    
-    wordBorderContainer.appendChild(wordBorderLabel);
-    wordBorderContainer.appendChild(wordBorderInputContainer);
-    wordBorderInputContainer.appendChild(wordBorderSelect);
-    wordBorderInputContainer.appendChild(wordBorderInput);
-    tab.appendChild(wordBorderContainer);
-    //TODO Gradients!!!
-    let wordGradientContainer = createElement("div","wordGradientContainer","tabWordContainer");
-    let wordGradientLabel = createElement("div","wordGradientLabel","gridLabel","Gradients! (You may choose to replace the color with a gradient instead. Be warned that your color will be ignored if you choose this)");
-    let wordGradientInputContainer = createElement("div","wordGradientInputContainer"); 
-    let wordGradientSelect = createElement("select","wordGradientSelect","selectContainer");
-    let wordGradientPreviewContainer = createElement("div","wordGradientPreviewContainer","fontPreview");
-    let wordGradientCreatorContainer = createElement("div","wordGradientCreatorContainer","fontPreview");
-    let wordGradientPreviewBg = createElement("div","wordGradientPreviewBg","gradientPreview");
-    let wordGradientPreviewTextContainer = createElement("div","wordGradientPreviewTextContainer","gradientPreview");
-    let wordGradientPreviewText = createElement("div","wordGradientPreviewText","","Test");
-    
-    wordGradientSelect.options.add(new Option("None","None"));
-    wordGradientSelect.options.add(new Option("Yes","Yes"));
-    //TODO move these to the creator part
-    wordGradientSelect.options.add(new Option("Linear","Linear"));
-    wordGradientSelect.options.add(new Option("Radial","Radial"));
-    wordGradientSelect.options.add(new Option("Conic","Conic"));
-    wordGradientSelect.options.add(new Option("Repeating Linear","Repeating Linear"));
-    wordGradientSelect.options.add(new Option("Repeating Radial","Repeating Radial"));
-    wordGradientSelect.options.add(new Option("Repeating Conic","Repeating Conic"));
-
-    //all the stuff for the creator her
-    //select part
-    let preloadGradientContainer = createElement("div","preloadGradientContainer","gradientCreatorBox");
-    let preloadGradientLabel = createElement("div","preloadGradientLabel","gradientLabel","Preload?");
-    let preloadGradientSelect = createElement("select","preloadGradientSelect","selectContainer");
-
-    /* I guess I'll just load them manually :/, no idea what's wrong with these
-    for(i in _preloadedGradients) {
-      preloadGradientSelect.options.add(new Option(_preloadedGradients[i],"aaa"));
-    }
-    /* sinner down here
-    for(i in _preloadedGradients) {
-      console.log("What am I doing here?????? why error at 382???")
-      console.log(i);
-      preloadGradientSelect.options.add(new Option(i,i));
-    }
-    /* try again...
-    console.log(_preloadedGradients);
-    preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
-    preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
-    *//*
-    preloadGradientSelect.options.add(new Option("New one","New one"));
-    preloadGradientSelect.options.add(new Option("Rainbow1","Rainbow1"));
-    preloadGradientSelect.options.add(new Option("ShadowBelow","ShadowBelow"));
-    preloadGradientSelect.onchange = (e) => {
-      //TODO move this in a func cause I need it later
-      let selected = e.target.options[e.target.selectedIndex].text;
-        let grad = "";
-        for(i in _preloadedGradients[selected]) {
-          if(i!="blendMode") {
-            grad+=`${_preloadedGradients[selected][i].type}(${_preloadedGradients[selected][i].direction},`;
-            for(j in _preloadedGradients[selected][i].colors) {
-              grad+=`${_preloadedGradients[selected][i].colors[j]} ${_preloadedGradients[selected][i].positions[j]},`;
-            }
-            grad = grad.slice(0,-1);
-            grad+="),";
-          }
-        }
-        grad = grad.slice(0,-1);
-        wordGradientPreviewBg.style.backgroundImage=grad;
-        wordGradientPreviewBg.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
-        wordGradientPreviewText.style.backgroundImage=grad;
-        wordGradientPreviewText.style.backgroundBlendMode=_preloadedGradients[selected].blendMode;
-    };
-
-    preloadGradientContainer.appendChild(preloadGradientLabel);
-    preloadGradientContainer.appendChild(preloadGradientSelect);
-    wordGradientCreatorContainer.appendChild(preloadGradientContainer);
-
-    //name part
-    let nameGradientContainer = createElement("div","nameGradientContainer","gradientCreatorBox");
-    let nameGradientLabel = createElement("div","nameGradientLabel","gradientLabel","Name?");
-    let nameGradientInput = createElement("input","nameGradientInput","gradientTextInput","","Name here");
-    nameGradientInput.type = "text";
-    
-    nameGradientContainer.appendChild(nameGradientLabel);
-    nameGradientContainer.appendChild(nameGradientInput);
-    wordGradientCreatorContainer.appendChild(nameGradientContainer);
-    //buttons!
-    let gradientBtnContainer = createElement("div","gradientBtnContainer","gradientCreatorBox");
-    let gradientAddBtn = createElement("div","gradientAddBtn","gradientBtn","+");
-    let gradientRemoveBtn = createElement("div","gradientRemoveBtn","gradientBtn","-");
-
-    gradientAddBtn.onclick = (e) => {
-      //TODO add a gradient
-    };
-    gradientRemoveBtn.onclick = (e) => {
-      //TODO remove selected grad unless None
-    };
-
-    gradientBtnContainer.appendChild(gradientAddBtn);
-    gradientBtnContainer.appendChild(gradientRemoveBtn);
-    wordGradientCreatorContainer.appendChild(gradientBtnContainer);
-
-    //Choose current gradient
-    let gradientSelectedContainer = createElement("div","gradientSelectedContainer","gradientCreatorBox");
-    let gradientSelectedLabel = createElement("div","gradientSelectedLabel","gradientLabel","Selected:");
-    let gradientSelectedSelect = createElement("select","gradientSelectedSelect","selectContainer");
-
-    gradientSelectedSelect.options.add(new Option("None","None"));
-    gradientSelectedSelect.onchange = (e) => {
-      //TODO hide everything with none, load the gradient when chosen
-    }
-
-    gradientSelectedContainer.appendChild(gradientSelectedLabel);
-    gradientSelectedContainer.appendChild(gradientSelectedSelect);
-    wordGradientCreatorContainer.appendChild(gradientSelectedContainer);
-
-
-    //add everything
-    wordGradientInputContainer.appendChild(wordGradientSelect);
-    wordGradientInputContainer.appendChild(wordGradientCreatorContainer);
-    wordGradientPreviewContainer.appendChild(wordGradientPreviewBg);
-    wordGradientPreviewTextContainer.appendChild(wordGradientPreviewText);
-    wordGradientPreviewContainer.appendChild(wordGradientPreviewTextContainer);
-    wordGradientInputContainer.appendChild(wordGradientPreviewContainer);
-    wordGradientContainer.appendChild(wordGradientLabel);
-    wordGradientContainer.appendChild(wordGradientInputContainer);
-    tab.appendChild(wordGradientContainer);
-
-    document.getElementById("tabsContainer").appendChild(tab);
-    return tab;
-    */
-    //remaking color down here 
     let tab = createElement("div","wordColorTab","createTab");
     let createWordColorTabHTML = `
     <div id="wordColorContainer" class="tabWordContainer">
@@ -1441,15 +1033,6 @@ var bmrHypno = function() {
     return tab;
   }
 
-  function updateGradient(selected) {
-    //might just remove the name
-    //document.getElementById("nameGradientInput").value = selected;
-    //document.getElementById("blendSelect").selectedIndex = blendModes.indexOf(selected.blendMode);
-    //selected Gradient here
-    //TODO
-    //_currentGradientInfo
-  }
-
   function updateGradientPreviewLeft(selectedGradient,displayedGradient,displayedColor) {
     document.getElementById("nameGradientInput").value = selectedGradient.name;
     document.getElementById("blendSelect").value = selectedGradient.blendMode;
@@ -1553,7 +1136,6 @@ var bmrHypno = function() {
             <input id="nameAnimationInput" class="gradientTextInput" placeholder="Name here" type="text">
             <div id="easeAnimationLabel" class="gradientLabel">Ease?</div>
             <select id="easeAnimationSelect" class="selectContainer">
-              <option value="None">None</option>
               <option value="ease">ease</option>
               <option value="ease-in">ease-in</option>
               <option value="ease-out">ease-out</option>
@@ -1602,9 +1184,10 @@ var bmrHypno = function() {
             <div id="propertyValueLabel" class="gradientLabel">Property value?</div>
             <input id="propertyValueInput" class="gradientTextInput" type="text" placeholder="Value">
           </div>
-          <div id="paddingDown" class="sideCreatorBox" style="min-height: 10%;"></div>
+          <div id="playAnimationBtn" class="sideCreatorBox">Play!</div>
         </div>
         <div id="wordAnimationPreviewContainer" class="animationPreview" style="display: none;">
+          <div id="animationPreviewText">Test</div>
         </div>
       </div>
     </div>
@@ -1661,15 +1244,42 @@ var bmrHypno = function() {
         wordAnimationPreviewContainer.style.display = "none";
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation == "None") {
-          //_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(_templateAnimation));
+          _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(_templateAnimation));
           _currentlyLoaded.selectedKeyframe = 0;
           _currentlyLoaded.selectedKeyframeValue = 0;
-          //updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0,0);
-          //updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
+          //updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0,0);
         }
         wordAnimationCreatorContainer.style.display = "";
         wordAnimationPreviewContainer.style.display = "";
       }
+    }
+    //name
+    let nameAnimationInput = document.getElementById("nameAnimationInput");
+    nameAnimationInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.name = e.target.value;
+    }
+    //easing
+    let easeAnimationSelect = document.getElementById("easeAnimationSelect");
+    easeAnimationSelect.onchange = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.easing = e.target.value;
+    }
+    //duration
+    let durationAnimationInput = document.getElementById("durationAnimationInput");
+    durationAnimationInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.duration = Number(e.target.value);
+    }
+    //iterations
+    let iterationsAnimationInput = document.getElementById("iterationsAnimationInput");
+    let iterationsAnimationInputRange = document.getElementById("iterationsAnimationInputRange");
+    iterationsAnimationInput.oninput = (e) => {
+      let selected = e.target.value>=10?"Infinity":e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.iterations = selected;
+      iterationsAnimationInputRange.value = e.target.value;
+    }
+    iterationsAnimationInputRange.oninput = (e) => {
+      let selected = e.target.value>=10?"Infinity":e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.iterations = selected;
+      iterationsAnimationInput.value = e.target.value;
     }
 
     return tab;
