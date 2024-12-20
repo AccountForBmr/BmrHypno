@@ -509,12 +509,12 @@ Word Color down here
     justify-content: center;
 }
 
-#gradientAddBtn, #colorGradientAddBtn, #keyframeAddBtn {
+#gradientAddBtn, #colorGradientAddBtn, #keyframeAddBtn, #propertyAddBtn {
     background-color: #033f03;
     border-right: 2px solid rgb(80, 80, 80);
 }
 
-#gradientRemoveBtn, #colorGradientRemoveBtn, #keyframeRemoveBtn {
+#gradientRemoveBtn, #colorGradientRemoveBtn, #keyframeRemoveBtn, #propertyRemoveBtn {
     background-color: #5a0606;
     border-left: 2px solid rgb(80, 80, 80);
 }
@@ -624,15 +624,15 @@ Word Effects Down Here
     flex-wrap: wrap;
 }
 
-#preloadAnimationLabel, #preloadGradientSelect, #nameAnimationLabel, #nameAnimationInput, #durationAnimationLabel, #durationAnimationInput, #iterationsAnimationLabel, #easeAnimationLabel, #easeAnimationSelect {
+#preloadAnimationLabel, #preloadGradientSelect, #durationAnimationLabel, #durationAnimationInput, #iterationsAnimationLabel, #offsetInputRange, #propertyNameLabel, #propertyNameInput, #propertyValueLabel, #propertyValueInput {
     width: 50% !important;
 }
 
-#iterationsAnimationInput, #iterationsAnimationInputRange, #keyframeSelectedLabel, #keyframeSelectedSelect {
+#iterationsAnimationInput, #iterationsAnimationInputRange, #keyframeSelectedLabel, #keyframeSelectedSelect, #nameAnimationLabel, #nameAnimationInput, #easeAnimationLabel, #easeAnimationSelect, #offsetAnimationLabel, #offsetAnimationInput, #propertySelectedLabel, #propertySelectedSelect {
     width: 25% !important;
 }
 
-#animationBtnContainer {
+#animationBtnContainer, #propertyBtnContainer {
     width: 50% !important;
     border-radius: 0.5em;
     overflow: hidden;

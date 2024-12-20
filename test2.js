@@ -1551,6 +1551,14 @@ var bmrHypno = function() {
           <div id="nameAnimationContainer" class="sideCreatorBox">
             <div id="nameAnimationLabel" class="gradientLabel">Name?</div>
             <input id="nameAnimationInput" class="gradientTextInput" placeholder="Name here" type="text">
+            <div id="easeAnimationLabel" class="gradientLabel">Ease?</div>
+            <select id="easeAnimationSelect" class="selectContainer">
+              <option value="None">None</option>
+              <option value="ease">ease</option>
+              <option value="ease-in">ease-in</option>
+              <option value="ease-out">ease-out</option>
+              <option value="ease-in-out">ease-in-out</option>
+            </select>
           </div>
           <div id="durationAnimationContainer" class="sideCreatorBox">
             <div id="durationAnimationLabel" class="gradientLabel">Duration?</div>
@@ -1561,16 +1569,6 @@ var bmrHypno = function() {
             <input id="iterationsAnimationInput" class="gradientTextInput" type="text" placeholder="Number">
             <input id="iterationsAnimationInputRange" class="gradientTextInput" placeholder="0" type="range" min="0" max="10">
           </div>
-          <div id="easeAnimationContainer" class="sideCreatorBox">
-            <div id="easeAnimationLabel" class="gradientLabel">Easing?</div>
-            <select id="easeAnimationSelect" class="selectContainer">
-              <option value="None">None</option>
-              <option value="ease">ease</option>
-              <option value="ease-in">ease-in</option>
-              <option value="ease-out">ease-out</option>
-              <option value="ease-in-out">ease-in-out</option>
-            </select>
-          </div>
           <div id="keyframeSelectedContainer" class="sideCreatorBox">
             <div id="keyframeSelectedLabel" class="gradientLabel">Selected Keyframe</div>
             <select id="keyframeSelectedSelect" class="selectContainer">                
@@ -1580,6 +1578,29 @@ var bmrHypno = function() {
               <div id="keyframeAddBtn" class="gradientBtn">+</div>
               <div id="keyframeRemoveBtn" class="gradientBtn">-</div>
             </div>
+          </div>
+          <div id="offsetAnimationContainer" class="sideCreatorBox">
+            <div id="offsetAnimationLabel" class="gradientLabel">Offset:</div>
+            <input id="offsetAnimationInput" class="gradientTextInput" type="text" placeholder="between 0 and 1">
+            <input id="offsetInputRange" class="gradientTextInput" placeholder="0" type="range" min="0" max="1" step="0.01">
+          </div>
+          <div id="propertySelectedContainer" class="sideCreatorBox">
+            <div id="propertySelectedLabel" class="gradientLabel">Selected property</div>
+            <select id="propertySelectedSelect" class="selectContainer">                
+              <option value="0">0</option>
+            </select>
+            <div id="propertyBtnContainer" class="sideCreatorBox">
+              <div id="propertyAddBtn" class="gradientBtn">+</div>
+              <div id="propertyRemoveBtn" class="gradientBtn">-</div>
+            </div>
+          </div>
+          <div id="propertyNameContainer" class="sideCreatorBox">
+            <div id="propertyNameLabel" class="gradientLabel">Property name?</div>
+            <input id="propertyNameInput" class="gradientTextInput" type="text" placeholder="Name">
+          </div>
+          <div id="propertyValueContainer" class="sideCreatorBox">
+            <div id="propertyValueLabel" class="gradientLabel">Property value?</div>
+            <input id="propertyValueInput" class="gradientTextInput" type="text" placeholder="Value">
           </div>
           <div id="paddingDown" class="sideCreatorBox" style="min-height: 10%;"></div>
         </div>
