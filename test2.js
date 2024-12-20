@@ -1247,7 +1247,7 @@ var bmrHypno = function() {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(_templateAnimation));
           _currentlyLoaded.selectedKeyframe = 0;
           _currentlyLoaded.selectedKeyframeValue = 0;
-          //updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,0,0);
+          updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,0,0);
         }
         wordAnimationCreatorContainer.style.display = "";
         wordAnimationPreviewContainer.style.display = "";
@@ -1282,7 +1282,56 @@ var bmrHypno = function() {
       iterationsAnimationInput.value = e.target.value;
     }
 
+    //play animation
+    let playAnimationBtn = document.getElementById("playAnimationBtn");
+    playAnimationBtn.onclick = (e) => {playAnimationRight();}
+
     return tab;
+  }
+
+  function updateAnimationLeft(selectedAnimation,displayedKeyframe,displayedKeyframeValue) {
+    document.getElementById("nameAnimationInput").value = selectedAnimation.name;
+    //timings
+    document.getElementById("easeAnimationSelect").value = selectedAnimation.timings.easing;
+    document.getElementById("durationAnimationInput").value = selectedAnimation.timings.duration;
+    let iterationsParse = selectedAnimation.timings.iterations=="Infinity"?10:selectedAnimation.timings.iterations;
+    document.getElementById("iterationsAnimationInput").value = iterationsParse;
+    document.getElementById("iterationsAnimationInputRange").value = iterationsParse;
+
+    //keyframes
+    let keyframeSelectedSelect = document.getElementById("keyframeSelectedSelect");
+    keyframeSelectedSelect.options.length = 0;
+    for (let i=0; i < selectedAnimation.keyframes.length; i++) {
+      keyframeSelectedSelect.options.add(new Option(i,i));
+    }
+    keyframeSelectedSelect.selectedIndex = displayedKeyframe;
+    document.getElementById("offsetAnimationInput").value = selectedAnimation.keyframes[displayedKeyframe].offset;
+    document.getElementById("offsetInputRange").value = selectedAnimation.keyframes[displayedKeyframe].offset;
+
+    //properties
+    let propertySelectedSelect = document.getElementById("propertySelectedSelect");
+    propertySelectedSelect.options.length = 0;
+    for (let i=0; i < selectedAnimation.keyframes[displayedKeyframe].names.length; i++) {
+      propertySelectedSelect.options.add(new Option(i,selectedAnimation.keyframes[displayedKeyframe].names[i]));
+    }    
+    propertySelectedSelect.selectedIndex = displayedKeyframeValue;
+    document.getElementById("propertyNameInput").value = selectedAnimation.keyframes[displayedKeyframe].names[displayedKeyframeValue];
+    document.getElementById("propertyValueInput").value = selectedAnimation.keyframes[displayedKeyframe].values[displayedKeyframeValue];
+  }
+
+  function playAnimationRight() {
+    let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+    let animText = document.getElementById("animationPreviewText");
+    let keyframesList = [];
+    let timings = anim.timings;
+    for(let i=0;i<anim.keyframes.length;i++) {
+      let curKeyframe = {};
+      for(let j=0;j<anim.keyframes[i].names;j++) {
+        curKeyframe[anim.keyframes[i].names[j]] = anim.keyframes[i].values[j];
+      }
+      keyframesList.push(curKeyframe);
+    }
+    animText.animate(keyframesList,timings);
   }
 
   function createWordPreviewTab() {
