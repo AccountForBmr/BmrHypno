@@ -158,6 +158,53 @@ var bmrHypno = function() {
     "blendMode": "overlay"
     }
   };
+  var _preloadedAnimations = {
+    "Spin": {
+      "keyframes": [
+        {
+          "offset": 1,
+          "names": ["transform"],
+          "values": ["rotate(720deg)"]
+        }
+      ],
+      "name": "Spin",
+      "timings": {
+        "easing": "linear",
+        "duration": 1000,
+        "iterations": "5"
+      }
+    },
+    "Wobble": {
+      "keyframes": [
+        {
+          "offset": 0,
+          "names": ["transform"],
+          "values": ["scale(1,1)"]
+        },
+        {
+          "offset": 0.25,
+          "names": ["transform"],
+          "values": ["scale(0.9,1.1)"]
+        },
+        {
+          "offset": 0.5,
+          "names": ["transform"],
+          "values": ["scale(1.1,0.9)"]
+        },
+        {
+          "offset": 0.75,
+          "names": ["transform"],
+          "values": ["scale(0.95,1.05)"]
+        }
+      ],
+      "name": "Wobble",
+      "timings": {
+        "easing": "linear",
+        "duration": 1000,
+        "iterations": "5"
+      }
+    },
+  };
   const _templateHypno = {
     "name": "",
     "spawnTime": "",
@@ -210,7 +257,7 @@ var bmrHypno = function() {
     ],
     "name": "New one",
     "timings": {
-      "easing": "ease",
+      "easing": "linear",
       "duration": 5000,
       "iterations": 1
     }
@@ -1141,6 +1188,7 @@ var bmrHypno = function() {
             <input id="nameAnimationInput" class="gradientTextInput" placeholder="Name here" type="text">
             <div id="easeAnimationLabel" class="gradientLabel">Ease?</div>
             <select id="easeAnimationSelect" class="selectContainer">
+              <option value="linear">linear</option>
               <option value="ease">ease</option>
               <option value="ease-in">ease-in</option>
               <option value="ease-out">ease-out</option>
@@ -1258,6 +1306,19 @@ var bmrHypno = function() {
         wordAnimationPreviewContainer.style.display = "";
       }
     }
+    //preloaded animations
+    let preloadAnimationSelect = document.getElementById("preloadAnimationSelect");
+    preloadAnimationSelect.onchange = (e) => {
+      let selected = e.target.value;//e.target.options[e.target.selectedIndex].text;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = _preloadedAnimations[selected];
+      _currentlyLoaded.selectedKeyframe = 0;
+      _currentlyLoaded.selectedKeyframeValue = 0;
+      updateAnimationLeft(_preloadedAnimations[selected],0,0);
+    };
+    for(animName in _preloadedAnimations) {
+      preloadAnimationSelect.options.add(new Option(animName,animName));
+    }
+
     //name
     let nameAnimationInput = document.getElementById("nameAnimationInput");
     nameAnimationInput.oninput = (e) => {
