@@ -1329,7 +1329,7 @@ var bmrHypno = function() {
       for(let selVal=0;selVal<anim.keyframes[selKf].names;selVal++) {
         curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
       }
-      curKeyframe.offset = anim.keyframes[i].offset;
+      curKeyframe.offset = anim.keyframes[selKf].offset;
       console.log("before");
       console.log(keyframesList);
       keyframesList.push(JSON.parse(JSON.stringify(curKeyframe)));
