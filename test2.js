@@ -1286,6 +1286,37 @@ var bmrHypno = function() {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.iterations = selected;
       iterationsAnimationInput.value = e.target.value;
     }
+    //selectedKeyframe
+    let keyframeSelectedSelect = document.getElementById("keyframeSelectedSelect");
+    let keyframeAddBtn = document.getElementById("keyframeAddBtn");
+    let keyframeRemoveBtn = document.getElementById("keyframeRemoveBtn");
+    keyframeSelectedSelect.onchange = (e) => {
+      console.log(_currentlyLoaded);
+      let selected = e.target.selectedIndex;
+      _currentlyLoaded.selectedKeyframe = selected;
+      _currentlyLoaded.selectedKeyframeValue = 0;
+      let selectedAnimation = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+      updateAnimationLeft(selectedAnimation,selected,0);
+    }
+    //keyframe +/- button
+    keyframeAddBtn.onclick = (e) => {
+      let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+      anim.keyframes.push(JSON.parse(JSON.stringify(_templateAnimation.keyframes[0])));
+      _currentlyLoaded.selectedKeyframe = anim.keyframes.length-1;
+      _currentlyLoaded.selectedKeyframeValue = 0;
+      updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,_currentlyLoaded.selectedKeyframe,_currentlyLoaded.selectedKeyframeValue);
+    };
+    keyframeRemoveBtn.onclick = (e) => {
+      let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+      if(anim.keyframes.length == 1) {
+        GUI.instance.DisplayMessage("You can't have less than 1 keyframe, silly!");
+        return;
+      }
+      anim.keyframes.splice(_currentlyLoaded.selectedKeyframe,1);
+      _currentlyLoaded.selectedKeyframe = _currentlyLoaded.selectedKeyframe==0?0:_currentlyLoaded.selectedKeyframe-1;
+      _currentlyLoaded.selectedKeyframeValue = 0;
+      updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,_currentlyLoaded.selectedKeyframe,_currentlyLoaded.selectedKeyframeValue); 
+    };
 
     //play animation
     let playAnimationBtn = document.getElementById("playAnimationBtn");
