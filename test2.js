@@ -1349,7 +1349,7 @@ var bmrHypno = function() {
     };
     propertyRemoveBtn.onclick = (e) => {
       let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
-      if(anim.keyframes[_currentlyLoaded.selectedKeyframe].length == 1) {
+      if(anim.keyframes[_currentlyLoaded.selectedKeyframe].names.length == 1) {
         GUI.instance.DisplayMessage("You can't have less than 1 property, silly!");
         return;
       }
