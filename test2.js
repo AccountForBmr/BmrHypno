@@ -204,7 +204,7 @@ var bmrHypno = function() {
       },
       {
         "offset": 0.5,
-        "names": ["transform","backgroundColor"],
+        "names": ["transform","background"],
         "values": ["scale(3)","blue"]
       }
     ],
