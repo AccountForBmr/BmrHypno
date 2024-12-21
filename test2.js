@@ -201,6 +201,11 @@ var bmrHypno = function() {
         "offset": 0,
         "names": ["filter"],
         "values": ["brightness(1.5)"]
+      },
+      {
+        "offset": 0.5,
+        "names": ["transform","backgroundColor"],
+        "values": ["scale(3)","blue"]
       }
     ],
     "name": "New one",
