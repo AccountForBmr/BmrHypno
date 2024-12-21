@@ -1324,6 +1324,8 @@ var bmrHypno = function() {
     let animText = document.getElementById("animationPreviewText");
     let keyframesList = [];
     let timings = anim.timings;
+    console.log(anim);
+    BMRHYPNO.anim=anim;
     for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
       let curKeyframe = {};
       for(let selVal=0;selVal<anim.keyframes[selKf].names;selVal++) {
