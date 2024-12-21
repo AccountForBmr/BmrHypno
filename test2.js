@@ -1317,7 +1317,57 @@ var bmrHypno = function() {
       _currentlyLoaded.selectedKeyframeValue = 0;
       updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,_currentlyLoaded.selectedKeyframe,_currentlyLoaded.selectedKeyframeValue); 
     };
-
+    //offset
+    let offsetAnimationInput = document.getElementById("offsetAnimationInput");
+    let offsetInputRange = document.getElementById("offsetInputRange");
+    offsetAnimationInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.keyframes[_currentlyLoaded.selectedKeyframe].offset = e.target.value;
+      offsetInputRange.value = e.target.value;
+    }
+    offsetInputRange.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.keyframes[_currentlyLoaded.selectedKeyframe].offset = e.target.value;
+      offsetAnimationInput.value = e.target.value;
+    }
+    //selectedProperty
+    let propertySelectedSelect = document.getElementById("propertySelectedSelect");
+    let propertyAddBtn = document.getElementById("propertyAddBtn");
+    let propertyRemoveBtn = document.getElementById("propertyRemoveBtn");
+    propertySelectedSelect.onchange = (e) => {
+      console.log(_currentlyLoaded);
+      let selected = e.target.selectedIndex;
+      _currentlyLoaded.selectedKeyframeValue = selected;
+      let selectedAnimation = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+      updateAnimationLeft(selectedAnimation,_currentlyLoaded.selectedKeyframe,selected);
+    }
+    //property +/- button
+    propertyAddBtn.onclick = (e) => {
+      let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+      anim.keyframes[_currentlyLoaded.selectedKeyframe].names.push("name");
+      anim.keyframes[_currentlyLoaded.selectedKeyframe].values.push("value");
+      _currentlyLoaded.selectedKeyframeValue = anim.keyframes[_currentlyLoaded.selectedKeyframe].values.length-1;
+      updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,_currentlyLoaded.selectedKeyframe,_currentlyLoaded.selectedKeyframeValue);
+    };
+    propertyRemoveBtn.onclick = (e) => {
+      let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+      if(anim.keyframes[_currentlyLoaded.selectedKeyframe].length == 1) {
+        GUI.instance.DisplayMessage("You can't have less than 1 property, silly!");
+        return;
+      }
+      anim.keyframes[_currentlyLoaded.selectedKeyframe].names.splice(_currentlyLoaded.selectedKeyframeValue,1);
+      anim.keyframes[_currentlyLoaded.selectedKeyframe].values.splice(_currentlyLoaded.selectedKeyframeValue,1);
+      _currentlyLoaded.selectedKeyframeValue = _currentlyLoaded.selectedKeyframeValue==0?0:_currentlyLoaded.selectedKeyframeValue-1;
+      updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,_currentlyLoaded.selectedKeyframe,_currentlyLoaded.selectedKeyframeValue); 
+    };
+    //property name
+    let propertyNameInput = document.getElementById("propertyNameInput");
+    propertyNameInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.keyframes[_currentlyLoaded.selectedKeyframe].names[_currentlyLoaded.selectedKeyframeValue] = e.target.value;
+    }    
+    //property value
+    let propertyValueInput = document.getElementById("propertyValueInput");
+    propertyNameInput.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.keyframes[_currentlyLoaded.selectedKeyframe].values[_currentlyLoaded.selectedKeyframeValue] = e.target.value;
+    }    
     //play animation
     let playAnimationBtn = document.getElementById("playAnimationBtn");
     playAnimationBtn.onclick = (e) => {playAnimationRight();}
