@@ -1324,19 +1324,14 @@ var bmrHypno = function() {
     let animText = document.getElementById("animationPreviewText");
     let keyframesList = [];
     let timings = anim.timings;
-    console.log(anim);
-    BMRHYPNO.anim=anim;
     for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
       let curKeyframe = {};
       for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
         curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
       }
       curKeyframe.offset = anim.keyframes[selKf].offset;
-      console.log("before");
-      console.log(keyframesList);
-      keyframesList.push(JSON.parse(JSON.stringify(curKeyframe)));
-      console.log("after");
-      console.log(keyframesList);
+      //keyframesList.push(JSON.parse(JSON.stringify(curKeyframe)));
+      keyframesList.push(curKeyframe);
     }
     animText.animate(keyframesList,timings);
   }
