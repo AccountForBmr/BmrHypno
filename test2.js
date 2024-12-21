@@ -1365,7 +1365,7 @@ var bmrHypno = function() {
     }    
     //property value
     let propertyValueInput = document.getElementById("propertyValueInput");
-    propertyNameInput.oninput = (e) => {
+    propertyValueInput.oninput = (e) => {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.keyframes[_currentlyLoaded.selectedKeyframe].values[_currentlyLoaded.selectedKeyframeValue] = e.target.value;
     }    
     //play animation
