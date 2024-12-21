@@ -1329,7 +1329,12 @@ var bmrHypno = function() {
       for(let j=0;j<anim.keyframes[i].names;j++) {
         curKeyframe[anim.keyframes[i].names[j]] = anim.keyframes[i].values[j];
       }
-      keyframesList.push(curKeyframe);
+      curKeyframe.offset = anim.keyframes[i].offset;
+      console.log("before");
+      console.log(keyframesList);
+      keyframesList.push(JSON.parse(JSON.stringify(curKeyframe)));
+      console.log("after");
+      console.log(keyframesList);
     }
     animText.animate(keyframesList,timings);
   }
