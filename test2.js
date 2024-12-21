@@ -1328,7 +1328,7 @@ var bmrHypno = function() {
     BMRHYPNO.anim=anim;
     for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
       let curKeyframe = {};
-      for(let selVal=0;selVal<anim.keyframes[selKf].names;selVal++) {
+      for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
         curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
       }
       curKeyframe.offset = anim.keyframes[selKf].offset;
