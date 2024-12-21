@@ -159,6 +159,21 @@ var bmrHypno = function() {
     }
   };
   var _preloadedAnimations = {
+    "New one": {
+      "keyframes": [
+        {
+          "offset": 0,
+          "names": ["name"],
+          "values": ["value"]
+        }
+      ],
+      "name": "New one",
+      "timings": {
+        "easing": "linear",
+        "duration": 5000,
+        "iterations": 1
+      }
+    },
     "Spin": {
       "keyframes": [
         {
@@ -171,10 +186,10 @@ var bmrHypno = function() {
       "timings": {
         "easing": "linear",
         "duration": 1000,
-        "iterations": "5"
+        "iterations": "1"
       }
     },
-    "Wobble": {
+    "Gelatine": {
       "keyframes": [
         {
           "offset": 0,
@@ -197,11 +212,101 @@ var bmrHypno = function() {
           "values": ["scale(0.95,1.05)"]
         }
       ],
-      "name": "Wobble",
+      "name": "Gelatine",
       "timings": {
         "easing": "linear",
         "duration": 1000,
-        "iterations": "5"
+        "iterations": "1"
+      }
+    },
+    "Fade out": {
+      "keyframes": [
+        {
+          "offset": 1,
+          "names": ["opacity"],
+          "values": ["0"]
+        }
+      ],
+      "name": "Fade out",
+      "timings": {
+        "easing": "linear",
+        "duration": 1000,
+        "iterations": "1"
+      }
+    },
+    "Wobble": {
+      "keyframes": [
+        {
+          "offset": 0,
+          "names": ["transform"],
+          "values": ["translateX(0%)"]
+        },
+        {
+          "offset": 0.15,
+          "names": ["transform"],
+          "values": ["translateX(-25%) rotate(-5deg)"]
+        },
+        {
+          "offset": 0.30,
+          "names": ["transform"],
+          "values": ["translateX(20%) rotate(3deg)"]
+        },
+        {
+          "offset": 0.45,
+          "names": ["transform"],
+          "values": ["translateX(-15%) rotate(-3deg)"]
+        },
+        {
+          "offset": 0.60,
+          "names": ["transform"],
+          "values": ["translateX(10%) rotate(2deg)"]
+        },
+        {
+          "offset": 0.75,
+          "names": ["transform"],
+          "values": ["translateX(-5%) rotate(-1deg)"]
+        },
+        {
+          "offset": 1,
+          "names": ["transform"],
+          "values": ["translateX(0%)"]
+        },
+      ],
+      "name": "Wobble",
+      "timings": {
+        "easing": "ease",
+        "duration": 1000,
+        "iterations": "1"
+      }
+    },
+    "Bounce in": {
+      "keyframes": [
+        {
+          "offset": 0,
+          "names": ["transform"],
+          "values": ["scale(0.3)"]
+        },
+        {
+          "offset": 0.5,
+          "names": ["transform"],
+          "values": ["scale(1.05)"]
+        },
+        {
+          "offset": 0.7,
+          "names": ["transform"],
+          "values": ["scale(0.9)"]
+        },
+        {
+          "offset": 1,
+          "names": ["transform"],
+          "values": ["scale(1)"]
+        }
+      ],
+      "name": "Bounce in",
+      "timings": {
+        "easing": "linear",
+        "duration": 1000,
+        "iterations": "1"
       }
     },
   };
@@ -1202,7 +1307,7 @@ var bmrHypno = function() {
           <div id="iterationsAnimationContainer" class="sideCreatorBox">
             <div id="iterationsAnimationLabel" class="gradientLabel">Iterations?</div>
             <input id="iterationsAnimationInput" class="gradientTextInput" type="text" placeholder="Number">
-            <input id="iterationsAnimationInputRange" class="gradientTextInput" placeholder="0" type="range" min="0" max="10">
+            <input id="iterationsAnimationInputRange" class="gradientTextInput" placeholder="0" type="range" min="1" max="10">
           </div>
           <div id="keyframeSelectedContainer" class="sideCreatorBox">
             <div id="keyframeSelectedLabel" class="gradientLabel">Selected Keyframe</div>
@@ -1338,12 +1443,12 @@ var bmrHypno = function() {
     let iterationsAnimationInput = document.getElementById("iterationsAnimationInput");
     let iterationsAnimationInputRange = document.getElementById("iterationsAnimationInputRange");
     iterationsAnimationInput.oninput = (e) => {
-      let selected = e.target.value>=10?"Infinity":e.target.value;
+      let selected = e.target.value//>=10?"Infinity":e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.iterations = selected;
       iterationsAnimationInputRange.value = e.target.value;
     }
     iterationsAnimationInputRange.oninput = (e) => {
-      let selected = e.target.value>=10?"Infinity":e.target.value;
+      let selected = e.target.value//>=10?"Infinity":e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.iterations = selected;
       iterationsAnimationInput.value = e.target.value;
     }
