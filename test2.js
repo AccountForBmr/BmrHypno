@@ -1684,7 +1684,9 @@ var bmrHypno = function() {
 
     wordElm.style.opacity = word.opacity;
 
-    wordElm.style.transform = `rotate(${randRange(Number(word.rotation[0]),Number(word.rotation[1]))}deg)`;
+    let rotateValue = randRange(Number(word.rotation[0]),Number(word.rotation[1]))+"deg";
+    wordElm.style.setProperty("--rotation",rotateValue);
+    wordElm.style.transform = "rotate(var(--rotation))";
 
     if(word.animation != "None") {
       let anim = word.animation;
