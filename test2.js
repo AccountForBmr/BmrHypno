@@ -1618,6 +1618,7 @@ var bmrHypno = function() {
       wordElm.style.left = word.position[0];
       wordElm.style.top = word.position[1];
     }
+    console.log(word.font);
     wordElm.style.fontSize = randRange(Number(word.font[0]),Number(word.font[1]))+"px";
 
     spawnArea.appendChild(wordElm);
