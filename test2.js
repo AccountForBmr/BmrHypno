@@ -82,7 +82,21 @@ var bmrHypno = function() {
           },
           "opacity": "0.5",
           "rotation": ["-45","45"],
-          "animation": "None"
+          "animation": {
+            "keyframes": [
+              {
+                "offset": 1,
+                "names": ["transform"],
+                "values": ["rotate(720deg)"]
+              }
+            ],
+            "name": "Spin",
+            "timings": {
+              "easing": "linear",
+              "duration": 1000,
+              "iterations": "1"
+            }
+          }
         },
         {
           "type": "img",
@@ -580,7 +594,20 @@ var bmrHypno = function() {
       //rotation
       document.getElementById("wordRotationInput1").value = cur.rotation[0];
       document.getElementById("wordRotationInput2").value = cur.rotation[1];
-      //animation/additional effects TODO
+      //animation/additional effects
+      let wordAnimationSelect = document.getElementById("wordAnimationSelect");
+      let wordAnimationCreatorContainer = document.getElementById("wordAnimationCreatorContainer");
+      let wordAnimationPreviewContainer = document.getElementById("wordAnimationPreviewContainer");
+      if(cur.animation == "None") {
+        wordAnimationSelect.selectedIndex = 0;
+        wordAnimationCreatorContainer.style.display = "none";
+        wordAnimationPreviewContainer.style.display = "none";
+      } else {
+        wordAnimationSelect.selectedIndex = 1;
+        wordAnimationCreatorContainer.style.display = "";
+        wordAnimationPreviewContainer.style.display = "";
+        updateAnimationLeft(cur.animation,0,0);
+      }
     }
     //that's all I have for now
   }
@@ -1658,6 +1685,21 @@ var bmrHypno = function() {
     wordElm.style.opacity = word.opacity;
 
     wordElm.style.transform = `rotate(${randRange(Number(word.rotation[0]),Number(word.rotation[1]))}deg)`;
+
+    if(word.animation != "None") {
+      let anim = word.animation;
+      let keyframesList = [];
+      let timings = anim.timings;
+      for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
+        let curKeyframe = {};
+        for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
+          curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
+        }
+        curKeyframe.offset = anim.keyframes[selKf].offset;
+        keyframesList.push(curKeyframe);
+      }
+      wordElm.animate(keyframesList,timings);
+    }
 
     spawnArea.appendChild(wordElm);
     setTimeout(()=>{wordElm.remove();},word.leaveTime);
