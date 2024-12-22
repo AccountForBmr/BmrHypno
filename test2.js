@@ -465,6 +465,7 @@ var bmrHypno = function() {
     loadSelections(selectHypno);
     //mainBox.appendChild(createCreateScreenGrid());
     createCreateScreenGrid();
+    loadSelectionInGrid(_preloadedHypnos["New one"]);
   }
 
   function loadSelections(selections) {
@@ -938,10 +939,15 @@ var bmrHypno = function() {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text == "Random") {
         wordColorInput.style.display = "none";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].color = "Random";
       } else {
-          wordColorInput.style.display = "";
+        wordColorInput.style.display = "";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].color = wordColorPicker.toHEXString();
       }
     };
+    wordColorPicker.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].color = wordColorPicker.toHEXString();
+    }
     _colorPickers.push(wordColorPicker);
     //border
     let wordBorderInput = document.getElementById("wordBorderInput");
@@ -956,10 +962,15 @@ var bmrHypno = function() {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text == "None") {
         wordBorderInput.style.display = "none";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].border = "None";
       } else {
         wordBorderInput.style.display = "";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].border = wordBorderPicker.toHEXString();
       }
     };
+    wordBorderPicker.oninput = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].border = wordBorderPicker.toHEXString();
+    }
     _colorPickers.push(wordBorderPicker);
     //gradient
     let wordGradientSelect = document.getElementById("wordGradientSelect");
