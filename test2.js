@@ -945,7 +945,7 @@ var bmrHypno = function() {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].color = wordColorPicker.toHEXString();
       }
     };
-    wordColorPicker.oninput = (e) => {
+    wordColorInput.oninput = (e) => {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].color = wordColorPicker.toHEXString();
     }
     _colorPickers.push(wordColorPicker);
@@ -968,7 +968,7 @@ var bmrHypno = function() {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].border = wordBorderPicker.toHEXString();
       }
     };
-    wordBorderPicker.oninput = (e) => {
+    wordBorderInput.oninput = (e) => {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].border = wordBorderPicker.toHEXString();
     }
     _colorPickers.push(wordBorderPicker);
