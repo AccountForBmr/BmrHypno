@@ -29,17 +29,17 @@ var bmrHypno = function() {
   var _currentlyLoaded = {};
   var _preloadedHypnos = {
     "New one": {
-      "name": "",
-      "spawnTime": "",
+      "name": "New one",
+      "spawnTime": 500,
       "values": [
         {
           "type": "word",
-          "value": "",
-          "leaveTime": "",
+          "value": "Word",
+          "leaveTime": 5000,
           "position": "Random",
-          "font": ["",""],
+          "font": ["64","128"],
           "color": "Random",
-          "border": "None",
+          "border": "#000000",
           "gradient": "None",
           "opacity": "0.5",
           "rotation": ["0","0"],
@@ -1638,6 +1638,8 @@ var bmrHypno = function() {
         grad+="),";
       }
       grad = grad.slice(0,-1);
+      wordElm.style.color = "transparent";
+      wordElm.style.backgroundClip = "text";
       wordElm.style.backgroundImage=grad;
       wordElm.style.backgroundBlendMode=selectedGradient.blendMode;
     }
