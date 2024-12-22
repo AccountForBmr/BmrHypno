@@ -1832,6 +1832,20 @@ var bmrHypno = function() {
     GUI.instance.DisplayMessage("Everything was loaded correctly, hopefully! \\[T]/");
     jsColor = JSColor; 
   }
+  popperScript=document.createElement('script');
+  popperScript.src='https://unpkg.com/@popperjs/core@2';
+  popperScript.async=true;
+  document.body.appendChild(popperScript);
+  popperScript.onload = () => {
+    GUI.instance.DisplayMessage("Popper Loaded");
+  }
+  tippyScript=document.createElement('script');
+  tippyScript.src='https://unpkg.com/tippy.js@6';
+  tippyScript.async=true;
+  document.body.appendChild(tippyScript);
+  tippyScript.onload = () => {
+    GUI.instance.DisplayMessage("Tippy Loaded");
+  }    
 
 };
 
