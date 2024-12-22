@@ -1619,6 +1619,8 @@ var bmrHypno = function() {
       wordElm.style.top = word.position[1];
     }
     wordElm.style.fontSize = randRange(word.font[0],word.font[1])+"px";
+    
+    spawnArea.appendChild(wordElm);
     setTimeout(()=>{wordElm.remove();},word.leaveTime);
   }
 
