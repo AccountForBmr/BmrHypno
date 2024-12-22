@@ -1655,6 +1655,10 @@ var bmrHypno = function() {
       wordElm.style.backgroundBlendMode=selectedGradient.blendMode;
     }
 
+    wordElm.style.opacity = word.opacity;
+
+    wordElm.style.transform = `rotate(${randRange(wordElm.rotation[0],wordElm.rotation[1])}deg)`;
+
     spawnArea.appendChild(wordElm);
     setTimeout(()=>{wordElm.remove();},word.leaveTime);
   }
