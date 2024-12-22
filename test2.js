@@ -492,7 +492,7 @@ var bmrHypno = function() {
       if(selected.text == "Load from file") {
         displayBtn.style.display = "";
       } else {
-        loadSelectionInGrid(selected);
+        loadSelectionInGrid(_preloadedHypnos[selected.text]);
         displayBtn.style.display = "none";
       }
     };
@@ -500,13 +500,13 @@ var bmrHypno = function() {
 
   function loadSelectionInGrid(selection) {
     //name
-    _currentlyLoaded = _preloadedHypnos[selection.text];
+    _currentlyLoaded = selection;
     _currentlyLoaded.selectedValue=0;
     _currentlyLoaded.selectedGradient=0;
     _currentlyLoaded.selectedGradientColor=0;
     _currentlyLoaded.selectedKeyframe=0;
     _currentlyLoaded.selectedKeyframeValue=0;
-    document.getElementById("formNameInput").value = selection.text;
+    document.getElementById("formNameInput").value = _currentlyLoaded.name;
     //spawnTime
     document.getElementById("formSpawnInput").value = _currentlyLoaded.spawnTime;
     document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
