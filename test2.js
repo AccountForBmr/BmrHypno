@@ -312,17 +312,17 @@ var bmrHypno = function() {
     },
   };
   const _templateHypno = {
-    "name": "",
-    "spawnTime": "",
+    "name": "New one",
+    "spawnTime": "500",
     "values": [
       {
         "type": "word",
-        "value": "",
-        "leaveTime": "",
+        "value": "Word",
+        "leaveTime": "5000",
         "position": "Random",
-        "font": ["",""],
+        "font": ["64","128"],
         "color": "Random",
-        "border": "None",
+        "border": "#000000",
         "gradient": "None",
         "opacity": "0.5",
         "rotation": ["0","0"],
@@ -1618,8 +1618,29 @@ var bmrHypno = function() {
       wordElm.style.left = word.position[0];
       wordElm.style.top = word.position[1];
     }
-    console.log(word.font);
     wordElm.style.fontSize = randRange(Number(word.font[0]),Number(word.font[1]))+"px";
+
+    wordElm.style.color = word.color == "Random"?"#"+Math.floor(Math.random()*0xFFFFFF).toString(16).padStart(6, 0):word.color;
+    
+    wordElm.style.webkitTextStroke = word.border != "None"?"1px "+word.border:"";
+    
+    if(word.gradient != "None") {
+      let selectedGradient = word.gradient;
+      let grad = "";
+      for(i in selectedGradient.gradients) {
+        grad += `${selectedGradient.gradients[i].type}(`;
+        grad += selectedGradient.gradients[i].type.includes("conic")?`from ${selectedGradient.gradients[i].direction}`:`${selectedGradient.gradients[i].direction}`;
+        grad += selectedGradient.gradients[i].type.includes("radial")?",":"deg,";
+        for(j in selectedGradient.gradients[i].colors) {
+          grad+=`${selectedGradient.gradients[i].colors[j]} ${selectedGradient.gradients[i].positions[j]!=""?selectedGradient.gradients[i].positions[j]+"%":""} ${selectedGradient.gradients[i].positions2[j]!=""?selectedGradient.gradients[i].positions2[j]+"%":""},`;
+        }
+        grad = grad.slice(0,-1);
+        grad+="),";
+      }
+      grad = grad.slice(0,-1);
+      wordElm.style.backgroundImage=grad;
+      wordElm.style.backgroundBlendMode=selectedGradient.blendMode;
+    }
 
     spawnArea.appendChild(wordElm);
     setTimeout(()=>{wordElm.remove();},word.leaveTime);
