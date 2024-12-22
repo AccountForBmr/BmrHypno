@@ -1656,9 +1656,14 @@ var bmrHypno = function() {
       wordElm.style.left = word.position[0];
       wordElm.style.top = word.position[1];
     }
+    wordElm.style.setProperty("--top",wordElm.style.top);
+    wordElm.style.setProperty("--left",wordElm.style.left);
+
     wordElm.style.fontSize = randRange(Number(word.font[0]),Number(word.font[1]))+"px";
+    wordElm.style.setProperty("--fontSize",wordElm.style.fontSize);
 
     wordElm.style.color = word.color == "Random"?"#"+Math.floor(Math.random()*0xFFFFFF).toString(16).padStart(6, 0):word.color;
+    wordElm.style.setProperty("--color",wordElm.style.color);
     
     wordElm.style.webkitTextStroke = word.border != "None"?"1px "+word.border:"";
     
