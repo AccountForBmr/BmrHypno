@@ -6,6 +6,7 @@ var BMRHYPNO = {};
 
 var bmrHypno = function() {
   var mainBox = createElement("div", "mainBox");
+  var spawnArea = createElement("div","hypnoSpawnArea");
   var jsColor = {};
   var _menuModified = false;
   var _tabs = {
@@ -382,6 +383,7 @@ var bmrHypno = function() {
 
     if(!_menuModified) {
       document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
+      document.getElementById("scaler").appendChild(spawnArea);
       _menuModified = true;
     }
 
@@ -1590,9 +1592,34 @@ var bmrHypno = function() {
 
   function createWordPreviewTab() {
     let tab = createElement("div","wordPreviewTab","createTab");
-
+    let createWordPreviewTabHTML = `
+    <div id="wordPreviewContainer" class="tabWordContainer">
+      <div id="spawn1Btn">Spawn 1!</div>
+    </div>
+    `;
+    tab.insertAdjacentHTML("beforeend",createWordPreviewTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
+
+    //spawn1
+    let spawn1Btn = document.getElementById("spawn1Btn");
+    spawn1Btn.onclick = (e) => {
+      spawnWord(_currentlyLoaded.values[_currentlyLoaded.selectedValue]);
+    };
     return tab;
+  }
+
+  function spawnWord(word) {
+    let wordElm = createElement("div","","wordHypno",word.value);
+    if(word.position=="Random") {
+      let boundingRect = spawnArea.getBoundingClientRect();
+      wordElm.style.top = randRange(0,boundingRect.height)+"px";
+      wordElm.style.left = randRange(0,boundingRect.width)+"px";
+    } else {
+      wordElm.style.left = word.position[0];
+      wordElm.style.top = word.position[1];
+    }
+    wordElm.style.fontSize = randRange(word.font[0],word.font[1])+"px";
+    setTimeout(()=>{wordElm.remove();},word.leaveTime);
   }
 
   function createImgBaseTab() {
@@ -1699,6 +1726,10 @@ var bmrHypno = function() {
     elm.innerHTML = innerHTML;
     elm.placeholder = placeholder;
     return elm;
+  }
+
+  function randRange(min,max) {
+    return Math.floor(Math.random()*(max-min+1))+min;
   }
 
   BMRHYPNO.start = startBmr;
