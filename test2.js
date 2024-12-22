@@ -1657,7 +1657,7 @@ var bmrHypno = function() {
 
     wordElm.style.opacity = word.opacity;
 
-    wordElm.style.transform = `rotate(${randRange(word.rotation[0],word.rotation[1])}deg)`;
+    wordElm.style.transform = `rotate(${randRange(Number(word.rotation[0]),Number(word.rotation[1]))}deg)`;
 
     spawnArea.appendChild(wordElm);
     setTimeout(()=>{wordElm.remove();},word.leaveTime);
