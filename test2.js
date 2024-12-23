@@ -644,6 +644,7 @@ var bmrHypno = function() {
     let tippyFormNameInput = createTippy(formNameInput,"Name can't be empty","top");
     _tippys.push(tippyFormNameInput);
     formNameInput.oninput = (e) => {
+      console.log(e.target.value);
       if(e.target.value == "") {
         formNameInput.classList.add("invalidValue");
         tippyFormNameInput.show();
