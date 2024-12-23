@@ -513,6 +513,7 @@ var bmrHypno = function() {
   }
 
   function loadSelectionInGrid(selection) {
+    cleanInvalidValues("mainBox");
     //name
     _currentlyLoaded = selection;
     _currentlyLoaded.selectedValue=0;
@@ -782,7 +783,7 @@ var bmrHypno = function() {
     let wordPositionInput1 = document.getElementById("wordPositionInput1");
     let wordPositionInput2 = document.getElementById("wordPositionInput2");
     let tippyWordPos1 = createTippy(wordPositionInput1,"Value must be in format: 11.11%","top");
-    let tippyWordPos2 = createTippy(wordPositionInput2,"Value must be in format: 11.11%","right");
+    let tippyWordPos2 = createTippy(wordPositionInput2,"Value must be in format: 11.11%","bottom");
     wordPositionInputSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text == "Random") {
@@ -1063,6 +1064,7 @@ var bmrHypno = function() {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = "None";
         wordGradientCreatorContainer.style.display = "none";
         wordGradientPreviewContainer.style.display = "none";
+        cleanInvalidValues("wordGradientCreatorContainer");
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient == "None") {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_templateGradient));
@@ -1086,7 +1088,8 @@ var bmrHypno = function() {
       _currentlyLoaded.selectedGradient = 0;
       _currentlyLoaded.selectedGradientColor = 0;
       updateGradientPreviewRight(_preloadedGradients[selected]);
-      updateGradientPreviewLeft(_preloadedGradients[selected],0,0); 
+      updateGradientPreviewLeft(_preloadedGradients[selected],0,0);
+      cleanInvalidValues("wordGradientCreatorContainer"); 
     };
     for(gradName in _preloadedGradients) {
       console.log(gradName);
@@ -1097,6 +1100,10 @@ var bmrHypno = function() {
     let gradientAddBtn = document.getElementById("gradientAddBtn");
     let gradientRemoveBtn = document.getElementById("gradientRemoveBtn");
     gradientAddBtn.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       gr.gradients.push(JSON.parse(JSON.stringify(_templateGradient.gradients[0])));
       _currentlyLoaded.selectedGradient = gr.gradients.length-1;
@@ -1120,6 +1127,10 @@ var bmrHypno = function() {
     //choose which gradient to load
     let gradientSelectedSelect = document.getElementById("gradientSelectedSelect");
     gradientSelectedSelect.onchange = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       _currentlyLoaded.selectedGradient = selected;
@@ -1148,6 +1159,8 @@ var bmrHypno = function() {
         document.getElementById("angleGradientContainer").style.display = "none";
         shapeSelect.selectedIndex = 0;
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction ="ellipse";
+        angleGradientInput.classList.remove("invalidValue");
+        wordAngleTippy.hide();
       } else {
         document.getElementById("shapeGradientContainer").style.display = "none";
         document.getElementById("angleGradientContainer").style.display = "";
@@ -1163,13 +1176,23 @@ var bmrHypno = function() {
     //angle gradient
     let angleGradientInput = document.getElementById("angleGradientInput");
     let angleGradientInputRange = document.getElementById("angleGradientInputRange");
-    angleGradientInput.oninput = (e) => { 
+    let wordAngleTippy = createTippy(angleGradientInput,"Use a number >:c","bottom");
+    angleGradientInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        wordAngleTippy.show();
+        angleGradientInput.classList.add("invalidValue");
+        return;
+      }
+      wordAngleTippy.hide();
+      angleGradientInput.classList.remove("invalidValue"); 
       angleGradientInputRange.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = e.target.value;
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
-    angleGradientInputRange.oninput = (e) => { 
+    angleGradientInputRange.oninput = (e) => {
+      wordAngleTippy.hide();
+      angleGradientInput.classList.remove("invalidValue");
       angleGradientInput.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = e.target.value;
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
@@ -1196,6 +1219,10 @@ var bmrHypno = function() {
     _colorPickers.push(gradientColorPicker);
     let colorGradientSelectedSelect = document.getElementById("colorGradientSelectedSelect");
     colorGradientSelectedSelect.onchange = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
@@ -1246,7 +1273,12 @@ var bmrHypno = function() {
     let positionGradientSelect = document.getElementById("positionGradientSelect");
     let positionGradientInput = document.getElementById("positionGradientInput");
     let positionGradientInputRange = document.getElementById("positionGradientInputRange");
+    let wordPositionGradientTippy = createTippy(positionGradientInput,"Use a number >:c","bottom");
     positionGradientSelect.onchange = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       console.log(e.target.value);
       if(e.target.value == "Start at") {
         positionGradientInput.value = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor];
@@ -1257,6 +1289,13 @@ var bmrHypno = function() {
       }
     };
     positionGradientInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        positionGradientInput.classList.add("invalidValue");
+        wordPositionGradientTippy.show();
+        return;
+      }
+      positionGradientInput.classList.remove("invalidValue");
+      wordPositionGradientTippy.hide();
       positionGradientInputRange.value = e.target.value;
       if(positionGradientSelect.value == "Start at") {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor] = e.target.value;
@@ -1267,6 +1306,8 @@ var bmrHypno = function() {
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
     positionGradientInputRange.oninput = (e) => {
+      positionGradientInput.classList.remove("invalidValue");
+      wordPositionGradientTippy.hide();
       positionGradientInput.value = e.target.value;
       if(positionGradientSelect.value == "Start at") {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor] = e.target.value;
@@ -1780,6 +1821,10 @@ var bmrHypno = function() {
   }
 
   function changeTabType(type) {
+    if(document.getElementsByClassName("invalidValue").length != 0) {
+      GUI.instance.DisplayMessage("Fix the errors first :D");
+      return;
+    }
     //document.getElementById("create-tab-start").innerHTML="";
     //let hideAll = document.querySelectorAll(".createTab, .tabTitle");
     for (let i=0;i<_tabsContainers.length;i++) {
@@ -1808,12 +1853,23 @@ var bmrHypno = function() {
   }
 
   function changeTab(whichTab) {
+    if(document.getElementsByClassName("invalidValue").length != 0) {
+      GUI.instance.DisplayMessage("Fix the errors first :D");
+      return;
+    }
     for (let i=0;i<_tabsContainers.length;i++) {
       _tabsTitles[i].classList.remove("activeType");
       _tabsContainers[i].style.display = "none";
     }
     _tabsTitles[whichTab].classList.add("activeType");
     _tabsContainers[whichTab].style.display = "";
+  }
+
+  function cleanInvalidValues(fromId) {
+    let allInv = document.getElementById(fromId).getElementsByClassName("invalidValue");
+    for(invalid=0;invalid<allInv.length;invalid++) {
+      allInv[invalid].classList.remove("invalidValue");
+    }
   }
 
   function emptyMainBox() {
