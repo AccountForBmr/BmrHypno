@@ -651,17 +651,14 @@ var bmrHypno = function() {
     let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","right");
     spawnInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        tippySpawnInput.show();
         spawnInput.classList.add("invalidValue");
         return;
       }
-      tippySpawnInput.hide();
       spawnInput.classList.remove("invalidValue");
       spawnInputRange.value = e.target.value;
       _currentlyLoaded.spawnTime = e.target.value;
     }
     spawnInputRange.oninput = (e) => {
-      tippySpawnInput.hide();
       spawnInput.classList.remove("invalidValue");
       spawnInput.value = e.target.value;
       _currentlyLoaded.spawnTime = e.target.value;
@@ -762,17 +759,14 @@ var bmrHypno = function() {
     let tippyWordTimeInput = createTippy(wordTimeInput,"Use a number >:c","right");
     wordTimeInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        tippyWordTimeInput.show();
         wordTimeInput.classList.add("invalidValue");
         return;
       }
-      tippyWordTimeInput.hide();
       wordTimeInput.classList.remove("invalidValue");
       wordTimeRange.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
     }
     wordTimeRange.oninput = (e) => {
-      tippyWordTimeInput.hide();
       wordTimeInput.classList.remove("invalidValue");
       wordTimeInput.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
@@ -791,10 +785,8 @@ var bmrHypno = function() {
         wordPositionInput2.style.display = "none";
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = "Random";
 
-        tippyWordPos1.hide();
         wordPositionInput1.classList.remove("invalidValue");
         wordPositionInput1.value="";
-        tippyWordPos2.hide();
         wordPositionInput2.classList.remove("invalidValue");
         wordPositionInput2.value="";
       } else {
@@ -813,21 +805,17 @@ var bmrHypno = function() {
     };
     wordPositionInput1.oninput = (e) => {
       if(e.target.value.match(/^\d+(\.?\d+)*%$/)==null) {
-        tippyWordPos1.show();
         wordPositionInput1.classList.add("invalidValue");
         return;
       }
-      tippyWordPos1.hide();
       wordPositionInput1.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[0] = e.target.value;
     }
     wordPositionInput2.oninput = (e) => {
       if(e.target.value.match(/^\d+(\.?\d+)*%$/)==null) {
-        tippyWordPos2.show();
         wordPositionInput2.classList.add("invalidValue");
         return;
       }
-      tippyWordPos2.hide();
       wordPositionInput2.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[1] = e.target.value;
     }
@@ -849,11 +837,9 @@ var bmrHypno = function() {
     };
     wordFontInput1.oninput = (e)=>{
       if(isNaN(Number(e.target.value))) {
-        tippyWordFont1.show();
         wordFontInput1.classList.add("invalidValue");
         return;
       }
-      tippyWordFont1.hide();
       wordFontInput1.classList.remove("invalidValue");
       fontMin.style.fontSize = wordFontInput1.value+"px";
       fontMax.style.fontSize = wordFontInput2.value+"px";
@@ -863,11 +849,9 @@ var bmrHypno = function() {
     wordFontInput2.onblur = wordFontInput1.onblur;
     wordFontInput2.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        tippyWordFont2.show();
         wordFontInput2.classList.add("invalidValue");
         return;
       }
-      tippyWordFont2.hide();
       wordFontInput2.classList.remove("invalidValue");
       fontMin.style.fontSize = wordFontInput1.value+"px";
       fontMax.style.fontSize = wordFontInput2.value+"px";
@@ -1065,8 +1049,6 @@ var bmrHypno = function() {
         wordGradientCreatorContainer.style.display = "none";
         wordGradientPreviewContainer.style.display = "none";
         cleanInvalidValues("wordGradientCreatorContainer");
-        wordAngleTippy.hide();
-        wordPositionGradientTippy.hide();
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient == "None") {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_templateGradient));
@@ -1170,7 +1152,6 @@ var bmrHypno = function() {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = 0;
       }
       angleGradientInput.classList.remove("invalidValue");
-      wordAngleTippy.hide();
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].type = selected.value;
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
@@ -1182,11 +1163,9 @@ var bmrHypno = function() {
     let wordAngleTippy = createTippy(angleGradientInput,"Use a number >:c","bottom");
     angleGradientInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        wordAngleTippy.show();
         angleGradientInput.classList.add("invalidValue");
         return;
       }
-      wordAngleTippy.hide();
       angleGradientInput.classList.remove("invalidValue"); 
       angleGradientInputRange.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = e.target.value;
@@ -1194,7 +1173,6 @@ var bmrHypno = function() {
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
     angleGradientInputRange.oninput = (e) => {
-      wordAngleTippy.hide();
       angleGradientInput.classList.remove("invalidValue");
       angleGradientInput.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = e.target.value;
@@ -1299,11 +1277,9 @@ var bmrHypno = function() {
     positionGradientInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
         positionGradientInput.classList.add("invalidValue");
-        wordPositionGradientTippy.show();
         return;
       }
       positionGradientInput.classList.remove("invalidValue");
-      wordPositionGradientTippy.hide();
       positionGradientInputRange.value = e.target.value;
       if(positionGradientSelect.value == "Start at") {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor] = e.target.value;
@@ -1315,7 +1291,6 @@ var bmrHypno = function() {
     }
     positionGradientInputRange.oninput = (e) => {
       positionGradientInput.classList.remove("invalidValue");
-      wordPositionGradientTippy.hide();
       positionGradientInput.value = e.target.value;
       if(positionGradientSelect.value == "Start at") {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor] = e.target.value;
@@ -1874,11 +1849,8 @@ var bmrHypno = function() {
   }
 
   function cleanInvalidValues(fromId) {
-    let allInv = document.getElementById(fromId).getElementsByClassName("invalidValue");
-    for(invalid=0;invalid<allInv.length;invalid++) {
-      console.log(allInv);
-      allInv[invalid].classList.remove("invalidValue");
-    }
+    let allInv = document.getElementById(fromId).querySelectorAll(".invalidValue");
+    allInv.forEach((invalid)=>{invalid.classList.remove("invalidValue")}); 
   }
 
   function emptyMainBox() {
@@ -1916,6 +1888,7 @@ var bmrHypno = function() {
    newFunc = newFunc.replace(/_menuButton/gm,'document.getElementById("menu").getElementsByClassName("button")[0]');
    let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHYPNO.start())}'
    newFunc = newFunc.replace(/MENU\.Spells\.Open\({}\) }/gm,restOfTheFunc);
+   newFunc = newFunc.replace(/this\.ExitAlert\(\)/gm,"GUI.instance.ExitAlert()");
 
    return new Function("e",newFunc);
   }
@@ -1936,10 +1909,13 @@ var bmrHypno = function() {
   function createTippy(elm, content, placement) {
     var tippySettings = {
       "content": content,
-      "trigger": "manual",
-      "hideOnClick": "toggle",
+      "trigger": "focus",
+      "hideOnClick": "true",
       "placement": placement,
-      "theme": "error"
+      "theme": "error",
+      onShow(instance) {
+        return elm.classList.contains("invalidValue")?true:false;
+      }
     };
     return tippy(elm,tippySettings);
   }
@@ -1948,7 +1924,7 @@ var bmrHypno = function() {
   //testing jscolor
   jsColorScript=document.createElement('script');
   jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
-  jsColorScript.async=true;
+  //jsColorScript.async=true;
   document.body.appendChild(jsColorScript);
   jsColorScript.onload = () => {
     GUI.instance.DisplayMessage("Everything was loaded correctly, hopefully! \\[T]/");
@@ -1956,14 +1932,14 @@ var bmrHypno = function() {
   }
   popperScript=document.createElement('script');
   popperScript.src='https://unpkg.com/@popperjs/core@2';
-  popperScript.async=true;
+  //popperScript.async=true;
   document.body.appendChild(popperScript);
   popperScript.onload = () => {
     GUI.instance.DisplayMessage("Popper Loaded");
   }
   tippyScript=document.createElement('script');
   tippyScript.src='https://unpkg.com/tippy.js@6';
-  tippyScript.async=true;
+  //tippyScript.async=true;
   document.body.appendChild(tippyScript);
   tippyScript.onload = () => {
     GUI.instance.DisplayMessage("Tippy Loaded");
