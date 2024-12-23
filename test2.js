@@ -8,6 +8,7 @@ var bmrHypno = function() {
   var mainBox = createElement("div", "mainBox");
   var spawnArea = createElement("div","hypnoSpawnArea");
   var jsColor = {};
+  var _tippys = [];
   var _menuModified = false;
   var _tabs = {
     "word": {
@@ -640,7 +641,15 @@ var bmrHypno = function() {
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
     //name of the set
     let formNameInput = document.getElementById("formNameInput");
+    let tippyFormNameInput = createTippy(formNameInput,"Name can't be empty","top");
+    _tippys.push(tippyFormNameInput);
     formNameInput.oninput = (e) => {
+      if(e.target.value == "") {
+        formNameInput.classList.add("invalidValue");
+        tippyFormNameInput.show();
+        return;
+      }
+      formNameInput.classList.remove("invalidValue");
       _currentlyLoaded.name = e.target.value;
       console.log(_currentlyLoaded);
     }
@@ -649,8 +658,9 @@ var bmrHypno = function() {
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
     let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","right");
+    _tippys.push(tippySpawnInput);
     spawnInput.oninput = (e) => {
-      if(isNaN(Number(e.target.value))) {
+      if(isNaN(Number(e.target.value))||e.target.value=="") {
         spawnInput.classList.add("invalidValue");
         tippySpawnInput.show();
         return;
@@ -751,15 +761,24 @@ var bmrHypno = function() {
     document.getElementById("tabsContainer").appendChild(tab);
     //value
     let wordValueInput = document.getElementById("wordValueInput");
+    let tippywordValueInput = createTippy(wordValueInput,"word can't be empty","right");
+    _tippys.push(tippywordValueInput);
     wordValueInput.oninput = (e) => {
+      if(e.target.value == "") {
+        wordValueInput.classList.add("invalidValue");
+        tippywordValueInput.show();
+        return;
+      }
+      wordValueInput.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].value = e.target.value;
     }
     //time
     let wordTimeInput = document.getElementById("wordTimeInput");
     let wordTimeRange = document.getElementById("wordTimeRange");
     let tippyWordTimeInput = createTippy(wordTimeInput,"Use a number >:c","right");
+    _tippys.push(tippyWordTimeInput);
     wordTimeInput.oninput = (e) => {
-      if(isNaN(Number(e.target.value))) {
+      if(isNaN(Number(e.target.value))||e.target.value == "") {
         wordTimeInput.classList.add("invalidValue");
         tippyWordTimeInput.show();
         return;
@@ -780,6 +799,8 @@ var bmrHypno = function() {
     let wordPositionInput2 = document.getElementById("wordPositionInput2");
     let tippyWordPos1 = createTippy(wordPositionInput1,"Value must be in format: 11.11%","top");
     let tippyWordPos2 = createTippy(wordPositionInput2,"Value must be in format: 11.11%","bottom");
+    _tippys.push(tippyWordPos1);
+    _tippys.push(tippyWordPos2);
     wordPositionInputSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text == "Random") {
@@ -831,6 +852,8 @@ var bmrHypno = function() {
     let fontMax = document.getElementById("fontPreviewMax");
     let tippyWordFont1 = createTippy(wordFontInput1,"Use a number >:c","bottom");
     let tippyWordFont2 = createTippy(wordFontInput2,"Use a number >:c","right");
+    _tippys.push(tippyWordFont1);
+    _tippys.push(tippyWordFont2);
     wordFontInput1.onfocus = (e)=>{
       fontMin.style.display = "";
       fontMax.style.display = "";
@@ -840,7 +863,7 @@ var bmrHypno = function() {
       fontMax.style.display = "none"
     };
     wordFontInput1.oninput = (e)=>{
-      if(isNaN(Number(e.target.value))) {
+      if(isNaN(Number(e.target.value))||e.target.value == "") {
         wordFontInput1.classList.add("invalidValue");
         tippyWordFont1.show();
         return;
@@ -853,7 +876,7 @@ var bmrHypno = function() {
     wordFontInput2.onfocus = wordFontInput1.onfocus;
     wordFontInput2.onblur = wordFontInput1.onblur;
     wordFontInput2.oninput = (e) => {
-      if(isNaN(Number(e.target.value))) {
+      if(isNaN(Number(e.target.value))||e.target.value == "") {
         wordFontInput2.classList.add("invalidValue");
         tippyWordFont2.show();
         return;
@@ -1167,8 +1190,9 @@ var bmrHypno = function() {
     let angleGradientInput = document.getElementById("angleGradientInput");
     let angleGradientInputRange = document.getElementById("angleGradientInputRange");
     let wordAngleTippy = createTippy(angleGradientInput,"Use a number >:c","bottom");
+    _tippys.push(wordAngleTippy);
     angleGradientInput.oninput = (e) => {
-      if(isNaN(Number(e.target.value))) {
+      if(isNaN(Number(e.target.value))||e.target.value == "") {
         angleGradientInput.classList.add("invalidValue");
         wordAngleTippy.show();
         return;
@@ -1267,12 +1291,13 @@ var bmrHypno = function() {
     let positionGradientInput = document.getElementById("positionGradientInput");
     let positionGradientInputRange = document.getElementById("positionGradientInputRange");
     let wordPositionGradientTippy = createTippy(positionGradientInput,"Use a number >:c","bottom");
+    _tippys.push(wordPositionGradientTippy);
     positionGradientSelect.onchange = (e) => {
       if(document.getElementsByClassName("invalidValue").length != 0) {
         GUI.instance.DisplayMessage("Fix the errors first :D");
+        positionGradientSelect.selectedIndex = (positionGradientSelect.selectedIndex+1)%2;
         return;
       }
-      console.log(e.target.value);
       if(e.target.value == "Start at") {
         positionGradientInput.value = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor];
         positionGradientInputRange.value = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].positions[_currentlyLoaded.selectedGradientColor];
@@ -1868,6 +1893,8 @@ var bmrHypno = function() {
     _tabsContainers = [];
     _colorPickers = [];
     _currentlyLoaded = JSON.parse(JSON.stringify(_templateHypno));
+    _tippys.forEach((tippy)=>{tippy.destroy()});
+    _tippys = [];
     //var closeBtn = createElement("div","","button close");
     //closeBtn.onclick = () => { mainBox.remove(); };
     //mainBox.appendChild(closeBtn);
