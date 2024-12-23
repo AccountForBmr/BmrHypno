@@ -692,20 +692,20 @@ Tippy theme
 
 */
 
-.tippy-box[data-theme~='whiteBg'] {
-    background-color: rgb(72, 3, 3);
+.tippy-box[data-theme~='error'] {
+    background-color: darkred;
     color: #9c9c9c;
 }
 
-.tippy-box[data-theme~='whiteBg'][data-placement^='top'] > .tippy-arrow::before {
-    border-top-color: white;
+.tippy-box[data-theme~='error'][data-placement^='top'] > .tippy-arrow::before {
+    border-top-color: darkred;
 }
-  .tippy-box[data-theme~='whiteBg'][data-placement^='bottom'] > .tippy-arrow::before {
-    border-bottom-color: white;
+  .tippy-box[data-theme~='error'][data-placement^='bottom'] > .tippy-arrow::before {
+    border-bottom-color: darkred;
 }
-  .tippy-box[data-theme~='whiteBg'][data-placement^='left'] > .tippy-arrow::before {
-    border-left-color: white;
+  .tippy-box[data-theme~='error'][data-placement^='left'] > .tippy-arrow::before {
+    border-left-color: darkred;
 }
-  .tippy-box[data-theme~='whiteBg'][data-placement^='right'] > .tippy-arrow::before {
-    border-right-color: white;
+  .tippy-box[data-theme~='error'][data-placement^='right'] > .tippy-arrow::before {
+    border-right-color: darkred;
 }

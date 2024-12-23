@@ -1821,7 +1821,7 @@ var bmrHypno = function() {
       "trigger": "manual",
       "hideOnClick": "toggle",
       "placement": placement,
-      "theme": "whiteBg"
+      "theme": "error"
     };
     return tippy(elm,tippySettings);
   }
