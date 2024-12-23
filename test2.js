@@ -647,7 +647,7 @@ var bmrHypno = function() {
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
-    let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","top");
+    let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","right");
     spawnInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
         tippySpawnInput.show();
@@ -758,11 +758,21 @@ var bmrHypno = function() {
     //time
     let wordTimeInput = document.getElementById("wordTimeInput");
     let wordTimeRange = document.getElementById("wordTimeRange");
+    let tippyWordTimeInput = createTippy(wordTimeInput,"Use a number >:c","right");
     wordTimeInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        tippyWordTimeInput.show();
+        wordTimeInput.classList.add("invalidValue");
+        return;
+      }
+      tippyWordTimeInput.hide();
+      wordTimeInput.classList.remove("invalidValue");
       wordTimeRange.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
     }
     wordTimeRange.oninput = (e) => {
+      tippyWordTimeInput.hide();
+      wordTimeInput.classList.remove("invalidValue");
       wordTimeInput.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
     }
@@ -771,12 +781,21 @@ var bmrHypno = function() {
     let wordPositionInputSelect = document.getElementById("wordPositionInputSelect");
     let wordPositionInput1 = document.getElementById("wordPositionInput1");
     let wordPositionInput2 = document.getElementById("wordPositionInput2");
+    let tippyWordPos1 = createTippy(wordPositionInput1,"Value must be in format: 11.11%","top");
+    let tippyWordPos2 = createTippy(wordPositionInput2,"Value must be in format: 11.11%","right");
     wordPositionInputSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
       if(selected.text == "Random") {
         wordPositionInput1.style.display = "none";
         wordPositionInput2.style.display = "none";
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = "Random";
+
+        tippyWordPos1.hide();
+        wordPositionInput1.classList.remove("invalidValue");
+        wordPositionInput1.value="";
+        tippyWordPos2.hide();
+        wordPositionInput2.classList.remove("invalidValue");
+        wordPositionInput2.value="";
       } else {
         wordPositionInput1.style.display = "";
         wordPositionInput2.style.display = "";
@@ -792,9 +811,23 @@ var bmrHypno = function() {
       }
     };
     wordPositionInput1.oninput = (e) => {
+      if(e.target.value.match(/\d+(\.?\d+)*%/)==null) {
+        tippyWordPos1.show();
+        wordPositionInput1.classList.add("invalidValue");
+        return;
+      }
+      tippyWordPos1.hide();
+      wordPositionInput1.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[0] = e.target.value;
     }
     wordPositionInput2.oninput = (e) => {
+      if(e.target.value.match(/\d+(\.?\d+)*%/)==null) {
+        tippyWordPos2.show();
+        wordPositionInput2.classList.add("invalidValue");
+        return;
+      }
+      tippyWordPos2.hide();
+      wordPositionInput2.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[1] = e.target.value;
     }
 
@@ -803,6 +836,8 @@ var bmrHypno = function() {
     let wordFontInput2 = document.getElementById("wordFontInput2");
     let fontMin = document.getElementById("fontPreviewMin");
     let fontMax = document.getElementById("fontPreviewMax");
+    let tippyWordFont1 = createTippy(wordFontInput1,"Use a number >:c","bottom");
+    let tippyWordFont2 = createTippy(wordFontInput2,"Use a number >:c","right");
     wordFontInput1.onfocus = (e)=>{
       fontMin.style.display = "";
       fontMax.style.display = "";
@@ -812,13 +847,31 @@ var bmrHypno = function() {
       fontMax.style.display = "none"
     };
     wordFontInput1.oninput = (e)=>{
+      if(isNaN(Number(e.target.value))) {
+        tippyWordFont1.show();
+        wordFontInput1.classList.add("invalidValue");
+        return;
+      }
+      tippyWordFont1.hide();
+      wordFontInput1.classList.remove("invalidValue");
       fontMin.style.fontSize = wordFontInput1.value+"px";
       fontMax.style.fontSize = wordFontInput2.value+"px";
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];
     }
     wordFontInput2.onfocus = wordFontInput1.onfocus;
     wordFontInput2.onblur = wordFontInput1.onblur;
-    wordFontInput2.oninput = wordFontInput1.oninput;
+    wordFontInput2.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        tippyWordFont2.show();
+        wordFontInput2.classList.add("invalidValue");
+        return;
+      }
+      tippyWordFont2.hide();
+      wordFontInput2.classList.remove("invalidValue");
+      fontMin.style.fontSize = wordFontInput1.value+"px";
+      fontMax.style.fontSize = wordFontInput2.value+"px";
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];    
+    }
 
     return tab;
   }
