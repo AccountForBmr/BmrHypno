@@ -1876,6 +1876,7 @@ var bmrHypno = function() {
   function cleanInvalidValues(fromId) {
     let allInv = document.getElementById(fromId).getElementsByClassName("invalidValue");
     for(invalid=0;invalid<allInv.length;invalid++) {
+      console.log(allInv);
       allInv[invalid].classList.remove("invalidValue");
     }
   }
