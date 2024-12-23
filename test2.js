@@ -1065,6 +1065,8 @@ var bmrHypno = function() {
         wordGradientCreatorContainer.style.display = "none";
         wordGradientPreviewContainer.style.display = "none";
         cleanInvalidValues("wordGradientCreatorContainer");
+        wordAngleTippy.hide();
+        wordPositionGradientTippy.hide();
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient == "None") {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_templateGradient));
@@ -1112,6 +1114,7 @@ var bmrHypno = function() {
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     };
     gradientRemoveBtn.onclick = (e) => {
+      cleanInvalidValues("wordGradientCreatorContainer");
       let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       if(gr.gradients.length == 1) {
         GUI.instance.DisplayMessage("You can't have less than 1 gradient in this gradient group");
@@ -1159,8 +1162,6 @@ var bmrHypno = function() {
         document.getElementById("angleGradientContainer").style.display = "none";
         shapeSelect.selectedIndex = 0;
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction ="ellipse";
-        angleGradientInput.classList.remove("invalidValue");
-        wordAngleTippy.hide();
       } else {
         document.getElementById("shapeGradientContainer").style.display = "none";
         document.getElementById("angleGradientContainer").style.display = "";
@@ -1168,6 +1169,8 @@ var bmrHypno = function() {
         angleGradientInputRange.value = 0;
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].direction = 0;
       }
+      angleGradientInput.classList.remove("invalidValue");
+      wordAngleTippy.hide();
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient].type = selected.value;
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
@@ -1247,6 +1250,10 @@ var bmrHypno = function() {
     let colorGradientAddBtn = document.getElementById("colorGradientAddBtn");
     let colorGradientRemoveBtn = document.getElementById("colorGradientRemoveBtn");
     colorGradientAddBtn.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
       gr.colors.push("#000000FF");
       gr.positions.push("");
@@ -1256,6 +1263,7 @@ var bmrHypno = function() {
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
     colorGradientRemoveBtn.onclick = (e) => {
+      cleanInvalidValues("positionGradientInput");
       let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
       if(gr.colors.length == 2) {
         GUI.instance.DisplayMessage("You can't have less than 2 colors");
