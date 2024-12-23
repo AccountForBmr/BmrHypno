@@ -643,15 +643,11 @@ var bmrHypno = function() {
       _currentlyLoaded.name = e.target.value;
       console.log(_currentlyLoaded);
     }
-    formNameInput.onchange = formNameInput.oninput;
 
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
-    let tippySpawnInput = tippy(spawnInput,{
-      "content": "Use a number >:c",
-      "trigger": "none"
-    });
+    let tippySpawnInput = createTippy("Use a number >:c","right");
     spawnInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
         tippySpawnInput.show();
@@ -663,12 +659,12 @@ var bmrHypno = function() {
       spawnInputRange.value = e.target.value;
       _currentlyLoaded.spawnTime = e.target.value;
     }
-    spawnInput.onchange = spawnInput.oninput;
     spawnInputRange.oninput = (e) => {
+      tippySpawnInput.hide();
+      spawnInput.classList.remove("invalidValue");
       spawnInput.value = e.target.value;
       _currentlyLoaded.spawnTime = e.target.value;
     }
-    spawnInputRange.onchange = spawnInputRange.oninput;
     //select word/img
     //word
     let wordTypeContainer = document.getElementById("wordTypeContainer");
@@ -766,12 +762,10 @@ var bmrHypno = function() {
       wordTimeRange.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
     }
-    wordTimeInput.onchange = (e) => wordTimeInput.oninput;
     wordTimeRange.oninput = (e) => {
       wordTimeInput.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
     }
-    wordTimeRange.onchange = (e) => wordTimeRange.oninput;
 
     //position
     let wordPositionInputSelect = document.getElementById("wordPositionInputSelect");
@@ -800,11 +794,9 @@ var bmrHypno = function() {
     wordPositionInput1.oninput = (e) => {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[0] = e.target.value;
     }
-    wordPositionInput1.onchange = wordPositionInput1.oninput;
     wordPositionInput2.oninput = (e) => {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[1] = e.target.value;
     }
-    wordPositionInput2.onchange = wordPositionInput2.oninput;
 
     //font
     let wordFontInput1 = document.getElementById("wordFontInput1");
@@ -824,11 +816,9 @@ var bmrHypno = function() {
       fontMax.style.fontSize = wordFontInput2.value+"px";
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];
     }
-    wordFontInput1.onchange = wordFontInput1.oninput;
     wordFontInput2.onfocus = wordFontInput1.onfocus;
     wordFontInput2.onblur = wordFontInput1.onblur;
     wordFontInput2.oninput = wordFontInput1.oninput;
-    wordFontInput2.onchange = wordFontInput1.onchange;
 
     return tab;
   }
@@ -1132,8 +1122,6 @@ var bmrHypno = function() {
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
-    angleGradientInput.onchange = angleGradientInput.oninput;
-    angleGradientInputRange.onchange = angleGradientInputRange.oninput;
 
     //shape gradient (radial)
     let shapeSelect = document.getElementById("shapeSelect");
@@ -1235,8 +1223,6 @@ var bmrHypno = function() {
       updateGradientPreviewLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient,_currentlyLoaded.selectedGradient,_currentlyLoaded.selectedGradientColor);
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
-    positionGradientInput.onchange = positionGradientInput.oninput;
-    positionGradientInputRange.onchange = positionGradientInputRange.oninput;
 
     return tab;
   }
@@ -1417,8 +1403,6 @@ var bmrHypno = function() {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].opacity = e.target.value;
       wordOpacityInput.style.opacity = e.target.value;
     }
-    wordOpacityInput.onchange = wordOpacityInput.oninput;
-    wordOpacityRange.onchange = wordOpacityRange.oninput;
     wordOpacityInput.onblur = (e) => {wordOpacityInput.style.opacity = "1";}
     wordOpacityRange.onblur = (e) => {wordOpacityInput.style.opacity = "1";}
     //rotation
@@ -1429,7 +1413,6 @@ var bmrHypno = function() {
       wordRotationInput1.style.transform = `rotate(${e.target.value}deg)`;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].rotation[0] = e.target.value;
     }
-    wordRotationInput1.onchange = wordRotationInput1.oninput;
     wordRotationInput1.onblur = (e) => {
       wordRotationInput1.style.transform = "";
     }
@@ -1437,7 +1420,6 @@ var bmrHypno = function() {
       wordRotationInput2.style.transform = `rotate(${e.target.value}deg)`;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].rotation[1] = e.target.value;
     }
-    wordRotationInput2.onchange = wordRotationInput2.oninput;
     wordRotationInput2.onblur = (e) => {
       wordRotationInput2.style.transform = "";
     }
@@ -1831,6 +1813,17 @@ var bmrHypno = function() {
 
   function randRange(min,max) {
     return Math.floor(Math.random()*(max-min+1))+min;
+  }
+
+  function createTippy(content,placement) {
+    var tippySettings = {
+      "content": content,
+      "trigger": "manual",
+      "hideOnClick": "toggle",
+      "placement": placement,
+      "theme": "whiteBg"
+    };
+    return tippySettings;
   }
 
   BMRHYPNO.start = startBmr;

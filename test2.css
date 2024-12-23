@@ -24,7 +24,7 @@
 }
 
 .invalidValue {
-    background-color: darkred;
+    background-color: darkred !important;
 }
 
 .topStart {
@@ -685,3 +685,14 @@ Word Hypnos down here
     user-select:none;
     pointer-events:none;
 }
+
+/*
+
+Tippy theme
+
+*/
+
+.tippy-box[data-theme~='whiteBg'] {
+    background-color: white;
+    color: black;
+  }
