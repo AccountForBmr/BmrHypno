@@ -693,7 +693,7 @@ Tippy theme
 */
 
 .tippy-box[data-theme~='error'] {
-    background-color: darkred;
+    background-color: rgba(102, 1, 1, 0.793);
     color: #9c9c9c;
 }
 
