@@ -695,4 +695,18 @@ Tippy theme
 .tippy-box[data-theme~='whiteBg'] {
     background-color: white;
     color: black;
-  }
+    border: 3px red;
+}
+
+.tippy-box[data-theme~='whiteBg'][data-placement^='top'] > .tippy-arrow::before {
+    border-top-color: white;
+}
+  .tippy-box[data-theme~='whiteBg'][data-placement^='bottom'] > .tippy-arrow::before {
+    border-bottom-color: white;
+}
+  .tippy-box[data-theme~='whiteBg'][data-placement^='left'] > .tippy-arrow::before {
+    border-left-color: white;
+}
+  .tippy-box[data-theme~='whiteBg'][data-placement^='right'] > .tippy-arrow::before {
+    border-right-color: white;
+}
