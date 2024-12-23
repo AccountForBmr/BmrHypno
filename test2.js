@@ -651,8 +651,8 @@ var bmrHypno = function() {
     let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","right");
     spawnInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        tippySpawnInput.show();
         spawnInput.classList.add("invalidValue");
+        tippySpawnInput.show();
         return;
       }
       spawnInput.classList.remove("invalidValue");
@@ -760,8 +760,8 @@ var bmrHypno = function() {
     let tippyWordTimeInput = createTippy(wordTimeInput,"Use a number >:c","right");
     wordTimeInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        tippyWordTimeInput.show();
         wordTimeInput.classList.add("invalidValue");
+        tippyWordTimeInput.show();
         return;
       }
       wordTimeInput.classList.remove("invalidValue");
@@ -807,8 +807,8 @@ var bmrHypno = function() {
     };
     wordPositionInput1.oninput = (e) => {
       if(e.target.value.match(/^\d+(\.?\d+)*%$/)==null) {
-        tippyWordPos1.show();
         wordPositionInput1.classList.add("invalidValue");
+        tippyWordPos1.show();
         return;
       }
       wordPositionInput1.classList.remove("invalidValue");
@@ -816,8 +816,8 @@ var bmrHypno = function() {
     }
     wordPositionInput2.oninput = (e) => {
       if(e.target.value.match(/^\d+(\.?\d+)*%$/)==null) {
-        tippyWordPos2.show();
         wordPositionInput2.classList.add("invalidValue");
+        tippyWordPos2.show();
         return;
       }
       wordPositionInput2.classList.remove("invalidValue");
@@ -841,8 +841,8 @@ var bmrHypno = function() {
     };
     wordFontInput1.oninput = (e)=>{
       if(isNaN(Number(e.target.value))) {
-        tippyWordFont1.show();
         wordFontInput1.classList.add("invalidValue");
+        tippyWordFont1.show();
         return;
       }
       wordFontInput1.classList.remove("invalidValue");
@@ -854,8 +854,8 @@ var bmrHypno = function() {
     wordFontInput2.onblur = wordFontInput1.onblur;
     wordFontInput2.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        tippyWordFont2.show();
         wordFontInput2.classList.add("invalidValue");
+        tippyWordFont2.show();
         return;
       }
       wordFontInput2.classList.remove("invalidValue");
@@ -1169,8 +1169,8 @@ var bmrHypno = function() {
     let wordAngleTippy = createTippy(angleGradientInput,"Use a number >:c","bottom");
     angleGradientInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        wordAngleTippy.show();
         angleGradientInput.classList.add("invalidValue");
+        wordAngleTippy.show();
         return;
       }
       angleGradientInput.classList.remove("invalidValue"); 
@@ -1283,8 +1283,8 @@ var bmrHypno = function() {
     };
     positionGradientInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
-        wordPositionGradientTippy.show();
         positionGradientInput.classList.add("invalidValue");
+        wordPositionGradientTippy.show();
         return;
       }
       positionGradientInput.classList.remove("invalidValue");
