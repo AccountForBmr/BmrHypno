@@ -811,7 +811,7 @@ var bmrHypno = function() {
       }
     };
     wordPositionInput1.oninput = (e) => {
-      if(e.target.value.match(/\d+(\.?\d+)*%$/)==null) {
+      if(e.target.value.match(/^\d+(\.?\d+)*%$/)==null) {
         tippyWordPos1.show();
         wordPositionInput1.classList.add("invalidValue");
         return;
@@ -821,7 +821,7 @@ var bmrHypno = function() {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[0] = e.target.value;
     }
     wordPositionInput2.oninput = (e) => {
-      if(e.target.value.match(/\d+(\.?\d+)*%$/)==null) {
+      if(e.target.value.match(/^\d+(\.?\d+)*%$/)==null) {
         tippyWordPos2.show();
         wordPositionInput2.classList.add("invalidValue");
         return;
