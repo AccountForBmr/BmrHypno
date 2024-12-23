@@ -647,7 +647,7 @@ var bmrHypno = function() {
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
-    let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","right");
+    let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","top");
     spawnInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
         tippySpawnInput.show();
