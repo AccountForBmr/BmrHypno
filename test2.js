@@ -647,7 +647,7 @@ var bmrHypno = function() {
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
-    let tippySpawnInput = createTippy("Use a number >:c","right");
+    let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","right");
     spawnInput.oninput = (e) => {
       if(isNaN(Number(e.target.value))) {
         tippySpawnInput.show();
@@ -1815,7 +1815,7 @@ var bmrHypno = function() {
     return Math.floor(Math.random()*(max-min+1))+min;
   }
 
-  function createTippy(content,placement) {
+  function createTippy(elm, content, placement) {
     var tippySettings = {
       "content": content,
       "trigger": "manual",
@@ -1823,7 +1823,7 @@ var bmrHypno = function() {
       "placement": placement,
       "theme": "whiteBg"
     };
-    return tippySettings;
+    return tippy(elm,tippySettings);
   }
 
   BMRHYPNO.start = startBmr;
