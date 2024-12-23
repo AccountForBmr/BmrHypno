@@ -648,7 +648,18 @@ var bmrHypno = function() {
     //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
+    let tippySpawnInput = tippy(spawnInput,{
+      "content": "Use a number >:c",
+      "trigger": "none"
+    });
     spawnInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        tippySpawnInput.show();
+        spawnInput.classList.add("invalidValue");
+        return;
+      }
+      tippySpawnInput.hide();
+      spawnInput.classList.remove("invalidValue");
       spawnInputRange.value = e.target.value;
       _currentlyLoaded.spawnTime = e.target.value;
     }

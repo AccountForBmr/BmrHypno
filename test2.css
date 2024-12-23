@@ -23,6 +23,10 @@
     height: 100%;
 }
 
+.invalidValue {
+    background-color: darkred;
+}
+
 .topStart {
     width: 100%;
     display: flex;
