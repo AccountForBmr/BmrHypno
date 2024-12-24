@@ -195,7 +195,7 @@ var bmrHypno = function() {
         {
           "offset": 1,
           "names": ["transform"],
-          "values": ["rotate(720deg)"]
+          "values": ["rotate(calc(var(--rotation) + 720deg))"]
         }
       ],
       "name": "Spin",
@@ -210,22 +210,22 @@ var bmrHypno = function() {
         {
           "offset": 0,
           "names": ["transform"],
-          "values": ["scale(1,1)"]
+          "values": ["scale(1,1) rotate(var(--rotation))"]
         },
         {
           "offset": 0.25,
           "names": ["transform"],
-          "values": ["scale(0.9,1.1)"]
+          "values": ["scale(0.9,1.1) rotate(var(--rotation))"]
         },
         {
           "offset": 0.5,
           "names": ["transform"],
-          "values": ["scale(1.1,0.9)"]
+          "values": ["scale(1.1,0.9) rotate(var(--rotation))"]
         },
         {
           "offset": 0.75,
           "names": ["transform"],
-          "values": ["scale(0.95,1.05)"]
+          "values": ["scale(0.95,1.05) rotate(var(--rotation))"]
         }
       ],
       "name": "Gelatine",
@@ -255,37 +255,37 @@ var bmrHypno = function() {
         {
           "offset": 0,
           "names": ["transform"],
-          "values": ["translateX(0%)"]
+          "values": ["translateX(0%) rotate(var(--rotation))"]
         },
         {
           "offset": 0.15,
           "names": ["transform"],
-          "values": ["translateX(-25%) rotate(-5deg)"]
+          "values": ["translateX(-25%) rotate(var(--rotation) - 5deg)"]
         },
         {
           "offset": 0.30,
           "names": ["transform"],
-          "values": ["translateX(20%) rotate(3deg)"]
+          "values": ["translateX(20%) rotate(var(--rotation) + 8deg)"]
         },
         {
           "offset": 0.45,
           "names": ["transform"],
-          "values": ["translateX(-15%) rotate(-3deg)"]
+          "values": ["translateX(-15%) rotate(var(--rotation) - 6deg)"]
         },
         {
           "offset": 0.60,
           "names": ["transform"],
-          "values": ["translateX(10%) rotate(2deg)"]
+          "values": ["translateX(10%) rotate(var(--rotation) + 5deg)"]
         },
         {
           "offset": 0.75,
           "names": ["transform"],
-          "values": ["translateX(-5%) rotate(-1deg)"]
+          "values": ["translateX(-5%) rotate(var(--rotation) - 4deg)"]
         },
         {
           "offset": 1,
           "names": ["transform"],
-          "values": ["translateX(0%)"]
+          "values": ["translateX(0%) rotate(var(--rotation))"]
         },
       ],
       "name": "Wobble",
@@ -300,22 +300,22 @@ var bmrHypno = function() {
         {
           "offset": 0,
           "names": ["transform"],
-          "values": ["scale(0.3)"]
+          "values": ["scale(0.3) rotate(var(--rotation))"]
         },
         {
           "offset": 0.5,
           "names": ["transform"],
-          "values": ["scale(1.05)"]
+          "values": ["scale(1.05) rotate(var(--rotation))"]
         },
         {
           "offset": 0.7,
           "names": ["transform"],
-          "values": ["scale(0.9)"]
+          "values": ["scale(0.9) rotate(var(--rotation))"]
         },
         {
           "offset": 1,
           "names": ["transform"],
-          "values": ["scale(1)"]
+          "values": ["scale(1) rotate(var(--rotation))"]
         }
       ],
       "name": "Bounce in",
@@ -372,7 +372,7 @@ var bmrHypno = function() {
       },
       {
         "offset": 0.5,
-        "names": ["transform","background"],
+        "names": ["transform","backgroundColor"],
         "values": ["scale(3)","blue"]
       }
     ],
@@ -1422,6 +1422,13 @@ var bmrHypno = function() {
         <input id="wordRotationInput2" class="gridTextInput" type="text" placeholder="Max here(Use deg)">
       </div>
     </div>
+    <div class="tabWordContainer" id="smartPositionContainer">
+      <div id="wordSmartPositionLabel" class="gridLabel">Smart Positioning?</div>   
+      <select id="wordSmartPositionSelect" class="selectContainer">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
     <div id="wordAnimationInputContainer" class="tabWordContainer">
       <div id="wordAnimationLabel" class="gridLabel">Animation/Additional properties (Anything in the 0 keyframe can be treated as an additional property):</div>
       <div id="wordAnimationContainer">
@@ -1558,6 +1565,11 @@ var bmrHypno = function() {
     wordRotationInput2.onblur = (e) => {
       wordRotationInput2.style.transform = "";
     }
+    //smart positioning
+    let wordSmartPositionSelect = document.getElementById("wordSmartPositionSelect");
+    wordSmartPositionSelect.onchange = (e) => {
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].smart = e.target.value;
+    }
     //animation
     let wordAnimationSelect = document.getElementById("wordAnimationSelect");
     wordAnimationSelect.onchange = (e) => {
@@ -1574,6 +1586,7 @@ var bmrHypno = function() {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(_templateAnimation));
           _currentlyLoaded.selectedKeyframe = 0;
           _currentlyLoaded.selectedKeyframeValue = 0;
+          preloadAnimationSelect.selectedIndex = 0;
           updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,0,0);
         }
         wordAnimationCreatorContainer.style.display = "";

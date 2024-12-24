@@ -641,7 +641,7 @@ Word Effects Down Here
     flex-wrap: wrap;
 }
 
-#preloadAnimationLabel, #preloadGradientSelect, #durationAnimationLabel, #durationAnimationInput, #iterationsAnimationLabel, #offsetInputRange, #propertyNameLabel, #propertyNameInput, #propertyValueLabel, #propertyValueInput {
+#preloadAnimationLabel, #preloadGradientSelect, #durationAnimationLabel, #durationAnimationInput, #iterationsAnimationLabel, #offsetInputRange, #propertyNameLabel, #propertyNameInput, #propertyValueLabel, #propertyValueInput, #wordSmartPositionLabel, #wordSmartPositionSelect {
     width: 50% !important;
 }
 
