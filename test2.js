@@ -44,6 +44,7 @@ var bmrHypno = function() {
           "gradient": "None",
           "opacity": "0.5",
           "rotation": ["0","0"],
+          "smart": "Yes",
           "animation": "None"
         }
       ]
@@ -83,6 +84,7 @@ var bmrHypno = function() {
           },
           "opacity": "0.5",
           "rotation": ["-45","45"],
+          "smart": "No",
           "animation": {
             "keyframes": [
               {
@@ -260,27 +262,27 @@ var bmrHypno = function() {
         {
           "offset": 0.15,
           "names": ["transform"],
-          "values": ["translateX(-25%) rotate(var(--rotation) - 5deg)"]
+          "values": ["translateX(-25%) rotate(calc(var(--rotation) - 5deg))"]
         },
         {
           "offset": 0.30,
           "names": ["transform"],
-          "values": ["translateX(20%) rotate(var(--rotation) + 8deg)"]
+          "values": ["translateX(20%) rotate(calc(var(--rotation) + 3deg))"]
         },
         {
           "offset": 0.45,
           "names": ["transform"],
-          "values": ["translateX(-15%) rotate(var(--rotation) - 6deg)"]
+          "values": ["translateX(-15%) rotate(calc(var(--rotation) - 3deg))"]
         },
         {
           "offset": 0.60,
           "names": ["transform"],
-          "values": ["translateX(10%) rotate(var(--rotation) + 5deg)"]
+          "values": ["translateX(10%) rotate(calc(var(--rotation) + 2deg))"]
         },
         {
           "offset": 0.75,
           "names": ["transform"],
-          "values": ["translateX(-5%) rotate(var(--rotation) - 4deg)"]
+          "values": ["translateX(-5%) rotate(calc(var(--rotation) - 1deg))"]
         },
         {
           "offset": 1,
@@ -596,6 +598,8 @@ var bmrHypno = function() {
       //rotation
       document.getElementById("wordRotationInput1").value = cur.rotation[0];
       document.getElementById("wordRotationInput2").value = cur.rotation[1];
+      //smart positioning
+      document.getElementById("wordSmartPositionSelect").value = cur.smart;
       //animation/additional effects
       let wordAnimationSelect = document.getElementById("wordAnimationSelect");
       let wordAnimationCreatorContainer = document.getElementById("wordAnimationCreatorContainer");
