@@ -1277,7 +1277,7 @@ var bmrHypno = function() {
         GUI.instance.DisplayMessage("You can't have less than 2 colors");
         return;
       }
-      cleanInvalidValues("positionGradientContainer");
+      cleanInvalidValues("wordGradientCreatorContainer");
       gr.colors.splice(_currentlyLoaded.selectedGradientColor,1);
       gr.positions.splice(_currentlyLoaded.selectedGradientColor,1);
       gr.positions2.splice(_currentlyLoaded.selectedGradientColor,1);
@@ -1674,7 +1674,7 @@ var bmrHypno = function() {
         GUI.instance.DisplayMessage("You can't have less than 1 keyframe, silly!");
         return;
       }
-      cleanInvalidValues("offsetAnimationContainer");
+      cleanInvalidValues("wordAnimationCreatorContainer");
       anim.keyframes.splice(_currentlyLoaded.selectedKeyframe,1);
       _currentlyLoaded.selectedKeyframe = _currentlyLoaded.selectedKeyframe==0?0:_currentlyLoaded.selectedKeyframe-1;
       _currentlyLoaded.selectedKeyframeValue = 0;
@@ -1713,6 +1713,10 @@ var bmrHypno = function() {
     }
     //property +/- button
     propertyAddBtn.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
       anim.keyframes[_currentlyLoaded.selectedKeyframe].names.push("name");
       anim.keyframes[_currentlyLoaded.selectedKeyframe].values.push("value");
@@ -1720,6 +1724,10 @@ var bmrHypno = function() {
       updateAnimationLeft(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation,_currentlyLoaded.selectedKeyframe,_currentlyLoaded.selectedKeyframeValue);
     };
     propertyRemoveBtn.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
       if(anim.keyframes[_currentlyLoaded.selectedKeyframe].names.length == 1) {
         GUI.instance.DisplayMessage("You can't have less than 1 property, silly!");
@@ -1778,10 +1786,11 @@ var bmrHypno = function() {
   }
 
   function playAnimationRight() {
-    let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
+    let anim = JSON.parse(JSON.stringify(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation));
     let animText = document.getElementById("animationPreviewText");
     let keyframesList = [];
     let timings = anim.timings;
+    anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); //offsets need to be in order
     for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
       let curKeyframe = {};
       for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
@@ -1860,9 +1869,10 @@ var bmrHypno = function() {
     wordElm.style.transform = "rotate(var(--rotation))";
 
     if(word.animation != "None") {
-      let anim = word.animation;
+      let anim = JSON.parse(JSON.stringify(word.animation));
       let keyframesList = [];
       let timings = anim.timings;
+      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); //offsets need to be in order
       for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
         let curKeyframe = {};
         for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
