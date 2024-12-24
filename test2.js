@@ -644,7 +644,6 @@ var bmrHypno = function() {
     let tippyFormNameInput = createTippy(formNameInput,"Name can't be empty","top");
     _tippys.push(tippyFormNameInput);
     formNameInput.oninput = (e) => {
-      console.log(e.target.value);
       if(e.target.value == "") {
         formNameInput.classList.add("invalidValue");
         tippyFormNameInput.show();
@@ -1504,7 +1503,16 @@ var bmrHypno = function() {
     //opacity
     let wordOpacityInput = document.getElementById("wordOpacityInput");
     let wordOpacityRange = document.getElementById("wordOpacityRange");
+    let tippyWordOpacityInput = createTippy(wordOpacityInput,"Use a number >:c","top");
+    _tippys.push(tippyWordOpacityInput);
     wordOpacityInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        //can be empty, no need to check for that
+        wordOpacityInput.classList.add("invalidValue");
+        tippyWordOpacityInput.show();
+        return;
+      }
+      wordOpacityInput.classList.remove("invalidValue");
       wordOpacityRange.value = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].opacity = e.target.value;
       wordOpacityInput.style.opacity = e.target.value;
@@ -1519,8 +1527,18 @@ var bmrHypno = function() {
     //rotation
     let wordRotationInput1 = document.getElementById("wordRotationInput1");
     let wordRotationInput2 = document.getElementById("wordRotationInput2");
+    let tippyWordRotationInput1 = createTippy(wordRotationInput1,"Use a number >:c","left");
+    let tippyWordRotationInput2 = createTippy(wordRotationInput2,"Use a number >:c","bottom");
+    _tippys.push(tippyWordRotationInput1);
+    _tippys.push(tippyWordRotationInput2);
 
     wordRotationInput1.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        wordRotationInput1.classList.add("invalidValue");
+        tippyWordRotationInput1.show();
+        return;
+      }
+      wordRotationInput1.classList.remove("invalidValue");
       wordRotationInput1.style.transform = `rotate(${e.target.value}deg)`;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].rotation[0] = e.target.value;
     }
@@ -1528,6 +1546,12 @@ var bmrHypno = function() {
       wordRotationInput1.style.transform = "";
     }
     wordRotationInput2.oninput = (e) => {
+      if(isNaN(Number(e.target.value))) {
+        wordRotationInput2.classList.add("invalidValue");
+        tippyWordRotationInput2.show();
+        return;
+      }
+      wordRotationInput2.classList.remove("invalidValue");
       wordRotationInput2.style.transform = `rotate(${e.target.value}deg)`;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].rotation[1] = e.target.value;
     }
