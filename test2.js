@@ -106,7 +106,87 @@ var bmrHypno = function() {
           "value": "woah,url"
         }
       ]
-    }
+    },
+    "Slime": {
+      "name":"Slime",
+      "spawnTime":1000,
+      "values":[
+         {
+            "type":"word",
+            "value":"Slimy!",
+            "leaveTime":"10000",
+            "position":"Random",
+            "font":[
+               "64",
+               "128"
+            ],
+            "color":"#40B5C1",
+            "border":"#21F4C8",
+            "gradient":"None",
+            "opacity":"0.5",
+            "rotation":[
+               "-45",
+               "45"
+            ],
+            "smart":"Yes",
+            "animation":{
+               "keyframes":[
+                  {
+                     "offset":0,
+                     "names":[
+                        "transform"
+                     ],
+                     "values":[
+                        "scale(1,1) rotate(var(--rotation))"
+                     ]
+                  },
+                  {
+                     "offset":0.25,
+                     "names":[
+                        "transform"
+                     ],
+                     "values":[
+                        "scale(0.9,1.1) rotate(var(--rotation))"
+                     ]
+                  },
+                  {
+                     "offset":0.5,
+                     "names":[
+                        "transform"
+                     ],
+                     "values":[
+                        "scale(1.1,0.9) rotate(var(--rotation))"
+                     ]
+                  },
+                  {
+                     "offset":0.75,
+                     "names":[
+                        "transform"
+                     ],
+                     "values":[
+                        "scale(0.95,1.05) rotate(var(--rotation))"
+                     ]
+                  }
+               ],
+               "name":"Gelatine",
+               "timings":{
+                  "easing":"linear",
+                  "duration":300,
+                  "iterations":"50"
+               }
+            }
+         },
+         {
+            "type":"img",
+            "value":"woah,url"
+         }
+      ],
+      "selectedValue":0,
+      "selectedGradient":0,
+      "selectedGradientColor":0,
+      "selectedKeyframe":0,
+      "selectedKeyframeValue":0
+   }
   };
   var _preloadedGradients = {
     "New one": {
