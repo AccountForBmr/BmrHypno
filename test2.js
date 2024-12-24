@@ -1604,19 +1604,36 @@ var bmrHypno = function() {
     }
     //duration
     let durationAnimationInput = document.getElementById("durationAnimationInput");
+    let tippyDurationAnimationInput = createTippy(durationAnimationInput,"Use a positive number >:c","right");
+    _tippys.push(tippyDurationAnimationInput);
     durationAnimationInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))||Number(e.target.value)<0) {
+        durationAnimationInput.classList.add("invalidValue");
+        tippyDurationAnimationInput.show();
+        return;
+      }
+      durationAnimationInput.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.duration = Number(e.target.value);
     }
     //iterations
     let iterationsAnimationInput = document.getElementById("iterationsAnimationInput");
     let iterationsAnimationInputRange = document.getElementById("iterationsAnimationInputRange");
+    let tippyIterationsAnimationInput = createTippy(iterationsAnimationInput,"Use a positive number >:c","top");
+    _tippys.push(tippyIterationsAnimationInput);
     iterationsAnimationInput.oninput = (e) => {
-      let selected = e.target.value//>=10?"Infinity":e.target.value;
+      if(isNaN(Number(e.target.value))||Number(e.target.value)<0) {
+        iterationsAnimationInput.classList.add("invalidValue");
+        tippyIterationsAnimationInput.show();
+        return;
+      }
+      iterationsAnimationInput.classList.remove("invalidValue");
+      let selected = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.iterations = selected;
       iterationsAnimationInputRange.value = e.target.value;
     }
     iterationsAnimationInputRange.oninput = (e) => {
-      let selected = e.target.value//>=10?"Infinity":e.target.value;
+      iterationsAnimationInput.classList.remove("invalidValue");
+      let selected = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.timings.iterations = selected;
       iterationsAnimationInput.value = e.target.value;
     }
@@ -1654,11 +1671,20 @@ var bmrHypno = function() {
     //offset
     let offsetAnimationInput = document.getElementById("offsetAnimationInput");
     let offsetInputRange = document.getElementById("offsetInputRange");
+    let tippyOffsetAnimationInput = createTippy(offsetAnimationInput,"use a number between 0 and 1 >:c","top");
+    _tippys.push(tippyOffsetAnimationInput);
     offsetAnimationInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))||!(Number(e.target.value)>=0&&Number(e.target.value)<=1)) {
+        offsetAnimationInput.classList.add("invalidValue");
+        tippyOffsetAnimationInput.show();
+        return;
+      }
+      offsetAnimationInput.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.keyframes[_currentlyLoaded.selectedKeyframe].offset = e.target.value;
       offsetInputRange.value = e.target.value;
     }
     offsetInputRange.oninput = (e) => {
+      offsetAnimationInput.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.keyframes[_currentlyLoaded.selectedKeyframe].offset = e.target.value;
       offsetAnimationInput.value = e.target.value;
     }
@@ -1996,14 +2022,14 @@ var bmrHypno = function() {
   document.body.appendChild(popperScript);
   popperScript.onload = () => {
     GUI.instance.DisplayMessage("Popper Loaded");
+    tippyScript=document.createElement('script');
+    tippyScript.src='https://unpkg.com/tippy.js@6';
+    //tippyScript.async=true;
+    document.body.appendChild(tippyScript);
+    tippyScript.onload = () => {
+      GUI.instance.DisplayMessage("Tippy Loaded");
+    }    
   }
-  tippyScript=document.createElement('script');
-  tippyScript.src='https://unpkg.com/tippy.js@6';
-  //tippyScript.async=true;
-  document.body.appendChild(tippyScript);
-  tippyScript.onload = () => {
-    GUI.instance.DisplayMessage("Tippy Loaded");
-  }    
 
 };
 
