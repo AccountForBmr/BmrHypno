@@ -1125,12 +1125,12 @@ var bmrHypno = function() {
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     };
     gradientRemoveBtn.onclick = (e) => {
-      cleanInvalidValues("wordGradientCreatorContainer");
       let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient;
       if(gr.gradients.length == 1) {
         GUI.instance.DisplayMessage("You can't have less than 1 gradient in this gradient group");
         return;
       }
+      cleanInvalidValues("wordGradientCreatorContainer");
       gr.gradients.splice(_currentlyLoaded.selectedGradient,1);
       _currentlyLoaded.selectedGradient = _currentlyLoaded.selectedGradient==0?0:_currentlyLoaded.selectedGradient-1;
       _currentlyLoaded.selectedGradientColor = 0;
@@ -1272,12 +1272,12 @@ var bmrHypno = function() {
       updateGradientPreviewRight(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient);
     }
     colorGradientRemoveBtn.onclick = (e) => {
-      cleanInvalidValues("positionGradientInput");
       let gr = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
       if(gr.colors.length == 2) {
         GUI.instance.DisplayMessage("You can't have less than 2 colors");
         return;
       }
+      cleanInvalidValues("positionGradientContainer");
       gr.colors.splice(_currentlyLoaded.selectedGradientColor,1);
       gr.positions.splice(_currentlyLoaded.selectedGradientColor,1);
       gr.positions2.splice(_currentlyLoaded.selectedGradientColor,1);
@@ -1646,6 +1646,7 @@ var bmrHypno = function() {
     keyframeSelectedSelect.onchange = (e) => {
       if(document.getElementsByClassName("invalidValue").length != 0) {
         GUI.instance.DisplayMessage("Fix the errors first :D");
+        keyframeSelectedSelect.selectedIndex = _currentlyLoaded.selectedKeyframe;
         return;
       }
       console.log(_currentlyLoaded);
@@ -1657,6 +1658,10 @@ var bmrHypno = function() {
     }
     //keyframe +/- button
     keyframeAddBtn.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       let anim = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
       anim.keyframes.push(JSON.parse(JSON.stringify(_templateAnimation.keyframes[0])));
       _currentlyLoaded.selectedKeyframe = anim.keyframes.length-1;
@@ -1669,6 +1674,7 @@ var bmrHypno = function() {
         GUI.instance.DisplayMessage("You can't have less than 1 keyframe, silly!");
         return;
       }
+      cleanInvalidValues("offsetAnimationContainer");
       anim.keyframes.splice(_currentlyLoaded.selectedKeyframe,1);
       _currentlyLoaded.selectedKeyframe = _currentlyLoaded.selectedKeyframe==0?0:_currentlyLoaded.selectedKeyframe-1;
       _currentlyLoaded.selectedKeyframeValue = 0;
