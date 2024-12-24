@@ -1568,6 +1568,7 @@ var bmrHypno = function() {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = "None";
         wordAnimationCreatorContainer.style.display = "none";
         wordAnimationPreviewContainer.style.display = "none";
+        cleanInvalidValues("wordAnimationCreatorContainer");
       } else {
         if(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation == "None") {
           _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(_templateAnimation));
@@ -1587,6 +1588,7 @@ var bmrHypno = function() {
       _currentlyLoaded.selectedKeyframe = 0;
       _currentlyLoaded.selectedKeyframeValue = 0;
       updateAnimationLeft(_preloadedAnimations[selected],0,0);
+      cleanInvalidValues("wordAnimationCreatorContainer");
     };
     for(animName in _preloadedAnimations) {
       preloadAnimationSelect.options.add(new Option(animName,animName));
@@ -1642,6 +1644,10 @@ var bmrHypno = function() {
     let keyframeAddBtn = document.getElementById("keyframeAddBtn");
     let keyframeRemoveBtn = document.getElementById("keyframeRemoveBtn");
     keyframeSelectedSelect.onchange = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       _currentlyLoaded.selectedKeyframe = selected;
