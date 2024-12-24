@@ -74,7 +74,7 @@
     display: none;
 }
 
-#loadFileLabel {
+.topLabel {
     border: 2px solid #343434;
     border-radius: 0.5em;
     background: rgba(20, 20, 20, 0.9);
@@ -83,7 +83,11 @@
     color: #9c9c9c;
 }
 
-#loadFileLabel:hover, .selectContainer:hover, .gridTextInput:hover, .gradientBtn:hover, .gradientTextInput:hover, #playAnimationBtn:hover, #spawn1Btn:hover {
+#saveLabel {
+    background-color: #033f03;
+}
+
+.topLabel:hover, .selectContainer:hover, .gridTextInput:hover, .gradientBtn:hover, .gradientTextInput:hover, #playAnimationBtn:hover, #spawn1Btn:hover {
     filter: brightness(1.3);
 }
 
@@ -93,6 +97,7 @@
 
 #selectHypno {
     color: #9c9c9c;
+    width: 20% !important;
 }
 
 /*

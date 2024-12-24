@@ -445,8 +445,12 @@ var bmrHypno = function() {
       <div id="" class="gridLabel">Load from:</div>
       <select id="selectHypno" class="selectContainer">
       </select>
-      <label id="loadFileLabel" class="" style="display: none;">
+      <label id="loadFileLabel" class="topLabel" style="display: none;">
         <input id="loadFileBtn" class="" placeholder="" type="file">Load from file
+      </label>
+      <label id="saveLabel" class="topLabel">
+        Save
+        <a id="downloadAnchor" style="display: none;"></a>
       </label>
       <input id="backButton" class="" placeholder="" type="button" value="<">
       <div id="closeButton" class="button close"></div>
@@ -479,8 +483,18 @@ var bmrHypno = function() {
     let closeButton = document.getElementById("closeButton");
     closeButton.onclick = () => { mainBox.remove(); };
     let selectHypno = document.getElementById("selectHypno");
+
+    //save Btn
+    let saveLabel = document.getElementById("saveLabel");
+    let downloadAnchor = document.getElementById("downloadAnchor");
+    saveLabel.onclick = (e) => {
+      dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(_currentlyLoaded));
+      downloadAnchor.setAttribute("href",dataStr);
+      downloadAnchor.setAttribute("download", `${_currentlyLoaded.name}.json`);
+      downloadAnchor.click();
+    }
+
     loadSelections(selectHypno);
-    //mainBox.appendChild(createCreateScreenGrid());
     createCreateScreenGrid();
     loadSelectionInGrid(_preloadedHypnos["New one"]);
   }
