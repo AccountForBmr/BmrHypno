@@ -2032,7 +2032,7 @@ var bmrHypno = function() {
       if(wordRect.width >= bounds.width) {
         console.log("I'm big, width big. current left");
         console.log(wordElm.style.left);
-        wordElm.style.left = (wordRect.width-bounds.width)*-1+"px";
+        wordElm.style.left = (wordRect.width-bounds.width)/(-2)+"px";
         console.log("After:");
         console.log(wordElm.style.left);
       }
@@ -2040,7 +2040,7 @@ var bmrHypno = function() {
       if(wordRect.height >= bounds.height) {
         console.log("I'm big, height big. current top:");
         console.log(wordElm.style.top);
-        wordElm.style.top = (wordRect.height-bounds.height)*-1+"px";
+        wordElm.style.top = (wordRect.height-bounds.height)/(-2)+"px";
         console.log("After:");
         console.log(wordElm.style.top);
       }
