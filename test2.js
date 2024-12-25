@@ -1979,6 +1979,7 @@ var bmrHypno = function() {
     wordElm.style.setProperty("--rotation",rotateValue);
     wordElm.style.transform = "rotate(var(--rotation))";
 
+    setTimeout(()=>{wordElm.remove();},word.leaveTime);
     if(word.animation != "None") {
       let anim = JSON.parse(JSON.stringify(word.animation));
       let keyframesList = [];
@@ -1996,7 +1997,23 @@ var bmrHypno = function() {
     }
 
     spawnArea.appendChild(wordElm);
-    setTimeout(()=>{wordElm.remove();},word.leaveTime);
+    let smart = word.smart;
+    if(smart == "Yes") {
+      let bounds = document.getElementById("scaler").getBoundingClientRect();
+      let wordRect = wordElm.getBoundingClientRect();
+      if(wordRect.bottom > bounds.bottom) {
+        console.log("Out of bounds, down");
+      }
+      if(wordRect.right > bounds.right) {
+        console.log("Out of bounds, right");
+      }
+      if(wordRect.left < bounds.left) {
+        console.log("Out of bounds, left");
+      }
+      if(wordRect.top < bounds.top) {
+        console.log("Out of bounds, top");
+      }
+    }
   }
 
   function createImgBaseTab() {
