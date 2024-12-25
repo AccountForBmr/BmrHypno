@@ -2004,14 +2004,14 @@ var bmrHypno = function() {
       if(wordRect.bottom > bounds.bottom) {
         console.log("Out of bounds, down, current top");
         console.log(wordElm.style.top);
-        wordElm.style.top = wordElm.style.top.slice(0,-2)*bounds.width/100 - (wordRect.bottom - bounds.bottom) +"px";
+        wordElm.style.top = Number(wordElm.style.top.slice(0,-2))*bounds.width/100 - (wordRect.bottom - bounds.bottom) +"px";
         console.log("After:");
         console.log(wordElm.style.top);
       }
       if(wordRect.right > bounds.right) {
         console.log("Out of bounds, right, current left");
         console.log(wordElm.style.left);
-        wordElm.style.left = wordElm.style.left.slice(0,-2)*bounds.height/100 - (wordRect.right - bounds.right) +"px";
+        wordElm.style.left = Number(wordElm.style.left.slice(0,-2))*bounds.height/100 - (wordRect.right - bounds.right) +"px";
         console.log("After:");
         console.log(wordElm.style.left);
       }
