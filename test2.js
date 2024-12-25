@@ -1934,13 +1934,13 @@ var bmrHypno = function() {
 
   function spawnWord(word) {
     let wordElm = createElement("div","","wordHypno",word.value);
+    let bounds = spawnArea.getBoundingClientRect();
     if(word.position=="Random") {
-      let boundingRect = spawnArea.getBoundingClientRect();
-      wordElm.style.top = randRange(0,boundingRect.height)+"px";
-      wordElm.style.left = randRange(0,boundingRect.width)+"px";
+      wordElm.style.top = randRange(0,bounds.height)+"px";
+      wordElm.style.left = randRange(0,bounds.width)+"px";
     } else {
-      wordElm.style.left = word.position[0];
-      wordElm.style.top = word.position[1];
+      wordElm.style.top = Number(word.position[1].slice(0,-1))*bounds.height/100+"px";
+      wordElm.style.left = Number(word.position[0].slice(0,-1))*bounds.width/100+"px";
     }
     wordElm.style.setProperty("--top",wordElm.style.top);
     wordElm.style.setProperty("--left",wordElm.style.left);
@@ -1999,33 +1999,32 @@ var bmrHypno = function() {
     spawnArea.appendChild(wordElm);
     let smart = word.smart;
     if(smart == "Yes") {
-      let bounds = document.getElementById("scaler").getBoundingClientRect();
       let wordRect = wordElm.getBoundingClientRect();
       if(wordRect.bottom > bounds.bottom) {
         console.log("Out of bounds, down, current top");
         console.log(wordElm.style.top);
-        wordElm.style.top = Number(wordElm.style.top.slice(0,-2))*bounds.width/100 - (wordRect.bottom - bounds.bottom) +"px";
+        wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) - (wordRect.bottom - bounds.bottom) +"px";
         console.log("After:");
         console.log(wordElm.style.top);
       }
       if(wordRect.right > bounds.right) {
         console.log("Out of bounds, right, current left");
         console.log(wordElm.style.left);
-        wordElm.style.left = Number(wordElm.style.left.slice(0,-2))*bounds.height/100 - (wordRect.right - bounds.right) +"px";
+        wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) - (wordRect.right - bounds.right) +"px";
         console.log("After:");
         console.log(wordElm.style.left);
       }
       if(wordRect.left < bounds.left) {
         console.log("Out of bounds, left, current left");
         console.log(wordElm.style.left);
-        wordElm.style.left = 0+Math.abs(wordRect.left)+"px";
+        wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px";
         console.log("After:");
         console.log(wordElm.style.left);
       }
       if(wordRect.top < bounds.top) {
         console.log("Out of bounds, top, current top");
         console.log(wordElm.style.top);
-        wordElm.style.top = 0+Math.abs(wordRect.top)+"px";
+        wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
         console.log("After:");
         console.log(wordElm.style.top);
       }
