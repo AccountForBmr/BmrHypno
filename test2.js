@@ -2018,8 +2018,8 @@ var bmrHypno = function() {
       //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
         wordRect = wordElm.getBoundingClientRect();
-        wordElm.style.left = (wordRect.width-bounds.width)/(-2)+"px";
-        wordElm.style.top = (wordRect.height-bounds.height)/(-2)+"px";
+        wordElm.style.left = (Math.abs(wordRect.width-bounds.width))/(-2)+"px";
+        wordElm.style.top = (Math.abs(wordRect.height-bounds.height))/(-2)+"px";
       }
     }
   }
