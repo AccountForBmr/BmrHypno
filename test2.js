@@ -2018,14 +2018,14 @@ var bmrHypno = function() {
       if(wordRect.left < bounds.left) {
         console.log("Out of bounds, left, current left");
         console.log(wordElm.style.left);
-        wordElm.style.left = wordElm.style.left.slice(0,-2) + Math.abs(wordRect.left - bounds.left) +"px";
+        wordElm.style.left = "0px";
         console.log("After:");
         console.log(wordElm.style.left);
       }
       if(wordRect.top < bounds.top) {
         console.log("Out of bounds, top, current top");
         console.log(wordElm.style.top);
-        wordElm.style.top = wordElm.style.top.slice(0,-2) + Math.abs(wordRect.top - bounds.top) +"px";
+        wordElm.style.top = "0px";
         console.log("After:");
         console.log(wordElm.style.top);
       }
