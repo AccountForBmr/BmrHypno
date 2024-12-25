@@ -2003,6 +2003,7 @@ var bmrHypno = function() {
       let wordRect = wordElm.getBoundingClientRect();
       if(wordRect.bottom > bounds.bottom) {
         console.log("Out of bounds, down");
+        wordElm.style.top = wordElm.style.top - (bounds.bottom - wordRect.bottom);
       }
       if(wordRect.right > bounds.right) {
         console.log("Out of bounds, right");
