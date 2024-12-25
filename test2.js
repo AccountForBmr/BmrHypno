@@ -2009,13 +2009,25 @@ var bmrHypno = function() {
         console.log(wordElm.style.top);
       }
       if(wordRect.right > bounds.right) {
-        console.log("Out of bounds, right");
+        console.log("Out of bounds, right, current left");
+        console.log(wordElm.style.left);
+        wordElm.style.left = wordElm.style.left.slice(0,-2) - (wordRect.right - bounds.right) +"px";
+        console.log("After:");
+        console.log(wordElm.style.left);
       }
       if(wordRect.left < bounds.left) {
-        console.log("Out of bounds, left");
+        console.log("Out of bounds, left, current left");
+        console.log(wordElm.style.left);
+        wordElm.style.left = wordElm.style.left.slice(0,-2) + Math.abs(wordRect.left - bounds.left) +"px";
+        console.log("After:");
+        console.log(wordElm.style.left);
       }
       if(wordRect.top < bounds.top) {
-        console.log("Out of bounds, top");
+        console.log("Out of bounds, top, current top");
+        console.log(wordElm.style.top);
+        wordElm.style.top = wordElm.style.top.slice(0,-2) + Math.abs(wordRect.top - bounds.top) +"px";
+        console.log("After:");
+        console.log(wordElm.style.top);
       }
     }
   }
