@@ -2002,8 +2002,11 @@ var bmrHypno = function() {
       let bounds = document.getElementById("scaler").getBoundingClientRect();
       let wordRect = wordElm.getBoundingClientRect();
       if(wordRect.bottom > bounds.bottom) {
-        console.log("Out of bounds, down");
-        wordElm.style.top = wordElm.style.top.slice(0,-2) - (wordRect.bottom - bounds.bottom);
+        console.log("Out of bounds, down, current top");
+        console.log(wordElm.style.top);
+        wordElm.style.top = wordElm.style.top.slice(0,-2) - (wordRect.bottom - bounds.bottom) +"px";
+        console.log("After:");
+        console.log(wordElm.style.top);
       }
       if(wordRect.right > bounds.right) {
         console.log("Out of bounds, right");
