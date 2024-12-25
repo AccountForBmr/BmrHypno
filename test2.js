@@ -2001,48 +2001,21 @@ var bmrHypno = function() {
     if(smart == "Yes") {
       let wordRect = wordElm.getBoundingClientRect();
       if(wordRect.bottom > bounds.bottom) {
-        console.log("Out of bounds, down, current top");
-        console.log(wordElm.style.top);
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) - (wordRect.bottom - bounds.bottom) +"px";
-        console.log("After:");
-        console.log(wordElm.style.top);
       }
       if(wordRect.right > bounds.right) {
-        console.log("Out of bounds, right, current left");
-        console.log(wordElm.style.left);
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) - (wordRect.right - bounds.right) +"px";
-        console.log("After:");
-        console.log(wordElm.style.left);
       }
       if(wordRect.left < bounds.left) {
-        console.log("Out of bounds, left, current left");
-        console.log(wordElm.style.left);
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px";
-        console.log("After:");
-        console.log(wordElm.style.left);
       }
       if(wordRect.top < bounds.top) {
-        console.log("Out of bounds, top, current top");
-        console.log(wordElm.style.top);
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
-        console.log("After:");
-        console.log(wordElm.style.top);
       }
-      //if too big to fit in, width
-      if(wordRect.width >= bounds.width) {
-        console.log("I'm big, width big. current left");
-        console.log(wordElm.style.left);
+      //if too big to fit in
+      if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
         wordElm.style.left = (wordRect.width-bounds.width)/(-2)+"px";
-        console.log("After:");
-        console.log(wordElm.style.left);
-      }
-      //if too big to fit in, height
-      if(wordRect.height >= bounds.height) {
-        console.log("I'm big, height big. current top:");
-        console.log(wordElm.style.top);
         wordElm.style.top = (wordRect.height-bounds.height)/(-2)+"px";
-        console.log("After:");
-        console.log(wordElm.style.top);
       }
     }
   }
