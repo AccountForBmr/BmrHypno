@@ -1998,22 +1998,26 @@ var bmrHypno = function() {
 
     spawnArea.appendChild(wordElm);
     let smart = word.smart;
+    let wordRect = wordElm.getBoundingClientRect();
     if(smart == "Yes") {
-      let wordRect = wordElm.getBoundingClientRect();
       if(wordRect.bottom > bounds.bottom) {
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) - (wordRect.bottom - bounds.bottom) +"px";
       }
       if(wordRect.right > bounds.right) {
+        wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) - (wordRect.right - bounds.right) +"px";
       }
       if(wordRect.left < bounds.left) {
+        wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px";
       }
       if(wordRect.top < bounds.top) {
+        wordRect = wordElm.getBoundingClientRect();
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
       }
       //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
+        wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = (wordRect.width-bounds.width)/(-2)+"px";
         wordElm.style.top = (wordRect.height-bounds.height)/(-2)+"px";
       }
