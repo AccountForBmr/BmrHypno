@@ -435,7 +435,13 @@ var bmrHypno = function() {
               "transparent"
             ]
         }
-      ]
+      ],
+      "name": "Image as background",
+      "timings":{
+         "easing":"linear",
+         "duration":10000,
+         "iterations":"10"
+      }
     },
   };
   const _templateHypno = {
