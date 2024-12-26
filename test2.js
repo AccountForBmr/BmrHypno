@@ -624,7 +624,7 @@ var bmrHypno = function() {
     document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
     //values[0]
     let cur = _currentlyLoaded.values[selectedValue];
-    if(_currentlyLoaded.values[selectedValue].type == "word") {
+    if(cur.type == "word") {
       changeTabType("word");
       //word
       document.getElementById("wordValueInput").value = cur.value;
@@ -802,7 +802,7 @@ var bmrHypno = function() {
       //ADD
       leftTypeContainer.style.display = "";
       rightTypeContainer.style.display = "";
-      _currentlyLoaded.values.push(JSON.parse(JSON.stringify(_templateHypno)));
+      _currentlyLoaded.values.push(JSON.parse(JSON.stringify(_templateHypno.values[0])));
       _currentlyLoaded.selectedValue += 1;
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
     }
