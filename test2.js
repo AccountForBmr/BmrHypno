@@ -618,11 +618,18 @@ var bmrHypno = function() {
     _currentlyLoaded.selectedGradientColor=0;
     _currentlyLoaded.selectedKeyframe=0;
     _currentlyLoaded.selectedKeyframeValue=0;
+    if(selection.values.length > 1) {
+      document.getElementById("leftTypeContainer").style.display = "";
+      document.getElementById("rightTypeContainer").style.display = "";
+    } else {
+      document.getElementById("leftTypeContainer").style.display = "none";
+      document.getElementById("rightTypeContainer").style.display = "none";      
+    }
     document.getElementById("formNameInput").value = _currentlyLoaded.name;
     //spawnTime
     document.getElementById("formSpawnInput").value = _currentlyLoaded.spawnTime;
     document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
-    //values[0]
+    //values[]
     let cur = _currentlyLoaded.values[selectedValue];
     if(cur.type == "word") {
       changeTabType("word");
@@ -708,6 +715,9 @@ var bmrHypno = function() {
         wordAnimationPreviewContainer.style.display = "";
         updateAnimationLeft(cur.animation,0,0);
       }
+    } else {
+      //for the img
+      alert("I've got nothing for now!");
     }
     //that's all I have for now
   }
