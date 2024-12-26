@@ -576,7 +576,7 @@ var bmrHypno = function() {
 
     loadSelections(selectHypno);
     createCreateScreenGrid();
-    loadSelectionInGrid(_preloadedHypnos["New one"]);
+    loadSelectionInGrid(_preloadedHypnos["New one"],0);
   }
 
   function loadSelections(selections) {
@@ -603,17 +603,17 @@ var bmrHypno = function() {
       if(selected.text == "Load from file") {
         displayBtn.style.display = "";
       } else {
-        loadSelectionInGrid(_preloadedHypnos[selected.text]);
+        loadSelectionInGrid(_preloadedHypnos[selected.text],0);
         displayBtn.style.display = "none";
       }
     };
   }
 
-  function loadSelectionInGrid(selection) {
+  function loadSelectionInGrid(selection,selectedValue) {
     cleanInvalidValues("mainBox");
     //name
     _currentlyLoaded = selection;
-    _currentlyLoaded.selectedValue=0;
+    //_currentlyLoaded.selectedValue=0;
     _currentlyLoaded.selectedGradient=0;
     _currentlyLoaded.selectedGradientColor=0;
     _currentlyLoaded.selectedKeyframe=0;
@@ -623,8 +623,8 @@ var bmrHypno = function() {
     document.getElementById("formSpawnInput").value = _currentlyLoaded.spawnTime;
     document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
     //values[0]
-    let cur = _currentlyLoaded.values[0];
-    if(_currentlyLoaded.values[0].type == "word") {
+    let cur = _currentlyLoaded.values[selectedValue];
+    if(cur.type == "word") {
       changeTabType("word");
       //word
       document.getElementById("wordValueInput").value = cur.value;
@@ -756,7 +756,7 @@ var bmrHypno = function() {
       console.log(_currentlyLoaded);
     }
 
-    //making the two inputs update each other //TODO LATER CHECK CORRECT VALUE
+    //making the two inputs update each other 
     let spawnInput = document.getElementById("formSpawnInput");
     let spawnInputRange = document.getElementById("formSpawnRange");
     let tippySpawnInput = createTippy(spawnInput,"Use a number >:c","right");
@@ -791,6 +791,59 @@ var bmrHypno = function() {
     };
     _tabsTypes.push(wordTypeContainer);
     _tabsTypes.push(imgTypeContainer);
+    //add/remove new word/img
+    let addTypeContainer = document.getElementById("addTypeContainer");
+    let removeTypeContainer = document.getElementById("removeTypeContainer");
+    addTypeContainer.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
+      //ADD
+      leftTypeContainer.style.display = "";
+      rightTypeContainer.style.display = "";
+      _currentlyLoaded.values.push(JSON.parse(JSON.stringify(_templateHypno)));
+      _currentlyLoaded.selectedValue += 1;
+      loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
+    }
+    removeTypeContainer.onclick = (e) => {
+      //REMOVE
+      if(_currentlyLoaded.values.length == 2) {
+        leftTypeContainer.style.display = "none";
+        rightTypeContainer.style.display = "none";        
+      }
+      if(_currentlyLoaded.values.length == 1) {
+        GUI.instance.DisplayMessage("You can't have less than 1 word/img!");
+        return;
+      }
+      cleanInvalidValues("tabsContainer");
+      _currentlyLoaded.values.splice(_currentlyLoaded.selectedValue,1);
+      _currentlyLoaded.selectedValue = _currentlyLoaded.selectedValue==0?0:_currentlyLoaded.selectedValue-1;
+      loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);  
+    }
+
+    //move to the previous/next one
+    let leftTypeContainer = document.getElementById("leftTypeContainer");
+    let rightTypeContainer = document.getElementById("rightTypeContainer");
+    leftTypeContainer.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
+      //MOVE LEFT
+      _currentlyLoaded.selectedValue = _currentlyLoaded.selectedValue==0?_currentlyLoaded.values.length-1:_currentlyLoaded.selectedValue-1;
+      loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);  
+    }
+    rightTypeContainer.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
+      //MOVE RIGHT
+      _currentlyLoaded.selectedValue = (_currentlyLoaded.selectedValue+1)%_currentlyLoaded.values.length;
+      loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);     
+    }
+
     //creating the tabbed part
     let createTabbedContainer = document.getElementById("create-tab-start");
     fillTabs(createTabbedContainer);
