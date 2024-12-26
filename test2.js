@@ -2038,15 +2038,6 @@ var bmrHypno = function() {
   function spawnWord(word) {
     let wordElm = createElement("div","","wordHypno",word.value);
     let bounds = spawnArea.getBoundingClientRect();
-    if(word.position=="Random") {
-      wordElm.style.top = randRange(0,bounds.height)+"px";
-      wordElm.style.left = randRange(0,bounds.width)+"px";
-    } else {
-      wordElm.style.top = Number(word.position[1].slice(0,-1))*bounds.height/100+"px";
-      wordElm.style.left = Number(word.position[0].slice(0,-1))*bounds.width/100+"px";
-    }
-    wordElm.style.setProperty("--top",wordElm.style.top);
-    wordElm.style.setProperty("--left",wordElm.style.left);
 
     wordElm.style.fontSize = randRange(Number(word.font[0]),Number(word.font[1]))+"px";
     wordElm.style.setProperty("--fontSize",wordElm.style.fontSize);
@@ -2082,21 +2073,19 @@ var bmrHypno = function() {
     wordElm.style.setProperty("--rotation",rotateValue);
     wordElm.style.transform = "rotate(var(--rotation))";
 
-    setTimeout(()=>{wordElm.remove();},word.leaveTime);
-    if(word.animation != "None") {
-      let anim = JSON.parse(JSON.stringify(word.animation));
-      let keyframesList = [];
-      let timings = anim.timings;
-      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); //offsets need to be in order
-      for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
-        let curKeyframe = {};
-        for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
-          curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
-        }
-        curKeyframe.offset = anim.keyframes[selKf].offset;
-        keyframesList.push(curKeyframe);
-      }
-      wordElm.animate(keyframesList,timings);
+    if(word.position=="Random") {
+      //the span is needed to not have the results skewed towards bottom right, take width/height of span
+      let tempWordSpan = createElement("span","","tempWord");
+      tempWordSpan.style.fontSize = wordElm.style.fontSize;
+      spawnArea.appendChild(tempWordSpan);
+      let spanRect = tempWordSpan.getBoundingClientRect();
+      console.log(spanRect);
+      wordElm.style.top = randRange(spanRect.height*-1,bounds.height)+"px";
+      wordElm.style.left = randRange(spanRect.width*-1,bounds.width)+"px";
+      tempWordSpan.remove();
+    } else {
+      wordElm.style.top = Number(word.position[1].slice(0,-1))*bounds.height/100+"px";
+      wordElm.style.left = Number(word.position[0].slice(0,-1))*bounds.width/100+"px";
     }
 
     spawnArea.appendChild(wordElm);
@@ -2125,6 +2114,27 @@ var bmrHypno = function() {
         wordElm.style.top = (Math.abs(wordRect.height-bounds.height))/(-2)+"px";
       }
     }
+
+    wordElm.style.setProperty("--top",wordElm.style.top);
+    wordElm.style.setProperty("--left",wordElm.style.left);
+    
+    setTimeout(()=>{wordElm.remove();},word.leaveTime);
+    if(word.animation != "None") {
+      let anim = JSON.parse(JSON.stringify(word.animation));
+      let keyframesList = [];
+      let timings = anim.timings;
+      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); //offsets need to be in order
+      for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
+        let curKeyframe = {};
+        for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
+          curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
+        }
+        curKeyframe.offset = anim.keyframes[selKf].offset;
+        keyframesList.push(curKeyframe);
+      }
+      wordElm.animate(keyframesList,timings);
+    }
+
   }
 
   function createImgBaseTab() {
