@@ -224,6 +224,8 @@ Create stuff down here, mostly
 
 #selectTypeContainer {
     height: 15%;
+    padding-right: 2%;
+    padding-left: 2%;
 }
 
 .typeContainer {
@@ -248,12 +250,22 @@ Create stuff down here, mostly
     filter: brightness(1.75);
 }
 
-#wordTypeContainer {
-    margin-left: 2%;
+#wordTypeContainer, #imgTypeContainer {
+    min-width: 20%;
 }
 
-#imgTypeContainer {
-    margin-right: 2%;
+#leftTypeContainer, #rightTypeContainer {
+    width: 15%;
+}
+
+#addTypeContainer {
+    width: 15%;
+    background-color: #033f03;
+}
+
+#removeTypeContainer {
+    width: 15%;
+    background-color: #5a0606;
 }
 /*
  Tabbed part here

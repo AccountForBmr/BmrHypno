@@ -729,8 +729,12 @@ var bmrHypno = function() {
         </div>
       </div>
       <div id="selectTypeContainer" class="gridContainer">
+        <div id="leftTypeContainer" class="typeContainer" style="display: none;">◀</div>
         <div id="wordTypeContainer" class="typeContainer activeType">Word/Text</div>
         <div id="imgTypeContainer" class="typeContainer">Image/Gif</div>
+        <div id="addTypeContainer" class="typeContainer">+</div>
+        <div id="removeTypeContainer" class="typeContainer">-</div>
+        <div id="rightTypeContainer" class="typeContainer" style="display: none;">▶</div>
       </div>
       <div id="create-tab-start">
       </div>
