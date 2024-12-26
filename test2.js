@@ -403,6 +403,40 @@ var bmrHypno = function() {
         "iterations": "1"
       }
     },
+    "Image as background": {
+      "keyframes": [
+         {
+            "offset":"0",
+            "names": [
+              "backgroundImage",
+              "backgroundSize",
+              "backgroundClip",
+              "color"
+            ],
+            "values": [
+              "url(https://cdn.donmai.us/original/ba/a4/__drawn_by_tamamoice__baa4ccd12a8838f34802510a84574d13.png)",
+              "100% 100%",
+              "text",
+              "transparent"
+            ]
+        },
+        {
+            "offset":"1",
+            "names":[
+              "backgroundImage",
+              "backgroundSize",
+              "backgroundClip",
+              "color"
+            ],
+            "values":[
+              "url(https://cdn.donmai.us/original/ba/a4/__drawn_by_tamamoice__baa4ccd12a8838f34802510a84574d13.png)",
+              "100% 100%",
+              "text",
+              "transparent"
+            ]
+        }
+      ]
+    },
   };
   const _templateHypno = {
     "name": "New one",
