@@ -624,7 +624,7 @@ var bmrHypno = function() {
     document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
     //values[0]
     let cur = _currentlyLoaded.values[selectedValue];
-    if(cur.type == "word") {
+    if(_currentlyLoaded.values[selectedValue].type == "word") {
       changeTabType("word");
       //word
       document.getElementById("wordValueInput").value = cur.value;
