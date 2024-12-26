@@ -2075,7 +2075,7 @@ var bmrHypno = function() {
 
     if(word.position=="Random") {
       //the span is needed to not have the results skewed towards bottom right, take width/height of span
-      let tempWordSpan = createElement("span","","tempWord");
+      let tempWordSpan = createElement("span","","tempWord",word.value);
       tempWordSpan.style.fontSize = wordElm.style.fontSize;
       spawnArea.appendChild(tempWordSpan);
       let spanRect = tempWordSpan.getBoundingClientRect();
@@ -2117,7 +2117,7 @@ var bmrHypno = function() {
 
     wordElm.style.setProperty("--top",wordElm.style.top);
     wordElm.style.setProperty("--left",wordElm.style.left);
-    
+
     setTimeout(()=>{wordElm.remove();},word.leaveTime);
     if(word.animation != "None") {
       let anim = JSON.parse(JSON.stringify(word.animation));
