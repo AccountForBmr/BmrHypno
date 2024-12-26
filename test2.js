@@ -613,7 +613,7 @@ var bmrHypno = function() {
     cleanInvalidValues("mainBox");
     //name
     _currentlyLoaded = selection;
-    //_currentlyLoaded.selectedValue=0;
+    _currentlyLoaded.selectedValue=selectedValue;
     _currentlyLoaded.selectedGradient=0;
     _currentlyLoaded.selectedGradientColor=0;
     _currentlyLoaded.selectedKeyframe=0;
