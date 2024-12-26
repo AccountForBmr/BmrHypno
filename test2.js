@@ -175,10 +175,6 @@ var bmrHypno = function() {
                   "iterations":"50"
                }
             }
-         },
-         {
-            "type":"img",
-            "value":"woah,url"
          }
       ],
       "selectedValue":0,
@@ -813,7 +809,7 @@ var bmrHypno = function() {
       leftTypeContainer.style.display = "";
       rightTypeContainer.style.display = "";
       _currentlyLoaded.values.push(JSON.parse(JSON.stringify(_templateHypno.values[0])));
-      _currentlyLoaded.selectedValue += 1;
+      _currentlyLoaded.selectedValue = _currentlyLoaded.values.length-1;
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
     }
     removeTypeContainer.onclick = (e) => {
