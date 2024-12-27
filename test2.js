@@ -2106,8 +2106,8 @@ var bmrHypno = function() {
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
       }
-      //if too big to fit in, word as big as 75% of the screen in width or height
-      if(wordRect.width >= bounds.width*75/100 || wordRect.height >= bounds.height*75/100) {
+      //if too big to fit in
+      if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
         wordRect = wordElm.getBoundingClientRect();
         let tempWordSpan = createElement("span","","tempWord",word.value);
         tempWordSpan.style.fontSize = wordElm.style.fontSize;
