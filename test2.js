@@ -2079,7 +2079,6 @@ var bmrHypno = function() {
       tempWordSpan.style.fontSize = wordElm.style.fontSize;
       spawnArea.appendChild(tempWordSpan);
       let spanRect = tempWordSpan.getBoundingClientRect();
-      console.log(spanRect);
       wordElm.style.top = randRange(spanRect.height*-1,bounds.height)+"px";
       wordElm.style.left = randRange(spanRect.width*-1,bounds.width)+"px";
       tempWordSpan.remove();
@@ -2101,11 +2100,11 @@ var bmrHypno = function() {
       }
       if(wordRect.left < bounds.left) {
         wordRect = wordElm.getBoundingClientRect();
-        wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + bounds.left - Math.abs(wordRect.left)+"px";
+        wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(wordRect.left) - Math.abs(bounds.left)+"px";
       }
       if(wordRect.top < bounds.top) {
         wordRect = wordElm.getBoundingClientRect();
-        wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + bounds.top - Math.abs(wordRect.top)+"px";
+        wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(wordRect.top) - Math.abs(bounds.top)+"px";
       }
       //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
