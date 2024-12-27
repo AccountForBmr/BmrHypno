@@ -706,6 +706,7 @@ Word Hypnos down here
     z-index:20;
     user-select:none;
     pointer-events:none;
+    white-space: nowrap;
 }
 
 .tempWord {
@@ -714,7 +715,8 @@ Word Hypnos down here
     left:0;
     opacity: 0;
     user-select:none;
-    pointer-events:none;    
+    pointer-events:none;   
+    white-space: nowrap; 
 }
 
 /*

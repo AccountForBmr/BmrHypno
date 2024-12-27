@@ -2093,23 +2093,41 @@ var bmrHypno = function() {
     let smart = word.smart;
     let wordRect = wordElm.getBoundingClientRect();
     if(smart == "Yes") {
+      let cc=createElement("div","","",word.value);
+      cc.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:red;opacity:0.75;transform:${wordElm.style.transform};`;
+      spawnArea.appendChild(cc);
       if(wordRect.bottom > bounds.bottom) {
+        let dd=createElement("div","","",word.value);
+        dd.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:blue;opacity:0.75;transform:${wordElm.style.transform};`;
+        spawnArea.appendChild(dd);
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) - (wordRect.bottom - bounds.bottom) +"px";
       }
       if(wordRect.right > bounds.right) {
+        let ee=createElement("div","","",word.value);
+        ee.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:green;opacity:0.75;transform:${wordElm.style.transform};`;
+        spawnArea.appendChild(ee);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) - (wordRect.right - bounds.right) +"px";
       }
       if(wordRect.left < bounds.left) {
+        let ff=createElement("div","","",word.value);
+        ff.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:yellow;opacity:0.75;transform:${wordElm.style.transform};`;
+        spawnArea.appendChild(ff);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px";
       }
       if(wordRect.top < bounds.top) {
+        let gg=createElement("div","","",word.value);
+        gg.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:violet;opacity:0.75;transform:${wordElm.style.transform};`;
+        spawnArea.appendChild(gg);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
       }
       //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
+        let hh=createElement("div","","",word.value);
+        hh.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:orange;opacity:0.75;transform:${wordElm.style.transform};`;
+        spawnArea.appendChild(hh);
         wordRect = wordElm.getBoundingClientRect();
         let tempWordSpan = createElement("span","","tempWord",word.value);
         tempWordSpan.style.fontSize = wordElm.style.fontSize;
