@@ -2100,23 +2100,14 @@ var bmrHypno = function() {
       }
       if(wordRect.left < bounds.left) {
         wordRect = wordElm.getBoundingClientRect();
-        console.log("word:");
-        console.log(wordRect);
-        console.log("spawnArea:");
-        console.log(bounds);
-        console.log("moved left to:");
-        console.log(Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px");
-        console.log("originally it was at left:");
-        console.log(wordElm.style.left);
-
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px";
       }
       if(wordRect.top < bounds.top) {
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
       }
-      //if too big to fit in
-      if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
+      //if too big to fit in, word as big as 75% of the screen in width or height
+      if(wordRect.width >= bounds.width*75/100 || wordRect.height >= bounds.height*75/100) {
         wordRect = wordElm.getBoundingClientRect();
         let tempWordSpan = createElement("span","","tempWord",word.value);
         tempWordSpan.style.fontSize = wordElm.style.fontSize;
