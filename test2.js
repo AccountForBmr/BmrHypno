@@ -877,6 +877,7 @@ var bmrHypno = function() {
         return;
       }
       //MOVE LEFT
+      document.getElementById("create-tab-start").animate({opacity:[1,0,1]},{duration:500,ease:"ease-in-out"});
       _currentlyLoaded.selectedValue = _currentlyLoaded.selectedValue==0?_currentlyLoaded.values.length-1:_currentlyLoaded.selectedValue-1;
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);  
     }
@@ -886,6 +887,7 @@ var bmrHypno = function() {
         return;
       }
       //MOVE RIGHT
+      document.getElementById("create-tab-start").animate({opacity:[1,0,1]},{duration:500,ease:"ease-in-out"});
       _currentlyLoaded.selectedValue = (_currentlyLoaded.selectedValue+1)%_currentlyLoaded.values.length;
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);     
     }
