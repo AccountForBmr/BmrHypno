@@ -2100,6 +2100,13 @@ var bmrHypno = function() {
       }
       if(wordRect.left < bounds.left) {
         wordRect = wordElm.getBoundingClientRect();
+        console.log("word:");
+        console.log(wordRect);
+        console.log("spawnArea:");
+        console.log(bounds);
+        console.log("moved left to:");
+        console.log(Number(wordElm.style.left.slice(0,-2)) + Math.abs(wordRect.left) - Math.abs(bounds.left)+"px");
+
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(wordRect.left) - Math.abs(bounds.left)+"px";
       }
       if(wordRect.top < bounds.top) {
