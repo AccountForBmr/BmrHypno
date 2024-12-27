@@ -2134,8 +2134,8 @@ var bmrHypno = function() {
         spawnArea.appendChild(tempWordSpan);
         let spanRect = tempWordSpan.getBoundingClientRect();
         console.log(spanRect);
-        wordElm.style.left = (Math.abs(spanRect.width-bounds.width))/(-2)+"px";
-        wordElm.style.top = (Math.abs(spanRect.height-bounds.height))/(-2)+"px";
+        wordElm.style.left = (spanRect.width-bounds.width)/(-2)+"px";
+        wordElm.style.top = (spanRect.height-bounds.height)/(-2)+"px";
         tempWordSpan.remove();
       }
       let ii=createElement("div","","",word.value);
