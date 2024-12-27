@@ -946,8 +946,8 @@ var bmrHypno = function() {
           <option value="Random">Random</option>
           <option value="Precise Position">Precise Position</option>
         </select>
-        <input id="wordPositionInput1" class="gridTextInput" placeholder="% from top" type="text" style="display: none;">
-        <input id="wordPositionInput2" class="gridTextInput" placeholder="% from left" type="text" style="display: none;">
+        <input id="wordPositionInput1" class="gridTextInput" placeholder="% from left" type="text" style="display: none;">
+        <input id="wordPositionInput2" class="gridTextInput" placeholder="% from top" type="text" style="display: none;">
       </div>
     </div>
     <div id="wordFontContainer" class="tabWordContainer">
@@ -2094,31 +2094,31 @@ var bmrHypno = function() {
     let wordRect = wordElm.getBoundingClientRect();
     if(smart == "Yes") {
       let cc=createElement("div","","",word.value);
-      cc.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:red;opacity:0.75;transform:${wordElm.style.transform};`;
+      cc.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:red;opacity:0.75;transform:rotate(${rotateValue}deg);`;
       spawnArea.appendChild(cc);
       if(wordRect.bottom > bounds.bottom) {
         let dd=createElement("div","","",word.value);
-        dd.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:blue;opacity:0.75;transform:${wordElm.style.transform};`;
+        dd.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:blue;opacity:0.75;transform:rotate(${rotateValue}deg);`;
         spawnArea.appendChild(dd);
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) - (wordRect.bottom - bounds.bottom) +"px";
       }
       if(wordRect.right > bounds.right) {
         let ee=createElement("div","","",word.value);
-        ee.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:green;opacity:0.75;transform:${wordElm.style.transform};`;
+        ee.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:green;opacity:0.75;transform:rotate(${rotateValue}deg);`;
         spawnArea.appendChild(ee);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) - (wordRect.right - bounds.right) +"px";
       }
       if(wordRect.left < bounds.left) {
         let ff=createElement("div","","",word.value);
-        ff.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:yellow;opacity:0.75;transform:${wordElm.style.transform};`;
+        ff.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:yellow;opacity:0.75;transform:rotate(${rotateValue}deg);`;
         spawnArea.appendChild(ff);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px";
       }
       if(wordRect.top < bounds.top) {
         let gg=createElement("div","","",word.value);
-        gg.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:violet;opacity:0.75;transform:${wordElm.style.transform};`;
+        gg.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:violet;opacity:0.75;transform:rotate(${rotateValue}deg);`;
         spawnArea.appendChild(gg);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
@@ -2126,7 +2126,7 @@ var bmrHypno = function() {
       //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
         let hh=createElement("div","","",word.value);
-        hh.style = `font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:orange;opacity:0.75;transform:${wordElm.style.transform};`;
+        hh.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:orange;opacity:0.75;transform:rotate(${rotateValue}deg);`;
         spawnArea.appendChild(hh);
         wordRect = wordElm.getBoundingClientRect();
         let tempWordSpan = createElement("span","","tempWord",word.value);
