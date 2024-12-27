@@ -2110,8 +2110,14 @@ var bmrHypno = function() {
       //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
         wordRect = wordElm.getBoundingClientRect();
-        wordElm.style.left = (Math.abs(wordRect.width-bounds.width))/(-2)+"px";
-        wordElm.style.top = (Math.abs(wordRect.height-bounds.height))/(-2)+"px";
+        let tempWordSpan = createElement("span","","tempWord",word.value);
+        tempWordSpan.style.fontSize = wordElm.style.fontSize;
+        spawnArea.appendChild(tempWordSpan);
+        let spanRect = tempWordSpan.getBoundingClientRect();
+        console.log(spanRect);
+        wordElm.style.left = (Math.abs(spanRect.width-bounds.width))/(-2)+"px";
+        wordElm.style.top = (Math.abs(spanRect.height-bounds.height))/(-2)+"px";
+        tempWordSpan.remove();
       }
     }
 
