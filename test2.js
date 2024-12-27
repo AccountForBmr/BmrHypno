@@ -2094,31 +2094,31 @@ var bmrHypno = function() {
     let wordRect = wordElm.getBoundingClientRect();
     if(smart == "Yes") {
       let cc=createElement("div","","",word.value);
-      cc.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:red;opacity:0.75;transform:rotate(${rotateValue}deg);`;
+      cc.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:red;opacity:0.75;transform:rotate(${rotateValue});`;
       spawnArea.appendChild(cc);
       if(wordRect.bottom > bounds.bottom) {
         let dd=createElement("div","","",word.value);
-        dd.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:blue;opacity:0.75;transform:rotate(${rotateValue}deg);`;
+        dd.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:blue;opacity:0.75;transform:rotate(${rotateValue});`;
         spawnArea.appendChild(dd);
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) - (wordRect.bottom - bounds.bottom) +"px";
       }
       if(wordRect.right > bounds.right) {
         let ee=createElement("div","","",word.value);
-        ee.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:green;opacity:0.75;transform:rotate(${rotateValue}deg);`;
+        ee.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:green;opacity:0.75;transform:rotate(${rotateValue});`;
         spawnArea.appendChild(ee);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) - (wordRect.right - bounds.right) +"px";
       }
       if(wordRect.left < bounds.left) {
         let ff=createElement("div","","",word.value);
-        ff.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:yellow;opacity:0.75;transform:rotate(${rotateValue}deg);`;
+        ff.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:yellow;opacity:0.75;transform:rotate(${rotateValue});`;
         spawnArea.appendChild(ff);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.left = Number(wordElm.style.left.slice(0,-2)) + Math.abs(bounds.left - wordRect.left)+"px";
       }
       if(wordRect.top < bounds.top) {
         let gg=createElement("div","","",word.value);
-        gg.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:violet;opacity:0.75;transform:rotate(${rotateValue}deg);`;
+        gg.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:violet;opacity:0.75;transform:rotate(${rotateValue});`;
         spawnArea.appendChild(gg);
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
@@ -2126,7 +2126,7 @@ var bmrHypno = function() {
       //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
         let hh=createElement("div","","",word.value);
-        hh.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:orange;opacity:0.75;transform:rotate(${rotateValue}deg);`;
+        hh.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:orange;opacity:0.75;transform:rotate(${rotateValue});`;
         spawnArea.appendChild(hh);
         wordRect = wordElm.getBoundingClientRect();
         let tempWordSpan = createElement("span","","tempWord",word.value);
@@ -2138,6 +2138,9 @@ var bmrHypno = function() {
         wordElm.style.top = (Math.abs(spanRect.height-bounds.height))/(-2)+"px";
         tempWordSpan.remove();
       }
+      let ii=createElement("div","","",word.value);
+      ii.style = `position:absolute;font-size:${wordElm.style.fontSize};white-space:nowrap;user-select:none;pointer-events:none;top:${wordElm.style.top};left:${wordElm.style.left};color:transparent;background-color:cyan;opacity:0.75;transform:rotate(${rotateValue});`;
+      spawnArea.appendChild(ii);
     }
 
     wordElm.style.setProperty("--top",wordElm.style.top);
