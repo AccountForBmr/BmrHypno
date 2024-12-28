@@ -35,6 +35,7 @@ var bmrHypno = function() {
       "values": [
         {
           "type": "word",
+          "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
           "value": "Word",
           "leaveTime": 5000,
           "position": "Random",
@@ -56,6 +57,7 @@ var bmrHypno = function() {
       "values": [
         {
           "type": "word",
+          "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
           "value": "slut",
           "leaveTime": 4120,
           "position": ["1.00%","3.14%"],
@@ -83,6 +85,7 @@ var bmrHypno = function() {
           "blendMode": "overlay"
           },
           "opacity": "0.5",
+          "smart": "Yes",
           "rotation": ["-45","45"],
           "smart": "No",
           "animation": {
@@ -103,6 +106,7 @@ var bmrHypno = function() {
         },
         {
           "type": "img",
+          "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
           "value": "woah,url"
         }
       ]
@@ -113,6 +117,7 @@ var bmrHypno = function() {
       "values":[
          {
             "type":"word",
+            "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
             "value":"Slimy!",
             "leaveTime":"10000",
             "position":"Random",
@@ -450,6 +455,7 @@ var bmrHypno = function() {
     "values": [
       {
         "type": "word",
+        "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
         "value": "Word",
         "leaveTime": "5000",
         "position": "Random",
@@ -459,6 +465,7 @@ var bmrHypno = function() {
         "gradient": "None",
         "opacity": "0.5",
         "rotation": ["0","0"],
+        "smart": "Yes",
         "animation": "None"
       }
     ],
@@ -753,7 +760,27 @@ var bmrHypno = function() {
       }
     } else {
       //for the img
-      alert("I've got nothing for now!");
+      changeTabType("img");
+      //imgUrl
+      document.getElementById("imgValueInput").value = cur.imgUrl;
+      //leaveTime
+      document.getElementById("imgTimeInput").value = cur.leaveTime;
+      document.getElementById("imgTimeRange").value = cur.leaveTime;
+      //position
+      let selectPos = document.getElementById("imgPositionInputSelect");
+      let pos1 = document.getElementById("imgPositionInput1");
+      let pos2 = document.getElementById("imgPositionInput2");
+      if(cur.position == "Random") {
+        selectPos.selectedIndex = 0;
+        pos1.style.display = "none";
+        pos2.style.display = "none";
+      } else {
+        selectPos.selectedIndex = 1;
+        pos1.style.display = "";
+        pos2.style.display = "";
+        pos1.value = cur.position[0];
+        pos2.value = cur.position[1];
+      }
     }
     //that's all I have for now
   }
@@ -1005,7 +1032,7 @@ var bmrHypno = function() {
     _tippys.push(tippyWordPos1);
     _tippys.push(tippyWordPos2);
     wordPositionInputSelect.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
+      let selected = e.target.value;
       if(selected.text == "Random") {
         wordPositionInput1.style.display = "none";
         wordPositionInput2.style.display = "none";
@@ -2146,8 +2173,172 @@ var bmrHypno = function() {
 
   function createImgBaseTab() {
     let tab = createElement("div","imgBaseTab","createTab");
-
+    let createImgBaseTabHTML = `
+    <div id="imgValueContainer" class="tabImgContainer">
+      <div id="imgValueLabel" class="gridLabel">Type the url of the image you wish to use:</div>
+      <div id="imgValueInputContainer">
+        <input id="imgValueInput" class="gridTextInput" placeholder="Url here." type="text">
+      </div>
+    </div>
+    <div id="imgTimeContainer" class="tabImgContainer">
+      <div id="imgTimeLabel" class="gridLabel">How long before the image leaves? (in milliseconds)</div>
+      <div id="imgTimeInputContainer">
+        <input id="imgTimeInput" class="gridTextInput" placeholder="ms here, can go past max." type="text">
+        <input id="imgTimeRange" placeholder="" type="range" min="10" max="10000">
+      </div>
+    </div>
+    <div id="imgPositionContainer" class="tabImgContainer">
+      <div id="imgPositionLabel" class="gridLabel">Where should your image be?</div>
+      <div id="imgPositionInputContainer">
+        <select id="imgPositionInputSelect" class="selectContainer">
+          <option value="Random">Random</option>
+          <option value="Precise Position">Precise Position</option>
+        </select>
+        <input id="imgPositionInput1" class="gridTextInput" placeholder="% from left" type="text" style="display: none;">
+        <input id="imgPositionInput2" class="gridTextInput" placeholder="% from top" type="text" style="display: none;">
+      </div>
+    </div>
+    <div id="imgSizeContainer" class="tabImgContainer">
+      <div id="imgSizeLabel" class="gridLabel">Image size?</div>
+      <div id="imgSizeInputContainer">
+        <input id="imgWidthInput" class="gridTextInput" placeholder="Min value." type="text">
+        <input id="imgHeightInput" class="gridTextInput" placeholder="Max value." type="text">
+        <div id="IMGTODOfontPreviewMin" class="fontPreview" style="display: none;">Min</div>
+        <div id="IMGTODOfontPreviewMax" class="fontPreview" style="display: none;">Max</div>
+      </div>
+    </div>
+    `;
+    tab.insertAdjacentHTML("beforeend",createImgBaseTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
+    //image url
+    let imgValueInput = document.getElementById("imgValueInput");
+    let tippyImgValueInput = createTippy(imgValueInput,"url can't be empty :c","right");
+    _tippys.push(tippyImgValueInput);
+    imgValueInput.oninput = (e) => {
+      if(e.target.value == "") {
+        imgValueInput.classList.add("invalidValue");
+        tippyImgValueInput.show();
+        return;
+      }
+      imgValueInput.classList.remove("invalidValue");
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].imgUrl = e.target.value;
+    }
+    //time
+    let imgTimeInput = document.getElementById("imgTimeInput");
+    let imgTimeRange = document.getElementById("imgTimeRange");
+    let tippyImgTimeInput = createTippy(imgTimeInput,"Use a number >:c","right");
+    _tippys.push(tippyImgTimeInput);
+    imgTimeInput.oninput = (e) => {
+      if(isNaN(Number(e.target.value))||e.target.value == "") {
+        imgTimeInput.classList.add("invalidValue");
+        tippyImgTimeInput.show();
+        return;
+      }
+      imgTimeInput.classList.remove("invalidValue");
+      imgTimeRange.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
+    }
+    imgTimeRange.oninput = (e) => {
+      imgTimeInput.classList.remove("invalidValue");
+      imgTimeInput.value = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].leaveTime = e.target.value;
+    }
+
+    //position
+    let imgPositionInputSelect = document.getElementById("imgPositionInputSelect");
+    let imgPositionInput1 = document.getElementById("imgPositionInput1");
+    let imgPositionInput2 = document.getElementById("imgPositionInput2");
+    let tippyImgPos1 = createTippy(imgPositionInput1,"Value must be in format: 11.11%","top");
+    let tippyImgPos2 = createTippy(imgPositionInput2,"Value must be in format: 11.11%","bottom");
+    _tippys.push(tippyImgPos1);
+    _tippys.push(tippyImgPos2);
+    imgPositionInputSelect.onchange = (e) => {
+      let selected = e.target.value;
+      if(selected.text == "Random") {
+        imgPositionInput1.style.display = "none";
+        imgPositionInput2.style.display = "none";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = "Random";
+
+        imgPositionInput1.classList.remove("invalidValue");
+        imgPositionInput1.value="";
+        imgPositionInput2.classList.remove("invalidValue");
+        imgPositionInput2.value="";
+      } else {
+        imgPositionInput1.style.display = "";
+        imgPositionInput2.style.display = "";
+        let chooseWindow = createElement("div","chooseWindow","","Click where you would like your image top-left corner to be.");
+        document.getElementById("scaler").appendChild(chooseWindow);
+        chooseWindow.onclick = (evt) => {
+          let boundRect=evt.target.getBoundingClientRect();
+          imgPositionInput1.value = ((evt.clientX-boundRect.left)*100/boundRect.width).toFixed(2)+"%";
+          imgPositionInput2.value = ((evt.clientY-boundRect.top)*100/boundRect.height).toFixed(2)+"%";
+          _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = [imgPositionInput1.value,imgPositionInput2.value];
+          chooseWindow.remove();
+        };
+      }
+    };
+    imgPositionInput1.oninput = (e) => {
+      if(e.target.value.match(/^(\d+|-\d+)(\.?\d+)*%$/)==null) {
+        imgPositionInput1.classList.add("invalidValue");
+        tippyImgPos1.show();
+        return;
+      }
+      imgPositionInput1.classList.remove("invalidValue");
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[0] = e.target.value;
+    }
+    imgPositionInput2.oninput = (e) => {
+      if(e.target.value.match(/^(\d+|-\d+)(\.?\d+)*%$/)==null) {
+        imgPositionInput2.classList.add("invalidValue");
+        tippyImgPos2.show();
+        return;
+      }
+      imgPositionInput2.classList.remove("invalidValue");
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].position[1] = e.target.value;
+    }
+
+    //size
+    /*
+    let wordFontInput1 = document.getElementById("wordFontInput1");
+    let wordFontInput2 = document.getElementById("wordFontInput2");
+    let fontMin = document.getElementById("fontPreviewMin");
+    let fontMax = document.getElementById("fontPreviewMax");
+    let tippyWordFont1 = createTippy(wordFontInput1,"Use a number >:c","bottom");
+    let tippyWordFont2 = createTippy(wordFontInput2,"Use a number >:c","right");
+    _tippys.push(tippyWordFont1);
+    _tippys.push(tippyWordFont2);
+    wordFontInput1.onfocus = (e)=>{
+      fontMin.style.display = "";
+      fontMax.style.display = "";
+    };
+    wordFontInput1.onblur = (e)=>{
+      fontMin.style.display = "none";
+      fontMax.style.display = "none"
+    };
+    wordFontInput1.oninput = (e)=>{
+      if(isNaN(Number(e.target.value))||e.target.value == "") {
+        wordFontInput1.classList.add("invalidValue");
+        tippyWordFont1.show();
+        return;
+      }
+      wordFontInput1.classList.remove("invalidValue");
+      fontMin.style.fontSize = wordFontInput1.value+"px";
+      fontMax.style.fontSize = wordFontInput2.value+"px";
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];
+    }
+    wordFontInput2.onfocus = wordFontInput1.onfocus;
+    wordFontInput2.onblur = wordFontInput1.onblur;
+    wordFontInput2.oninput = (e) => {
+      if(isNaN(Number(e.target.value))||e.target.value == "") {
+        wordFontInput2.classList.add("invalidValue");
+        tippyWordFont2.show();
+        return;
+      }
+      wordFontInput2.classList.remove("invalidValue");
+      fontMin.style.fontSize = wordFontInput1.value+"px";
+      fontMax.style.fontSize = wordFontInput2.value+"px";
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];    
+    }*/
+
     return tab;
   }
 
@@ -2278,7 +2469,7 @@ var bmrHypno = function() {
       "placement": placement,
       "theme": "error",
       onShow(instance) {
-        return elm.classList.contains("invalidValue")?true:false;
+        return elm.classList.contains("invalidValue");
       }
     };
     return tippy(elm,tippySettings);
@@ -2288,21 +2479,18 @@ var bmrHypno = function() {
   //testing jscolor
   jsColorScript=document.createElement('script');
   jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
-  //jsColorScript.async=true;
   document.body.appendChild(jsColorScript);
   jsColorScript.onload = () => {
-    GUI.instance.DisplayMessage("Everything was loaded correctly, hopefully! \\[T]/");
+    GUI.instance.DisplayMessage("JsColor Loaded");
     jsColor = JSColor; 
   }
   popperScript=document.createElement('script');
   popperScript.src='https://unpkg.com/@popperjs/core@2';
-  //popperScript.async=true;
   document.body.appendChild(popperScript);
   popperScript.onload = () => {
     GUI.instance.DisplayMessage("Popper Loaded");
     tippyScript=document.createElement('script');
     tippyScript.src='https://unpkg.com/tippy.js@6';
-    //tippyScript.async=true;
     document.body.appendChild(tippyScript);
     tippyScript.onload = () => {
       GUI.instance.DisplayMessage("Tippy Loaded");
