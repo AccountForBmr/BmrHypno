@@ -674,113 +674,114 @@ var bmrHypno = function() {
     document.getElementById("formSpawnRange").value = _currentlyLoaded.spawnTime;
     //values[]
     let cur = _currentlyLoaded.values[selectedValue];
-    if(cur.type == "word") {
-      changeTabType("word");
-      //word
-      document.getElementById("wordValueInput").value = cur.value;
-      //leaveTime
-      document.getElementById("wordTimeInput").value = cur.leaveTime;
-      document.getElementById("wordTimeRange").value = cur.leaveTime;
-      //position
-      let selectPos = document.getElementById("wordPositionInputSelect");
-      let pos1 = document.getElementById("wordPositionInput1");
-      let pos2 = document.getElementById("wordPositionInput2");
-      if(cur.position == "Random") {
-        selectPos.selectedIndex = 0;
-        pos1.style.display = "none";
-        pos2.style.display = "none";
-      } else {
-        selectPos.selectedIndex = 1;
-        pos1.style.display = "";
-        pos2.style.display = "";
-        pos1.value = cur.position[0];
-        pos2.value = cur.position[1];
-      }
-      //font
-      document.getElementById("wordFontInput1").value = cur.font[0];
-      document.getElementById("wordFontInput2").value = cur.font[1];
-      //color
-      let selectCol = document.getElementById("wordColorSelect");
-      let col1 = document.getElementById("wordColorInput");
-      if(cur.color == "Random") {
-        selectCol.selectedIndex = 0;
-        col1.style.display = "none";
-      } else {
-        selectCol.selectedIndex = 1;
-        col1.style.display = "";
-        _colorPickers[0].fromString(cur.color);
-      }
-      //border
-      let selectBor = document.getElementById("wordBorderSelect");
-      let bor1 = document.getElementById("wordBorderInput");
-      if(cur.border == "None") {
-        selectBor.selectedIndex = 0;
-        bor1.style.display = "none";
-      } else {
-        selectBor.selectedIndex = 1;
-        bor1.style.display = "";
-        _colorPickers[1].fromString(cur.border);
-      }
-      //gradient
-      let wordGradientSelect = document.getElementById("wordGradientSelect");
-      let wordGradientCreatorContainer = document.getElementById("wordGradientCreatorContainer");
-      let wordGradientPreviewContainer = document.getElementById("wordGradientPreviewContainer");
-      if(cur.gradient == "None") {
-        wordGradientSelect.selectedIndex = 0;
-        wordGradientCreatorContainer.style.display = "none";
-        wordGradientPreviewContainer.style.display = "none";
-      } else {
-        wordGradientSelect.selectedIndex = 1;
-        wordGradientCreatorContainer.style.display = "";
-        wordGradientPreviewContainer.style.display = "";
-        updateGradientPreviewLeft(cur.gradient,0,0);
-        updateGradientPreviewRight(cur.gradient);
-      }
-      //opacity
-      document.getElementById("wordOpacityInput").value = cur.opacity;
-      document.getElementById("wordOpacityRange").value = cur.opacity;
-      //rotation
-      document.getElementById("wordRotationInput1").value = cur.rotation[0];
-      document.getElementById("wordRotationInput2").value = cur.rotation[1];
-      //smart positioning
-      document.getElementById("wordSmartPositionSelect").value = cur.smart;
-      //animation/additional effects
-      let wordAnimationSelect = document.getElementById("wordAnimationSelect");
-      let wordAnimationCreatorContainer = document.getElementById("wordAnimationCreatorContainer");
-      let wordAnimationPreviewContainer = document.getElementById("wordAnimationPreviewContainer");
-      if(cur.animation == "None") {
-        wordAnimationSelect.selectedIndex = 0;
-        wordAnimationCreatorContainer.style.display = "none";
-        wordAnimationPreviewContainer.style.display = "none";
-      } else {
-        wordAnimationSelect.selectedIndex = 1;
-        wordAnimationCreatorContainer.style.display = "";
-        wordAnimationPreviewContainer.style.display = "";
-        updateAnimationLeft(cur.animation,0,0);
-      }
+    changeTabType(cur.type);
+    /*
+    Loading the word part
+    */
+    //word
+    document.getElementById("wordValueInput").value = cur.value;
+    //leaveTime
+    document.getElementById("wordTimeInput").value = cur.leaveTime;
+    document.getElementById("wordTimeRange").value = cur.leaveTime;
+    //position
+    let selectPos = document.getElementById("wordPositionInputSelect");
+    let pos1 = document.getElementById("wordPositionInput1");
+    let pos2 = document.getElementById("wordPositionInput2");
+    if(cur.position == "Random") {
+      selectPos.selectedIndex = 0;
+      pos1.style.display = "none";
+      pos2.style.display = "none";
     } else {
-      //for the img
-      changeTabType("img");
-      //imgUrl
-      document.getElementById("imgValueInput").value = cur.imgUrl;
-      //leaveTime
-      document.getElementById("imgTimeInput").value = cur.leaveTime;
-      document.getElementById("imgTimeRange").value = cur.leaveTime;
-      //position
-      let selectPos = document.getElementById("imgPositionInputSelect");
-      let pos1 = document.getElementById("imgPositionInput1");
-      let pos2 = document.getElementById("imgPositionInput2");
-      if(cur.position == "Random") {
-        selectPos.selectedIndex = 0;
-        pos1.style.display = "none";
-        pos2.style.display = "none";
-      } else {
-        selectPos.selectedIndex = 1;
-        pos1.style.display = "";
-        pos2.style.display = "";
-        pos1.value = cur.position[0];
-        pos2.value = cur.position[1];
-      }
+      selectPos.selectedIndex = 1;
+      pos1.style.display = "";
+      pos2.style.display = "";
+      pos1.value = cur.position[0];
+      pos2.value = cur.position[1];
+    }
+    //font
+    document.getElementById("wordFontInput1").value = cur.font[0];
+    document.getElementById("wordFontInput2").value = cur.font[1];
+    //color
+    let selectCol = document.getElementById("wordColorSelect");
+    let col1 = document.getElementById("wordColorInput");
+    if(cur.color == "Random") {
+      selectCol.selectedIndex = 0;
+      col1.style.display = "none";
+    } else {
+      selectCol.selectedIndex = 1;
+      col1.style.display = "";
+      _colorPickers[0].fromString(cur.color);
+    }
+    //border
+    let selectBor = document.getElementById("wordBorderSelect");
+    let bor1 = document.getElementById("wordBorderInput");
+    if(cur.border == "None") {
+      selectBor.selectedIndex = 0;
+      bor1.style.display = "none";
+    } else {
+      selectBor.selectedIndex = 1;
+      bor1.style.display = "";
+      _colorPickers[1].fromString(cur.border);
+    }
+    //gradient
+    let wordGradientSelect = document.getElementById("wordGradientSelect");
+    let wordGradientCreatorContainer = document.getElementById("wordGradientCreatorContainer");
+    let wordGradientPreviewContainer = document.getElementById("wordGradientPreviewContainer");
+    if(cur.gradient == "None") {
+      wordGradientSelect.selectedIndex = 0;
+      wordGradientCreatorContainer.style.display = "none";
+      wordGradientPreviewContainer.style.display = "none";
+    } else {
+      wordGradientSelect.selectedIndex = 1;
+      wordGradientCreatorContainer.style.display = "";
+      wordGradientPreviewContainer.style.display = "";
+      updateGradientPreviewLeft(cur.gradient,0,0);
+      updateGradientPreviewRight(cur.gradient);
+    }
+    //opacity
+    document.getElementById("wordOpacityInput").value = cur.opacity;
+    document.getElementById("wordOpacityRange").value = cur.opacity;
+    //rotation
+    document.getElementById("wordRotationInput1").value = cur.rotation[0];
+    document.getElementById("wordRotationInput2").value = cur.rotation[1];
+    //smart positioning
+    document.getElementById("wordSmartPositionSelect").value = cur.smart;
+    //animation/additional effects
+    let wordAnimationSelect = document.getElementById("wordAnimationSelect");
+    let wordAnimationCreatorContainer = document.getElementById("wordAnimationCreatorContainer");
+    let wordAnimationPreviewContainer = document.getElementById("wordAnimationPreviewContainer");
+    if(cur.animation == "None") {
+      wordAnimationSelect.selectedIndex = 0;
+      wordAnimationCreatorContainer.style.display = "none";
+      wordAnimationPreviewContainer.style.display = "none";
+    } else {
+      wordAnimationSelect.selectedIndex = 1;
+      wordAnimationCreatorContainer.style.display = "";
+      wordAnimationPreviewContainer.style.display = "";
+      updateAnimationLeft(cur.animation,0,0);
+    }
+    /*
+    Loading the img part here
+    */
+    //imgUrl
+    document.getElementById("imgValueInput").value = cur.imgUrl;
+    //leaveTime
+    document.getElementById("imgTimeInput").value = cur.leaveTime;
+    document.getElementById("imgTimeRange").value = cur.leaveTime;
+    //position
+    selectPos = document.getElementById("imgPositionInputSelect");
+    pos1 = document.getElementById("imgPositionInput1");
+    pos2 = document.getElementById("imgPositionInput2");
+    if(cur.position == "Random") {
+      selectPos.selectedIndex = 0;
+      pos1.style.display = "none";
+      pos2.style.display = "none";
+    } else {
+      selectPos.selectedIndex = 1;
+      pos1.style.display = "";
+      pos2.style.display = "";
+      pos1.value = cur.position[0];
+      pos2.value = cur.position[1];
     }
     //that's all I have for now
   }
