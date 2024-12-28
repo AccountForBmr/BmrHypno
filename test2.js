@@ -855,14 +855,14 @@ var bmrHypno = function() {
     let wordTypeContainer = document.getElementById("wordTypeContainer");
     let imgTypeContainer = document.getElementById("imgTypeContainer");
     wordTypeContainer.onclick = (e) => {
-      //TODO Change format of the inputs below
+      //TODO maybe change the loadselection with simply load new changed values for word? Probably not.
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "word";
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
       changeTabType("word");
     };
     //img
     imgTypeContainer.onclick = (e) => {
-      //TODO Change format of the inputs below
+      //TODO maybe change the loadselection with simply load new changed values for img? Probably not.
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "image";
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
       changeTabType("image");
@@ -2373,15 +2373,15 @@ var bmrHypno = function() {
   }
 
   function spawnImg(img) {
-    let imgElm = createElement("div","","imgHypno");
+    let imgElm = createElement("img","","imgHypno");
     let bounds = spawnArea.getBoundingClientRect();
 
-    imgElm.style.backgroundImage = `url(${img.imgUrl})`;
+    imgElm.src = img.imgUrl;
 
     if(img.position=="Random") {
       //the span is needed to not have the results skewed towards bottom right, take width/height of span
-      let tempImgSpan = createElement("span","","tempImg");
-      tempImgSpan.style.backgroundImage = imgElm.style.backgroundImage;
+      let tempImgSpan = createElement("img","","tempImg");
+      tempImgSpan.src = imgElm.src;
       spawnArea.appendChild(tempImgSpan);
       let spanRect = tempImgSpan.getBoundingClientRect();
       imgElm.style.top = randRange(spanRect.height*-1,bounds.height)+"px";
@@ -2414,8 +2414,8 @@ var bmrHypno = function() {
       //if too big to fit in
       if(imgRect.width >= bounds.width || imgRect.height >= bounds.height) {
         imgRect = imgElm.getBoundingClientRect();
-        let tempImgSpan = createElement("span","","tempImg",img.value);
-        tempImgSpan.style.fontSize = imgElm.style.fontSize;
+        let tempImgSpan = createElement("img","","tempImg");
+        tempImgSpan.src = imgElm.src;
         spawnArea.appendChild(tempImgSpan);
         let spanRect = tempImgSpan.getBoundingClientRect();
         console.log(spanRect);

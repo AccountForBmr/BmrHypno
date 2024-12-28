@@ -355,9 +355,18 @@ Word down here, Base
     align-items: center;
 }
 
-#wordTimeLabel, #wordPositionLabel, #imgTimeLabel, #imgPositionLabel {
+#wordTimeLabel, #wordPositionLabel, #imgPositionLabel {
     width: 45%;
     height: 100%;
+}
+
+#imgTimeLabel {
+    width: 55%;
+    height: 100%;    
+}
+
+#imgTimeInputContainer {
+    width: 45%;
 }
 
 #wordPositionInputContainer, #imgPositionInputContainer {
@@ -727,10 +736,6 @@ Img Hypnos down here
     z-index:20;
     user-select:none;
     pointer-events:none;
-    white-space: nowrap;
-    background-size: 100% 100%;
-    width: 50%;
-    height: 50%;
 }
 
 .tempImg {
@@ -740,10 +745,6 @@ Img Hypnos down here
     opacity: 0;
     user-select:none;
     pointer-events:none;   
-    white-space: nowrap; 
-    background-size: 100% 100%;
-    width: 50%;
-    height: 50%;
 }
 
 /*
