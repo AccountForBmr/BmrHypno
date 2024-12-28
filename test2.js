@@ -857,14 +857,14 @@ var bmrHypno = function() {
     wordTypeContainer.onclick = (e) => {
       //TODO Change format of the inputs below
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "word";
-      loadSelectionInGrid(_currentlyLoaded.values[_currentlyLoaded.selectedValue],_currentlyLoaded.selectedValue);
+      loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
       changeTabType("word");
     };
     //img
     imgTypeContainer.onclick = (e) => {
       //TODO Change format of the inputs below
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "image";
-      loadSelectionInGrid(_currentlyLoaded.values[_currentlyLoaded.selectedValue],_currentlyLoaded.selectedValue);
+      loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
       changeTabType("image");
     };
     _tabsTypes.push(wordTypeContainer);
