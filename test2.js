@@ -2053,7 +2053,7 @@ var bmrHypno = function() {
     let tab = createElement("div","wordPreviewTab","createTab");
     let createWordPreviewTabHTML = `
     <div id="wordPreviewContainer" class="tabWordContainer">
-      <div id="spawn1Btn">Spawn 1!</div>
+      <div id="spawn1Btn" class="spawn1Btn">Spawn 1!</div>
     </div>
     `;
     tab.insertAdjacentHTML("beforeend",createWordPreviewTabHTML);
@@ -2354,9 +2354,79 @@ var bmrHypno = function() {
 
   function createImgPreviewTab() {
     let tab = createElement("div","imgPreviewTab","createTab");
-
+    let createImgPreviewTabHTML = `
+    <div id="imgPreviewContainer" class="tabWordContainer">
+      <div id="imgSpawn1Btn" class="spawn1Btn">Spawn 1!</div>
+    </div>
+    `;
+    tab.insertAdjacentHTML("beforeend",createImgPreviewTabHTML);
     document.getElementById("tabsContainer").appendChild(tab);
+
+    //spawn1
+    let imgSpawn1Btn = document.getElementById("imgSpawn1Btn");
+    imgSpawn1Btn.onclick = (e) => {
+      spawnImg(_currentlyLoaded.values[_currentlyLoaded.selectedValue]);
+    };
     return tab;
+  }
+
+  function spawnImg(img) {
+    let imgElm = createElement("div","","imgHypno");
+    let bounds = spawnArea.getBoundingClientRect();
+
+    imgElm.style.backgroundImage = `url(${img.imgUrl})`;
+
+    if(img.position=="Random") {
+      //the span is needed to not have the results skewed towards bottom right, take width/height of span
+      let tempImgSpan = createElement("span","","tempImg");
+      tempImgSpan.style.backgroundImage = imgElm.style.backgroundImage;
+      spawnArea.appendChild(tempImgSpan);
+      let spanRect = tempImgSpan.getBoundingClientRect();
+      imgElm.style.top = randRange(spanRect.height*-1,bounds.height)+"px";
+      imgElm.style.left = randRange(spanRect.width*-1,bounds.width)+"px";
+      tempImgSpan.remove();
+    } else {
+      imgElm.style.top = Number(img.position[1].slice(0,-1))*bounds.height/100+"px";
+      imgElm.style.left = Number(img.position[0].slice(0,-1))*bounds.width/100+"px";
+    }
+
+    spawnArea.appendChild(imgElm);
+    let smart = img.smart;
+    let imgRect = imgElm.getBoundingClientRect();
+    if(smart == "Yes") {
+      if(imgRect.bottom > bounds.bottom) {
+        imgElm.style.top = Number(imgElm.style.top.slice(0,-2)) - (imgRect.bottom - bounds.bottom) +"px";
+      }
+      if(imgRect.right > bounds.right) {
+        imgRect = imgElm.getBoundingClientRect();
+        imgElm.style.left = Number(imgElm.style.left.slice(0,-2)) - (imgRect.right - bounds.right) +"px";
+      }
+      if(imgRect.left < bounds.left) {
+        imgRect = imgElm.getBoundingClientRect();
+        imgElm.style.left = Number(imgElm.style.left.slice(0,-2)) + Math.abs(bounds.left - imgRect.left)+"px";
+      }
+      if(imgRect.top < bounds.top) {
+        imgRect = imgElm.getBoundingClientRect();
+        imgElm.style.top = Number(imgElm.style.top.slice(0,-2)) + Math.abs(bounds.top - imgRect.top)+"px";
+      }
+      //if too big to fit in
+      if(imgRect.width >= bounds.width || imgRect.height >= bounds.height) {
+        imgRect = imgElm.getBoundingClientRect();
+        let tempImgSpan = createElement("span","","tempImg",img.value);
+        tempImgSpan.style.fontSize = imgElm.style.fontSize;
+        spawnArea.appendChild(tempImgSpan);
+        let spanRect = tempImgSpan.getBoundingClientRect();
+        console.log(spanRect);
+        imgElm.style.left = (spanRect.width-bounds.width)/(-2)+"px";
+        imgElm.style.top = (spanRect.height-bounds.height)/(-2)+"px";
+        tempImgSpan.remove();
+      }
+    }
+
+    imgElm.style.setProperty("--top",imgElm.style.top);
+    imgElm.style.setProperty("--left",imgElm.style.left);
+
+    setTimeout(()=>{imgElm.remove();},img.leaveTime);
   }
 
   function changeTabType(type) {
