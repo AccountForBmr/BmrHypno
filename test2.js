@@ -1036,7 +1036,7 @@ var bmrHypno = function() {
     _tippys.push(tippyWordPos2);
     wordPositionInputSelect.onchange = (e) => {
       let selected = e.target.value;
-      if(selected.text == "Random") {
+      if(selected == "Random") {
         wordPositionInput1.style.display = "none";
         wordPositionInput2.style.display = "none";
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = "Random";
@@ -2257,7 +2257,7 @@ var bmrHypno = function() {
     _tippys.push(tippyImgPos2);
     imgPositionInputSelect.onchange = (e) => {
       let selected = e.target.value;
-      if(selected.text == "Random") {
+      if(selected == "Random") {
         imgPositionInput1.style.display = "none";
         imgPositionInput2.style.display = "none";
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].position = "Random";
