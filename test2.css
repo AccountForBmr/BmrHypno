@@ -172,7 +172,7 @@ Create stuff down here, mostly
     height: 100%;
 }
 
-#formSpawn, #formSpawnRange,#wordTimeRange {
+#formSpawn, #formSpawnRange, #wordTimeRange, #imgTimeRange {
     width: 100%;
     height: 50%;
 }
@@ -319,16 +319,13 @@ background-color: #313131;
     flex-wrap: wrap;
 }
 
-/*#wordValueContainer, #wordTimeContainer, #wordPositionContainer {
-    height: 25%;
-}*/
 /*
 
 Word down here, Base
 
 */
 
-.tabWordContainer {
+.tabWordContainer, .tabImgContainer {
     width: 100%;
     display: flex;
     border: 2px solid rgb(80, 80, 80);
@@ -343,14 +340,14 @@ Word down here, Base
     border-radius: 0 0 0.5em 0.5em;
 }
 
-#wordValueLabel {
+#wordValueLabel, #imgValueLabel {
     width: 35%;
     height: 100%;
     display: flex;
     align-items: center;
 }
 
-#wordValueInputContainer {
+#wordValueInputContainer, #imgValueInputContainer {
     width: 65%;
     height: 100%;
     color: #9c9c9c;
@@ -358,24 +355,24 @@ Word down here, Base
     align-items: center;
 }
 
-#wordTimeLabel, #wordPositionLabel {
+#wordTimeLabel, #wordPositionLabel, #imgTimeLabel, #imgPositionLabel {
     width: 45%;
     height: 100%;
 }
 
-#wordPositionInputContainer {
+#wordPositionInputContainer, #imgPositionInputContainer {
     width: 55%;
     display: flex;
     align-items: center;
     height: 100%;
 }
 
-#wordPositionInputSelect {
+#wordPositionInputSelect, #imgPositionInputSelect {
     height: 80% !important;
     width: 50% !important;
 }
 
-#wordPositionInput1, #wordPositionInput2 {
+#wordPositionInput1, #wordPositionInput2, #imgPositionInput1, #imgPositionInput2 {
     width: 25% !important;
     height: 80% !important;
 }

@@ -855,11 +855,13 @@ var bmrHypno = function() {
     let imgTypeContainer = document.getElementById("imgTypeContainer");
     wordTypeContainer.onclick = (e) => {
       //TODO Change format of the inputs below
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "word";
       changeTabType("word");
     };
     //img
     imgTypeContainer.onclick = (e) => {
       //TODO Change format of the inputs below
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "image";
       changeTabType("image");
     };
     _tabsTypes.push(wordTypeContainer);
