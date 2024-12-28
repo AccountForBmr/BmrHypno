@@ -698,7 +698,7 @@ Word Hypnos down here
 
 */
 
-.wordHypno, .imgHypno {
+.wordHypno {
     position:absolute;
     z-index:20;
     user-select:none;
@@ -706,7 +706,7 @@ Word Hypnos down here
     white-space: nowrap;
 }
 
-.tempWord, .tempImg {
+.tempWord {
     position:absolute;
     top:0;
     left:0;
@@ -714,6 +714,36 @@ Word Hypnos down here
     user-select:none;
     pointer-events:none;   
     white-space: nowrap; 
+}
+
+/*
+
+Img Hypnos down here
+
+*/
+
+.imgHypno {
+    position:absolute;
+    z-index:20;
+    user-select:none;
+    pointer-events:none;
+    white-space: nowrap;
+    background-size: 100% 100%;
+    width: 50%;
+    height: 50%;
+}
+
+.tempImg {
+    position:absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+    user-select:none;
+    pointer-events:none;   
+    white-space: nowrap; 
+    background-size: 100% 100%;
+    width: 50%;
+    height: 50%;
 }
 
 /*
