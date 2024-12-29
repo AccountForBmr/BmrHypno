@@ -2778,7 +2778,7 @@ var bmrHypno = function() {
 
   function preloadedHypnosSelectUpdate(value) {
     let needUpdate = document.getElementById("selectHypno").options;
-    for(let i = 0; i<=needUpdate.length; i++) {
+    for(let i = 0; i<needUpdate.length; i++) {
       if(needUpdate[i].value==value)
         return;
     }
