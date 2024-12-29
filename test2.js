@@ -2577,6 +2577,8 @@ var bmrHypno = function() {
       //the span is needed to not have the results skewed towards bottom right, take width/height of span
       let tempImgSpan = createElement("img","","tempImg");
       tempImgSpan.src = imgElm.src;
+      tempImgSpan.style.width = imgElm.style.width;
+      tempImgSpan.style.height = imgElm.style.height;
       spawnArea.appendChild(tempImgSpan);
       let spanRect = tempImgSpan.getBoundingClientRect();
       imgElm.style.top = randRange(spanRect.height*-1,bounds.height)+"px";
@@ -2611,6 +2613,8 @@ var bmrHypno = function() {
         imgRect = imgElm.getBoundingClientRect();
         let tempImgSpan = createElement("img","","tempImg");
         tempImgSpan.src = imgElm.src;
+        tempImgSpan.style.width = imgElm.style.width;
+        tempImgSpan.style.height = imgElm.style.height;
         spawnArea.appendChild(tempImgSpan);
         let spanRect = tempImgSpan.getBoundingClientRect();
         console.log(spanRect);
