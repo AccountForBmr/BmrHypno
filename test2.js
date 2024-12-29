@@ -2214,8 +2214,8 @@ var bmrHypno = function() {
           <option value="Auto">Auto</option>
           <option value="Random Between">Random Between</option>
         </select>
-        <input id="imgWidthInput1" class="gridTextInput" type="text" placeholder="Min value.">
-        <input id="imgWidthInput2" class="gridTextInput" placeholder="Max value." type="text">
+        <input id="imgWidthInput1" class="gridTextInput" type="text" placeholder="Min value." style="display: none;">
+        <input id="imgWidthInput2" class="gridTextInput" placeholder="Max value." type="text" style="display: none;">
       </div>
     </div>
     <div id="imgHeightContainer" class="tabImgContainer">
@@ -2225,8 +2225,8 @@ var bmrHypno = function() {
           <option value="Auto">Auto</option>
           <option value="Random Between">Random Between</option>
         </select>
-        <input id="imgHeightInput1" class="gridTextInput" type="text" placeholder="Min value.">
-        <input id="imgHeightInput2" class="gridTextInput" placeholder="Max value." type="text">
+        <input id="imgHeightInput1" class="gridTextInput" type="text" placeholder="Min value." style="display: none;">
+        <input id="imgHeightInput2" class="gridTextInput" placeholder="Max value." type="text" style="display: none;">
       </div>
     </div>
     `;
@@ -2320,6 +2320,63 @@ var bmrHypno = function() {
 
     //size
     //width
+    let imgWidthInputSelect = document.getElementById("imgWidthInputSelect");
+    let imgWidthInput1 = document.getElementById("imgWidthInput1");
+    let imgWidthInput2 = document.getElementById("imgWidthInput2");
+    let tippyImgWidth1 = createTippy(imgWidthInput1,"Value must be in format: 11.11%","top");
+    let tippyImgWidth2 = createTippy(imgWidthInput2,"Value must be in format: 11.11%","right");
+    _tippys.push(tippyImgWidth1);
+    _tippys.push(tippyImgWidth2);
+    imgWidthInputSelect.onchange = (e) => {
+      let selected = e.target.value;
+      if(selected == "Auto") {
+        imgWidthInput1.style.display = "none";
+        imgWidthInput2.style.display = "none";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].width = "auto";
+
+        imgWidthInput1.classList.remove("invalidValue");
+        imgWidthInput1.value="";
+        imgWidthInput2.classList.remove("invalidValue");
+        imgWidthInput2.value="";
+      } else {
+        imgWidthInput1.style.display = "";
+        imgWidthInput2.style.display = "";
+        imgWidthInput1.value="50%";
+        imgWidthInput2.value="50%";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].width = ["50%","50%"];
+      }
+    };
+    let imgSizePreview = document.getElementById("imgSizePreview");
+    imgWidthInput1.oninput = (e) => {
+      if(e.target.value.match(/^(\d+|-\d+)(\.?\d+)*%$/)==null) {
+        imgWidthInput1.classList.add("invalidValue");
+        tippyImgWidth1.show();
+        return;
+      }
+      imgWidthInput1.classList.remove("invalidValue");
+      imgSizePreview.style.width = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].width[0] = e.target.value;
+    }
+    imgWidthInput2.oninput = (e) => {
+      if(e.target.value.match(/^(\d+|-\d+)(\.?\d+)*%$/)==null) {
+        imgWidthInput2.classList.add("invalidValue");
+        tippyImgWidth2.show();
+        return;
+      }
+      imgWidthInput2.classList.remove("invalidValue");
+      imgSizePreview.style.width = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].width[1] = e.target.value;
+    }
+    imgWidthInput1.onfocus = (e) => {
+      imgSizePreview.style.display = "";
+      imgSizePreview.style.width = e.target.value;
+      imgSizePreview.style.height = "auto";
+    }
+    imgWidthInput1.onblur = (e) => {
+      imgSizePreview.style.display = "none";
+    }
+    imgWidthInput2.onfocus = imgWidthInput1.onfocus;
+    imgWidthInput2.onblur = imgWidthInput1.onblur;
     /*
     let wordFontInput1 = document.getElementById("wordFontInput1");
     let wordFontInput2 = document.getElementById("wordFontInput2");

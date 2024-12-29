@@ -696,11 +696,15 @@ Img Base Down here
 
 #imgHeightInputContainer, #imgWidthInputContainer {
     width: 80% !important;
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+
 }
 
 #imgHeightInput1, #imgHeightInput2, #imgWidthInput1, #imgWidthInput2 {
     width: 25% !important;
-    height: 25% !important;
+    height: 80% !important;
 }
 
 #imgSizePreview {
