@@ -632,6 +632,9 @@ var bmrHypno = function() {
       downloadAnchor.setAttribute("download", `${_currentlyLoaded.name}.json`);
       downloadAnchor.click();
       _preloadedHypnos[_currentlyLoaded.name] = JSON.parse(JSON.stringify(_currentlyLoaded));
+      if(preloadedHypnosSelectUpdate(_currentlyLoaded.name)) {
+        document.getElementById("selectHypno").options.add(new Option(_currentlyLoaded.name,_currentlyLoaded.name));
+      }
     }
 
     loadSelections(selectHypno);
@@ -656,7 +659,7 @@ var bmrHypno = function() {
     return selections;*/
     let displayBtn = document.getElementById("loadFileLabel");
     for(i in _preloadedHypnos) {
-      selections.options.add(new Option(i,_preloadedHypnos[i].name||"oops"));
+      selections.options.add(new Option(i,_preloadedHypnos[i].name||"Load from file"));
     }
     selections.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
@@ -2770,6 +2773,15 @@ var bmrHypno = function() {
       }
     };
     return tippy(elm,tippySettings);
+  }
+
+  function preloadedHypnosSelectUpdate(value) {
+    let needUpdate = document.getElementById("selectHypno").options;
+    for(let i = 0; i<=needUpdate.length; i++) {
+      if(needUpdate[i].value==value)
+        return false;
+    }
+    return true;
   }
 
   BMRHYPNO.start = startBmr;
