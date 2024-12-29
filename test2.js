@@ -581,7 +581,7 @@ var bmrHypno = function() {
       <select id="selectHypno" class="selectContainer">
       </select>
       <label id="loadFileLabel" class="topLabel" style="display: none;">
-        <input id="loadFileBtn" class="" placeholder="" type="file">Load from file
+        <input id="loadFileBtn" class="" placeholder="" type="file" multiple>Load from file
       </label>
       <label id="saveLabel" class="topLabel">
         Save
@@ -2783,6 +2783,7 @@ var bmrHypno = function() {
         return;
     }
     needUpdate.add(new Option(_currentlyLoaded.name,_currentlyLoaded.name));
+    document.getElementById("selectHypno").selectedIndex = needUpdate.length-1;
   }
 
   BMRHYPNO.start = startBmr;
