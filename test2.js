@@ -601,7 +601,7 @@ var bmrHypno = function() {
       let result = tmpFr.result;
       let resultJSON = JSON.parse(result);
       console.log(resultJSON);
-      _preloadedHypnos[resultJSON.name] = resultJSON;
+      _preloadedHypnos[resultJSON.name] = JSON.parse(JSON.stringify(resultJSON));
       preloadedHypnosSelectUpdate(resultJSON.name);
       loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[resultJSON])),0);
     };
