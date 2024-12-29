@@ -2567,6 +2567,12 @@ var bmrHypno = function() {
     }
     imgElm.style.setProperty("--height",imgElm.style.height);
 
+    imgElm.style.opacity = img.opacity;
+
+    let rotateValue = randRange(Number(img.rotation[0]),Number(img.rotation[1]))+"deg";
+    imgElm.style.setProperty("--rotation",rotateValue);
+    imgElm.style.transform = "rotate(var(--rotation))";
+
     if(img.position=="Random") {
       //the span is needed to not have the results skewed towards bottom right, take width/height of span
       let tempImgSpan = createElement("img","","tempImg");
@@ -2618,6 +2624,21 @@ var bmrHypno = function() {
     imgElm.style.setProperty("--left",imgElm.style.left);
 
     setTimeout(()=>{imgElm.remove();},img.leaveTime);
+    if(img.animation != "None") {
+      let anim = JSON.parse(JSON.stringify(img.animation));
+      let keyframesList = [];
+      let timings = anim.timings;
+      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); //offsets need to be in order
+      for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
+        let curKeyframe = {};
+        for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
+          curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
+        }
+        curKeyframe.offset = anim.keyframes[selKf].offset;
+        keyframesList.push(curKeyframe);
+      }
+      imgElm.animate(keyframesList,timings);
+    }
   }
 
   function changeTabType(type) {
@@ -2663,6 +2684,9 @@ var bmrHypno = function() {
     }
     _tabsTitles[whichTab].classList.add("activeType");
     _tabsContainers[whichTab].style.display = "";
+    if(whichTab==2) {
+      _tabsTitles[5].classList.add("activeType");
+    }
   }
 
   function cleanInvalidValues(fromId) {
