@@ -623,10 +623,15 @@ var bmrHypno = function() {
     let saveLabel = document.getElementById("saveLabel");
     let downloadAnchor = document.getElementById("downloadAnchor");
     saveLabel.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
       dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(_currentlyLoaded));
       downloadAnchor.setAttribute("href",dataStr);
       downloadAnchor.setAttribute("download", `${_currentlyLoaded.name}.json`);
       downloadAnchor.click();
+      _preloadedHypnos[_currentlyLoaded.name] = JSON.parse(JSON.stringify(_currentlyLoaded));
     }
 
     loadSelections(selectHypno);
