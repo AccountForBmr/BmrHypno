@@ -2368,6 +2368,7 @@ var bmrHypno = function() {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].width[1] = e.target.value;
     }
     imgWidthInput1.onfocus = (e) => {
+      imgSizePreview.src =  _currentlyLoaded.values[_currentlyLoaded.selectedValue].imgUrl;
       imgSizePreview.style.display = "";
       imgSizePreview.style.width = e.target.value;
       imgSizePreview.style.height = "auto";
