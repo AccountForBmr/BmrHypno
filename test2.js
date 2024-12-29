@@ -656,7 +656,7 @@ var bmrHypno = function() {
     return selections;*/
     let displayBtn = document.getElementById("loadFileLabel");
     for(i in _preloadedHypnos) {
-      selections.options.add(new Option(i,_preloadedHypnos[i]));
+      selections.options.add(new Option(i,_preloadedHypnos[i].name||"oops"));
     }
     selections.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex];
