@@ -35,7 +35,7 @@ var bmrHypno = function() {
       "values": [
         {
           "type": "word",
-          "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+          "imgUrl": "https://battlemageroyal.com/assets/img/logo_battlemageroyal.png",
           "width": "auto",
           "height": "auto",
           "value": "Word",
@@ -59,7 +59,7 @@ var bmrHypno = function() {
       "values": [
         {
           "type": "word",
-          "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+          "imgUrl": "https://battlemageroyal.com/assets/img/logo_battlemageroyal.png",
           "width": "auto",
           "height": "auto",
           "value": "slut",
@@ -110,7 +110,7 @@ var bmrHypno = function() {
         },
         {
           "type": "img",
-          "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+          "imgUrl": "https://battlemageroyal.com/assets/img/logo_battlemageroyal.png",
           "value": "woah,url"
         }
       ]
@@ -121,7 +121,7 @@ var bmrHypno = function() {
       "values":[
          {
             "type":"word",
-            "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+            "imgUrl": "https://battlemageroyal.com/assets/img/logo_battlemageroyal.png",
             "width": "auto",
             "height": "auto",
             "value":"Slimy!",
@@ -461,7 +461,7 @@ var bmrHypno = function() {
     "values": [
       {
         "type": "word",
-        "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+        "imgUrl": "https://battlemageroyal.com/assets/img/logo_battlemageroyal.png",
         "width": "auto",
         "height": "auto",
         "value": "Word",
@@ -984,6 +984,10 @@ var bmrHypno = function() {
         let curTabInfo = whichTabInfo;
         let tabTitle = createElement("div",i+j+"CreateTitle","tabTitle",j);
         tabTitle.onclick = (e) => {
+          if(curTabInfo==5){
+            changeTab(2);
+            return;
+          } 
           changeTab(curTabInfo);
         };
         _tabsTitles.push(tabTitle);
@@ -2522,7 +2526,6 @@ var bmrHypno = function() {
   function createImgEffectsTab() {
     let tab = createElement("div","imgEffectsTab","createTab");
 
-    document.getElementById("tabsContainer").appendChild(tab);
     return tab;
   }
 
