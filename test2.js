@@ -2235,6 +2235,7 @@ var bmrHypno = function() {
     //image url
     let imgValueInput = document.getElementById("imgValueInput");
     let tippyImgValueInput = createTippy(imgValueInput,"url can't be empty :c","right");
+    let imgSizePreview = document.getElementById("imgSizePreview");
     _tippys.push(tippyImgValueInput);
     imgValueInput.oninput = (e) => {
       if(e.target.value == "") {
@@ -2244,6 +2245,7 @@ var bmrHypno = function() {
       }
       imgValueInput.classList.remove("invalidValue");
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].imgUrl = e.target.value;
+      imgSizePreview.src =  _currentlyLoaded.values[_currentlyLoaded.selectedValue].imgUrl;
     }
     //time
     let imgTimeInput = document.getElementById("imgTimeInput");
@@ -2346,7 +2348,6 @@ var bmrHypno = function() {
         _currentlyLoaded.values[_currentlyLoaded.selectedValue].width = ["50%","50%"];
       }
     };
-    let imgSizePreview = document.getElementById("imgSizePreview");
     imgWidthInput1.oninput = (e) => {
       if(e.target.value.match(/^(\d+|-\d+)(\.?\d+)*%$/)==null) {
         imgWidthInput1.classList.add("invalidValue");
@@ -2368,7 +2369,6 @@ var bmrHypno = function() {
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].width[1] = e.target.value;
     }
     imgWidthInput1.onfocus = (e) => {
-      imgSizePreview.src =  _currentlyLoaded.values[_currentlyLoaded.selectedValue].imgUrl;
       imgSizePreview.style.display = "";
       imgSizePreview.style.width = e.target.value;
       imgSizePreview.style.height = "auto";
@@ -2378,6 +2378,63 @@ var bmrHypno = function() {
     }
     imgWidthInput2.onfocus = imgWidthInput1.onfocus;
     imgWidthInput2.onblur = imgWidthInput1.onblur;
+    //height
+    let imgHeightInputSelect = document.getElementById("imgHeightInputSelect");
+    let imgHeightInput1 = document.getElementById("imgHeightInput1");
+    let imgHeightInput2 = document.getElementById("imgHeightInput2");
+    let tippyImgHeight1 = createTippy(imgHeightInput1,"Value must be in format: 11.11%","top");
+    let tippyImgHeight2 = createTippy(imgHeightInput2,"Value must be in format: 11.11%","right");
+    _tippys.push(tippyImgHeight1);
+    _tippys.push(tippyImgHeight2);
+    imgHeightInputSelect.onchange = (e) => {
+      let selected = e.target.value;
+      if(selected == "Auto") {
+        imgHeightInput1.style.display = "none";
+        imgHeightInput2.style.display = "none";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].height = "auto";
+
+        imgHeightInput1.classList.remove("invalidValue");
+        imgHeightInput1.value="";
+        imgHeightInput2.classList.remove("invalidValue");
+        imgHeightInput2.value="";
+      } else {
+        imgHeightInput1.style.display = "";
+        imgHeightInput2.style.display = "";
+        imgHeightInput1.value="50%";
+        imgHeightInput2.value="50%";
+        _currentlyLoaded.values[_currentlyLoaded.selectedValue].height = ["50%","50%"];
+      }
+    };
+    imgHeightInput1.oninput = (e) => {
+      if(e.target.value.match(/^(\d+|-\d+)(\.?\d+)*%$/)==null) {
+        imgHeightInput1.classList.add("invalidValue");
+        tippyImgHeight1.show();
+        return;
+      }
+      imgHeightInput1.classList.remove("invalidValue");
+      imgSizePreview.style.height = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].height[0] = e.target.value;
+    }
+    imgHeightInput2.oninput = (e) => {
+      if(e.target.value.match(/^(\d+|-\d+)(\.?\d+)*%$/)==null) {
+        imgHeightInput2.classList.add("invalidValue");
+        tippyImgHeight2.show();
+        return;
+      }
+      imgHeightInput2.classList.remove("invalidValue");
+      imgSizePreview.style.height = e.target.value;
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].height[1] = e.target.value;
+    }
+    imgHeightInput1.onfocus = (e) => {
+      imgSizePreview.style.display = "";
+      imgSizePreview.style.height = e.target.value;
+      imgSizePreview.style.height = "auto";
+    }
+    imgHeightInput1.onblur = (e) => {
+      imgSizePreview.style.display = "none";
+    }
+    imgHeightInput2.onfocus = imgHeightInput1.onfocus;
+    imgHeightInput2.onblur = imgHeightInput1.onblur;    
     /*
     let wordFontInput1 = document.getElementById("wordFontInput1");
     let wordFontInput2 = document.getElementById("wordFontInput2");
