@@ -2550,6 +2550,20 @@ var bmrHypno = function() {
 
     imgElm.src = img.imgUrl;
 
+    if(word.width=="auto") {
+      wordElm.style.width = "auto";
+    } else {
+      wordElm.style.width = randRange(Number(word.width[0].slice(0,-1)),Number(word.width[1].slice(0,-1)))+"%";
+    }
+    imgElm.style.setProperty("--width",imgElm.style.width);
+
+    if(word.height=="auto") {
+      wordElm.style.height = "auto";
+    } else {
+      wordElm.style.height = randRange(Number(word.height[0].slice(0,-1)),Number(word.height[1].slice(0,-1)))+"%";
+    }
+    imgElm.style.setProperty("--height",imgElm.style.height);
+
     if(img.position=="Random") {
       //the span is needed to not have the results skewed towards bottom right, take width/height of span
       let tempImgSpan = createElement("img","","tempImg");
