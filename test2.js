@@ -581,7 +581,7 @@ var bmrHypno = function() {
       <select id="selectHypno" class="selectContainer">
       </select>
       <label id="loadFileLabel" class="topLabel" style="display: none;">
-        <input id="loadFileBtn" class="" placeholder="" type="file" multiple>Load from file
+        <input id="loadFileBtn" placeholder="" type="file" accept="application/json" multiple>Load from file
       </label>
       <label id="saveLabel" class="topLabel">
         Save
@@ -599,8 +599,11 @@ var bmrHypno = function() {
     let loaded = (e) => {
       let tmpFr = e.target;
       let result = tmpFr.result;
-      console.log(result);
-      //let resultJSON = JSON.parse(result);
+      let resultJSON = JSON.parse(result);
+      console.log(resultJSON);
+      _preloadedHypnos[resultJSON.name] = resultJSON;
+      preloadedHypnosSelectUpdate(resultJSON.name);
+      loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[resultJSON])),0);
     };
     //How are the files processed when you load them
     let process = (file) => {
@@ -610,10 +613,9 @@ var bmrHypno = function() {
     };
     //Making it so you process the file when you choose it
     fileBtn.addEventListener('change', (e) => {
-      let file = fileBtn.files;
-      for(i in file) {
-        console.log(i);
-        process(file[i]);
+      let files = fileBtn.files;
+      for(let i=0;i<files.length;i++) {
+        process(files[i]);
       }
     });
     let backButton = document.getElementById("backButton");
