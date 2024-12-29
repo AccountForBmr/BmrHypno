@@ -610,8 +610,11 @@ var bmrHypno = function() {
     };
     //Making it so you process the file when you choose it
     fileBtn.addEventListener('change', (e) => {
-      let file = fileBtn.files[0];
-      process(file);
+      let file = fileBtn.files;
+      for(i in file) {
+        console.log(i);
+        process(file[i]);
+      }
     });
     let backButton = document.getElementById("backButton");
     backButton.onclick = startBmr;
@@ -632,14 +635,12 @@ var bmrHypno = function() {
       downloadAnchor.setAttribute("download", `${_currentlyLoaded.name}.json`);
       downloadAnchor.click();
       _preloadedHypnos[_currentlyLoaded.name] = JSON.parse(JSON.stringify(_currentlyLoaded));
-      if(preloadedHypnosSelectUpdate(_currentlyLoaded.name)) {
-        document.getElementById("selectHypno").options.add(new Option(_currentlyLoaded.name,_currentlyLoaded.name));
-      }
+      preloadedHypnosSelectUpdate(_currentlyLoaded.name);
     }
 
     loadSelections(selectHypno);
     createCreateScreenGrid();
-    loadSelectionInGrid(_preloadedHypnos["New one"],0);
+    loadSelectionInGrid(JSON.parse(JSON.stringify(_templateHypno)),0);
   }
 
   function loadSelections(selections) {
@@ -2779,9 +2780,9 @@ var bmrHypno = function() {
     let needUpdate = document.getElementById("selectHypno").options;
     for(let i = 0; i<=needUpdate.length; i++) {
       if(needUpdate[i].value==value)
-        return false;
+        return;
     }
-    return true;
+    needUpdate.add(new Option(_currentlyLoaded.name,_currentlyLoaded.name));
   }
 
   BMRHYPNO.start = startBmr;
