@@ -376,7 +376,7 @@ Word down here, Base
     height: 100%;
 }
 
-#wordPositionInputSelect, #imgPositionInputSelect {
+#wordPositionInputSelect, #imgPositionInputSelect, #imgHeightInputSelect, #imgWidthInputSelect {
     height: 80% !important;
     width: 50% !important;
 }
@@ -682,6 +682,34 @@ Word Effects Down Here
     min-height: 10%;
     justify-content: end;
     background-color: #033f03;
+}
+
+/*
+
+Img Base Down here
+
+*/
+
+#imgHeightLabel, #imgWidthLabel {
+    width: 20% !important;
+}
+
+#imgHeightInputContainer, #imgWidthInputContainer {
+    width: 80% !important;
+}
+
+#imgHeightInput1, #imgHeightInput2, #imgWidthInput1, #imgWidthInput2 {
+    width: 25% !important;
+    height: 25% !important;
+}
+
+#imgSizePreview {
+    position: absolute;
+    top: 0;
+    z-index: 20;
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 /*

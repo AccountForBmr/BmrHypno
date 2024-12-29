@@ -524,6 +524,10 @@ var bmrHypno = function() {
     if(!_menuModified) {
       document.getElementById("menu").getElementsByClassName("button")[0].onclick = rewrittenDropdownFunction();
       document.getElementById("scaler").appendChild(spawnArea);
+      let imgPrev = createElement("img","imgSizePreview");
+      imgPrev.style.display = "none";
+      imgPrev.src = "https://battlemageroyal.com/assets/img/logo_battlemageroyal.png";
+      spawnArea.appendChild(imgPrev);
       _menuModified = true;
     }
 
@@ -2203,13 +2207,26 @@ var bmrHypno = function() {
         <input id="imgPositionInput2" class="gridTextInput" placeholder="% from top" type="text" style="display: none;">
       </div>
     </div>
-    <div id="imgSizeContainer" class="tabImgContainer">
-      <div id="imgSizeLabel" class="gridLabel">Image size?</div>
-      <div id="imgSizeInputContainer">
-        <input id="imgWidthInput" class="gridTextInput" placeholder="Min value." type="text">
-        <input id="imgHeightInput" class="gridTextInput" placeholder="Max value." type="text">
-        <div id="IMGTODOfontPreviewMin" class="fontPreview" style="display: none;">Min</div>
-        <div id="IMGTODOfontPreviewMax" class="fontPreview" style="display: none;">Max</div>
+    <div id="imgWidthContainer" class="tabImgContainer">
+      <div id="imgWidthLabel" class="gridLabel">Width:</div>
+      <div id="imgWidthInputContainer"> 
+        <select id="imgWidthInputSelect" class="selectContainer">
+          <option value="Auto">Auto</option>
+          <option value="Random Between">Random Between</option>
+        </select>
+        <input id="imgWidthInput1" class="gridTextInput" type="text" placeholder="Min value.">
+        <input id="imgWidthInput2" class="gridTextInput" placeholder="Max value." type="text">
+      </div>
+    </div>
+    <div id="imgHeightContainer" class="tabImgContainer">
+      <div id="imgHeightLabel" class="gridLabel">Height:</div>
+      <div id="imgHeightInputContainer"> 
+        <select id="imgHeightInputSelect" class="selectContainer">
+          <option value="Auto">Auto</option>
+          <option value="Random Between">Random Between</option>
+        </select>
+        <input id="imgHeightInput1" class="gridTextInput" type="text" placeholder="Min value.">
+        <input id="imgHeightInput2" class="gridTextInput" placeholder="Max value." type="text">
       </div>
     </div>
     `;
@@ -2302,6 +2319,7 @@ var bmrHypno = function() {
     }
 
     //size
+    //width
     /*
     let wordFontInput1 = document.getElementById("wordFontInput1");
     let wordFontInput2 = document.getElementById("wordFontInput2");
