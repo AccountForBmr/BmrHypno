@@ -2550,17 +2550,17 @@ var bmrHypno = function() {
 
     imgElm.src = img.imgUrl;
 
-    if(word.width=="auto") {
-      wordElm.style.width = "auto";
+    if(img.width=="auto") {
+      imgElm.style.width = "auto";
     } else {
-      wordElm.style.width = randRange(Number(word.width[0].slice(0,-1)),Number(word.width[1].slice(0,-1)))+"%";
+      imgElm.style.width = randRange(Number(img.width[0].slice(0,-1)),Number(img.width[1].slice(0,-1)))+"%";
     }
     imgElm.style.setProperty("--width",imgElm.style.width);
 
-    if(word.height=="auto") {
-      wordElm.style.height = "auto";
+    if(img.height=="auto") {
+      imgElm.style.height = "auto";
     } else {
-      wordElm.style.height = randRange(Number(word.height[0].slice(0,-1)),Number(word.height[1].slice(0,-1)))+"%";
+      imgElm.style.height = randRange(Number(img.height[0].slice(0,-1)),Number(img.height[1].slice(0,-1)))+"%";
     }
     imgElm.style.setProperty("--height",imgElm.style.height);
 
