@@ -658,7 +658,7 @@ var bmrHypno = function() {
       if(selected.text == "Load from file") {
         displayBtn.style.display = "";
       } else {
-        loadSelectionInGrid(_preloadedHypnos[selected.text],0);
+        loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[selected.text])),0);
         displayBtn.style.display = "none";
       }
     };
@@ -860,10 +860,10 @@ var bmrHypno = function() {
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
     //name of the set
     let formNameInput = document.getElementById("formNameInput");
-    let tippyFormNameInput = createTippy(formNameInput,"Name can't be empty","top");
+    let tippyFormNameInput = createTippy(formNameInput,"Name can't be empty or 'New one'","top");
     _tippys.push(tippyFormNameInput);
     formNameInput.oninput = (e) => {
-      if(e.target.value == "") {
+      if(e.target.value == "" || e.target.value == "New one") {
         formNameInput.classList.add("invalidValue");
         tippyFormNameInput.show();
         return;
