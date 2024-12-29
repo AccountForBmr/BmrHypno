@@ -36,6 +36,8 @@ var bmrHypno = function() {
         {
           "type": "word",
           "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+          "width": "auto",
+          "height": "auto",
           "value": "Word",
           "leaveTime": 5000,
           "position": "Random",
@@ -58,6 +60,8 @@ var bmrHypno = function() {
         {
           "type": "word",
           "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+          "width": "auto",
+          "height": "auto",
           "value": "slut",
           "leaveTime": 4120,
           "position": ["1.00%","3.14%"],
@@ -118,6 +122,8 @@ var bmrHypno = function() {
          {
             "type":"word",
             "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+            "width": "auto",
+            "height": "auto",
             "value":"Slimy!",
             "leaveTime":"10000",
             "position":"Random",
@@ -456,6 +462,8 @@ var bmrHypno = function() {
       {
         "type": "word",
         "imgUrl": "https://battlemageroyal.com/game/assets/characters/lacey/lacey.png",
+        "width": "auto",
+        "height": "auto",
         "value": "Word",
         "leaveTime": "5000",
         "position": "Random",
@@ -787,6 +795,37 @@ var bmrHypno = function() {
       pos1.value = cur.position[0];
       pos2.value = cur.position[1];
     }
+    //size
+    //width
+    selectWid = document.getElementById("imgWidthInputSelect");
+    wid1 = document.getElementById("imgWidthInput1");
+    wid2 = document.getElementById("imgWidthInput2");
+    if(cur.width == "auto") {
+      selectWid.selectedIndex = 0;
+      wid1.style.display = "none";
+      wid2.style.display = "none";
+    } else {
+      selectWid.selectedIndex = 1;
+      wid1.style.display = "";
+      wid2.style.display = "";
+      wid1.value = cur.width[0];
+      wid2.value = cur.width[1];
+    }
+    //height
+    selectHei = document.getElementById("imgHeightInputSelect");
+    hei1 = document.getElementById("imgHeightInput1");
+    hei2 = document.getElementById("imgHeightInput2");
+    if(cur.height == "auto") {
+      selectHei.selectedIndex = 0;
+      hei1.style.display = "none";
+      hei2.style.display = "none";
+    } else {
+      selectHei.selectedIndex = 1;
+      hei1.style.display = "";
+      hei2.style.display = "";
+      hei1.value = cur.height[0];
+      hei2.value = cur.height[1];
+    }        
     //that's all I have for now
   }
   
@@ -2428,7 +2467,7 @@ var bmrHypno = function() {
     imgHeightInput1.onfocus = (e) => {
       imgSizePreview.style.display = "";
       imgSizePreview.style.height = e.target.value;
-      imgSizePreview.style.height = "auto";
+      imgSizePreview.style.width = "auto";
     }
     imgHeightInput1.onblur = (e) => {
       imgSizePreview.style.display = "none";
