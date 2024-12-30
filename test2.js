@@ -2586,7 +2586,6 @@ var bmrHypno = function() {
     imgElm.style.transform = "rotate(var(--rotation))";
 
     if(img.position=="Random") {
-      //the span is needed to not have the results skewed towards bottom right, take width/height of span
       let tempImgSpan = createElement("img","","tempImg");
       tempImgSpan.src = imgElm.src;
       tempImgSpan.style.width = imgElm.style.width;
@@ -2620,7 +2619,6 @@ var bmrHypno = function() {
         imgRect = imgElm.getBoundingClientRect();
         imgElm.style.top = Number(imgElm.style.top.slice(0,-2)) + Math.abs(bounds.top - imgRect.top)+"px";
       }
-      //if too big to fit in
       if(imgRect.width >= bounds.width || imgRect.height >= bounds.height) {
         imgRect = imgElm.getBoundingClientRect();
         let tempImgSpan = createElement("img","","tempImg");
@@ -2646,7 +2644,7 @@ var bmrHypno = function() {
       let anim = JSON.parse(JSON.stringify(img.animation));
       let keyframesList = [];
       let timings = anim.timings;
-      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); //offsets need to be in order
+      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)});
       for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
         let curKeyframe = {};
         for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
@@ -2903,7 +2901,7 @@ var bmrHypno = function() {
       let theMessage = "${theHypno=";
       theMessage += JSON.stringify(hypno);
       //adding the css
-      theMessage += `;scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v0.8.44/test2.css';scriptCss.rel="stylesheet";document.body.appendChild(scriptCss);scriptCss.onload = ()=>{`;
+      theMessage += `;scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v0.8.44/test2.css';scriptCss.rel="stylesheet";document.body.appendChild(scriptCss);`;
       //adding the spawningInterval
       theMessage += '$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
       //adding createElement,spawnArea and randRange
@@ -2914,7 +2912,7 @@ var bmrHypno = function() {
       theMessage += `${spawnWord.toString()};`;
       //adding spawnImg function
       theMessage += `${spawnImg.toString()};`;
-      theMessage += "};}";
+      theMessage += "}";
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
       GUI.instance.DisplayMessage(`A message with some instrunctions has been sent to ${targetUsername}`);
     }
