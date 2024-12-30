@@ -2862,15 +2862,28 @@ var bmrHypno = function() {
     let castButton = document.getElementById("castButton");
     castButton.onclick = (e) => {
       let option = document.getElementById("castTargetInputSelect").value;
+      if(document.getElementById("selectHypno").value == "None") {
+        GUI.instance.DisplayMessage("Choose something first!");
+        return;
+      }
       switch (option) {
         case "Yourself":
           castHypno(_currentlyLoaded,0);
           break;
         case "Your Opponent":
+          if(LOCATION.instance.opponent.username == null) {
+            GUI.instance.DisplayMessage("You're alone :c");
+            return;
+          }
           castHypno(_currentlyLoaded,1,LOCATION.instance.opponent.username);
           break;
         case "Username":
-          castHypno(_currentlyLoaded,1,document.getElementById("castTargetInput").value);
+          let target = document.getElementById("castTargetInput").value;
+          if(target == "") {
+            GUI.instance.DisplayMessage(`You didn't insert an username!`);
+            return;
+          }
+          castHypno(_currentlyLoaded,1,target);
           break;
       }
     };
@@ -2885,7 +2898,11 @@ var bmrHypno = function() {
       _activeHypnos[hypno.name] = intId;
       console.log(_activeHypnos);
     } else {
-      alert(`Not done yet, however, target was: ${targetUsername}`);
+      let theMessage = "${abcd=";
+      theMessage+=JSON.stringify(hypno);
+      theMessage+="}";
+      GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
+      GUI.instance.DisplayMessage(`A message with some instrunctions has been sent to ${targetUsername}`);
     }
   }
 
