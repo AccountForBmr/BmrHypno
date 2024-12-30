@@ -2782,9 +2782,9 @@ var bmrHypno = function() {
     let needUpdate = document.getElementById("selectHypno").options;
     for(let i = 0; i<needUpdate.length; i++) {
       if(needUpdate[i].value==value)
-        return;
+        document.getElementById("selectHypno").selectedIndex = i;
     }
-    needUpdate.add(new Option(_currentlyLoaded.name,_currentlyLoaded.name));
+    needUpdate.add(new Option(value,value));
     document.getElementById("selectHypno").selectedIndex = needUpdate.length-1;
   }
 
