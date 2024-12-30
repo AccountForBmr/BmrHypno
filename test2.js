@@ -28,6 +28,7 @@ var bmrHypno = function() {
   var _tabsContainers = [];
   var _colorPickers = [];
   var _currentlyLoaded = {};
+  var _activeHypnos = {};
   var _preloadedHypnos = {
     "New one": {
       "name": "New",
@@ -2850,15 +2851,42 @@ var bmrHypno = function() {
     let castTargetInputSelect = document.getElementById("castTargetInputSelect");
     castTargetInputSelect.onchange = (e) => {
       let selected = e.target.value;
-      console.log(selected);
+      if(selected == "Username") {
+        document.getElementById("castTargetInput").style.display = "";
+      } else {
+        document.getElementById("castTargetInput").style.display = "none";
+      }
     };
 
     //cast!
     let castButton = document.getElementById("castButton");
     castButton.onclick = (e) => {
       let option = document.getElementById("castTargetInputSelect").value;
-      console.log(option);
+      switch (option) {
+        case "Yourself":
+          castHypno(_currentlyLoaded,0);
+          break;
+        case "Your Opponent":
+          castHypno(_currentlyLoaded,1,Location.instance.opponent.username);
+          break;
+        case "Username":
+          castHypno(_currentlyLoaded,1,document.getElementById("castTargetInput").value);
+          break;
+      }
     };
+  }
+
+  function castHypno(hypno,target,targetUsername) {
+    if(target==0) {
+      let intId = setInterval(()=>{
+        let chosen = Math.floor(Math.random()*hypno.values.length);
+        hypno.values[chosen].type == "word"?spawnWord(hypno.values[chosen]):spawnImg(hypno.values[chosen]);
+      },hypno.spawnTime);
+      _activeHypnos[hypno.name] = intId;
+      console.log(_activeHypnos);
+    } else {
+      alert(`Not done yet, however, target was: ${targetUsername}`);
+    }
   }
 
   BMRHYPNO.start = startBmr;
