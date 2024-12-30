@@ -53,7 +53,6 @@ var bmrHypno = function() {
         }
       ]
     },
-    "Load from file": "Load from file",
     "Random": {
       "name": "Random",
       "spawnTime": 1000,
@@ -581,7 +580,7 @@ var bmrHypno = function() {
       <div id="" class="gridLabel">Load from:</div>
       <select id="selectHypno" class="selectContainer">
       </select>
-      <label id="loadFileLabel" class="topLabel" style="display: none;">
+      <label id="loadFileLabel" class="topLabel">
         <input id="loadFileBtn" placeholder="" type="file" accept="application/json" multiple>Load from file
       </label>
       <label id="saveLabel" class="topLabel">
@@ -596,7 +595,6 @@ var bmrHypno = function() {
     let fileBtn = document.getElementById("loadFileBtn");
     fileBtn.type = "file";
     //what happens after the file is loaded
-    //TODO TODO TODO TODO TODO TODO TODO TODO TODO, for now just console log
     let loaded = (e) => {
       let tmpFr = e.target;
       let result = tmpFr.result;
@@ -661,18 +659,12 @@ var bmrHypno = function() {
       }
     };
     return selections;*/
-    let displayBtn = document.getElementById("loadFileLabel");
     for(i in _preloadedHypnos) {
       selections.options.add(new Option(i,_preloadedHypnos[i].name||"Load from file"));
     }
     selections.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
-      if(selected.text == "Load from file") {
-        displayBtn.style.display = "";
-      } else {
-        loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[selected.text])),0);
-        displayBtn.style.display = "none";
-      }
+      loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[selected.text])),0);
+      displayBtn.style.display = "none";
     };
   }
 
@@ -2919,7 +2911,7 @@ var bmrHypno = function() {
       //the message with the instructions
       let message2 = `Hello! If you're seeing this message, than it means that I've decide to cast a spell on you!
       Please, copy/paste the long message that was sent along with this one into your chat for the spell to work.
-      If you wish to remove the effets of the macro afterwards, all you need to do is type this in chat:
+      If you wish to remove the effets of the spell afterwards, all you need to do is type this in chat (the stuff already on screen will be removed when its duration expires):
       `;
       message2 += "${clearInterval($intervalId)}";
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": message2, load: true});
