@@ -2905,7 +2905,7 @@ var bmrHypno = function() {
       let theMessage = "${theHypno=";
       theMessage+=JSON.stringify(hypno);
       //adding the spawningInterval
-      theMessage+='$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime); _activeHypnos[hypno.name] = intId;';
+      theMessage+=';$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
       //adding spawnWord function
       theMessage += 'function spawnWord(word){console.log(word.value);};';
       //adding spawnImg function
