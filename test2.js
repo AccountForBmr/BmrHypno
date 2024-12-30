@@ -569,7 +569,7 @@ var bmrHypno = function() {
 
   function createBmrRemoveScreenBtn() {
     let removeBtn = createElement("div","removeBtn","gridButton","R E M O V E");
-    removeBtn.onclick = (e) => { console.log("I haven't made the remove screen yet :c"); };
+    removeBtn.onclick = loadRemoveScreen;
     return removeBtn;
   }
 
@@ -2783,6 +2783,8 @@ var bmrHypno = function() {
     document.getElementById("selectHypno").selectedIndex = needUpdate.length-1;
   }
 
+  //CAST
+
   function loadCastScreen() {
     emptyMainBox();
     let topContainerHTML = `
@@ -2917,6 +2919,90 @@ var bmrHypno = function() {
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": message2, load: true});
       GUI.instance.DisplayMessage(`A message with some instructions has been sent to ${targetUsername}`);
     }
+  }
+
+  //REMOVE
+  function loadRemoveScreen() {
+    emptyMainBox();
+    let topContainerHTML = `
+    <div id="topContainer" class="gridContainer">
+      <input id="backButton" class="" placeholder="" type="button" value="<">
+      <div id="closeButton" class="button close"></div>
+    </div>
+    `;
+    mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
+    
+    let backButton = document.getElementById("backButton");
+    backButton.onclick = startBmr;
+    let closeButton = document.getElementById("closeButton");
+    closeButton.onclick = () => { mainBox.remove(); };
+
+    createRemoveMenu();
+  }
+
+  function createRemoveMenu() {
+    let createMenuHTML = `
+    <div id="castMenu" class="menu-start">
+      <div id="cast-tab-start">
+        <div id="castTargetContainer" class="tabWordContainer">
+          <div id="castTargetLabel" class="gridLabel">Who is the target?</div>
+          <div id="castTargetInputContainer">
+            <select id="castTargetInputSelect" class="selectContainer">
+              <option value="Yourself">Yourself</option>
+              <option value="Your Opponent">Your Opponent</option>
+              <option value="Username">Username</option>
+            </select>
+            <input id="castTargetInput" class="gridTextInput" type="text" placeholder="Username here" style="display: none"> 
+          </div>
+        </div>
+        <div id="castBtnContainer" class="tabWordContainer">
+          <div id="castButton">Cast!</div>
+        </div>
+      </div>
+    </div>
+    `;
+    mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
+
+    //select target
+    let castTargetInputSelect = document.getElementById("castTargetInputSelect");
+    castTargetInputSelect.onchange = (e) => {
+      let selected = e.target.value;
+      if(selected == "Username") {
+        document.getElementById("castTargetInput").style.display = "";
+      } else {
+        document.getElementById("castTargetInput").style.display = "none";
+      }
+    };
+
+    //cast!
+    let castButton = document.getElementById("castButton");
+    castButton.onclick = (e) => {
+      let option = document.getElementById("castTargetInputSelect").value;
+      if(document.getElementById("selectHypno").value == "None") {
+        GUI.instance.DisplayMessage("Choose something first!");
+        return;
+      }
+      switch (option) {
+        case "Yourself":
+          castHypno(_currentlyLoaded,0);
+          break;
+        case "Your Opponent":
+          if(LOCATION.instance.opponent.username == null) {
+            GUI.instance.DisplayMessage("You're alone :c");
+            return;
+          }
+          castHypno(_currentlyLoaded,1,LOCATION.instance.opponent.username);
+          break;
+        case "Username":
+          let target = document.getElementById("castTargetInput").value;
+          if(target == "") {
+            GUI.instance.DisplayMessage(`You didn't insert an username!`);
+            return;
+          }
+          castHypno(_currentlyLoaded,1,target);
+          break;
+      }
+    };
   }
 
   BMRHYPNO.start = startBmr;
