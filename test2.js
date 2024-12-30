@@ -2781,8 +2781,10 @@ var bmrHypno = function() {
   function preloadedHypnosSelectUpdate(value) {
     let needUpdate = document.getElementById("selectHypno").options;
     for(let i = 0; i<needUpdate.length; i++) {
-      if(needUpdate[i].value==value)
+      if(needUpdate[i].value==value) {
         document.getElementById("selectHypno").selectedIndex = i;
+        return;
+      }
     }
     needUpdate.add(new Option(value,value));
     document.getElementById("selectHypno").selectedIndex = needUpdate.length-1;
