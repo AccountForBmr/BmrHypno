@@ -2898,9 +2898,9 @@ var bmrHypno = function() {
       _activeHypnos[hypno.name] = intId;
       console.log(_activeHypnos);
     } else {
-      let theMessage = "${abcd=";
+      let theMessage = "${abcd=JSON.parse(";
       theMessage+=JSON.stringify(hypno);
-      theMessage+="}";
+      theMessage+=")}";
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
       GUI.instance.DisplayMessage(`A message with some instrunctions has been sent to ${targetUsername}`);
     }
