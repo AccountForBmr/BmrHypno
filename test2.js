@@ -2907,7 +2907,7 @@ var bmrHypno = function() {
       //adding createElement,spawnArea and randRange
       theMessage += 'function createElement(type = "div", id = "", className = "", innerHTML = "", placeholder = "") {let elm = document.createElement(type);elm.id = id;elm.className = className;elm.innerHTML = innerHTML;elm.placeholder = placeholder;return elm;};console.log(createElement.toString());';
       theMessage += 'var spawnArea = document.getElementById("hypnoSpawnArea");';
-      theMessage += `function randRange(min,max){${randRange.toString()}};console.log(randRange.toString());`;
+      theMessage += `${randRange.toString()};console.log(randRange(-100,50));`;
       //adding spawnWord function
       theMessage += `function spawnWord(word){console.log(word.value)};`;
       //adding spawnImg function
