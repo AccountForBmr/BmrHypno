@@ -2167,7 +2167,6 @@ var bmrHypno = function() {
     wordElm.style.transform = "rotate(var(--rotation))";
 
     if(word.position=="Random") {
-      //the span is needed to not have the results skewed towards bottom right, take width/height of span
       let tempWordSpan = createElement("span","","tempWord",word.value);
       tempWordSpan.style.fontSize = wordElm.style.fontSize;
       spawnArea.appendChild(tempWordSpan);
@@ -2199,7 +2198,6 @@ var bmrHypno = function() {
         wordRect = wordElm.getBoundingClientRect();
         wordElm.style.top = Number(wordElm.style.top.slice(0,-2)) + Math.abs(bounds.top - wordRect.top)+"px";
       }
-      //if too big to fit in
       if(wordRect.width >= bounds.width || wordRect.height >= bounds.height) {
         wordRect = wordElm.getBoundingClientRect();
         let tempWordSpan = createElement("span","","tempWord",word.value);
@@ -2223,7 +2221,7 @@ var bmrHypno = function() {
       let anim = JSON.parse(JSON.stringify(word.animation));
       let keyframesList = [];
       let timings = anim.timings;
-      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); //offsets need to be in order
+      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)}); 
       for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
         let curKeyframe = {};
         for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
@@ -2903,14 +2901,18 @@ var bmrHypno = function() {
       console.log(_activeHypnos);
     } else {
       let theMessage = "${theHypno=";
-      theMessage+=JSON.stringify(hypno);
+      theMessage += JSON.stringify(hypno);
       //adding the spawningInterval
-      theMessage+=';$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
+      theMessage += ';$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
+      //adding createElement,spawnArea and randRange
+      theMessage += 'function createElement(type = "div", id = "", className = "", innerHTML = "", placeholder = "") {let elm = document.createElement(type);elm.id = id;elm.className = className;elm.innerHTML = innerHTML;elm.placeholder = placeholder;return elm;};';
+      theMessage += 'var spawnArea = document.getElementById("hypnoSpawnArea");';
+      theMessage += `function randRange(min,max){${randRange.toString()}};`;
       //adding spawnWord function
-      theMessage += 'function spawnWord(word){console.log(word.value);};';
+      theMessage += `function spawnWord(word){${spawnWord.toString()}};`;
       //adding spawnImg function
       theMessage += 'function spawnImg(img){console.log(img.imgUrl);};';
-      theMessage+="}";
+      theMessage += "}";
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
       GUI.instance.DisplayMessage(`A message with some instrunctions has been sent to ${targetUsername}`);
     }
