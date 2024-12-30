@@ -2794,12 +2794,26 @@ var bmrHypno = function() {
     emptyMainBox();
     let topContainerHTML = `
     <div id="topContainer" class="gridContainer">
-      <div id="" class="gridLabel">UHHH Duration??? or select the one you want:</div>
+      <div id="" class="gridLabel">Casting:</div>
+      <select id="selectHypno" class="selectContainer">
+        <option value="None">None</option>
+      </select>
       <input id="backButton" class="" placeholder="" type="button" value="<">
       <div id="closeButton" class="button close"></div>
     </div>
     `;
     mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
+
+    let selectHypno = document.getElementById("selectHypno");
+    for(i in _preloadedHypnos) {
+      if(i != "New one"&&i != "Load from file") {
+        selectHypno.options.add(new Option(i,_preloadedHypnos[i].name));
+      }
+    }
+    selectHypno.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex];
+      _currentlyLoaded = _preloadedHypnos[selected.text];
+    };
     
     let backButton = document.getElementById("backButton");
     backButton.onclick = startBmr;
@@ -2807,38 +2821,32 @@ var bmrHypno = function() {
     closeButton.onclick = () => { mainBox.remove(); };
 
     createCastMenu();
-    //loadSelectionInGrid(JSON.parse(JSON.stringify(_templateHypno)),0);
   }
 
   function createCastMenu() {
     let createMenuHTML = `
     <div id="createMenu", class="menu-start">
-      <div id="nameContainer" class="gridContainer">
-        <div id="nameLabel" class="gridLabel">Choose a name for your set:</div>
-        <div id="nameInputContainer">
-          <input id="formNameInput" class="gridTextInput" placeholder="Name here." type="text">
-        </div>
-      </div>
-      <div id="spawnContainer" class="gridContainer">
-        <div id="spawnLabel" class="gridLabel">Choose how many milliseconds you want between each spawn:</div>
-        <div id="spawnInputContainer" class="">
-          <input id="formSpawnInput" class="gridTextInput" placeholder="ms here, can go past max." type="text">
-          <input id="formSpawnRange" class="" placeholder="" type="range" min="100" max="5000">
-        </div>
-      </div>
-      <div id="selectTypeContainer" class="gridContainer">
-        <div id="leftTypeContainer" class="typeContainer" style="display: none;">◀</div>
-        <div id="wordTypeContainer" class="typeContainer activeType">Word/Text</div>
-        <div id="imgTypeContainer" class="typeContainer">Image/Gif</div>
-        <div id="addTypeContainer" class="typeContainer">+</div>
-        <div id="removeTypeContainer" class="typeContainer">-</div>
-        <div id="rightTypeContainer" class="typeContainer" style="display: none;">▶</div>
-      </div>
       <div id="create-tab-start">
+        <div id="nameContainer" class="gridContainer">
+          <div id="nameLabel" class="gridLabel">Choose a name for your set:</div>
+          <div id="nameInputContainer">
+            <input id="formNameInput" class="gridTextInput" placeholder="Name here." type="text">
+          </div>
+        </div>
+        <div id="imgPreviewContainer" class="tabWordContainer">
+          <div id="imgSpawn1Btn" class="spawn1Btn">Spawn 1!</div>
+        </div>
       </div>
     </div>
     `;
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
+
+    //spawn1
+    let imgSpawn1Btn = document.getElementById("imgSpawn1Btn");
+    imgSpawn1Btn.onclick = (e) => {
+      spawnImg(_currentlyLoaded.values[_currentlyLoaded.selectedValue]);
+    };
+    return tab;
   }
 
   BMRHYPNO.start = startBmr;
