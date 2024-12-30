@@ -2903,7 +2903,7 @@ var bmrHypno = function() {
       //adding the css
       theMessage += `;scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v0.8.44/test2.css';scriptCss.rel="stylesheet";document.body.appendChild(scriptCss);`;
       //adding the spawningInterval
-      theMessage += '$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
+      theMessage += '$intervalId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
       //adding createElement,spawnArea and randRange
       theMessage += `${createElement.toString()};`;
       theMessage += 'var spawnArea = createElement("div","hypnoSpawnArea");document.getElementById("scaler").appendChild(spawnArea);';
@@ -2913,8 +2913,17 @@ var bmrHypno = function() {
       //adding spawnImg function
       theMessage += `${spawnImg.toString()};`;
       theMessage += "}";
+      //removing \n (to make the message cast macro work)
+      theMessage = theMessage.replace(/[\r\n]+/gm, "");
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
-      GUI.instance.DisplayMessage(`A message with some instrunctions has been sent to ${targetUsername}`);
+      //the message with the instructions
+      let message2 = `Hello! If you're seeing this message, than it means that I've decide to cast a spell on you!
+      Please, copy/paste the long message that was sent along with this one into your chat for the spell to work.
+      If you wish to remove the effets of the macro afterwards, all you need to do is type this in chat:
+      `;
+      message2 += "${clearInterval($intervalId)}";
+      GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": message2, load: true});
+      GUI.instance.DisplayMessage(`A message with some instructions has been sent to ${targetUsername}`);
     }
   }
 

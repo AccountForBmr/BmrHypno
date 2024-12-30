@@ -716,6 +716,20 @@ Img Base Down here
     opacity: 0.5;
 }
 
+/* container heights tmp, maybe remove*/
+
+#imgValueContainer {
+    height: 25%;
+}
+
+#imgTimeContainer {
+    height: 30%;
+}
+
+#imgPositionContainer, #imgWidthContainer, #imgHeightContainer {
+    height: 15%;
+}
+
 /*
 
 Word Preview Down Here
