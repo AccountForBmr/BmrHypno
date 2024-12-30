@@ -2906,7 +2906,7 @@ var bmrHypno = function() {
       theMessage += ';$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
       //adding createElement,spawnArea and randRange
       theMessage += 'function createElement(type = "div", id = "", className = "", innerHTML = "", placeholder = "") {let elm = document.createElement(type);elm.id = id;elm.className = className;elm.innerHTML = innerHTML;elm.placeholder = placeholder;return elm;};console.log(createElement.toString());';
-      theMessage += 'spawnArea = document.getElementById("hypnoSpawnArea");';
+      theMessage += 'var spawnArea = createElement("div","hypnoSpawnArea");document.getElementById("scaler").appendChild(spawnArea);';
       theMessage += `${randRange.toString()};`;
       //adding spawnWord function
       theMessage += `${spawnWord.toString()};`;
