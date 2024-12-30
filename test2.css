@@ -377,13 +377,13 @@ Word down here, Base
 }
 
 #wordPositionInputSelect, #imgPositionInputSelect, #imgHeightInputSelect, #imgWidthInputSelect {
-    /*height: 80% !important;*/
+    height: 100% !important;
     width: 50% !important;
 }
 
 #wordPositionInput1, #wordPositionInput2, #imgPositionInput1, #imgPositionInput2 {
     width: 25% !important;
-    /*height: 80% !important;*/
+    height: 100% !important;
 }
 
 #chooseWindow {
@@ -704,7 +704,7 @@ Img Base Down here
 
 #imgHeightInput1, #imgHeightInput2, #imgWidthInput1, #imgWidthInput2 {
     width: 25% !important;
-    /*height: 80% !important;*/
+    height: 100% !important;
 }
 
 #imgSizePreview {

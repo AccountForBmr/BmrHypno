@@ -2902,17 +2902,19 @@ var bmrHypno = function() {
     } else {
       let theMessage = "${theHypno=";
       theMessage += JSON.stringify(hypno);
+      //adding the css
+      theMessage += `;scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v0.8.44/test2.css';scriptCss.rel="stylesheet";document.body.appendChild(scriptCss);scriptCss.onload = ()=>{`;
       //adding the spawningInterval
-      theMessage += ';$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
+      theMessage += '$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
       //adding createElement,spawnArea and randRange
-      theMessage += 'function createElement(type = "div", id = "", className = "", innerHTML = "", placeholder = "") {let elm = document.createElement(type);elm.id = id;elm.className = className;elm.innerHTML = innerHTML;elm.placeholder = placeholder;return elm;};console.log(createElement.toString());';
+      theMessage += `${createElement.toString()};`;
       theMessage += 'var spawnArea = createElement("div","hypnoSpawnArea");document.getElementById("scaler").appendChild(spawnArea);';
       theMessage += `${randRange.toString()};`;
       //adding spawnWord function
       theMessage += `${spawnWord.toString()};`;
       //adding spawnImg function
-      theMessage += 'function spawnImg(img){console.log(img.imgUrl);};';
-      theMessage += "}";
+      theMessage += `${spawnImg.toString()};`;
+      theMessage += "};}";
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
       GUI.instance.DisplayMessage(`A message with some instrunctions has been sent to ${targetUsername}`);
     }
