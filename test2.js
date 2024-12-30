@@ -2216,6 +2216,8 @@ var bmrHypno = function() {
     wordElm.style.setProperty("--top",wordElm.style.top);
     wordElm.style.setProperty("--left",wordElm.style.left);
 
+    wordElm.style.setProperty("--duration",word.leaveTime);
+
     setTimeout(()=>{wordElm.remove();},word.leaveTime);
     if(word.animation != "None") {
       let anim = JSON.parse(JSON.stringify(word.animation));
@@ -2639,6 +2641,8 @@ var bmrHypno = function() {
     imgElm.style.setProperty("--top",imgElm.style.top);
     imgElm.style.setProperty("--left",imgElm.style.left);
 
+    imgElm.style.setProperty("--duration",img.leaveTime);
+
     setTimeout(()=>{imgElm.remove();},img.leaveTime);
     if(img.animation != "None") {
       let anim = JSON.parse(JSON.stringify(img.animation));
@@ -2898,9 +2902,15 @@ var bmrHypno = function() {
       _activeHypnos[hypno.name] = intId;
       console.log(_activeHypnos);
     } else {
-      let theMessage = "${abcd=JSON.parse(";
+      let theMessage = "${theHypno=";
       theMessage+=JSON.stringify(hypno);
-      theMessage+=")}";
+      //adding the spawningInterval
+      theMessage+='$intId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime); _activeHypnos[hypno.name] = intId;';
+      //adding spawnWord function
+      theMessage += 'function spawnWord(word){console.log(word.value);};';
+      //adding spawnImg function
+      theMessage += 'function spawnImg(img){console.log(img.imgUrl);};';
+      theMessage+="}";
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
       GUI.instance.DisplayMessage(`A message with some instrunctions has been sent to ${targetUsername}`);
     }
