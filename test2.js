@@ -2867,7 +2867,7 @@ var bmrHypno = function() {
           castHypno(_currentlyLoaded,0);
           break;
         case "Your Opponent":
-          castHypno(_currentlyLoaded,1,Location.instance.opponent.username);
+          castHypno(_currentlyLoaded,1,LOCATION.instance.opponent.username);
           break;
         case "Username":
           castHypno(_currentlyLoaded,1,document.getElementById("castTargetInput").value);
