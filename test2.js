@@ -2825,28 +2825,40 @@ var bmrHypno = function() {
 
   function createCastMenu() {
     let createMenuHTML = `
-    <div id="createMenu", class="menu-start">
-      <div id="create-tab-start">
-        <div id="nameContainer" class="gridContainer">
-          <div id="nameLabel" class="gridLabel">Choose a name for your set:</div>
-          <div id="nameInputContainer">
-            <input id="formNameInput" class="gridTextInput" placeholder="Name here." type="text">
+    <div id="castMenu" class="menu-start">
+      <div id="cast-tab-start">
+        <div id="castTargetContainer" class="tabWordContainer">
+          <div id="castTargetLabel" class="gridLabel">Who is the target?</div>
+          <div id="castTargetInputContainer">
+            <select id="castTargetInputSelect" class="selectContainer">
+              <option value="Yourself">Yourself</option>
+              <option value="Your Opponent">Your Opponent</option>
+              <option value="Username">Username</option>
+            </select>
+            <input id="castTargetInput" class="gridTextInput" type="text" placeholder="Username here" style="display: none"> 
           </div>
         </div>
-        <div id="imgPreviewContainer" class="tabWordContainer">
-          <div id="imgSpawn1Btn" class="spawn1Btn">Spawn 1!</div>
+        <div id="castBtnContainer" class="tabWordContainer">
+          <div id="castButton">Cast!</div>
         </div>
       </div>
     </div>
     `;
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
 
-    //spawn1
-    let imgSpawn1Btn = document.getElementById("imgSpawn1Btn");
-    imgSpawn1Btn.onclick = (e) => {
-      spawnImg(_currentlyLoaded.values[_currentlyLoaded.selectedValue]);
+    //select target
+    let castTargetInputSelect = document.getElementById("castTargetInputSelect");
+    castTargetInputSelect.onchange = (e) => {
+      let selected = e.target.value;
+      console.log(selected);
     };
-    return tab;
+
+    //cast!
+    let castButton = document.getElementById("castButton");
+    castButton.onclick = (e) => {
+      let option = document.getElementById("castTargetInputSelect").value;
+      console.log(option);
+    };
   }
 
   BMRHYPNO.start = startBmr;
