@@ -30,7 +30,7 @@ var bmrHypno = function() {
   var _currentlyLoaded = {};
   var _preloadedHypnos = {
     "New one": {
-      "name": "New one",
+      "name": "New",
       "spawnTime": 500,
       "values": [
         {
@@ -456,7 +456,7 @@ var bmrHypno = function() {
     },
   };
   const _templateHypno = {
-    "name": "New one",
+    "name": "New",
     "spawnTime": "500",
     "values": [
       {
@@ -563,7 +563,7 @@ var bmrHypno = function() {
 
   function createBmrCastScreenBtn() {
     let castBtn = createElement("div","castBtn","gridButton","C A S T");
-    castBtn.onclick = (e) => { console.log("I haven't made the cast screen yet :c"); };
+    castBtn.onclick = loadCastScreen;
     return castBtn;
   }
 
@@ -2788,6 +2788,57 @@ var bmrHypno = function() {
     }
     needUpdate.add(new Option(value,value));
     document.getElementById("selectHypno").selectedIndex = needUpdate.length-1;
+  }
+
+  function loadCastScreen() {
+    emptyMainBox();
+    let topContainerHTML = `
+    <div id="topContainer" class="gridContainer">
+      <div id="" class="gridLabel">UHHH Duration??? or select the one you want:</div>
+      <input id="backButton" class="" placeholder="" type="button" value="<">
+      <div id="closeButton" class="button close"></div>
+    </div>
+    `;
+    mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
+    
+    let backButton = document.getElementById("backButton");
+    backButton.onclick = startBmr;
+    let closeButton = document.getElementById("closeButton");
+    closeButton.onclick = () => { mainBox.remove(); };
+
+    createCastMenu();
+    //loadSelectionInGrid(JSON.parse(JSON.stringify(_templateHypno)),0);
+  }
+
+  function createCastMenu() {
+    let createMenuHTML = `
+    <div id="createMenu", class="menu-start">
+      <div id="nameContainer" class="gridContainer">
+        <div id="nameLabel" class="gridLabel">Choose a name for your set:</div>
+        <div id="nameInputContainer">
+          <input id="formNameInput" class="gridTextInput" placeholder="Name here." type="text">
+        </div>
+      </div>
+      <div id="spawnContainer" class="gridContainer">
+        <div id="spawnLabel" class="gridLabel">Choose how many milliseconds you want between each spawn:</div>
+        <div id="spawnInputContainer" class="">
+          <input id="formSpawnInput" class="gridTextInput" placeholder="ms here, can go past max." type="text">
+          <input id="formSpawnRange" class="" placeholder="" type="range" min="100" max="5000">
+        </div>
+      </div>
+      <div id="selectTypeContainer" class="gridContainer">
+        <div id="leftTypeContainer" class="typeContainer" style="display: none;">◀</div>
+        <div id="wordTypeContainer" class="typeContainer activeType">Word/Text</div>
+        <div id="imgTypeContainer" class="typeContainer">Image/Gif</div>
+        <div id="addTypeContainer" class="typeContainer">+</div>
+        <div id="removeTypeContainer" class="typeContainer">-</div>
+        <div id="rightTypeContainer" class="typeContainer" style="display: none;">▶</div>
+      </div>
+      <div id="create-tab-start">
+      </div>
+    </div>
+    `;
+    mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
   }
 
   BMRHYPNO.start = startBmr;
