@@ -2796,7 +2796,7 @@ var bmrHypno = function() {
     let castButton = document.getElementById("castButton");
     castButton.onclick = (e) => {
       let option = document.getElementById("castTargetInputSelect").value;
-      if(document.getElementById("selectHypno").value == "None") {
+      if(document.getElementById("selectHypnoInputSelect").value == "None") {
         GUI.instance.DisplayMessage("Choose something first!");
         return;
       }

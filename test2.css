@@ -832,7 +832,11 @@ Cast/Remove part down here
     height: 100%;
 }
 
-#castBtnContainer, #removeBtnContainer {
+#castBtnContainer {
+    height: 70% !important;
+}
+
+#removeBtnContainer {
     height: 85% !important;
 }
 
