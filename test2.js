@@ -2857,15 +2857,26 @@ var bmrHypno = function() {
       theMessage += "}";
       //removing \n (to make the message cast macro work)
       theMessage = theMessage.replace(/[\r\n]+/gm, "");
-      GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
+      sendMessageUsername(theMessage,targetUsername);
       //the message with the instructions
       let message2 = `Hello! If you're seeing this message, than it means that I've decide to cast a spell on you!
-      Please, copy/paste the long message that was sent along with this one into your chat for the spell to work.
+      Please, copy/paste the long message that was sent along with this one into your chat for the spell to work (if the message was split into multiple ones cause the max length is 16382, copy them all in the order received).
       If you wish to remove the effets of the spell afterwards, all you need to do is type this in chat (the stuff already on screen will be removed when its duration expires):
       `;
       message2 += "${clearInterval($intervalId)}";
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": message2, load: true});
       GUI.instance.DisplayMessage(`A message with some instructions has been sent to ${targetUsername}`);
+    }
+  }
+
+  function sendMessageUsername(mes, username) {
+    GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
+    if(mes.length>16382) {
+      GAME_MANAGER.instance.WaitFor("Message", { "receiver":username, "message": mes.substring(0,16382), load: true});
+      mes = mes.substring(16382);
+      sendMessageUsername(mes,username);
+    } else {
+      GAME_MANAGER.instance.WaitFor("Message", { "receiver":username, "message": mes, load: true});
     }
   }
 
