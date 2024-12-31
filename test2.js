@@ -651,7 +651,6 @@ var bmrHypno = function() {
     selections.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
       loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[selected])),0);
-      displayBtn.style.display = "none";
     };
   }
 
