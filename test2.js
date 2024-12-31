@@ -645,25 +645,11 @@ var bmrHypno = function() {
   }
 
   function loadSelections(selections) {
-    /*var selections = createElement("select","selectHypno","selectContainer");
-    for(i in _preloadedHypnos) {
-      selections.options.add(new Option(i,_preloadedHypnos[i]));
-    }
-    selections.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
-      if(selected.text == "Load from file") {
-        displayBtn.style.display = "";
-      } else {
-        loadSelectionInGrid(selected);
-        displayBtn.style.display = "none";
-      }
-    };
-    return selections;*/
     for(i in _preloadedHypnos) {
       selections.options.add(new Option(i,_preloadedHypnos[i].name||"Load from file"));
     }
     selections.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedValue].text;
+      let selected = e.target.options[e.target.selectedIndex].text;
       loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[selected])),0);
       displayBtn.style.display = "none";
     };
@@ -831,7 +817,6 @@ var bmrHypno = function() {
       hei1.value = cur.height[0];
       hei2.value = cur.height[1];
     }        
-    //that's all I have for now
   }
   
   function createCreateScreenGrid() {
@@ -903,14 +888,12 @@ var bmrHypno = function() {
     let wordTypeContainer = document.getElementById("wordTypeContainer");
     let imgTypeContainer = document.getElementById("imgTypeContainer");
     wordTypeContainer.onclick = (e) => {
-      //TODO maybe change the loadselection with simply load new changed values for word? Probably not.
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "word";
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
       changeTabType("word");
     };
     //img
     imgTypeContainer.onclick = (e) => {
-      //TODO maybe change the loadselection with simply load new changed values for img? Probably not.
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].type = "image";
       loadSelectionInGrid(_currentlyLoaded,_currentlyLoaded.selectedValue);
       changeTabType("image");
@@ -999,7 +982,6 @@ var bmrHypno = function() {
         tabsTitleContainer.appendChild(tabTitle);
         //creating the actual tab
         let tabContainer = _tabs[i][j]();
-        //tabsContainer.appendChild(tabContainer); added to _tabs[i][j] so I can get the ids
         _tabsContainers.push(tabContainer);
         whichTabInfo+=1;
       }
@@ -1883,7 +1865,7 @@ var bmrHypno = function() {
     //preloaded animations
     let preloadAnimationSelect = document.getElementById("preloadAnimationSelect");
     preloadAnimationSelect.onchange = (e) => {
-      let selected = e.target.value;//e.target.options[e.target.selectedIndex].text;
+      let selected = e.target.value;
       _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = _preloadedAnimations[selected];
       _currentlyLoaded.selectedKeyframe = 0;
       _currentlyLoaded.selectedKeyframeValue = 0;
@@ -2097,7 +2079,6 @@ var bmrHypno = function() {
         curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
       }
       curKeyframe.offset = anim.keyframes[selKf].offset;
-      //keyframesList.push(JSON.parse(JSON.stringify(curKeyframe)));
       keyframesList.push(curKeyframe);
     }
     animText.animate(keyframesList,timings);
@@ -2483,47 +2464,6 @@ var bmrHypno = function() {
     }
     imgHeightInput2.onfocus = imgHeightInput1.onfocus;
     imgHeightInput2.onblur = imgHeightInput1.onblur;    
-    /*
-    let wordFontInput1 = document.getElementById("wordFontInput1");
-    let wordFontInput2 = document.getElementById("wordFontInput2");
-    let fontMin = document.getElementById("fontPreviewMin");
-    let fontMax = document.getElementById("fontPreviewMax");
-    let tippyWordFont1 = createTippy(wordFontInput1,"Use a number >:c","bottom");
-    let tippyWordFont2 = createTippy(wordFontInput2,"Use a number >:c","right");
-    _tippys.push(tippyWordFont1);
-    _tippys.push(tippyWordFont2);
-    wordFontInput1.onfocus = (e)=>{
-      fontMin.style.display = "";
-      fontMax.style.display = "";
-    };
-    wordFontInput1.onblur = (e)=>{
-      fontMin.style.display = "none";
-      fontMax.style.display = "none"
-    };
-    wordFontInput1.oninput = (e)=>{
-      if(isNaN(Number(e.target.value))||e.target.value == "") {
-        wordFontInput1.classList.add("invalidValue");
-        tippyWordFont1.show();
-        return;
-      }
-      wordFontInput1.classList.remove("invalidValue");
-      fontMin.style.fontSize = wordFontInput1.value+"px";
-      fontMax.style.fontSize = wordFontInput2.value+"px";
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];
-    }
-    wordFontInput2.onfocus = wordFontInput1.onfocus;
-    wordFontInput2.onblur = wordFontInput1.onblur;
-    wordFontInput2.oninput = (e) => {
-      if(isNaN(Number(e.target.value))||e.target.value == "") {
-        wordFontInput2.classList.add("invalidValue");
-        tippyWordFont2.show();
-        return;
-      }
-      wordFontInput2.classList.remove("invalidValue");
-      fontMin.style.fontSize = wordFontInput1.value+"px";
-      fontMax.style.fontSize = wordFontInput2.value+"px";
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue].font = [wordFontInput1.value, wordFontInput2.value];    
-    }*/
 
     return tab;
   }
@@ -2655,8 +2595,6 @@ var bmrHypno = function() {
       GUI.instance.DisplayMessage("Fix the errors first :D");
       return;
     }
-    //document.getElementById("create-tab-start").innerHTML="";
-    //let hideAll = document.querySelectorAll(".createTab, .tabTitle");
     for (let i=0;i<_tabsContainers.length;i++) {
       _tabsContainers[i].style.display = "none"; 
       _tabsContainers[i].classList.remove("activeType");
@@ -2712,9 +2650,6 @@ var bmrHypno = function() {
     _currentlyLoaded = JSON.parse(JSON.stringify(_templateHypno));
     _tippys.forEach((tippy)=>{tippy.destroy()});
     _tippys = [];
-    //var closeBtn = createElement("div","","button close");
-    //closeBtn.onclick = () => { mainBox.remove(); };
-    //mainBox.appendChild(closeBtn);
   }
 
   function rewrittenDropdownFunction(e) {
@@ -2998,7 +2933,6 @@ var bmrHypno = function() {
   }
 
   BMRHYPNO.start = startBmr;
-  //testing jscolor
   jsColorScript=document.createElement('script');
   jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
   document.body.appendChild(jsColorScript);
@@ -3022,47 +2956,3 @@ var bmrHypno = function() {
 };
 
 BMRHYPNO.load = bmrHypno;
-
-console.log("testtttt");
-/*-----------------------------
-setName needed to remove intervals
-
-type: img
-value: url of the image/gif
-opacity: ...
-max-min width-height: ...
-width-heigth: ...
-transformRotation: ...
-extra
-
-type: word
-value: "slut"
-color: random OR an hex value chosen by color picker
-opacity: value between 0 and 1(0 invisible, 1 totally visible
-fontSize: random between two chosen values
-fontType: ...nah
-max-min width-height: ???? Probably adding text-wrap too
-transformRotation: choose max deg and it will be between -deg and +deg
-extra: an other css that you might want to add. simply parse it like: first line \n second line probably. trasform gets +
-*/
-
-/*
-Animation example:
-
-temp0.animate(
-{
-	color: ["red","orange","yellow","green","blue","indigo","violet"]
-},
-{
-duration: 3000,
-fill: "both"
-}).onfinish = ()=>{alert(0)};
-temp0.animate(
-{
-	top: ["0%","50%","100%","0%"]
-},
-{
-duration: 3000,
-fill: "both"
-}).onfinish = ()=>{alert(55)};
-*/
