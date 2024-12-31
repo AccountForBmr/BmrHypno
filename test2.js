@@ -2870,7 +2870,6 @@ var bmrHypno = function() {
   }
 
   function sendMessageUsername(mes, username) {
-    GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": theMessage, load: true});
     if(mes.length>16382) {
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":username, "message": mes.substring(0,16382), load: true});
       mes = mes.substring(16382);
