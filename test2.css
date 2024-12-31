@@ -813,19 +813,19 @@ Cast/Remove part down here
     overflow: hidden;
 }
 
-#castTargetContainer, #removeTargetContainer {
+#castTargetContainer, #removeTargetContainer, #selectHypnoContainer {
     height: 15%;
 }
 
-#castTargetLabel, #castTargetInputSelect, #castTargetInput, #removeTargetLabel {
+#castTargetLabel, #castTargetInputSelect, #castTargetInput, #removeTargetLabel, #selectHypnoLabel {
     width: 50% !important;
 }
 
-#removeTargetInputSelect {
+#removeTargetInputSelect, #selectHypnoInputSelect {
     width: 100% !important;
 }
 
-#castTargetInputContainer, #removeTargetInputContainer {
+#castTargetInputContainer, #removeTargetInputContainer, #selectHypnoInputContainer {
     width: 50%;
     display: flex;
     align-items: center;

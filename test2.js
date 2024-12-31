@@ -2724,26 +2724,11 @@ var bmrHypno = function() {
     emptyMainBox();
     let topContainerHTML = `
     <div id="topContainer" class="gridContainer">
-      <div id="" class="gridLabel">Casting:</div>
-      <select id="selectHypno" class="selectContainer">
-        <option value="None">None</option>
-      </select>
       <input id="backButton" class="" placeholder="" type="button" value="<">
       <div id="closeButton" class="button close"></div>
     </div>
     `;
     mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
-
-    let selectHypno = document.getElementById("selectHypno");
-    for(i in _preloadedHypnos) {
-      if(i != "New one"&&i != "Load from file") {
-        selectHypno.options.add(new Option(i,_preloadedHypnos[i].name));
-      }
-    }
-    selectHypno.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex].text;
-      _currentlyLoaded = _preloadedHypnos[selected];
-    };
     
     let backButton = document.getElementById("backButton");
     backButton.onclick = startBmr;
@@ -2757,6 +2742,14 @@ var bmrHypno = function() {
     let createMenuHTML = `
     <div id="castMenu" class="menu-start">
       <div id="cast-tab-start">
+        <div id="selectHypnoContainer" class="tabWordContainer">
+          <div id="selectHypnoLabel" class="gridLabel">Casting:</div>
+          <div id="selectHypnoInputContainer">
+            <select id="selectHypnoInputSelect" class="selectContainer">
+              <option value="None">None</option>
+            </select>
+          </div>
+        </div>
         <div id="castTargetContainer" class="tabWordContainer">
           <div id="castTargetLabel" class="gridLabel">Who is the target?</div>
           <div id="castTargetInputContainer">
@@ -2775,6 +2768,18 @@ var bmrHypno = function() {
     </div>
     `;
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
+
+    //select hypno
+    let selectHypno = document.getElementById("selectHypnoInputSelect");
+    for(i in _preloadedHypnos) {
+      if(i != "New one"&&i != "Load from file") {
+        selectHypno.options.add(new Option(i,_preloadedHypnos[i].name));
+      }
+    }
+    selectHypno.onchange = (e) => {
+      let selected = e.target.options[e.target.selectedIndex].text;
+      _currentlyLoaded = _preloadedHypnos[selected];
+    };
 
     //select target
     let castTargetInputSelect = document.getElementById("castTargetInputSelect");
