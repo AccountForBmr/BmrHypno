@@ -795,40 +795,44 @@ Img Hypnos down here
 
 /*
 
-Cast part down here
+Cast/Remove part down here
 
 */
 
-#castMenu {
+#castMenu, #removeMenu {
     top: 1%;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #fff rgba(0, 0, 0, 0.9);
 }
 
-#cast-tab-start {
+#cast-tab-start, #remove-tab-start {
     display: block;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
-#castTargetContainer {
+#castTargetContainer, #removeTargetContainer {
     height: 15%;
 }
 
-#castTargetLabel, #castTargetInputSelect, #castTargetInput {
+#castTargetLabel, #castTargetInputSelect, #castTargetInput, #removeTargetLabel {
     width: 50% !important;
 }
 
-#castTargetInputContainer {
+#removeTargetInputSelect {
+    width: 100% !important;
+}
+
+#castTargetInputContainer, #removeTargetInputContainer {
     width: 50%;
     display: flex;
     align-items: center;
     height: 100%;
 }
 
-#castBtnContainer {
+#castBtnContainer, #removeBtnContainer {
     height: 85% !important;
 }
 
@@ -839,6 +843,18 @@ Cast part down here
     width: 100%;
     height: 100%;
     background-color: #033f03;
+    border: 2px solid;
+    border-radius: 0.5em;
+    font-size: xxx-large;
+}
+
+#removeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #5a0606;
     border: 2px solid;
     border-radius: 0.5em;
     font-size: xxx-large;

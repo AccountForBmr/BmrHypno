@@ -2885,6 +2885,10 @@ var bmrHypno = function() {
 
   function castHypno(hypno,target,targetUsername) {
     if(target==0) {
+      if(_activeHypnos[hypno.name]) {
+        GUI.instance.DisplayMessage("It's already active!");
+        return;
+      }
       let intId = setInterval(()=>{
         let chosen = Math.floor(Math.random()*hypno.values.length);
         hypno.values[chosen].type == "word"?spawnWord(hypno.values[chosen]):spawnImg(hypno.values[chosen]);
@@ -2942,21 +2946,17 @@ var bmrHypno = function() {
 
   function createRemoveMenu() {
     let createMenuHTML = `
-    <div id="castMenu" class="menu-start">
-      <div id="cast-tab-start">
-        <div id="castTargetContainer" class="tabWordContainer">
-          <div id="castTargetLabel" class="gridLabel">Who is the target?</div>
-          <div id="castTargetInputContainer">
-            <select id="castTargetInputSelect" class="selectContainer">
-              <option value="Yourself">Yourself</option>
-              <option value="Your Opponent">Your Opponent</option>
-              <option value="Username">Username</option>
-            </select>
-            <input id="castTargetInput" class="gridTextInput" type="text" placeholder="Username here" style="display: none"> 
+    <div id="removeMenu" class="menu-start">
+      <div id="remove-tab-start">
+        <div id="removeTargetContainer" class="tabWordContainer">
+          <div id="removeTargetLabel" class="gridLabel">Which one do you wish to remove?</div>
+          <div id="removeTargetInputContainer">
+            <select id="removeTargetInputSelect" class="selectContainer">                             
+            </select>             
           </div>
         </div>
-        <div id="castBtnContainer" class="tabWordContainer">
-          <div id="castButton">Cast!</div>
+        <div id="removeBtnContainer" class="tabWordContainer">
+          <div id="removeButton">Remove!</div>
         </div>
       </div>
     </div>
@@ -2964,44 +2964,27 @@ var bmrHypno = function() {
     mainBox.insertAdjacentHTML("beforeend",createMenuHTML);
 
     //select target
-    let castTargetInputSelect = document.getElementById("castTargetInputSelect");
-    castTargetInputSelect.onchange = (e) => {
-      let selected = e.target.value;
-      if(selected == "Username") {
-        document.getElementById("castTargetInput").style.display = "";
-      } else {
-        document.getElementById("castTargetInput").style.display = "none";
+    let removeTargetInputSelect = document.getElementById("removeTargetInputSelect");
+    if(_activeHypnos == {}) {
+      removeTargetInputSelect.options.add(new Option("Empty :c","New one"));
+    } else {
+      for(i in _activeHypnos) {
+        if(i != "New one"&&i != "Load from file") {
+          removeTargetInputSelect.options.add(new Option(i,_preloadedHypnos[i].name));
+        }
       }
-    };
+    }
 
-    //cast!
-    let castButton = document.getElementById("castButton");
-    castButton.onclick = (e) => {
-      let option = document.getElementById("castTargetInputSelect").value;
-      if(document.getElementById("selectHypno").value == "None") {
-        GUI.instance.DisplayMessage("Choose something first!");
+    //remove!
+    let removeButton = document.getElementById("removeButton");
+    removeButton.onclick = (e) => {
+      let option = document.getElementById("removeTargetInputSelect").value;
+      if(option == "New one") {
+        GUI.instance.DisplayMessage("Nothing to remove :c");
         return;
       }
-      switch (option) {
-        case "Yourself":
-          castHypno(_currentlyLoaded,0);
-          break;
-        case "Your Opponent":
-          if(LOCATION.instance.opponent.username == null) {
-            GUI.instance.DisplayMessage("You're alone :c");
-            return;
-          }
-          castHypno(_currentlyLoaded,1,LOCATION.instance.opponent.username);
-          break;
-        case "Username":
-          let target = document.getElementById("castTargetInput").value;
-          if(target == "") {
-            GUI.instance.DisplayMessage(`You didn't insert an username!`);
-            return;
-          }
-          castHypno(_currentlyLoaded,1,target);
-          break;
-      }
+      clearInterval(_activeHypnos[option]);
+      delete _activeHypnos[option];
     };
   }
 
