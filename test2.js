@@ -2984,7 +2984,7 @@ var bmrHypno = function() {
     removeTargetInputSelect = document.getElementById("removeTargetInputSelect");
     removeTargetInputSelect.options.length = 0;
     console.log(_activeHypnos);
-    if(_activeHypnos == {}) {
+    if(Object.keys(_activeHypnos).length == 0) {
       removeTargetInputSelect.options.add(new Option("Empty :c","New one"));
     } else {
       for(i in _activeHypnos) {
