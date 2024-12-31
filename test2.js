@@ -2117,7 +2117,7 @@ var bmrHypno = function() {
       let selectedGradient = word.gradient;
       let grad = "";
       for(i in selectedGradient.gradients) {
-        grad += selectedGradient.gradients[i].type}+"(";
+        grad += selectedGradient.gradients[i].type+"(";
         grad += selectedGradient.gradients[i].type.includes("conic")?"from "+selectedGradient.gradients[i].direction:selectedGradient.gradients[i].direction;
         grad += selectedGradient.gradients[i].type.includes("radial")?",":"deg,";
         for(j in selectedGradient.gradients[i].colors) {
