@@ -2841,9 +2841,10 @@ var bmrHypno = function() {
       GUI.instance.DisplayMessage(`You are now under the effects of: ${hypno.name}`);
     } else {
       let theMessage = "${theHypno=";
-      theMessage += JSON.stringify(hypno);
+      theMessage += JSON.stringify(hypno)+";}";
+      sendMessageUsername(theMessage,targetUsername);
       //adding the css
-      theMessage += `;scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v0.8.44/test2.css';scriptCss.rel="stylesheet";document.body.appendChild(scriptCss);`;
+      theMessage = "${scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v0.8.44/test2.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);";
       //adding the spawningInterval
       theMessage += '$intervalId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
       //adding createElement,spawnArea and randRange
