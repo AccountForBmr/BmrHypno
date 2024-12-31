@@ -663,7 +663,8 @@ var bmrHypno = function() {
       selections.options.add(new Option(i,_preloadedHypnos[i].name||"Load from file"));
     }
     selections.onchange = (e) => {
-      loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[selected.text])),0);
+      let selected = e.target.options[e.target.selectedValue].text;
+      loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[selected])),0);
       displayBtn.style.display = "none";
     };
   }
@@ -2806,8 +2807,8 @@ var bmrHypno = function() {
       }
     }
     selectHypno.onchange = (e) => {
-      let selected = e.target.options[e.target.selectedIndex];
-      _currentlyLoaded = _preloadedHypnos[selected.text];
+      let selected = e.target.options[e.target.selectedIndex].text;
+      _currentlyLoaded = _preloadedHypnos[selected];
     };
     
     let backButton = document.getElementById("backButton");
@@ -2894,7 +2895,7 @@ var bmrHypno = function() {
         hypno.values[chosen].type == "word"?spawnWord(hypno.values[chosen]):spawnImg(hypno.values[chosen]);
       },hypno.spawnTime);
       _activeHypnos[hypno.name] = intId;
-      console.log(_activeHypnos);
+      GUI.instance.DisplayMessage(`You are now under the effects of: ${hypno.name}`);
     } else {
       let theMessage = "${theHypno=";
       theMessage += JSON.stringify(hypno);
@@ -2976,6 +2977,7 @@ var bmrHypno = function() {
       }
       clearInterval(_activeHypnos[option]);
       delete _activeHypnos[option];
+      GUI.instance.DisplayMessage(`You are no long under the effects of: ${option}`);
       fillRemoveSelection();
     };
   }
