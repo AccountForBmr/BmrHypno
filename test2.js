@@ -2121,7 +2121,11 @@ var bmrHypno = function() {
         grad += selectedGradient.gradients[i].type.includes("conic")?"from "+selectedGradient.gradients[i].direction:selectedGradient.gradients[i].direction;
         grad += selectedGradient.gradients[i].type.includes("radial")?",":"deg,";
         for(j in selectedGradient.gradients[i].colors) {
-          grad+= selectedGradient.gradients[i].colors[j]+" "+selectedGradient.gradients[i].positions[j]!=""?selectedGradient.gradients[i].positions[j]+"%":""+" "+selectedGradient.gradients[i].positions2[j]!=""?selectedGradient.gradients[i].positions2[j]+"%":""+",";
+          grad += selectedGradient.gradients[i].colors[j]+" ";
+          grad += selectedGradient.gradients[i].positions[j]!=""?selectedGradient.gradients[i].positions[j]+"%":"";
+          grad += " ";
+          grad += selectedGradient.gradients[i].positions2[j]!=""?selectedGradient.gradients[i].positions2[j]+"%":"";
+          grad += ",";
         }
         grad = grad.slice(0,-1);
         grad+="),";
