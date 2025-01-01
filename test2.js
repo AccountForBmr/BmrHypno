@@ -2150,8 +2150,8 @@ var bmrHypno = function() {
       tempWordSpan.style.fontSize = wordElm.style.fontSize;
       spawnArea.appendChild(tempWordSpan);
       let spanRect = tempWordSpan.getBoundingClientRect();
-      wordElm.style.top = randRange(spanRect.height*-1,bounds.height)+"px";
-      wordElm.style.left = randRange(spanRect.width*-1,bounds.width)+"px";
+      wordElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*15/100,bounds.height*85/100)+"px";
+      wordElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*15/100,bounds.width*85/100)+"px";
       tempWordSpan.remove();
     } else {
       wordElm.style.top = Number(word.position[1].slice(0,-1))*bounds.height/100+"px";
@@ -2530,8 +2530,8 @@ var bmrHypno = function() {
       tempImgSpan.style.height = imgElm.style.height;
       spawnArea.appendChild(tempImgSpan);
       let spanRect = tempImgSpan.getBoundingClientRect();
-      imgElm.style.top = randRange(spanRect.height*-1,bounds.height)+"px";
-      imgElm.style.left = randRange(spanRect.width*-1,bounds.width)+"px";
+      imgElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*15/100,bounds.height*85/100)+"px";
+      imgElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*15/100,bounds.width*85/100)+"px";
       tempImgSpan.remove();
     } else {
       imgElm.style.top = Number(img.position[1].slice(0,-1))*bounds.height/100+"px";
@@ -2811,7 +2811,7 @@ var bmrHypno = function() {
           castHypno(_currentlyLoaded,0);
           break;
         case "Your Opponent":
-          if(LOCATION.instance.opponent.username == null) {
+          if(LOCATION.instance.opponent == null) {
             GUI.instance.DisplayMessage("You're alone :c");
             return;
           }
