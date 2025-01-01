@@ -87,7 +87,7 @@
     background-color: #033f03;
 }
 
-.topLabel:hover, .selectContainer:hover, .gridTextInput:hover, .gradientBtn:hover, .gradientTextInput:hover, #playAnimationBtn:hover, .spawn1Btn:hover, #castButton:hover {
+.topLabel:hover, .selectContainer:hover, .gridTextInput:hover, .gradientBtn:hover, .gradientTextInput:hover, #playAnimationBtn:hover, .spawn1Btn:hover, #castButton:hover, #removeButton:hover {
     filter: brightness(1.3);
 }
 
