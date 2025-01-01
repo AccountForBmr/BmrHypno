@@ -1,4 +1,5 @@
-import "./hypno.css" assert {type: "css"}
+import sheet from "./hypno.css" assert {type: "css"}
+console.log(sheet);
 /*
 A script that creates a menu in Bmr that you can use to load or create hypno messages, so have fun with it :P!
 */
