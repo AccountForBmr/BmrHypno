@@ -601,7 +601,6 @@ var bmrHypno = function() {
       let tmpFr = e.target;
       let result = tmpFr.result;
       let resultJSON = JSON.parse(result);
-      console.log(resultJSON);
       _preloadedHypnos[resultJSON.name] = resultJSON;
       preloadedHypnosSelectUpdate(resultJSON.name);
       loadSelectionInGrid(JSON.parse(JSON.stringify(_preloadedHypnos[resultJSON.name])),0);
@@ -817,7 +816,12 @@ var bmrHypno = function() {
       hei2.style.display = "";
       hei1.value = cur.height[0];
       hei2.value = cur.height[1];
-    }        
+    }
+    //img size preview
+    document.getElementById("imgSizePreview").src = cur.imgUrl;
+    //setting the preloads in animation and gradient to new one
+    document.getElementById("preloadGradientSelect").selectedIndex = 0;
+    document.getElementById("preloadAnimationSelect").selectedIndex = 0;
   }
   
   function createCreateScreenGrid() {
@@ -1363,11 +1367,9 @@ var bmrHypno = function() {
 
     //gradientPreviews
     let preloadGradientSelect = document.getElementById("preloadGradientSelect");
-    let wordGradientPreviewBg = document.getElementById("wordGradientPreviewBg");
-    let wordGradientPreviewText = document.getElementById("wordGradientPreviewText");
     preloadGradientSelect.onchange = (e) => {
       let selected = e.target.options[e.target.selectedIndex].text;
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = _preloadedGradients[selected];
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(_preloadedGradients[selected]));
       _currentlyLoaded.selectedGradient = 0;
       _currentlyLoaded.selectedGradientColor = 0;
       updateGradientPreviewRight(_preloadedGradients[selected]);
@@ -1375,7 +1377,6 @@ var bmrHypno = function() {
       cleanInvalidValues("wordGradientCreatorContainer"); 
     };
     for(gradName in _preloadedGradients) {
-      console.log(gradName);
       preloadGradientSelect.options.add(new Option(gradName,gradName));
     }
 
@@ -1415,7 +1416,6 @@ var bmrHypno = function() {
         GUI.instance.DisplayMessage("Fix the errors first :D");
         return;
       }
-      console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       _currentlyLoaded.selectedGradient = selected;
       _currentlyLoaded.selectedGradientColor = 0;
@@ -1505,7 +1505,6 @@ var bmrHypno = function() {
         GUI.instance.DisplayMessage("Fix the errors first :D");
         return;
       }
-      console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       let selectedGradient = _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.gradients[_currentlyLoaded.selectedGradient];
       gradientColorPicker.fromString(selectedGradient.colors[selected]);
@@ -1867,7 +1866,7 @@ var bmrHypno = function() {
     let preloadAnimationSelect = document.getElementById("preloadAnimationSelect");
     preloadAnimationSelect.onchange = (e) => {
       let selected = e.target.value;
-      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = _preloadedAnimations[selected];
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(_preloadedAnimations[selected]));
       _currentlyLoaded.selectedKeyframe = 0;
       _currentlyLoaded.selectedKeyframeValue = 0;
       updateAnimationLeft(_preloadedAnimations[selected],0,0);
@@ -1932,7 +1931,6 @@ var bmrHypno = function() {
         keyframeSelectedSelect.selectedIndex = _currentlyLoaded.selectedKeyframe;
         return;
       }
-      console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       _currentlyLoaded.selectedKeyframe = selected;
       _currentlyLoaded.selectedKeyframeValue = 0;
@@ -1988,7 +1986,6 @@ var bmrHypno = function() {
     let propertyAddBtn = document.getElementById("propertyAddBtn");
     let propertyRemoveBtn = document.getElementById("propertyRemoveBtn");
     propertySelectedSelect.onchange = (e) => {
-      console.log(_currentlyLoaded);
       let selected = e.target.selectedIndex;
       _currentlyLoaded.selectedKeyframeValue = selected;
       let selectedAnimation = _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation;
@@ -2150,8 +2147,8 @@ var bmrHypno = function() {
       tempWordSpan.style.fontSize = wordElm.style.fontSize;
       spawnArea.appendChild(tempWordSpan);
       let spanRect = tempWordSpan.getBoundingClientRect();
-      wordElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*10/100,bounds.height*90/100)+"px";
-      wordElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*10/100,bounds.width*90/100)+"px";
+      wordElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*15/100,bounds.height*85/100)+"px";
+      wordElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*15/100,bounds.width*85/100)+"px";
       tempWordSpan.remove();
     } else {
       wordElm.style.top = Number(word.position[1].slice(0,-1))*bounds.height/100+"px";
@@ -2183,7 +2180,6 @@ var bmrHypno = function() {
         tempWordSpan.style.fontSize = wordElm.style.fontSize;
         spawnArea.appendChild(tempWordSpan);
         let spanRect = tempWordSpan.getBoundingClientRect();
-        console.log(spanRect);
         wordElm.style.left = (spanRect.width-bounds.width)/(-2)+"px";
         wordElm.style.top = (spanRect.height-bounds.height)/(-2)+"px";
         tempWordSpan.remove();
@@ -2530,8 +2526,8 @@ var bmrHypno = function() {
       tempImgSpan.style.height = imgElm.style.height;
       spawnArea.appendChild(tempImgSpan);
       let spanRect = tempImgSpan.getBoundingClientRect();
-      imgElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*10/100,bounds.height*90/100)+"px";
-      imgElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*10/100,bounds.width*90/100)+"px";
+      imgElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*15/100,bounds.height*85/100)+"px";
+      imgElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*15/100,bounds.width*85/100)+"px";
       tempImgSpan.remove();
     } else {
       imgElm.style.top = Number(img.position[1].slice(0,-1))*bounds.height/100+"px";
@@ -2565,7 +2561,6 @@ var bmrHypno = function() {
         tempImgSpan.style.height = imgElm.style.height;
         spawnArea.appendChild(tempImgSpan);
         let spanRect = tempImgSpan.getBoundingClientRect();
-        console.log(spanRect);
         imgElm.style.left = (spanRect.width-bounds.width)/(-2)+"px";
         imgElm.style.top = (spanRect.height-bounds.height)/(-2)+"px";
         tempImgSpan.remove();
