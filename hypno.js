@@ -247,25 +247,44 @@ var bmrHypno = function() {
     "name": "ShadowBelow",
     "blendMode": "overlay"
     },
-    "RandomPositions": {
+    "Cooler Rainbow": {
       "gradients": [
         {
-        "type": "radial-gradient",
-        "direction": "circle",
-        "colors": ["#008000FF","#0000FFFF","#D2FF1FFF","#C0FBFFFF","#1A2323FF"],
-        "positions": ["0","15","25","75",""],
-        "positions2": ["15","25","50","","80"]
-      },
-      {
-        "type": "linear-gradient",
-        "direction": 180,
-        "colors": ["#FFFFFF00","#000000FF"],
-        "positions": ["","75"],
-        "positions2": ["",""]
-      }
-    ],
-    "name": "ShadowBelow",
-    "blendMode": "overlay"
+          "type":"linear-gradient",
+          "direction":"217",
+          "colors":["#FF0000CC","#FF000000"],
+          "positions":["","70.71"],
+          "positions2":["",""]
+        },
+        {
+          "type":"linear-gradient",
+          "direction":"127",
+          "colors":["#00FF00CC","#00FF0000"],
+          "positions":["","70.71"],
+          "positions2":["",""]
+        },
+        {"type":"linear-gradient",
+          "direction":"336",
+          "colors":["#0000FFCC","#0000FF00"],
+          "positions":["","70.71"],
+          "positions2":["",""]
+        }
+      ],
+      "name":"Cooler Rainbow",
+      "blendMode":"normal"
+    },
+    "Simple Repeating Circles": {
+      "gradients": [
+        {
+          "type":"repeating-radial-gradient",
+          "direction":"circle",
+          "colors":["#D722C3FF","#710D97FF"],
+          "positions":["0","5"],
+          "positions2":["5","10"]
+        }
+      ],
+      "name":"Simple Repeating Circles",
+      "blendMode":"normal"
     }
   };
   var _preloadedAnimations = {
