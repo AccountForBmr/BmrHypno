@@ -2503,95 +2503,97 @@ var bmrHypno = function() {
     let bounds = spawnArea.getBoundingClientRect();
 
     imgElm.src = img.imgUrl;
+    imgElm.onload = (e) => {
 
-    if(img.width=="auto") {
-      imgElm.style.width = "auto";
-    } else {
-      imgElm.style.width = randRange(Number(img.width[0].slice(0,-1)),Number(img.width[1].slice(0,-1)))+"%";
-    }
-    imgElm.style.setProperty("--width",imgElm.style.width);
-
-    if(img.height=="auto") {
-      imgElm.style.height = "auto";
-    } else {
-      imgElm.style.height = randRange(Number(img.height[0].slice(0,-1)),Number(img.height[1].slice(0,-1)))+"%";
-    }
-    imgElm.style.setProperty("--height",imgElm.style.height);
-
-    imgElm.style.opacity = img.opacity;
-
-    let rotateValue = randRange(Number(img.rotation[0]),Number(img.rotation[1]))+"deg";
-    imgElm.style.setProperty("--rotation",rotateValue);
-    imgElm.style.transform = "rotate(var(--rotation))";
-
-    if(img.position=="Random") {
-      let tempImgSpan = createElement("img","","tempImg");
-      tempImgSpan.src = imgElm.src;
-      tempImgSpan.style.width = imgElm.style.width;
-      tempImgSpan.style.height = imgElm.style.height;
-      spawnArea.appendChild(tempImgSpan);
-      let spanRect = tempImgSpan.getBoundingClientRect();
-      imgElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*15/100,bounds.height*85/100)+"px";
-      imgElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*15/100,bounds.width*85/100)+"px";
-      tempImgSpan.remove();
-    } else {
-      imgElm.style.top = Number(img.position[1].slice(0,-1))*bounds.height/100+"px";
-      imgElm.style.left = Number(img.position[0].slice(0,-1))*bounds.width/100+"px";
-    }
-
-    spawnArea.appendChild(imgElm);
-    let smart = img.smart;
-    let imgRect = imgElm.getBoundingClientRect();
-    if(smart == "Yes") {
-      if(imgRect.bottom > bounds.bottom) {
-        imgElm.style.top = Number(imgElm.style.top.slice(0,-2)) - (imgRect.bottom - bounds.bottom) +"px";
+      if(img.width=="auto") {
+        imgElm.style.width = "auto";
+      } else {
+        imgElm.style.width = randRange(Number(img.width[0].slice(0,-1)),Number(img.width[1].slice(0,-1)))+"%";
       }
-      if(imgRect.right > bounds.right) {
-        imgRect = imgElm.getBoundingClientRect();
-        imgElm.style.left = Number(imgElm.style.left.slice(0,-2)) - (imgRect.right - bounds.right) +"px";
+      imgElm.style.setProperty("--width",imgElm.style.width);
+
+      if(img.height=="auto") {
+        imgElm.style.height = "auto";
+      } else {
+        imgElm.style.height = randRange(Number(img.height[0].slice(0,-1)),Number(img.height[1].slice(0,-1)))+"%";
       }
-      if(imgRect.left < bounds.left) {
-        imgRect = imgElm.getBoundingClientRect();
-        imgElm.style.left = Number(imgElm.style.left.slice(0,-2)) + Math.abs(bounds.left - imgRect.left)+"px";
-      }
-      if(imgRect.top < bounds.top) {
-        imgRect = imgElm.getBoundingClientRect();
-        imgElm.style.top = Number(imgElm.style.top.slice(0,-2)) + Math.abs(bounds.top - imgRect.top)+"px";
-      }
-      if(imgRect.width >= bounds.width || imgRect.height >= bounds.height) {
-        imgRect = imgElm.getBoundingClientRect();
+      imgElm.style.setProperty("--height",imgElm.style.height);
+
+      imgElm.style.opacity = img.opacity;
+
+      let rotateValue = randRange(Number(img.rotation[0]),Number(img.rotation[1]))+"deg";
+      imgElm.style.setProperty("--rotation",rotateValue);
+      imgElm.style.transform = "rotate(var(--rotation))";
+
+      if(img.position=="Random") {
         let tempImgSpan = createElement("img","","tempImg");
         tempImgSpan.src = imgElm.src;
         tempImgSpan.style.width = imgElm.style.width;
         tempImgSpan.style.height = imgElm.style.height;
         spawnArea.appendChild(tempImgSpan);
         let spanRect = tempImgSpan.getBoundingClientRect();
-        imgElm.style.left = (spanRect.width-bounds.width)/(-2)+"px";
-        imgElm.style.top = (spanRect.height-bounds.height)/(-2)+"px";
+        imgElm.style.top = randRange(spanRect.height*-1+(bounds.height+spanRect.height)*15/100,bounds.height*85/100)+"px";
+        imgElm.style.left = randRange(spanRect.width*-1+(bounds.width+spanRect.width)*15/100,bounds.width*85/100)+"px";
         tempImgSpan.remove();
+      } else {
+        imgElm.style.top = Number(img.position[1].slice(0,-1))*bounds.height/100+"px";
+        imgElm.style.left = Number(img.position[0].slice(0,-1))*bounds.width/100+"px";
       }
-    }
 
-    imgElm.style.setProperty("--top",imgElm.style.top);
-    imgElm.style.setProperty("--left",imgElm.style.left);
-
-    imgElm.style.setProperty("--duration",img.leaveTime);
-
-    setTimeout(()=>{imgElm.remove();},img.leaveTime);
-    if(img.animation != "None") {
-      let anim = JSON.parse(JSON.stringify(img.animation));
-      let keyframesList = [];
-      let timings = anim.timings;
-      anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)});
-      for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
-        let curKeyframe = {};
-        for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
-          curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
+      spawnArea.appendChild(imgElm);
+      let smart = img.smart;
+      let imgRect = imgElm.getBoundingClientRect();
+      if(smart == "Yes") {
+        if(imgRect.bottom > bounds.bottom) {
+          imgElm.style.top = Number(imgElm.style.top.slice(0,-2)) - (imgRect.bottom - bounds.bottom) +"px";
         }
-        curKeyframe.offset = anim.keyframes[selKf].offset;
-        keyframesList.push(curKeyframe);
+        if(imgRect.right > bounds.right) {
+          imgRect = imgElm.getBoundingClientRect();
+          imgElm.style.left = Number(imgElm.style.left.slice(0,-2)) - (imgRect.right - bounds.right) +"px";
+        }
+        if(imgRect.left < bounds.left) {
+          imgRect = imgElm.getBoundingClientRect();
+          imgElm.style.left = Number(imgElm.style.left.slice(0,-2)) + Math.abs(bounds.left - imgRect.left)+"px";
+        }
+        if(imgRect.top < bounds.top) {
+          imgRect = imgElm.getBoundingClientRect();
+          imgElm.style.top = Number(imgElm.style.top.slice(0,-2)) + Math.abs(bounds.top - imgRect.top)+"px";
+        }
+        if(imgRect.width >= bounds.width || imgRect.height >= bounds.height) {
+          imgRect = imgElm.getBoundingClientRect();
+          let tempImgSpan = createElement("img","","tempImg");
+          tempImgSpan.src = imgElm.src;
+          tempImgSpan.style.width = imgElm.style.width;
+          tempImgSpan.style.height = imgElm.style.height;
+          spawnArea.appendChild(tempImgSpan);
+          let spanRect = tempImgSpan.getBoundingClientRect();
+          imgElm.style.left = (spanRect.width-bounds.width)/(-2)+"px";
+          imgElm.style.top = (spanRect.height-bounds.height)/(-2)+"px";
+          tempImgSpan.remove();
+        }
       }
-      imgElm.animate(keyframesList,timings);
+
+      imgElm.style.setProperty("--top",imgElm.style.top);
+      imgElm.style.setProperty("--left",imgElm.style.left);
+
+      imgElm.style.setProperty("--duration",img.leaveTime);
+
+      setTimeout(()=>{imgElm.remove();},img.leaveTime);
+      if(img.animation != "None") {
+        let anim = JSON.parse(JSON.stringify(img.animation));
+        let keyframesList = [];
+        let timings = anim.timings;
+        anim.keyframes.sort((a,b)=>{return Number(a.offset)-Number(b.offset)});
+        for(let selKf=0;selKf<anim.keyframes.length;selKf++) {
+          let curKeyframe = {};
+          for(let selVal=0;selVal<anim.keyframes[selKf].names.length;selVal++) {
+            curKeyframe[anim.keyframes[selKf].names[selVal]] = anim.keyframes[selKf].values[selVal];
+          }
+          curKeyframe.offset = anim.keyframes[selKf].offset;
+          keyframesList.push(curKeyframe);
+        }
+        imgElm.animate(keyframesList,timings);
+      }
     }
   }
 
