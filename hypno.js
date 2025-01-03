@@ -2738,9 +2738,9 @@ var bmrHypno = function() {
       theMessage = "${scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v0.8.44/test2.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);";
       //adding the spawningInterval
       theMessage += '$intervalId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
-      //adding createElement,spawnArea and randRange
+      //adding createElement,spawnArea, randRange and imgTimestamps
       theMessage += `${createElement.toString()};`;
-      theMessage += 'var spawnArea = createElement("div","hypnoSpawnArea");document.getElementById("scaler").appendChild(spawnArea);';
+      theMessage += 'var spawnArea = createElement("div","hypnoSpawnArea");document.getElementById("scaler").appendChild(spawnArea);var imgTimestamps = {};';
       theMessage += `${randRange.toString()};`;
       //adding spawnWord function
       theMessage += `${spawnWord.toString()};`;
@@ -2848,7 +2848,7 @@ var bmrHypno = function() {
   BMRHYPNO.spawnWord = spawnWord;
   BMRHYPNO.castHypno = castHypno;
   BMRHYPNO.hypnos = _preloadedHypnos;
-  
+
   let jsColorScript=document.createElement('script');
   jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
   document.body.appendChild(jsColorScript);
