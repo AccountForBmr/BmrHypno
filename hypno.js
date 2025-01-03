@@ -23,6 +23,7 @@ var bmrHypno = function() {
       "Preview":createImgPreviewTab
     }
   };
+  var imgTimestamps = {};
   var _tabsTypes = [];
   var _tabsTitles = [];
   var _tabsContainers = [];
@@ -2384,9 +2385,11 @@ var bmrHypno = function() {
     let imgElm = createElement("img","","imgHypno");
     let bounds = spawnArea.getBoundingClientRect();
     
-    imgElm.crossOrigin = "anonymous";
+    if(!imgTimestamps[img.imgUrl]) {
+      imgTimestamps[img.imgUrl] = new Date().getTime();
+    }
 
-    imgElm.src = img.imgUrl;
+    imgElm.src = `${img.imgUrl}?timestamp=${imgTimestamps[img.imgUrl]}`;
     imgElm.onload = (e) => {
 
       if(img.width=="auto") {
@@ -2840,6 +2843,12 @@ var bmrHypno = function() {
   }
 
   BMRHYPNO.start = startBmr;
+  BMRHYPNO.ts = imgTimestamps;
+  BMRHYPNO.spawnImg = spawnImg;
+  BMRHYPNO.spawnWord = spawnWord;
+  BMRHYPNO.castHypno = castHypno;
+  BMRHYPNO.hypnos = _preloadedHypnos;
+  
   let jsColorScript=document.createElement('script');
   jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
   document.body.appendChild(jsColorScript);
@@ -2870,3 +2879,4 @@ var bmrHypno = function() {
 };
 
 BMRHYPNO.load = bmrHypno;
+
