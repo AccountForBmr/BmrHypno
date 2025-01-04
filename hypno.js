@@ -1282,7 +1282,7 @@ var bmrHypno = function() {
       downloadAnchorGradient.setAttribute("href",dataStrGradient);
       downloadAnchorGradient.setAttribute("download", `${_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name}.json`);
       downloadAnchorGradient.click();
-      _preloadedHypnos[_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name] = JSON.parse(JSON.stringify(_currentlyLoaded));
+      _preloadedGradients[_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name] = JSON.parse(JSON.stringify(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient));
       preloadedGradientSelectUpdate(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name);
     }
 
@@ -1645,6 +1645,13 @@ var bmrHypno = function() {
             <div id="preloadAnimationLabel" class="gradientLabel">Preload?</div>
             <select id="preloadAnimationSelect" class="selectContainer">
             </select>
+            <label id="loadFileLabelAnimation" class="topLabel">
+              <input id="loadFileBtnAnimation" placeholder="" type="file" accept="application/json" multiple="">Load
+            </label>
+            <label id="saveLabelAnimation" class="topLabel">
+                Save
+                <a id="downloadAnchorAnimation" style="display: none;"></a>
+              </label>
           </div>
           <div id="nameAnimationContainer" class="sideCreatorBox">
             <div id="nameAnimationLabel" class="gradientLabel">Name?</div>
@@ -1810,6 +1817,50 @@ var bmrHypno = function() {
     for(animName in _preloadedAnimations) {
       preloadAnimationSelect.options.add(new Option(animName,animName));
     }
+
+    //save
+    let saveLabelAnimation = document.getElementById("saveLabelAnimation");
+    let downloadAnchorAnimation = document.getElementById("downloadAnchorAnimation");
+    saveLabelAnimation.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
+      let dataStrAnimation = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation));
+      downloadAnchorAnimation.setAttribute("href",dataStrAnimation);
+      downloadAnchorAnimation.setAttribute("download", `${_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.name}.json`);
+      downloadAnchorAnimation.click();
+      _preloadedAnimations[_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.name] = JSON.parse(JSON.stringify(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation));
+      preloadedAnimationSelectUpdate(_currentlyLoaded.values[_currentlyLoaded.selectedValue].animation.name);
+    }
+
+    //load
+    let fileBtnAnimation = document.getElementById("loadFileBtnAnimation");
+    //what happens after the file is loaded
+    let loadedAnimation = (e) => {
+      let tmpFr = e.target;
+      let result = tmpFr.result;
+      let resultJSON = JSON.parse(result);
+      _preloadedAnimations[resultJSON.name] = resultJSON;
+      preloadedAnimationSelectUpdate(resultJSON.name);
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].animation = JSON.parse(JSON.stringify(resultJSON));
+      _currentlyLoaded.selectedKeyframe = 0;
+      _currentlyLoaded.selectedKeyframeValue = 0;
+      updateAnimationLeft(_preloadedAnimations[resultJSON.name],0,0);
+    };
+    //How are the files processed when you load them
+    let processAnimation = (file) => {
+        let fr = new FileReader();
+        fr.readAsText(file);
+        fr.addEventListener('loadend', loadedAnimation);
+    };
+    //Making it so you process the file when you choose it
+    fileBtnAnimation.addEventListener('change', (e) => {
+        let files = fileBtnAnimation.files;
+        for (let i = 0; i < files.length; i++) {
+            processAnimation(files[i]);
+        }
+    });
 
     //name
     let nameAnimationInput = document.getElementById("nameAnimationInput");
@@ -2668,6 +2719,18 @@ var bmrHypno = function() {
     document.getElementById("preloadGradientSelect").selectedIndex = needUpdate.length-1;
   }
 
+  function preloadedAnimationSelectUpdate(value) {
+    let needUpdate = document.getElementById("preloadAnimationSelect").options;
+    for(let i = 0; i<needUpdate.length; i++) {
+      if(needUpdate[i].value==value) {
+        document.getElementById("preloadAnimationSelect").selectedIndex = i;
+        return;
+      }
+    }
+    needUpdate.add(new Option(value,value));
+    document.getElementById("preloadAnimationSelect").selectedIndex = needUpdate.length-1;
+  }
+
   //CAST
 
   function loadCastScreen() {
@@ -2923,7 +2986,7 @@ var bmrHypno = function() {
     }    
   }
   let scriptCss=document.createElement('link');
-  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v0.95/hypno.css';
+  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v0.97/hypno.css';
   scriptCss.rel="stylesheet";
   document.body.appendChild(scriptCss);
   scriptCss.onload = () => {

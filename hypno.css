@@ -669,11 +669,11 @@ Word Effects Down Here
     flex-wrap: wrap;
 }
 
-#preloadAnimationLabel, #preloadGradientSelect, #durationAnimationLabel, #durationAnimationInput, #iterationsAnimationLabel, #offsetInputRange, #propertyNameLabel, #propertyNameInput, #propertyValueLabel, #propertyValueInput, #wordSmartPositionLabel, #wordSmartPositionSelect {
+#durationAnimationLabel, #durationAnimationInput, #iterationsAnimationLabel, #offsetInputRange, #propertyNameLabel, #propertyNameInput, #propertyValueLabel, #propertyValueInput, #wordSmartPositionLabel, #wordSmartPositionSelect {
     width: 50% !important;
 }
 
-#iterationsAnimationInput, #iterationsAnimationInputRange, #keyframeSelectedLabel, #keyframeSelectedSelect, #nameAnimationLabel, #nameAnimationInput, #easeAnimationLabel, #easeAnimationSelect, #offsetAnimationLabel, #offsetAnimationInput, #propertySelectedLabel, #propertySelectedSelect {
+#preloadAnimationLabel, #preloadGradientSelect, #iterationsAnimationInput, #iterationsAnimationInputRange, #keyframeSelectedLabel, #keyframeSelectedSelect, #nameAnimationLabel, #nameAnimationInput, #easeAnimationLabel, #easeAnimationSelect, #offsetAnimationLabel, #offsetAnimationInput, #propertySelectedLabel, #propertySelectedSelect {
     width: 25% !important;
 }
 
