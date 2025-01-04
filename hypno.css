@@ -70,7 +70,7 @@
     width: 100%;
 }
 
-#loadFileBtn {
+#loadFileBtn, #loadFileBtnGradient, #loadFileBtnAnimation {
     display: none;
 }
 
@@ -85,6 +85,11 @@
 
 #saveLabel {
     background-color: #033f03;
+}
+
+#saveLabelGradient, #saveLabelAnimation {
+    background-color: #033f03;
+    width: 25% !important;
 }
 
 .topLabel:hover, .selectContainer:hover, .gridTextInput:hover, .gradientBtn:hover, .gradientTextInput:hover, #playAnimationBtn:hover, .spawn1Btn:hover, #castButton:hover, #removeButton:hover {
@@ -528,11 +533,11 @@ Word Color down here
     border: 2px solid rgb(80, 80, 80);
 }
 
-#preloadGradientLabel, #preloadGradientSelect, #changeColorGradientLabel, #shapeGradientLabel, #blendSelect, #typeGradientLabel, #typeGradientSelect, #blendGradientLabel, #nameGradientInput, #shapeSelect, #changeColorGradientInput, #angleGradientInputRange, #positionGradientInputRange {
+#changeColorGradientLabel, #shapeGradientLabel, #blendSelect, #typeGradientLabel, #typeGradientSelect, #blendGradientLabel, #nameGradientInput, #shapeSelect, #changeColorGradientInput, #angleGradientInputRange, #positionGradientInputRange {
     width: 50% !important;
 }
 
-#gradientSelectedLabel, #gradientSelectedSelect, #colorGradientSelectedLabel, #colorGradientSelectedSelect, #angleGradientLabel, #angleGradientInput, #positionGradientSelect, #positionGradientInput {
+#preloadGradientLabel, #preloadGradientSelect, #gradientSelectedLabel, #gradientSelectedSelect, #colorGradientSelectedLabel, #colorGradientSelectedSelect, #angleGradientLabel, #angleGradientInput, #positionGradientSelect, #positionGradientInput, #loadFileLabelGradient, #loadFileLabelAnimation {
     width: 25% !important;
 }
 

@@ -476,7 +476,6 @@ var bmrHypno = function() {
     `;
     mainBox.insertAdjacentHTML("beforeend",topContainerHTML);
     let fileBtn = document.getElementById("loadFileBtn");
-    fileBtn.type = "file";
     //what happens after the file is loaded
     let loaded = (e) => {
       let tmpFr = e.target;
@@ -513,7 +512,7 @@ var bmrHypno = function() {
         GUI.instance.DisplayMessage("Fix the errors first :D");
         return;
       }
-      dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(_currentlyLoaded));
+      let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(_currentlyLoaded));
       downloadAnchor.setAttribute("href",dataStr);
       downloadAnchor.setAttribute("download", `${_currentlyLoaded.name}.json`);
       downloadAnchor.click();
@@ -1083,6 +1082,13 @@ var bmrHypno = function() {
             <div id="preloadGradientLabel" class="gradientLabel">Preload?</div>
               <select id="preloadGradientSelect" class="selectContainer">
               </select>
+              <label id="loadFileLabelGradient" class="topLabel">
+                <input id="loadFileBtnGradient" placeholder="" type="file" accept="application/json" multiple="">Load
+              </label>
+              <label id="saveLabelGradient" class="topLabel">
+                Save
+                <a id="downloadAnchorGradient" style="display: none;"></a>
+              </label>
              </div>
             <div id="nameGradientContainer" class="sideCreatorBox">
               <div id="nameGradientLabel" class="gradientLabel">Name?</div>
@@ -1263,6 +1269,51 @@ var bmrHypno = function() {
     for(gradName in _preloadedGradients) {
       preloadGradientSelect.options.add(new Option(gradName,gradName));
     }
+
+    //save
+    let saveLabelGradient = document.getElementById("saveLabelGradient");
+    let downloadAnchorGradient = document.getElementById("downloadAnchorGradient");
+    saveLabelGradient.onclick = (e) => {
+      if(document.getElementsByClassName("invalidValue").length != 0) {
+        GUI.instance.DisplayMessage("Fix the errors first :D");
+        return;
+      }
+      let dataStrGradient = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient));
+      downloadAnchorGradient.setAttribute("href",dataStrGradient);
+      downloadAnchorGradient.setAttribute("download", `${_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name}.json`);
+      downloadAnchorGradient.click();
+      _preloadedHypnos[_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name] = JSON.parse(JSON.stringify(_currentlyLoaded));
+      preloadedGradientSelectUpdate(_currentlyLoaded.name);
+    }
+
+    //load
+    let fileBtnGradient = document.getElementById("loadFileBtnGradient");
+    //what happens after the file is loaded
+    let loadedGradient = (e) => {
+      let tmpFr = e.target;
+      let result = tmpFr.result;
+      let resultJSON = JSON.parse(result);
+      _preloadedGradients[resultJSON.name] = resultJSON;
+      preloadedGradientSelectUpdate(resultJSON.name);
+      _currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient = JSON.parse(JSON.stringify(resultJSON));
+      _currentlyLoaded.selectedGradient = 0;
+      _currentlyLoaded.selectedGradientColor = 0;
+      updateGradientPreviewLeft(_preloadedGradients[resultJSON.name],0,0);
+      updateGradientPreviewRight(_preloadedGradients[resultJSON.name]);
+    };
+    //How are the files processed when you load them
+    let processGradient = (file) => {
+        let fr = new FileReader();
+        fr.readAsText(file);
+        fr.addEventListener('loadend', loadedGradient);
+    };
+    //Making it so you process the file when you choose it
+    fileBtnGradient.addEventListener('change', (e) => {
+        let files = fileBtn.files;
+        for (let i = 0; i < files.length; i++) {
+            processGradient(files[i]);
+        }
+    });
 
     //gradient +/- buttons
     let gradientAddBtn = document.getElementById("gradientAddBtn");
@@ -2603,6 +2654,18 @@ var bmrHypno = function() {
     }
     needUpdate.add(new Option(value,value));
     document.getElementById("selectHypno").selectedIndex = needUpdate.length-1;
+  }
+
+  function preloadedGradientSelectUpdate(value) {
+    let needUpdate = document.getElementById("preloadGradientSelect").options;
+    for(let i = 0; i<needUpdate.length; i++) {
+      if(needUpdate[i].value==value) {
+        document.getElementById("preloadGradientSelect").selectedIndex = i;
+        return;
+      }
+    }
+    needUpdate.add(new Option(value,value));
+    document.getElementById("preloadGradientSelect").selectedIndex = needUpdate.length-1;
   }
 
   //CAST
