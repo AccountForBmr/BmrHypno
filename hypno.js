@@ -1283,7 +1283,7 @@ var bmrHypno = function() {
       downloadAnchorGradient.setAttribute("download", `${_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name}.json`);
       downloadAnchorGradient.click();
       _preloadedHypnos[_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name] = JSON.parse(JSON.stringify(_currentlyLoaded));
-      preloadedGradientSelectUpdate(_currentlyLoaded.name);
+      preloadedGradientSelectUpdate(_currentlyLoaded.values[_currentlyLoaded.selectedValue].gradient.name);
     }
 
     //load
