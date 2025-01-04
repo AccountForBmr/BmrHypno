@@ -9,8 +9,6 @@ check=()=>{return (!document.hasFocus()&&NOTIFICATION.browserSupport&&Notificati
 
 displayBrowserNotification=function(title,options,onclick){if(check()){notif=new Notification(title,{... _options,...options});notif.onclick=()=>{window.focus();onclick && onclick();notif.close();};return notif;}return false;};
 
-mesWhitelist = mesWhitelist||[];
-
 checkWhiteList=(mesUser)=>{
     if(mesWhitelist.includes(mesUser)) {
         return true;
