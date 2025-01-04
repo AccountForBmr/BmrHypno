@@ -1309,7 +1309,7 @@ var bmrHypno = function() {
     };
     //Making it so you process the file when you choose it
     fileBtnGradient.addEventListener('change', (e) => {
-        let files = fileBtn.files;
+        let files = fileBtnGradient.files;
         for (let i = 0; i < files.length; i++) {
             processGradient(files[i]);
         }
@@ -2923,7 +2923,7 @@ var bmrHypno = function() {
     }    
   }
   let scriptCss=document.createElement('link');
-  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v0.8.78/hypno.css';
+  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v0.95/hypno.css';
   scriptCss.rel="stylesheet";
   document.body.appendChild(scriptCss);
   scriptCss.onload = () => {
