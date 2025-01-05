@@ -673,7 +673,7 @@ Word Effects Down Here
     width: 50% !important;
 }
 
-#preloadAnimationLabel, #preloadGradientSelect, #iterationsAnimationInput, #iterationsAnimationInputRange, #keyframeSelectedLabel, #keyframeSelectedSelect, #nameAnimationLabel, #nameAnimationInput, #easeAnimationLabel, #easeAnimationSelect, #offsetAnimationLabel, #offsetAnimationInput, #propertySelectedLabel, #propertySelectedSelect {
+#preloadAnimationLabel, #preloadAnimationSelect, #iterationsAnimationInput, #iterationsAnimationInputRange, #keyframeSelectedLabel, #keyframeSelectedSelect, #nameAnimationLabel, #nameAnimationInput, #easeAnimationLabel, #easeAnimationSelect, #offsetAnimationLabel, #offsetAnimationInput, #propertySelectedLabel, #propertySelectedSelect {
     width: 25% !important;
 }
 

@@ -149,7 +149,9 @@ var bmrHypno = function() {
       ],
       "name":"Simple Repeating Circles",
       "blendMode":"normal"
-    }
+    },
+    "Eye": {"gradients":[{"type":"radial-gradient","direction":"ellipse","colors":["#000000FF","#B60DFFFF","#FFFFFFFF","#000000FF"],"positions":["6","25","",""],"positions2":["","30","",""]},{"type":"linear-gradient","direction":"0","colors":["#000000FF","#00000000","#000000FF"],"positions":["0","45","100"],"positions2":["","55",""]}],"name":"Eye","blendMode":"overlay"},
+    "Tartan": {"gradients":[{"type":"linear-gradient","direction":0,"colors":["#870000FF","#870000FF"],"positions":["",""],"positions2":["",""]},{"type":"repeating-linear-gradient","direction":"0","colors":["#000000BF","#4F4F4FBF","#000000BF","#FFFFFFBF"],"positions":["0","2","8","10"],"positions2":["2","8","10","16"]},{"type":"repeating-linear-gradient","direction":"90","colors":["#000000BF","#4F4F4FBF","#000000BF","#FFFFFFBF"],"positions":["0","2","8","10"],"positions2":["2","8","10","16"]}],"name":"Tartan","blendMode":"multiply"}
   };
   var _preloadedAnimations = {
     "New one": {
@@ -212,6 +214,7 @@ var bmrHypno = function() {
         "iterations": "1"
       }
     },
+    "Fade in": {"keyframes":[{"offset":"0","names":["opacity"],"values":["0"]}],"name":"Fade in","timings":{"easing":"linear","duration":1000,"iterations":"1"}},
     "Fade out": {
       "keyframes": [
         {
@@ -342,6 +345,8 @@ var bmrHypno = function() {
          "iterations":"10"
       }
     },
+    "Wall of text(You need to copy the words)": {"keyframes":[{"offset":0,"names":["whiteSpace","wordBreak"],"values":["wrap","break-all"]},{"offset":0,"names":["whiteSpace","wordBreak"],"values":["wrap","break-all"]}],"name":"Wall of text","timings":{"easing":"linear","duration":5000,"iterations":"5"}},
+    "Enlarge and move": {"keyframes":[{"offset":"1","names":["transform"],"values":["scale(3) translate(10%,-15%)"]}],"name":"Enlarge and move","timings":{"easing":"linear","duration":2500,"iterations":1}}
   };
   const _templateHypno = {
     "name": "New",
@@ -2986,7 +2991,7 @@ var bmrHypno = function() {
     }    
   }
   let scriptCss=document.createElement('link');
-  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v0.97/hypno.css';
+  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v0.98/hypno.css';
   scriptCss.rel="stylesheet";
   document.body.appendChild(scriptCss);
   scriptCss.onload = () => {
