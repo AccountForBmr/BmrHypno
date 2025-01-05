@@ -749,7 +749,6 @@ var bmrHypno = function() {
       }
       formNameInput.classList.remove("invalidValue");
       _currentlyLoaded.name = e.target.value;
-      console.log(_currentlyLoaded);
     }
 
     let spawnInput = document.getElementById("formSpawnInput");
@@ -2932,7 +2931,6 @@ var bmrHypno = function() {
   function fillRemoveSelection() {
     removeTargetInputSelect = document.getElementById("removeTargetInputSelect");
     removeTargetInputSelect.options.length = 0;
-    console.log(_activeHypnos);
     if(Object.keys(_activeHypnos).length == 0) {
       removeTargetInputSelect.options.add(new Option("Empty :c","New one"));
     } else {
@@ -2949,6 +2947,8 @@ var bmrHypno = function() {
   BMRHYPNO.spawnWord = spawnWord;
   BMRHYPNO.castHypno = castHypno;
   BMRHYPNO.hypnos = _preloadedHypnos;
+  BMRHYPNO.gradients = _preloadedGradients;
+  BMRHYPNO.animations = _preloadedAnimations;
 
   let jsColorScript=document.createElement('script');
   jsColorScript.src='https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js';
