@@ -2836,7 +2836,7 @@ var bmrHypno = function() {
       theMessage += JSON.stringify(hypno)+";}";
       sendMessageUsername(theMessage,targetUsername);
       //adding the css
-      theMessage = "${scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/TestingJsdelivrCauseIWantToUseIt@v1.0.0/test2.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);";
+      theMessage = "${scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.2/test2.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);";
       //adding the spawningInterval
       theMessage += '$intervalId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
       //adding createElement,spawnArea and randRange
@@ -2970,7 +2970,7 @@ var bmrHypno = function() {
     }    
   }
   let scriptCss=document.createElement('link');
-  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.0/hypno.css';
+  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.2/hypno.css';
   scriptCss.rel="stylesheet";
   document.body.appendChild(scriptCss);
   scriptCss.onload = () => {
