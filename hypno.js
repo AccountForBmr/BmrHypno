@@ -2832,14 +2832,14 @@ var bmrHypno = function() {
       _activeHypnos[hypno.name] = intId;
       GUI.instance.DisplayMessage(`You are now under the effects of: ${hypno.name}`);
     } else {
-      let randomHypnoId = "theHypno"+Math.floor(Math.random()*999999);
+      let randomIntervalId = Math.floor(Math.random()*999999)+1;
+      let randomHypnoId = "theHypno"+randomIntervalId;
       let theMessage = `\${${randomHypnoId}=`;
       theMessage += JSON.stringify(hypno)+";}";
       sendMessageUsername(theMessage,targetUsername);
       //adding the css
-      theMessage = "${scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.4/hypno.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);";
+      theMessage = "${if(document.getElementById('bmrHypnoCss')==null){scriptCss=document.createElement('link');scriptCss.id='bmrHypnoCss';scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.6/hypno.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);};";
       //adding the spawningInterval
-      let randomIntervalId = Math.floor(Math.random()*999999)+1;
       theMessage += `$${randomIntervalId} = setInterval(()=>{let chosen = Math.floor(Math.random()*${randomHypnoId}.values.length);${randomHypnoId}.values[chosen].type == "word"?spawnWord(${randomHypnoId}.values[chosen]):spawnImg(${randomHypnoId}.values[chosen]);},${randomHypnoId}.spawnTime);`;
       //adding createElement,spawnArea and randRange
       theMessage += `${createElement.toString()};`;
@@ -2972,7 +2972,7 @@ var bmrHypno = function() {
     }    
   }
   let scriptCss=document.createElement('link');
-  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.4/hypno.css';
+  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.6/hypno.css';
   scriptCss.rel="stylesheet";
   document.body.appendChild(scriptCss);
   scriptCss.onload = () => {
