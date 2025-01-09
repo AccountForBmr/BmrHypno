@@ -2836,9 +2836,10 @@ var bmrHypno = function() {
       theMessage += JSON.stringify(hypno)+";}";
       sendMessageUsername(theMessage,targetUsername);
       //adding the css
-      theMessage = "${scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.3/hypno.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);";
+      theMessage = "${scriptCss=document.createElement('link');scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.4test/hypno.css';scriptCss.rel='stylesheet';document.body.appendChild(scriptCss);";
       //adding the spawningInterval
-      theMessage += '$intervalId = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);';
+      let randomIntervalId = Math.floor(Math.random()*999999)+1;
+      theMessage += `$${randomIntervalId} = setInterval(()=>{let chosen = Math.floor(Math.random()*theHypno.values.length);theHypno.values[chosen].type == "word"?spawnWord(theHypno.values[chosen]):spawnImg(theHypno.values[chosen]);},theHypno.spawnTime);`;
       //adding createElement,spawnArea and randRange
       theMessage += `${createElement.toString()};`;
       theMessage += 'var spawnArea = createElement("div","hypnoSpawnArea");document.getElementById("scaler").appendChild(spawnArea);';
@@ -2855,8 +2856,8 @@ var bmrHypno = function() {
       let message2 = `Hello! If you're seeing this message, than it means that I've decide to cast a spell on you!
       Please, copy/paste the long message that was sent along with this one into your chat for the spell to work (if the message was split into multiple ones cause the max length is 16382, copy them all in the order received).
       If you wish to remove the effets of the spell afterwards, all you need to do is type this in chat (the stuff already on screen will be removed when its duration expires):
-      `;
-      message2 += "${clearInterval($intervalId)}";
+      
+      \${clearInterval($${randomIntervalId})}`;
       GAME_MANAGER.instance.WaitFor("Message", { "receiver":targetUsername, "message": message2, load: true});
       GUI.instance.DisplayMessage(`A message with some instructions has been sent to ${targetUsername}`);
     }
@@ -2970,7 +2971,7 @@ var bmrHypno = function() {
     }    
   }
   let scriptCss=document.createElement('link');
-  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.3/hypno.css';
+  scriptCss.href='https://cdn.jsdelivr.net/gh/AccountForBmr/BmrHypno@v1.0.4test/hypno.css';
   scriptCss.rel="stylesheet";
   document.body.appendChild(scriptCss);
   scriptCss.onload = () => {
