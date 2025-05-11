@@ -2642,10 +2642,14 @@ var bmrHypno = function() {
   function rewrittenDropdownFunction(e) {
    let _menuButton = document.getElementById("menu").getElementsByClassName("button")[0];
    let curFunc = _menuButton.onclick.toString(); 
-   let newFunc = curFunc.substring(curFunc.indexOf("{")+1,curFunc.length-1);
-   newFunc = newFunc.replace(/_menuButton/gm,'document.getElementById("menu").getElementsByClassName("button")[0]');
-   let restOfTheFunc = 'MENU.Spells.Open({}) },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHYPNO.start())}'
-   newFunc = newFunc.replace(/MENU\.Spells\.Open\({}\) }/gm,restOfTheFunc);
+   let newFunc = curFunc.substring(curFunc.indexOf("DROPDOWN"),curFunc.length);
+   if(newFunc.endsWith(")\n}")) {
+    newFunc = newFunc.slice(0,-1);
+   } 
+   //not used anymore
+   //newFunc = newFunc.replace(/_menuButton/gm,'document.getElementById("menu").getElementsByClassName("button")[0]');
+   let restOfTheFunc = 'MENU.Social.Open() },\n{ label: "Hypno", onclick: () => document.getElementById("menus").appendChild(BMRHYPNO.start())}'
+   newFunc = newFunc.replace(/MENU\.Social\.Open\(\) }/gm,restOfTheFunc);
    newFunc = newFunc.replace(/this\.ExitAlert\(\)/gm,"GUI.instance.ExitAlert()");
 
    return new Function("e",newFunc);
